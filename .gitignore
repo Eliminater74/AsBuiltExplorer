@@ -68,6 +68,8 @@ Generated\ Files/
 [Bb]uild[Ll]og.*
 *.trx
 
+*.ps1
+
 # NUnit
 *.VisualState.xml
 TestResult.xml
