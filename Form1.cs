@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: AsBuiltExplorer.Form1
 // Assembly: AsBuiltExplorer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9083D66F-6E27-42C7-99A4-392C98AEFBC8
@@ -23,7 +23,7 @@ using System.Windows.Forms;
 namespace AsBuiltExplorer;
 
 [DesignerGenerated]
-public class Form1 : Form
+public partial class Form1 : Form
 {
   private ColumnHeader lvwBrowser_SortingColumn;
   public int abDownloadTriggered;
@@ -3120,310 +3120,7 @@ label_24:
     }
   }
 
-  [DebuggerStepThrough]
-  private void InitializeComponent()
-  {
-    this.components = (IContainer) new System.ComponentModel.Container();
-    ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof (Form1));
-    this.TabControl1 = new TabControl();
-    this.TabPage1 = new TabPage();
-    this.chkCompareShowNames = new CheckBox();
-    this.lblComp4VIN = new Label();
-    this.lblComp3VIN = new Label();
-    this.lblComp2VIN = new Label();
-    this.lblComp1VIN = new Label();
-    this.Button9 = new Button();
-    this.tbxCompFile4 = new TextBox();
-    this.Label23 = new Label();
-    this.Button7 = new Button();
-    this.tbxCompFile3 = new TextBox();
-    this.Label22 = new Label();
-    this.chkCompareShowChecksum = new CheckBox();
-    this.btnCompLoad = new Button();
-    this.btnCompBrowse2 = new Button();
-    this.btnCompBrowse1 = new Button();
-    this.tbxCompFile2 = new TextBox();
-    this.tbxCompFile1 = new TextBox();
-    this.ListView1 = new ListView();
-    this.ColumnHeader1 = new ColumnHeader();
-    this.ColumnHeader2 = new ColumnHeader();
-    this.ColumnHeader3 = new ColumnHeader();
-    this.ColumnHeader4 = new ColumnHeader();
-    this.ColumnHeader5 = new ColumnHeader();
-    this.ColumnHeader6 = new ColumnHeader();
-    this.ColumnHeader7 = new ColumnHeader();
-    this.ColumnHeader8 = new ColumnHeader();
-    this.ColumnHeader9 = new ColumnHeader();
-    this.ContextMenuStrip1 = new ContextMenuStrip(this.components);
-    this.CopyToolStripMenuItem = new ToolStripMenuItem();
-    this.EntireLineToolStripMenuItem = new ToolStripMenuItem();
-    this.Data1hexToolStripMenuItem = new ToolStripMenuItem();
-    this.Data2hexToolStripMenuItem = new ToolStripMenuItem();
-    this.Data3hexToolStripMenuItem = new ToolStripMenuItem();
-    this.BinaryToolStripMenuItem = new ToolStripMenuItem();
-    this.ExportModuleToolStripMenuItem = new ToolStripMenuItem();
-    this.ToUCDSToolStripMenuItem = new ToolStripMenuItem();
-    this.ToABTToolStripMenuItem = new ToolStripMenuItem();
-    this.Label7 = new Label();
-    this.Label6 = new Label();
-    this.TabPage2 = new TabPage();
-    this.TextBox5 = new TextBox();
-    this.Button3 = new Button();
-    this.Button2 = new Button();
-    this.Label16 = new Label();
-    this.Label15 = new Label();
-    this.tbxChecksumBin = new TextBox();
-    this.tbxConvertBin = new TextBox();
-    this.tbxConvertHex = new TextBox();
-    this.tbxData3bin2 = new TextBox();
-    this.tbxData2bin2 = new TextBox();
-    this.tbxData1bin2 = new TextBox();
-    this.tbxData3bin1 = new TextBox();
-    this.tbxData2bin1 = new TextBox();
-    this.tbxData1bin1 = new TextBox();
-    this.tbxChecksumHex = new TextBox();
-    this.Label5 = new Label();
-    this.Button1 = new Button();
-    this.tbxData3hex = new TextBox();
-    this.Label4 = new Label();
-    this.tbxData2hex = new TextBox();
-    this.Label3 = new Label();
-    this.tbxData1hex = new TextBox();
-    this.Label2 = new Label();
-    this.tbxModIDhex = new TextBox();
-    this.Label1 = new Label();
-    this.TabPage3 = new TabPage();
-    this.TextBox2 = new TextBox();
-    this.Label12 = new Label();
-    this.Label9 = new Label();
-    this.chkDeduceDownloadAB = new CheckBox();
-    this.btnDeduceSaveInfo = new Button();
-    this.wbDeducer = new WebBrowser();
-    this.btnDeduceOpenETIS = new Button();
-    this.TabPage4 = new TabPage();
-    this.chkDeduceDoCCC = new CheckBox();
-    this.Button8 = new Button();
-    this.Label14 = new Label();
-    this.TextBox1 = new TextBox();
-    this.Label13 = new Label();
-    this.Label11 = new Label();
-    this.Label10 = new Label();
-    this.lstDeduceYears = new CheckedListBox();
-    this.lstDeduceModels = new CheckedListBox();
-    this.tbxDeduceReport = new TextBox();
-    this.btnDeduceFigureIt = new Button();
-    this.btnDeduceLoadOptions = new Button();
-    this.lstDeduceFactoryOptions = new ListBox();
-    this.TabPage5 = new TabPage();
-    this.Button10 = new Button();
-    this.TextBox4 = new TextBox();
-    this.Label21 = new Label();
-    this.lstBit_Modules = new ListBox();
-    this.Button6 = new Button();
-    this.Button5 = new Button();
-    this.Label20 = new Label();
-    this.Label19 = new Label();
-    this.lstBit_Years = new CheckedListBox();
-    this.lstBit_Models = new CheckedListBox();
-    this.Label17 = new Label();
-    this.TextBox3 = new TextBox();
-    this.Label18 = new Label();
-    this.tbxDeduceReport2 = new TextBox();
-    this.Button4 = new Button();
-    this.TabPage6 = new TabPage();
-    this.btnBrowseRefresh = new Button();
-    this.lvwBrowser = new ListView();
-    this.ColumnHeader10 = new ColumnHeader();
-    this.ColumnHeader11 = new ColumnHeader();
-    this.ColumnHeader12 = new ColumnHeader();
-    this.ColumnHeader13 = new ColumnHeader();
-    this.ColumnHeader14 = new ColumnHeader();
-    this.ContextMenuStrip2 = new ContextMenuStrip(this.components);
-    this.SetAsCompare1ToolStripMenuItem = new ToolStripMenuItem();
-    this.SetAsCompare2ToolStripMenuItem = new ToolStripMenuItem();
-    this.SetAsCompare3ToolStripMenuItem = new ToolStripMenuItem();
-    this.SetAsCompare4ToolStripMenuItem = new ToolStripMenuItem();
-    this.ToolStripMenuItem1 = new ToolStripSeparator();
-    this.DeleteFileToolStripMenuItem = new ToolStripMenuItem();
-    this.Label8 = new Label();
-    this.PictureBox1 = new PictureBox();
-    this.chkShowOnlyMismatches = new CheckBox();
-    this.TextBox6 = new TextBox();
-    this.TabControl1.SuspendLayout();
-    this.TabPage1.SuspendLayout();
-    this.ContextMenuStrip1.SuspendLayout();
-    this.TabPage2.SuspendLayout();
-    this.TabPage3.SuspendLayout();
-    this.TabPage4.SuspendLayout();
-    this.TabPage5.SuspendLayout();
-    this.TabPage6.SuspendLayout();
-    this.ContextMenuStrip2.SuspendLayout();
-    ((ISupportInitialize) this.PictureBox1).BeginInit();
-    this.SuspendLayout();
-    this.TabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-    this.TabControl1.Controls.Add((Control) this.TabPage1);
-    this.TabControl1.Controls.Add((Control) this.TabPage2);
-    this.TabControl1.Controls.Add((Control) this.TabPage3);
-    this.TabControl1.Controls.Add((Control) this.TabPage4);
-    this.TabControl1.Controls.Add((Control) this.TabPage5);
-    this.TabControl1.Controls.Add((Control) this.TabPage6);
-    this.TabControl1.Location = new Point(16 /*0x10*/, 15);
-    this.TabControl1.Margin = new Padding(4);
-    this.TabControl1.Name = "TabControl1";
-    this.TabControl1.SelectedIndex = 0;
-    this.TabControl1.Size = new Size(999, 591);
-    this.TabControl1.TabIndex = 0;
-    this.TabPage1.BackColor = SystemColors.Control;
-    this.TabPage1.Controls.Add((Control) this.chkShowOnlyMismatches);
-    this.TabPage1.Controls.Add((Control) this.chkCompareShowNames);
-    this.TabPage1.Controls.Add((Control) this.lblComp4VIN);
-    this.TabPage1.Controls.Add((Control) this.lblComp3VIN);
-    this.TabPage1.Controls.Add((Control) this.lblComp2VIN);
-    this.TabPage1.Controls.Add((Control) this.lblComp1VIN);
-    this.TabPage1.Controls.Add((Control) this.Button9);
-    this.TabPage1.Controls.Add((Control) this.tbxCompFile4);
-    this.TabPage1.Controls.Add((Control) this.Label23);
-    this.TabPage1.Controls.Add((Control) this.Button7);
-    this.TabPage1.Controls.Add((Control) this.tbxCompFile3);
-    this.TabPage1.Controls.Add((Control) this.Label22);
-    this.TabPage1.Controls.Add((Control) this.chkCompareShowChecksum);
-    this.TabPage1.Controls.Add((Control) this.btnCompLoad);
-    this.TabPage1.Controls.Add((Control) this.btnCompBrowse2);
-    this.TabPage1.Controls.Add((Control) this.btnCompBrowse1);
-    this.TabPage1.Controls.Add((Control) this.tbxCompFile2);
-    this.TabPage1.Controls.Add((Control) this.tbxCompFile1);
-    this.TabPage1.Controls.Add((Control) this.ListView1);
-    this.TabPage1.Controls.Add((Control) this.Label7);
-    this.TabPage1.Controls.Add((Control) this.Label6);
-    this.TabPage1.Location = new Point(4, 25);
-    this.TabPage1.Margin = new Padding(4);
-    this.TabPage1.Name = "TabPage1";
-    this.TabPage1.Padding = new Padding(4);
-    this.TabPage1.Size = new Size(991, 562);
-    this.TabPage1.TabIndex = 0;
-    this.TabPage1.Text = "Compare As-Built";
-    this.chkCompareShowNames.AutoSize = true;
-    this.chkCompareShowNames.Checked = true;
-    this.chkCompareShowNames.CheckState = CheckState.Checked;
-    this.chkCompareShowNames.Location = new Point(167, 180);
-    this.chkCompareShowNames.Name = "chkCompareShowNames";
-    this.chkCompareShowNames.Size = new Size(154, 20);
-    this.chkCompareShowNames.TabIndex = 19;
-    this.chkCompareShowNames.Text = "Show Module Names";
-    this.chkCompareShowNames.UseVisualStyleBackColor = true;
-    this.lblComp4VIN.AutoSize = true;
-    this.lblComp4VIN.ForeColor = Color.SaddleBrown;
-    this.lblComp4VIN.Location = new Point(642, 116);
-    this.lblComp4VIN.Name = "lblComp4VIN";
-    this.lblComp4VIN.Size = new Size(50, 16 /*0x10*/);
-    this.lblComp4VIN.TabIndex = 18;
-    this.lblComp4VIN.Text = "[no file]";
-    this.lblComp3VIN.AutoSize = true;
-    this.lblComp3VIN.ForeColor = Color.BlueViolet;
-    this.lblComp3VIN.Location = new Point(642, 85);
-    this.lblComp3VIN.Name = "lblComp3VIN";
-    this.lblComp3VIN.Size = new Size(50, 16 /*0x10*/);
-    this.lblComp3VIN.TabIndex = 17;
-    this.lblComp3VIN.Text = "[no file]";
-    this.lblComp2VIN.AutoSize = true;
-    this.lblComp2VIN.ForeColor = Color.DarkGreen;
-    this.lblComp2VIN.Location = new Point(642, 54);
-    this.lblComp2VIN.Name = "lblComp2VIN";
-    this.lblComp2VIN.Size = new Size(50, 16 /*0x10*/);
-    this.lblComp2VIN.TabIndex = 16 /*0x10*/;
-    this.lblComp2VIN.Text = "[no file]";
-    this.lblComp1VIN.AutoSize = true;
-    this.lblComp1VIN.ForeColor = Color.Blue;
-    this.lblComp1VIN.Location = new Point(642, 23);
-    this.lblComp1VIN.Name = "lblComp1VIN";
-    this.lblComp1VIN.Size = new Size(50, 16 /*0x10*/);
-    this.lblComp1VIN.TabIndex = 15;
-    this.lblComp1VIN.Text = "[no file]";
-    this.Button9.Location = new Point(538, 112 /*0x70*/);
-    this.Button9.Name = "Button9";
-    this.Button9.Size = new Size(98, 27);
-    this.Button9.TabIndex = 14;
-    this.Button9.Text = "Browse...";
-    this.Button9.UseVisualStyleBackColor = true;
-    this.tbxCompFile4.ForeColor = Color.SaddleBrown;
-    this.tbxCompFile4.Location = new Point(167, 113);
-    this.tbxCompFile4.Name = "tbxCompFile4";
-    this.tbxCompFile4.Size = new Size(343, 22);
-    this.tbxCompFile4.TabIndex = 13;
-    this.Label23.AutoSize = true;
-    this.Label23.ForeColor = Color.SaddleBrown;
-    this.Label23.Location = new Point(24, 116);
-    this.Label23.Name = "Label23";
-    this.Label23.Size = new Size(100, 16 /*0x10*/);
-    this.Label23.TabIndex = 12;
-    this.Label23.Text = "As-Built File # 4:";
-    this.Button7.Location = new Point(538, 81);
-    this.Button7.Name = "Button7";
-    this.Button7.Size = new Size(98, 27);
-    this.Button7.TabIndex = 11;
-    this.Button7.Text = "Browse...";
-    this.Button7.UseVisualStyleBackColor = true;
-    this.tbxCompFile3.ForeColor = Color.BlueViolet;
-    this.tbxCompFile3.Location = new Point(167, 82);
-    this.tbxCompFile3.Name = "tbxCompFile3";
-    this.tbxCompFile3.Size = new Size(343, 22);
-    this.tbxCompFile3.TabIndex = 10;
-    this.Label22.AutoSize = true;
-    this.Label22.ForeColor = Color.BlueViolet;
-    this.Label22.Location = new Point(24, 85);
-    this.Label22.Name = "Label22";
-    this.Label22.Size = new Size(100, 16 /*0x10*/);
-    this.Label22.TabIndex = 9;
-    this.Label22.Text = "As-Built File # 3:";
-    this.chkCompareShowChecksum.AutoSize = true;
-    this.chkCompareShowChecksum.Location = new Point(167, 154);
-    this.chkCompareShowChecksum.Name = "chkCompareShowChecksum";
-    this.chkCompareShowChecksum.Size = new Size(159, 20);
-    this.chkCompareShowChecksum.TabIndex = 8;
-    this.chkCompareShowChecksum.Text = "Include Checksum bits";
-    this.chkCompareShowChecksum.UseVisualStyleBackColor = true;
-    this.btnCompLoad.Font = new Font("Microsoft Sans Serif", 9.75f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
-    this.btnCompLoad.Location = new Point(523, 145);
-    this.btnCompLoad.Name = "btnCompLoad";
-    this.btnCompLoad.Size = new Size(113, 59);
-    this.btnCompLoad.TabIndex = 7;
-    this.btnCompLoad.Text = "Load Files";
-    this.btnCompLoad.UseVisualStyleBackColor = true;
-    this.btnCompBrowse2.Location = new Point(538, 50);
-    this.btnCompBrowse2.Name = "btnCompBrowse2";
-    this.btnCompBrowse2.Size = new Size(98, 27);
-    this.btnCompBrowse2.TabIndex = 6;
-    this.btnCompBrowse2.Text = "Browse...";
-    this.btnCompBrowse2.UseVisualStyleBackColor = true;
-    this.btnCompBrowse1.Location = new Point(538, 19);
-    this.btnCompBrowse1.Name = "btnCompBrowse1";
-    this.btnCompBrowse1.Size = new Size(98, 27);
-    this.btnCompBrowse1.TabIndex = 5;
-    this.btnCompBrowse1.Text = "Browse...";
-    this.btnCompBrowse1.UseVisualStyleBackColor = true;
-    this.tbxCompFile2.ForeColor = Color.DarkGreen;
-    this.tbxCompFile2.Location = new Point(167, 51);
-    this.tbxCompFile2.Name = "tbxCompFile2";
-    this.tbxCompFile2.Size = new Size(343, 22);
-    this.tbxCompFile2.TabIndex = 4;
-    this.tbxCompFile1.ForeColor = Color.Blue;
-    this.tbxCompFile1.Location = new Point(167, 20);
-    this.tbxCompFile1.Name = "tbxCompFile1";
-    this.tbxCompFile1.Size = new Size(343, 22);
-    this.tbxCompFile1.TabIndex = 3;
-    this.ListView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-    this.ListView1.Columns.AddRange(new ColumnHeader[9]
-    {
-      this.ColumnHeader1,
-      this.ColumnHeader2,
-      this.ColumnHeader3,
-      this.ColumnHeader4,
-      this.ColumnHeader5,
-      this.ColumnHeader6,
-      this.ColumnHeader7,
-      this.ColumnHeader8,
-      this.ColumnHeader9
-    });
+  );
     this.ListView1.ContextMenuStrip = this.ContextMenuStrip1;
     this.ListView1.Font = new Font("Courier New", 9.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
     this.ListView1.FullRowSelect = true;
@@ -4158,1066 +3855,328 @@ label_24:
     this.PerformLayout();
   }
 
-  [field: AccessedThroughProperty("TabControl1")]
+  
   internal virtual TabControl TabControl1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual TabPage TabPage1
-  {
-    get => this._TabPage1;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.TabPage1_Click);
-      TabPage tabPage1_1 = this._TabPage1;
-      if (tabPage1_1 != null)
-        tabPage1_1.Click -= eventHandler;
-      this._TabPage1 = value;
-      TabPage tabPage1_2 = this._TabPage1;
-      if (tabPage1_2 == null)
-        return;
-      tabPage1_2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual TabPage TabPage2
-  {
-    get => this._TabPage2;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.TabPage2_Click);
-      TabPage tabPage2_1 = this._TabPage2;
-      if (tabPage2_1 != null)
-        tabPage2_1.Click -= eventHandler;
-      this._TabPage2 = value;
-      TabPage tabPage2_2 = this._TabPage2;
-      if (tabPage2_2 == null)
-        return;
-      tabPage2_2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual TextBox tbxData2hex
-  {
-    get => this._tbxData2hex;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.TextBox3_TextChanged);
-      TextBox tbxData2hex1 = this._tbxData2hex;
-      if (tbxData2hex1 != null)
-        tbxData2hex1.TextChanged -= eventHandler;
-      this._tbxData2hex = value;
-      TextBox tbxData2hex2 = this._tbxData2hex;
-      if (tbxData2hex2 == null)
-        return;
-      tbxData2hex2.TextChanged += eventHandler;
-    }
-  }
+  
 
-  internal virtual Label Label3
-  {
-    get => this._Label3;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Label3_Click);
-      Label label3_1 = this._Label3;
-      if (label3_1 != null)
-        label3_1.Click -= eventHandler;
-      this._Label3 = value;
-      Label label3_2 = this._Label3;
-      if (label3_2 == null)
-        return;
-      label3_2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual TextBox tbxData1hex
-  {
-    get => this._tbxData1hex;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.tbxData1hex_TextChanged);
-      TextBox tbxData1hex1 = this._tbxData1hex;
-      if (tbxData1hex1 != null)
-        tbxData1hex1.TextChanged -= eventHandler;
-      this._tbxData1hex = value;
-      TextBox tbxData1hex2 = this._tbxData1hex;
-      if (tbxData1hex2 == null)
-        return;
-      tbxData1hex2.TextChanged += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("Label2")]
+  
   internal virtual Label Label2 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxModIDhex")]
+  
   internal virtual TextBox tbxModIDhex { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label1")]
+  
   internal virtual Label Label1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual TextBox tbxChecksumHex
-  {
-    get => this._tbxChecksumHex;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.tbxChecksumHex_TextChanged);
-      TextBox tbxChecksumHex1 = this._tbxChecksumHex;
-      if (tbxChecksumHex1 != null)
-        tbxChecksumHex1.TextChanged -= eventHandler;
-      this._tbxChecksumHex = value;
-      TextBox tbxChecksumHex2 = this._tbxChecksumHex;
-      if (tbxChecksumHex2 == null)
-        return;
-      tbxChecksumHex2.TextChanged += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("Label5")]
+  
   internal virtual Label Label5 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button Button1
-  {
-    get => this._Button1;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button1_Click);
-      Button button1_1 = this._Button1;
-      if (button1_1 != null)
-        button1_1.Click -= eventHandler;
-      this._Button1 = value;
-      Button button1_2 = this._Button1;
-      if (button1_2 == null)
-        return;
-      button1_2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual TextBox tbxData3hex
-  {
-    get => this._tbxData3hex;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.tbxData3hex_TextChanged);
-      TextBox tbxData3hex1 = this._tbxData3hex;
-      if (tbxData3hex1 != null)
-        tbxData3hex1.TextChanged -= eventHandler;
-      this._tbxData3hex = value;
-      TextBox tbxData3hex2 = this._tbxData3hex;
-      if (tbxData3hex2 == null)
-        return;
-      tbxData3hex2.TextChanged += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("Label4")]
+  
   internal virtual Label Label4 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxData3bin2")]
+  
   internal virtual TextBox tbxData3bin2 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxData2bin2")]
+  
   internal virtual TextBox tbxData2bin2 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxData1bin2")]
+  
   internal virtual TextBox tbxData1bin2 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxData3bin1")]
+  
   internal virtual TextBox tbxData3bin1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxData2bin1")]
+  
   internal virtual TextBox tbxData2bin1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxData1bin1")]
+  
   internal virtual TextBox tbxData1bin1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button btnCompBrowse2
-  {
-    get => this._btnCompBrowse2;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.btnCompBrowse2_Click);
-      Button btnCompBrowse2_1 = this._btnCompBrowse2;
-      if (btnCompBrowse2_1 != null)
-        btnCompBrowse2_1.Click -= eventHandler;
-      this._btnCompBrowse2 = value;
-      Button btnCompBrowse2_2 = this._btnCompBrowse2;
-      if (btnCompBrowse2_2 == null)
-        return;
-      btnCompBrowse2_2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual Button btnCompBrowse1
-  {
-    get => this._btnCompBrowse1;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.btnCompBrowse1_Click);
-      Button btnCompBrowse1_1 = this._btnCompBrowse1;
-      if (btnCompBrowse1_1 != null)
-        btnCompBrowse1_1.Click -= eventHandler;
-      this._btnCompBrowse1 = value;
-      Button btnCompBrowse1_2 = this._btnCompBrowse1;
-      if (btnCompBrowse1_2 == null)
-        return;
-      btnCompBrowse1_2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("tbxCompFile2")]
+  
   internal virtual TextBox tbxCompFile2 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxCompFile1")]
+  
   internal virtual TextBox tbxCompFile1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual ListView ListView1
-  {
-    get => this._ListView1;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.ListView1_SelectedIndexChanged);
-      ListView listView1_1 = this._ListView1;
-      if (listView1_1 != null)
-        listView1_1.SelectedIndexChanged -= eventHandler;
-      this._ListView1 = value;
-      ListView listView1_2 = this._ListView1;
-      if (listView1_2 == null)
-        return;
-      listView1_2.SelectedIndexChanged += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("Label7")]
+  
   internal virtual Label Label7 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label6")]
+  
   internal virtual Label Label6 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button btnCompLoad
-  {
-    get => this._btnCompLoad;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button2_Click);
-      Button btnCompLoad1 = this._btnCompLoad;
-      if (btnCompLoad1 != null)
-        btnCompLoad1.Click -= eventHandler;
-      this._btnCompLoad = value;
-      Button btnCompLoad2 = this._btnCompLoad;
-      if (btnCompLoad2 == null)
-        return;
-      btnCompLoad2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("ColumnHeader1")]
+  
   internal virtual ColumnHeader ColumnHeader1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader2")]
+  
   internal virtual ColumnHeader ColumnHeader2 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader3")]
+  
   internal virtual ColumnHeader ColumnHeader3 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader4")]
+  
   internal virtual ColumnHeader ColumnHeader4 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader5")]
+  
   internal virtual ColumnHeader ColumnHeader5 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader6")]
+  
   internal virtual ColumnHeader ColumnHeader6 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label8")]
+  
   internal virtual Label Label8 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual ContextMenuStrip ContextMenuStrip1
-  {
-    get => this._ContextMenuStrip1;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      CancelEventHandler cancelEventHandler = new CancelEventHandler(this.ContextMenuStrip1_Opening);
-      ContextMenuStrip contextMenuStrip1_1 = this._ContextMenuStrip1;
-      if (contextMenuStrip1_1 != null)
-        contextMenuStrip1_1.Opening -= cancelEventHandler;
-      this._ContextMenuStrip1 = value;
-      ContextMenuStrip contextMenuStrip1_2 = this._ContextMenuStrip1;
-      if (contextMenuStrip1_2 == null)
-        return;
-      contextMenuStrip1_2.Opening += cancelEventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem CopyToolStripMenuItem
-  {
-    get => this._CopyToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.CopyToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._CopyToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._CopyToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._CopyToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem EntireLineToolStripMenuItem
-  {
-    get => this._EntireLineToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.EntireLineToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._EntireLineToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._EntireLineToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._EntireLineToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem Data1hexToolStripMenuItem
-  {
-    get => this._Data1hexToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Data1hexToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._Data1hexToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._Data1hexToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._Data1hexToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem Data2hexToolStripMenuItem
-  {
-    get => this._Data2hexToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Data2hexToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._Data2hexToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._Data2hexToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._Data2hexToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem Data3hexToolStripMenuItem
-  {
-    get => this._Data3hexToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Data3hexToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._Data3hexToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._Data3hexToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._Data3hexToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem BinaryToolStripMenuItem
-  {
-    get => this._BinaryToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.BinaryToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._BinaryToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._BinaryToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._BinaryToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("TabPage3")]
+  
   internal virtual TabPage TabPage3 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button btnDeduceOpenETIS
-  {
-    get => this._btnDeduceOpenETIS;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button2_Click_1);
-      Button btnDeduceOpenEtis1 = this._btnDeduceOpenETIS;
-      if (btnDeduceOpenEtis1 != null)
-        btnDeduceOpenEtis1.Click -= eventHandler;
-      this._btnDeduceOpenETIS = value;
-      Button btnDeduceOpenEtis2 = this._btnDeduceOpenETIS;
-      if (btnDeduceOpenEtis2 == null)
-        return;
-      btnDeduceOpenEtis2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual WebBrowser wbDeducer
-  {
-    get => this._wbDeducer;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      WebBrowserDocumentCompletedEventHandler completedEventHandler = new WebBrowserDocumentCompletedEventHandler(this.wbDeducer_DocumentCompleted);
-      WebBrowserNavigatingEventHandler navigatingEventHandler = new WebBrowserNavigatingEventHandler(this.wbDeducer_Navigating);
-      EventHandler eventHandler = new EventHandler(this.wbDeducer_FileDownload);
-      WebBrowser wbDeducer1 = this._wbDeducer;
-      if (wbDeducer1 != null)
-      {
-        wbDeducer1.DocumentCompleted -= completedEventHandler;
-        wbDeducer1.Navigating -= navigatingEventHandler;
-        wbDeducer1.FileDownload -= eventHandler;
-      }
-      this._wbDeducer = value;
-      WebBrowser wbDeducer2 = this._wbDeducer;
-      if (wbDeducer2 == null)
-        return;
-      wbDeducer2.DocumentCompleted += completedEventHandler;
-      wbDeducer2.Navigating += navigatingEventHandler;
-      wbDeducer2.FileDownload += eventHandler;
-    }
-  }
+  
 
-  internal virtual Button btnDeduceSaveInfo
-  {
-    get => this._btnDeduceSaveInfo;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button3_Click);
-      Button btnDeduceSaveInfo1 = this._btnDeduceSaveInfo;
-      if (btnDeduceSaveInfo1 != null)
-        btnDeduceSaveInfo1.Click -= eventHandler;
-      this._btnDeduceSaveInfo = value;
-      Button btnDeduceSaveInfo2 = this._btnDeduceSaveInfo;
-      if (btnDeduceSaveInfo2 == null)
-        return;
-      btnDeduceSaveInfo2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("chkDeduceDownloadAB")]
+  
   internal virtual CheckBox chkDeduceDownloadAB { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual TabPage TabPage4
-  {
-    get => this._TabPage4;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.TabPage4_Click);
-      TabPage tabPage4_1 = this._TabPage4;
-      if (tabPage4_1 != null)
-        tabPage4_1.Click -= eventHandler;
-      this._TabPage4 = value;
-      TabPage tabPage4_2 = this._TabPage4;
-      if (tabPage4_2 == null)
-        return;
-      tabPage4_2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("tbxDeduceReport")]
+  
   internal virtual TextBox tbxDeduceReport { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button btnDeduceFigureIt
-  {
-    get => this._btnDeduceFigureIt;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.btnDeduceFigureIt_Click);
-      Button btnDeduceFigureIt1 = this._btnDeduceFigureIt;
-      if (btnDeduceFigureIt1 != null)
-        btnDeduceFigureIt1.Click -= eventHandler;
-      this._btnDeduceFigureIt = value;
-      Button btnDeduceFigureIt2 = this._btnDeduceFigureIt;
-      if (btnDeduceFigureIt2 == null)
-        return;
-      btnDeduceFigureIt2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual Button btnDeduceLoadOptions
-  {
-    get => this._btnDeduceLoadOptions;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.btnDeduceLoadOptions_Click);
-      Button deduceLoadOptions1 = this._btnDeduceLoadOptions;
-      if (deduceLoadOptions1 != null)
-        deduceLoadOptions1.Click -= eventHandler;
-      this._btnDeduceLoadOptions = value;
-      Button deduceLoadOptions2 = this._btnDeduceLoadOptions;
-      if (deduceLoadOptions2 == null)
-        return;
-      deduceLoadOptions2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("lstDeduceFactoryOptions")]
+  
   internal virtual ListBox lstDeduceFactoryOptions { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label9")]
+  
   internal virtual Label Label9 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("lstDeduceModels")]
+  
   internal virtual CheckedListBox lstDeduceModels { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("lstDeduceYears")]
+  
   internal virtual CheckedListBox lstDeduceYears { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label11")]
+  
   internal virtual Label Label11 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label10")]
+  
   internal virtual Label Label10 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label12")]
+  
   internal virtual Label Label12 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("TextBox2")]
+  
   internal virtual TextBox TextBox2 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("TextBox1")]
+  
   internal virtual TextBox TextBox1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label13")]
+  
   internal virtual Label Label13 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label14")]
+  
   internal virtual Label Label14 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxConvertBin")]
+  
   internal virtual TextBox tbxConvertBin { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxConvertHex")]
+  
   internal virtual TextBox tbxConvertHex { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxChecksumBin")]
+  
   internal virtual TextBox tbxChecksumBin { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label15")]
+  
   internal virtual Label Label15 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button Button3
-  {
-    get => this._Button3;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button3_Click_1);
-      Button button3_1 = this._Button3;
-      if (button3_1 != null)
-        button3_1.Click -= eventHandler;
-      this._Button3 = value;
-      Button button3_2 = this._Button3;
-      if (button3_2 == null)
-        return;
-      button3_2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual Button Button2
-  {
-    get => this._Button2;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button2_Click_2);
-      Button button2_1 = this._Button2;
-      if (button2_1 != null)
-        button2_1.Click -= eventHandler;
-      this._Button2 = value;
-      Button button2_2 = this._Button2;
-      if (button2_2 == null)
-        return;
-      button2_2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("Label16")]
+  
   internal virtual Label Label16 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual TabPage TabPage5
-  {
-    get => this._TabPage5;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.TabPage5_Click);
-      TabPage tabPage5_1 = this._TabPage5;
-      if (tabPage5_1 != null)
-        tabPage5_1.Click -= eventHandler;
-      this._TabPage5 = value;
-      TabPage tabPage5_2 = this._TabPage5;
-      if (tabPage5_2 == null)
-        return;
-      tabPage5_2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("Label17")]
+  
   internal virtual Label Label17 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("TextBox3")]
+  
   internal virtual TextBox TextBox3 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label18")]
+  
   internal virtual Label Label18 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("tbxDeduceReport2")]
+  
   internal virtual TextBox tbxDeduceReport2 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button Button4
-  {
-    get => this._Button4;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button4_Click);
-      Button button4_1 = this._Button4;
-      if (button4_1 != null)
-        button4_1.Click -= eventHandler;
-      this._Button4 = value;
-      Button button4_2 = this._Button4;
-      if (button4_2 == null)
-        return;
-      button4_2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("ColumnHeader7")]
+  
   internal virtual ColumnHeader ColumnHeader7 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader8")]
+  
   internal virtual ColumnHeader ColumnHeader8 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader9")]
+  
   internal virtual ColumnHeader ColumnHeader9 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button Button8
-  {
-    get => this._Button8;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button8_Click);
-      Button button8_1 = this._Button8;
-      if (button8_1 != null)
-        button8_1.Click -= eventHandler;
-      this._Button8 = value;
-      Button button8_2 = this._Button8;
-      if (button8_2 == null)
-        return;
-      button8_2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual Button Button6
-  {
-    get => this._Button6;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button6_Click_1);
-      Button button6_1 = this._Button6;
-      if (button6_1 != null)
-        button6_1.Click -= eventHandler;
-      this._Button6 = value;
-      Button button6_2 = this._Button6;
-      if (button6_2 == null)
-        return;
-      button6_2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual Button Button5
-  {
-    get => this._Button5;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button5_Click_1);
-      Button button5_1 = this._Button5;
-      if (button5_1 != null)
-        button5_1.Click -= eventHandler;
-      this._Button5 = value;
-      Button button5_2 = this._Button5;
-      if (button5_2 == null)
-        return;
-      button5_2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("Label20")]
+  
   internal virtual Label Label20 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label19")]
+  
   internal virtual Label Label19 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("lstBit_Years")]
+  
   internal virtual CheckedListBox lstBit_Years { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("lstBit_Models")]
+  
   internal virtual CheckedListBox lstBit_Models { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("lstBit_Modules")]
+  
   internal virtual ListBox lstBit_Modules { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("TextBox4")]
+  
   internal virtual TextBox TextBox4 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label21")]
+  
   internal virtual Label Label21 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("chkCompareShowChecksum")]
+  
   internal virtual CheckBox chkCompareShowChecksum { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("chkDeduceDoCCC")]
+  
   internal virtual CheckBox chkDeduceDoCCC { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button Button9
-  {
-    get => this._Button9;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button9_Click);
-      Button button9_1 = this._Button9;
-      if (button9_1 != null)
-        button9_1.Click -= eventHandler;
-      this._Button9 = value;
-      Button button9_2 = this._Button9;
-      if (button9_2 == null)
-        return;
-      button9_2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("tbxCompFile4")]
+  
   internal virtual TextBox tbxCompFile4 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label23")]
+  
   internal virtual Label Label23 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual Button Button7
-  {
-    get => this._Button7;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button7_Click);
-      Button button7_1 = this._Button7;
-      if (button7_1 != null)
-        button7_1.Click -= eventHandler;
-      this._Button7 = value;
-      Button button7_2 = this._Button7;
-      if (button7_2 == null)
-        return;
-      button7_2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("tbxCompFile3")]
+  
   internal virtual TextBox tbxCompFile3 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("Label22")]
+  
   internal virtual Label Label22 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("TextBox5")]
+  
   internal virtual TextBox TextBox5 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("TabPage6")]
+  
   internal virtual TabPage TabPage6 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual ListView lvwBrowser
-  {
-    get => this._lvwBrowser;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.lvwBrowser_SelectedIndexChanged);
-      ColumnClickEventHandler clickEventHandler = new ColumnClickEventHandler(this.lvwBrowser_ColumnClick);
-      ListView lvwBrowser1 = this._lvwBrowser;
-      if (lvwBrowser1 != null)
-      {
-        lvwBrowser1.SelectedIndexChanged -= eventHandler;
-        lvwBrowser1.ColumnClick -= clickEventHandler;
-      }
-      this._lvwBrowser = value;
-      ListView lvwBrowser2 = this._lvwBrowser;
-      if (lvwBrowser2 == null)
-        return;
-      lvwBrowser2.SelectedIndexChanged += eventHandler;
-      lvwBrowser2.ColumnClick += clickEventHandler;
-    }
-  }
+  
 
-  internal virtual Button btnBrowseRefresh
-  {
-    get => this._btnBrowseRefresh;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button10_Click);
-      Button btnBrowseRefresh1 = this._btnBrowseRefresh;
-      if (btnBrowseRefresh1 != null)
-        btnBrowseRefresh1.Click -= eventHandler;
-      this._btnBrowseRefresh = value;
-      Button btnBrowseRefresh2 = this._btnBrowseRefresh;
-      if (btnBrowseRefresh2 == null)
-        return;
-      btnBrowseRefresh2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("ColumnHeader10")]
+  
   internal virtual ColumnHeader ColumnHeader10 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader11")]
+  
   internal virtual ColumnHeader ColumnHeader11 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader12")]
+  
   internal virtual ColumnHeader ColumnHeader12 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader13")]
+  
   internal virtual ColumnHeader ColumnHeader13 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("ColumnHeader14")]
+  
   internal virtual ColumnHeader ColumnHeader14 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual ContextMenuStrip ContextMenuStrip2
-  {
-    get => this._ContextMenuStrip2;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      CancelEventHandler cancelEventHandler = new CancelEventHandler(this.ContextMenuStrip2_Opening);
-      ContextMenuStrip contextMenuStrip2_1 = this._ContextMenuStrip2;
-      if (contextMenuStrip2_1 != null)
-        contextMenuStrip2_1.Opening -= cancelEventHandler;
-      this._ContextMenuStrip2 = value;
-      ContextMenuStrip contextMenuStrip2_2 = this._ContextMenuStrip2;
-      if (contextMenuStrip2_2 == null)
-        return;
-      contextMenuStrip2_2.Opening += cancelEventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem SetAsCompare1ToolStripMenuItem
-  {
-    get => this._SetAsCompare1ToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.SetAsCompare1ToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._SetAsCompare1ToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._SetAsCompare1ToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._SetAsCompare1ToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem SetAsCompare2ToolStripMenuItem
-  {
-    get => this._SetAsCompare2ToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.SetAsCompare2ToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._SetAsCompare2ToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._SetAsCompare2ToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._SetAsCompare2ToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem SetAsCompare3ToolStripMenuItem
-  {
-    get => this._SetAsCompare3ToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.SetAsCompare3ToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._SetAsCompare3ToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._SetAsCompare3ToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._SetAsCompare3ToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem SetAsCompare4ToolStripMenuItem
-  {
-    get => this._SetAsCompare4ToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.SetAsCompare4ToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._SetAsCompare4ToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._SetAsCompare4ToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._SetAsCompare4ToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("ToolStripMenuItem1")]
+  
   internal virtual ToolStripSeparator ToolStripMenuItem1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual ToolStripMenuItem DeleteFileToolStripMenuItem
-  {
-    get => this._DeleteFileToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.DeleteFileToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._DeleteFileToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._DeleteFileToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._DeleteFileToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual PictureBox PictureBox1
-  {
-    get => this._PictureBox1;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.PictureBox1_Click);
-      PictureBox pictureBox1_1 = this._PictureBox1;
-      if (pictureBox1_1 != null)
-        pictureBox1_1.Click -= eventHandler;
-      this._PictureBox1 = value;
-      PictureBox pictureBox1_2 = this._PictureBox1;
-      if (pictureBox1_2 == null)
-        return;
-      pictureBox1_2.Click += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("lblComp4VIN")]
+  
   internal virtual Label lblComp4VIN { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("lblComp3VIN")]
+  
   internal virtual Label lblComp3VIN { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("lblComp2VIN")]
+  
   internal virtual Label lblComp2VIN { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("lblComp1VIN")]
+  
   internal virtual Label lblComp1VIN { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  [field: AccessedThroughProperty("chkCompareShowNames")]
+  
   internal virtual CheckBox chkCompareShowNames { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-  internal virtual ToolStripMenuItem ExportModuleToolStripMenuItem
-  {
-    get => this._ExportModuleToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler1 = new EventHandler(this.ExportModuleToolStripMenuItem_Click);
-      EventHandler eventHandler2 = new EventHandler(this.ExportModuleToolStripMenuItem_DropDownOpening);
-      ToolStripMenuItem toolStripMenuItem1 = this._ExportModuleToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-      {
-        toolStripMenuItem1.Click -= eventHandler1;
-        toolStripMenuItem1.DropDownOpening -= eventHandler2;
-      }
-      this._ExportModuleToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._ExportModuleToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler1;
-      toolStripMenuItem2.DropDownOpening += eventHandler2;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem ToUCDSToolStripMenuItem
-  {
-    get => this._ToUCDSToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.ToUCDSToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._ToUCDSToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._ToUCDSToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._ToUCDSToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual ToolStripMenuItem ToABTToolStripMenuItem
-  {
-    get => this._ToABTToolStripMenuItem;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.ToABTToolStripMenuItem_Click);
-      ToolStripMenuItem toolStripMenuItem1 = this._ToABTToolStripMenuItem;
-      if (toolStripMenuItem1 != null)
-        toolStripMenuItem1.Click -= eventHandler;
-      this._ToABTToolStripMenuItem = value;
-      ToolStripMenuItem toolStripMenuItem2 = this._ToABTToolStripMenuItem;
-      if (toolStripMenuItem2 == null)
-        return;
-      toolStripMenuItem2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual Button Button10
-  {
-    get => this._Button10;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.Button10_Click_1);
-      Button button10_1 = this._Button10;
-      if (button10_1 != null)
-        button10_1.Click -= eventHandler;
-      this._Button10 = value;
-      Button button10_2 = this._Button10;
-      if (button10_2 == null)
-        return;
-      button10_2.Click += eventHandler;
-    }
-  }
+  
 
-  internal virtual CheckBox chkShowOnlyMismatches
-  {
-    get => this._chkShowOnlyMismatches;
-    [MethodImpl(MethodImplOptions.Synchronized)] set
-    {
-      EventHandler eventHandler = new EventHandler(this.CheckBox1_CheckedChanged);
-      CheckBox showOnlyMismatches1 = this._chkShowOnlyMismatches;
-      if (showOnlyMismatches1 != null)
-        showOnlyMismatches1.CheckedChanged -= eventHandler;
-      this._chkShowOnlyMismatches = value;
-      CheckBox showOnlyMismatches2 = this._chkShowOnlyMismatches;
-      if (showOnlyMismatches2 == null)
-        return;
-      showOnlyMismatches2.CheckedChanged += eventHandler;
-    }
-  }
+  
 
-  [field: AccessedThroughProperty("TextBox6")]
+  
   internal virtual TextBox TextBox6 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
   public struct VehicleInfo
@@ -5242,3 +4201,4 @@ label_24:
     public bool[] abBinaryBool;
   }
 }
+
