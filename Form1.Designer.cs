@@ -57,6 +57,7 @@ namespace AsBuiltExplorer
             this.tbxCompFile1 = new System.Windows.Forms.TextBox();
             this.ListView1 = new System.Windows.Forms.ListView();
             this.ColumnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colModuleName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -147,6 +148,7 @@ namespace AsBuiltExplorer
             this.lvwBrowser = new System.Windows.Forms.ListView();
             this.ColumnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colModuleName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -404,6 +406,7 @@ namespace AsBuiltExplorer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnHeader1,
+            this.colModuleName,
             this.ColumnHeader2,
             this.ColumnHeader3,
             this.ColumnHeader4,
@@ -428,6 +431,11 @@ namespace AsBuiltExplorer
             // 
             this.ColumnHeader1.Text = "Module Address";
             this.ColumnHeader1.Width = 128;
+            // 
+            // colModuleName
+            // 
+            this.colModuleName.Text = "Module Name";
+            this.colModuleName.Width = 250;
             // 
             // ColumnHeader2
             // 
@@ -1627,6 +1635,7 @@ namespace AsBuiltExplorer
   private Label lblComp2VIN;
   private Label lblComp1VIN;
   private CheckBox chkCompareShowNames;
+  private System.Windows.Forms.ColumnHeader colModuleName;
   private TextBox TextBox6;
 }
 }

@@ -128,9 +128,10 @@ public partial class Form1 : Form
     string directoryPath = MyProject.Application.Info.DirectoryPath;
     if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
       directoryPath += "\\";
-    string inpFileName = directoryPath + "ModuleList.txt";
     if (this.chkCompareShowNames.Checked)
-      modAsBuilt.AsBuilt_LoadFile_ModuleList(inpFileName, ref retModuleNames, ref retModuleShortNames, ref retModuleAddresses, ref retModuleCount);
+    {
+       // Legacy file loading removed in favor of ModuleDatabase
+    }
     string[] strArray1 = new string[1];
     string[] retModuleDatas1 = new string[1];
     int num1 = 0;
@@ -321,13 +322,11 @@ public partial class Form1 : Form
         }
         checked { ++index3; }
       }
+      string modName = "";
       if (this.chkCompareShowNames.Checked)
-      {
-        string modName = ModuleDatabase.GetModuleName(str4);
-        if (!string.IsNullOrEmpty(modName))
-          str4 = str4 + "  " + modName;
-      }
+        modName = ModuleDatabase.GetModuleName(str4);
       ListViewItem listViewItem2 = this.ListView1.Items.Add(str4);
+      listViewItem2.SubItems.Add(modName);
       listViewItem2.ForeColor = this.tbxCompFile1.ForeColor;
       listViewItem2.UseItemStyleForSubItems = false;
       listViewItem2.Tag = (object) text1;
@@ -351,12 +350,9 @@ public partial class Form1 : Form
         retModuleDatas2[index4] = Strings.Left(retModuleDatas2[index4], checked (Strings.Len(retModuleDatas2[index4]) - 2));
       string str8 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray2[index4]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas2[index4], ref retData1_1, ref retData2_1, ref retData3_1);
+      string modName = "";
       if (this.chkCompareShowNames.Checked)
-      {
-        string modName = ModuleDatabase.GetModuleName(str8);
-        if (!string.IsNullOrEmpty(modName))
-          str8 = str8 + "  " + modName;
-      }
+        modName = ModuleDatabase.GetModuleName(str8);
       int index5 = -1;
       int num13 = checked (this.ListView1.Items.Count - 1);
       int index6 = 0;
@@ -368,6 +364,7 @@ public partial class Form1 : Form
       }
       flag5 = true;
       ListViewItem listViewItem3 = new ListViewItem(str8);
+      listViewItem3.SubItems.Add(modName);
       if (index5 != -1)
         this.ListView1.Items.Insert(checked (index5 + 1), listViewItem3);
       else
@@ -428,12 +425,9 @@ public partial class Form1 : Form
         retModuleDatas3[index9] = Strings.Left(retModuleDatas3[index9], checked (Strings.Len(retModuleDatas3[index9]) - 2));
       string str9 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray3[index9]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas3[index9], ref retData1_1, ref retData2_1, ref retData3_1);
+      string modName = "";
       if (this.chkCompareShowNames.Checked)
-      {
-        string modName = ModuleDatabase.GetModuleName(str9);
-        if (!string.IsNullOrEmpty(modName))
-          str9 = str9 + "  " + modName;
-      }
+        modName = ModuleDatabase.GetModuleName(str9);
       int index10 = -1;
       int num17 = checked (this.ListView1.Items.Count - 1);
       int index11 = 0;
@@ -445,6 +439,7 @@ public partial class Form1 : Form
       }
       flag5 = true;
       ListViewItem listViewItem4 = new ListViewItem(str9);
+      listViewItem4.SubItems.Add(modName);
       if (index10 != -1)
         this.ListView1.Items.Insert(checked (index10 + 1), listViewItem4);
       else
@@ -505,12 +500,9 @@ public partial class Form1 : Form
         retModuleDatas4[index14] = Strings.Left(retModuleDatas4[index14], checked (Strings.Len(retModuleDatas4[index14]) - 2));
       string str10 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray4[index14]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas4[index14], ref retData1_1, ref retData2_1, ref retData3_1);
+      string modName = "";
       if (this.chkCompareShowNames.Checked)
-      {
-        string modName = ModuleDatabase.GetModuleName(str10);
-        if (!string.IsNullOrEmpty(modName))
-          str10 = str10 + "  " + modName;
-      }
+        modName = ModuleDatabase.GetModuleName(str10);
       int index15 = -1;
       int num21 = checked (this.ListView1.Items.Count - 1);
       int index16 = 0;
@@ -522,6 +514,7 @@ public partial class Form1 : Form
       }
       flag5 = true;
       ListViewItem listViewItem5 = new ListViewItem(str10);
+      listViewItem5.SubItems.Add(modName);
       if (index15 != -1)
         this.ListView1.Items.Insert(checked (index15 + 1), listViewItem5);
       else
@@ -680,6 +673,8 @@ public partial class Form1 : Form
         checked { index27 += -1; }
       }
     }
+    this.ListView1.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
+    this.ListView1.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent);
   }
 
   private void btnCompBrowse1_Click(object sender, EventArgs e)

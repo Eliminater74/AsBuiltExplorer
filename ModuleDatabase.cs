@@ -214,7 +214,7 @@ Virtual Image Cluster (VIC)|VIC|060";
                             {
                                 if (!_moduleNames.ContainsKey(address))
                                 {
-                                    string displayName = !string.IsNullOrEmpty(abbr) ? abbr : fullName;
+                                    string displayName = !string.IsNullOrEmpty(fullName) ? fullName : abbr;
                                     _moduleNames[address] = displayName;
                                 }
                             }
