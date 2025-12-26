@@ -1471,6 +1471,28 @@ namespace AsBuiltExplorer
             this.TabPage6.ResumeLayout(false);
             this.ContextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
+            this.TabPage5.Click += new System.EventHandler(this.TabPage5_Click);
+            this.lvwBrowser.SelectedIndexChanged += new System.EventHandler(this.lvwBrowser_SelectedIndexChanged);
+            this.Button6.Click += new System.EventHandler(this.Button6_Click_1);
+            this.Button5.Click += new System.EventHandler(this.Button5_Click_1);
+            this.btnBrowseRefresh.Click += new System.EventHandler(this.Button10_Click);
+            this.Button10.Click += new System.EventHandler(this.Button10_Click_1);
+            this.Button7.Click += new System.EventHandler(this.Button7_Click);
+            this.Button9.Click += new System.EventHandler(this.Button9_Click);
+            this.Button8.Click += new System.EventHandler(this.Button8_Click);
+            this.Button4.Click += new System.EventHandler(this.Button4_Click);
+            this.btnDeduceSaveInfo.Click += new System.EventHandler(this.Button3_Click);
+            this.Button3.Click += new System.EventHandler(this.Button3_Click_1);
+            this.Button2.Click += new System.EventHandler(this.Button2_Click_2);
+            this.btnDeduceLoadOptions.Click += new System.EventHandler(this.btnDeduceLoadOptions_Click);
+            this.btnDeduceFigureIt.Click += new System.EventHandler(this.btnDeduceFigureIt_Click);
+            this.TabPage4.Click += new System.EventHandler(this.TabPage4_Click);
+            this.BinaryToolStripMenuItem.Click += new System.EventHandler(this.BinaryToolStripMenuItem_Click);
+            this.Data3hexToolStripMenuItem.Click += new System.EventHandler(this.Data3hexToolStripMenuItem_Click);
+            this.Data2hexToolStripMenuItem.Click += new System.EventHandler(this.Data2hexToolStripMenuItem_Click);
+            this.Data1hexToolStripMenuItem.Click += new System.EventHandler(this.Data1hexToolStripMenuItem_Click);
+            this.EntireLineToolStripMenuItem.Click += new System.EventHandler(this.EntireLineToolStripMenuItem_Click);
+            this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             this.btnDeduceOpenETIS.Click += new System.EventHandler(this.Button2_Click_1);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1606,6 +1628,7 @@ namespace AsBuiltExplorer
   private TextBox TextBox6;
 }
 }
+
 
 
 
