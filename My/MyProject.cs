@@ -1,8 +1,3 @@
-// Decompiled with JetBrains decompiler
-// Type: AsBuiltExplorer.My.MyProject
-// Assembly: AsBuiltExplorer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 9083D66F-6E27-42C7-99A4-392C98AEFBC8
-// Assembly location: I:\GITHUB\Projects\AsBuiltExplorer\AsBuiltExplorer.exe
 
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.ApplicationServices;
