@@ -594,14 +594,14 @@ public partial class Form1 : Form
         checked { ++num27; }
         checked { ++index21; }
       }
-      string text21 = this.ListView1.Items[index19].SubItems[5].Text;
+      string text21 = this.ListView1.Items[index19].SubItems[6].Text;
       bool flag9 = true;
       int num30 = checked (index19 + 1);
       int num31 = num24;
       int index22 = num30;
       while (index22 <= num31)
       {
-        if (Operators.CompareString(this.ListView1.Items[index22].SubItems[5].Text, text21, false) != 0)
+        if (Operators.CompareString(this.ListView1.Items[index22].SubItems[6].Text, text21, false) != 0)
         {
           flag9 = false;
           break;
@@ -615,19 +615,19 @@ public partial class Form1 : Form
       {
         if (!flag9)
         {
-          this.ListView1.Items[index23].SubItems[4].Text = "No";
-          this.ListView1.Items[index23].BackColor = color;
+          this.ListView1.Items[index23].SubItems[5].Text = "No";
+          this.ListView1.Items[index23].BackColor = Color.MistyRose;
           int num34 = checked (this.ListView1.Items[index23].SubItems.Count - 1);
           int index24 = 0;
           while (index24 <= num34)
           {
-            this.ListView1.Items[index23].SubItems[index24].BackColor = color;
+            this.ListView1.Items[index23].SubItems[index24].BackColor = Color.MistyRose;
             checked { ++index24; }
           }
         }
         else
         {
-          this.ListView1.Items[index23].SubItems[4].Text = "Yes";
+          this.ListView1.Items[index23].SubItems[5].Text = "Yes";
           this.ListView1.Items[index23].BackColor = Color.LightYellow;
           int num35 = checked (this.ListView1.Items[index23].SubItems.Count - 1);
           int index25 = 0;
