@@ -3068,6 +3068,42 @@ label_24:
 
 
 
+  private void btnDB1_Click(object sender, EventArgs e)
+  {
+      ShowVehicleDB(this.tbxCompFile1, this.lblComp1VIN);
+  }
+
+  private void btnDB2_Click(object sender, EventArgs e)
+  {
+      ShowVehicleDB(this.tbxCompFile2, this.lblComp2VIN);
+  }
+
+  private void btnDB3_Click(object sender, EventArgs e)
+  {
+      ShowVehicleDB(this.tbxCompFile3, this.lblComp3VIN);
+  }
+
+  private void btnDB4_Click(object sender, EventArgs e)
+  {
+      ShowVehicleDB(this.tbxCompFile4, this.lblComp4VIN);
+  }
+
+  private void ShowVehicleDB(TextBox tbxFile, Label lblVIN)
+  {
+      string currentPath = tbxFile.Text;
+      string currentVIN = lblVIN.Text;
+      if (currentVIN.ToLower().Contains("no vin")) currentVIN = "";
+      
+      using (frmVehicleDB frm = new frmVehicleDB(currentPath, currentVIN))
+      {
+          if (frm.ShowDialog() == DialogResult.OK)
+          {
+              tbxFile.Text = frm.SelectedFilePath;
+              Button2_Click(null, null); // Refresh
+          }
+      }
+  }
+
   public struct VehicleInfo
   {
     public string carVIN;

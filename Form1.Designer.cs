@@ -138,6 +138,10 @@ namespace AsBuiltExplorer
             this.Label19 = new System.Windows.Forms.Label();
             this.lstBit_Years = new System.Windows.Forms.CheckedListBox();
             this.lstBit_Models = new System.Windows.Forms.CheckedListBox();
+            this.btnDB1 = new System.Windows.Forms.Button();
+            this.btnDB2 = new System.Windows.Forms.Button();
+            this.btnDB3 = new System.Windows.Forms.Button();
+            this.btnDB4 = new System.Windows.Forms.Button();
             this.Label17 = new System.Windows.Forms.Label();
             this.TextBox3 = new System.Windows.Forms.TextBox();
             this.Label18 = new System.Windows.Forms.Label();
@@ -194,6 +198,10 @@ namespace AsBuiltExplorer
             // TabPage1
             // 
             this.TabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.TabPage1.Controls.Add(this.btnDB4);
+            this.TabPage1.Controls.Add(this.btnDB3);
+            this.TabPage1.Controls.Add(this.btnDB2);
+            this.TabPage1.Controls.Add(this.btnDB1);
             this.TabPage1.Controls.Add(this.chkShowOnlyMismatches);
             this.TabPage1.Controls.Add(this.chkCompareShowNames);
             this.TabPage1.Controls.Add(this.lblComp4VIN);
@@ -252,7 +260,7 @@ namespace AsBuiltExplorer
             // 
             this.lblComp4VIN.AutoSize = true;
             this.lblComp4VIN.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.lblComp4VIN.Location = new System.Drawing.Point(642, 116);
+            this.lblComp4VIN.Location = new System.Drawing.Point(700, 116);
             this.lblComp4VIN.Name = "lblComp4VIN";
             this.lblComp4VIN.Size = new System.Drawing.Size(50, 16);
             this.lblComp4VIN.TabIndex = 18;
@@ -262,7 +270,7 @@ namespace AsBuiltExplorer
             // 
             this.lblComp3VIN.AutoSize = true;
             this.lblComp3VIN.ForeColor = System.Drawing.Color.BlueViolet;
-            this.lblComp3VIN.Location = new System.Drawing.Point(642, 85);
+            this.lblComp3VIN.Location = new System.Drawing.Point(700, 85);
             this.lblComp3VIN.Name = "lblComp3VIN";
             this.lblComp3VIN.Size = new System.Drawing.Size(50, 16);
             this.lblComp3VIN.TabIndex = 17;
@@ -272,7 +280,7 @@ namespace AsBuiltExplorer
             // 
             this.lblComp2VIN.AutoSize = true;
             this.lblComp2VIN.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblComp2VIN.Location = new System.Drawing.Point(642, 54);
+            this.lblComp2VIN.Location = new System.Drawing.Point(700, 54);
             this.lblComp2VIN.Name = "lblComp2VIN";
             this.lblComp2VIN.Size = new System.Drawing.Size(50, 16);
             this.lblComp2VIN.TabIndex = 16;
@@ -282,7 +290,7 @@ namespace AsBuiltExplorer
             // 
             this.lblComp1VIN.AutoSize = true;
             this.lblComp1VIN.ForeColor = System.Drawing.Color.Blue;
-            this.lblComp1VIN.Location = new System.Drawing.Point(642, 23);
+            this.lblComp1VIN.Location = new System.Drawing.Point(700, 23);
             this.lblComp1VIN.Name = "lblComp1VIN";
             this.lblComp1VIN.Size = new System.Drawing.Size(50, 16);
             this.lblComp1VIN.TabIndex = 15;
@@ -382,6 +390,50 @@ namespace AsBuiltExplorer
             this.btnCompBrowse1.Text = "Browse...";
             this.btnCompBrowse1.UseVisualStyleBackColor = true;
             this.btnCompBrowse1.Click += new System.EventHandler(this.btnCompBrowse1_Click);
+            // 
+            // btnDB1
+            // 
+            this.btnDB1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDB1.Location = new System.Drawing.Point(642, 19);
+            this.btnDB1.Name = "btnDB1";
+            this.btnDB1.Size = new System.Drawing.Size(40, 27);
+            this.btnDB1.TabIndex = 100;
+            this.btnDB1.Text = "DB";
+            this.btnDB1.UseVisualStyleBackColor = true;
+            this.btnDB1.Click += new System.EventHandler(this.btnDB1_Click);
+            // 
+            // btnDB2
+            // 
+            this.btnDB2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDB2.Location = new System.Drawing.Point(642, 50);
+            this.btnDB2.Name = "btnDB2";
+            this.btnDB2.Size = new System.Drawing.Size(40, 27);
+            this.btnDB2.TabIndex = 101;
+            this.btnDB2.Text = "DB";
+            this.btnDB2.UseVisualStyleBackColor = true;
+            this.btnDB2.Click += new System.EventHandler(this.btnDB2_Click);
+            // 
+            // btnDB3
+            // 
+            this.btnDB3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDB3.Location = new System.Drawing.Point(642, 81);
+            this.btnDB3.Name = "btnDB3";
+            this.btnDB3.Size = new System.Drawing.Size(40, 27);
+            this.btnDB3.TabIndex = 102;
+            this.btnDB3.Text = "DB";
+            this.btnDB3.UseVisualStyleBackColor = true;
+            this.btnDB3.Click += new System.EventHandler(this.btnDB3_Click);
+            // 
+            // btnDB4
+            // 
+            this.btnDB4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDB4.Location = new System.Drawing.Point(642, 112);
+            this.btnDB4.Name = "btnDB4";
+            this.btnDB4.Size = new System.Drawing.Size(40, 27);
+            this.btnDB4.TabIndex = 103;
+            this.btnDB4.Text = "DB";
+            this.btnDB4.UseVisualStyleBackColor = true;
+            this.btnDB4.Click += new System.EventHandler(this.btnDB4_Click);
             // 
             // tbxCompFile2
             // 
@@ -1636,6 +1688,10 @@ namespace AsBuiltExplorer
   private Label lblComp1VIN;
   private CheckBox chkCompareShowNames;
   private System.Windows.Forms.ColumnHeader colModuleName;
+  private System.Windows.Forms.Button btnDB1;
+  private System.Windows.Forms.Button btnDB2;
+  private System.Windows.Forms.Button btnDB3;
+  private System.Windows.Forms.Button btnDB4;
   private TextBox TextBox6;
 }
 }
