@@ -114,6 +114,7 @@ public partial class Form1 : Form
 
   private void Form1_Load(object sender, EventArgs e)
   {
+      ModuleDatabase.LoadDatabase();
   }
 
   private void Button2_Click(object sender, EventArgs e)
@@ -322,18 +323,9 @@ public partial class Form1 : Form
       }
       if (this.chkCompareShowNames.Checked)
       {
-        ref string[] local1 = ref retModuleNames;
-        string[] modlistShortNames = retModuleShortNames;
-        string[] modlistAddress = retModuleAddresses;
-        int modlistCount = retModuleCount;
-        string addrToFind = str4;
-        num6 = 0;
-        ref int local2 = ref num6;
-        ref string local3 = ref Left1;
-        ref string local4 = ref str1;
-        modAsBuilt.AsBuilt_ModuleList_FindAddressInfo(ref local1, modlistShortNames, modlistAddress, modlistCount, addrToFind, ref local2, ref local3, ref local4);
-        if (Operators.CompareString(Left1, "", false) != 0)
-          str4 = $"{str4}  {str1}  {Left1}";
+        string modName = ModuleDatabase.GetModuleName(str4);
+        if (!string.IsNullOrEmpty(modName))
+          str4 = str4 + "  " + modName;
       }
       ListViewItem listViewItem2 = this.ListView1.Items.Add(str4);
       listViewItem2.ForeColor = this.tbxCompFile1.ForeColor;
@@ -361,18 +353,9 @@ public partial class Form1 : Form
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas2[index4], ref retData1_1, ref retData2_1, ref retData3_1);
       if (this.chkCompareShowNames.Checked)
       {
-        ref string[] local5 = ref retModuleNames;
-        string[] modlistShortNames = retModuleShortNames;
-        string[] modlistAddress = retModuleAddresses;
-        int modlistCount = retModuleCount;
-        string addrToFind = str8;
-        num6 = 0;
-        ref int local6 = ref num6;
-        ref string local7 = ref Left1;
-        ref string local8 = ref str1;
-        modAsBuilt.AsBuilt_ModuleList_FindAddressInfo(ref local5, modlistShortNames, modlistAddress, modlistCount, addrToFind, ref local6, ref local7, ref local8);
-        if (Operators.CompareString(Left1, "", false) != 0)
-          str8 = $"{str8}  {str1}  {Left1}";
+        string modName = ModuleDatabase.GetModuleName(str8);
+        if (!string.IsNullOrEmpty(modName))
+          str8 = str8 + "  " + modName;
       }
       int index5 = -1;
       int num13 = checked (this.ListView1.Items.Count - 1);
@@ -447,18 +430,9 @@ public partial class Form1 : Form
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas3[index9], ref retData1_1, ref retData2_1, ref retData3_1);
       if (this.chkCompareShowNames.Checked)
       {
-        ref string[] local9 = ref retModuleNames;
-        string[] modlistShortNames = retModuleShortNames;
-        string[] modlistAddress = retModuleAddresses;
-        int modlistCount = retModuleCount;
-        string addrToFind = str9;
-        num6 = 0;
-        ref int local10 = ref num6;
-        ref string local11 = ref Left1;
-        ref string local12 = ref str1;
-        modAsBuilt.AsBuilt_ModuleList_FindAddressInfo(ref local9, modlistShortNames, modlistAddress, modlistCount, addrToFind, ref local10, ref local11, ref local12);
-        if (Operators.CompareString(Left1, "", false) != 0)
-          str9 = $"{str9}  {str1}  {Left1}";
+        string modName = ModuleDatabase.GetModuleName(str9);
+        if (!string.IsNullOrEmpty(modName))
+          str9 = str9 + "  " + modName;
       }
       int index10 = -1;
       int num17 = checked (this.ListView1.Items.Count - 1);
@@ -533,18 +507,9 @@ public partial class Form1 : Form
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas4[index14], ref retData1_1, ref retData2_1, ref retData3_1);
       if (this.chkCompareShowNames.Checked)
       {
-        ref string[] local13 = ref retModuleNames;
-        string[] modlistShortNames = retModuleShortNames;
-        string[] modlistAddress = retModuleAddresses;
-        int modlistCount = retModuleCount;
-        string addrToFind = str10;
-        num6 = 0;
-        ref int local14 = ref num6;
-        ref string local15 = ref Left1;
-        ref string local16 = ref str1;
-        modAsBuilt.AsBuilt_ModuleList_FindAddressInfo(ref local13, modlistShortNames, modlistAddress, modlistCount, addrToFind, ref local14, ref local15, ref local16);
-        if (Operators.CompareString(Left1, "", false) != 0)
-          str10 = $"{str10}  {str1}  {Left1}";
+        string modName = ModuleDatabase.GetModuleName(str10);
+        if (!string.IsNullOrEmpty(modName))
+          str10 = str10 + "  " + modName;
       }
       int index15 = -1;
       int num21 = checked (this.ListView1.Items.Count - 1);
@@ -3082,8 +3047,14 @@ label_24:
     this.tbxDeduceReport2.Text = stringBuilder.ToString();
   }
 
-  private void CheckBox1_CheckedChanged(object sender, EventArgs e)
+  private void chkCompareShowNames_CheckedChanged(object sender, EventArgs e)
   {
+      Button2_Click(sender, e);
+  }
+
+  private void chkShowOnlyMismatches_CheckedChanged(object sender, EventArgs e)
+  {
+      Button2_Click(sender, e);
   }
 
   private void ExportModuleToolStripMenuItem_Click(object sender, EventArgs e)

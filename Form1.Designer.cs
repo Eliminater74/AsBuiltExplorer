@@ -38,6 +38,7 @@ namespace AsBuiltExplorer
             this.TabPage1 = new System.Windows.Forms.TabPage();
             this.chkShowOnlyMismatches = new System.Windows.Forms.CheckBox();
             this.chkCompareShowNames = new System.Windows.Forms.CheckBox();
+            this.chkCompareShowNames.CheckedChanged += new System.EventHandler(this.chkCompareShowNames_CheckedChanged);
             this.lblComp4VIN = new System.Windows.Forms.Label();
             this.lblComp3VIN = new System.Windows.Forms.Label();
             this.lblComp2VIN = new System.Windows.Forms.Label();
@@ -230,7 +231,7 @@ namespace AsBuiltExplorer
             this.chkShowOnlyMismatches.TabIndex = 20;
             this.chkShowOnlyMismatches.Text = "Only Show Non-Matching Groups";
             this.chkShowOnlyMismatches.UseVisualStyleBackColor = true;
-            this.chkShowOnlyMismatches.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            this.chkShowOnlyMismatches.CheckedChanged += new System.EventHandler(this.chkShowOnlyMismatches_CheckedChanged);
             // 
             // chkCompareShowNames
             // 
@@ -243,6 +244,7 @@ namespace AsBuiltExplorer
             this.chkCompareShowNames.TabIndex = 19;
             this.chkCompareShowNames.Text = "Show Module Names";
             this.chkCompareShowNames.UseVisualStyleBackColor = true;
+            this.chkCompareShowNames.CheckedChanged += new System.EventHandler(this.chkCompareShowNames_CheckedChanged);
             // 
             // lblComp4VIN
             // 
