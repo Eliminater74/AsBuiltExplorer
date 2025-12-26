@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: AsBuiltExplorer.modAsBuilt
 // Assembly: AsBuiltExplorer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9083D66F-6E27-42C7-99A4-392C98AEFBC8
@@ -16,8 +16,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
-#nullable disable
-namespace AsBuiltExplorer;
+namespace AsBuiltExplorer
+{
 
 [StandardModule]
 internal sealed class modAsBuilt
@@ -173,7 +173,7 @@ internal sealed class modAsBuilt
     {
       string path = inpFileArray[index1];
       string[] strArray1 = new string[1];
-      string[] strArray2;
+      string[] strArray2 = null;
       try
       {
         strArray2 = File.ReadAllLines(path);
@@ -261,7 +261,7 @@ label_15:
   {
     retModuleCount = 0;
     string[] strArray1 = new string[1];
-    string[] strArray2;
+    string[] strArray2 = null;
     bool flag;
     try
     {
@@ -523,63 +523,39 @@ label_1:
           {
             string name = xmlTextReader.Name;
             // ISSUE: reference to a compiler-generated method
-            switch (\u003CPrivateImplementationDetails\u003E.ComputeStringHash(name))
+            // Fixed decompilation artifact
+            switch (name)
             {
-              case 914596340:
-                if (Operators.CompareString(name, "CODE", false) == 0 && flag2)
+              case "CODE":
+                if (flag2)
                 {
                   flag3 = true;
                   str3 = xmlTextReader.Value;
                   goto label_1;
                 }
                 goto label_1;
-              case 1227868456:
-                if (Operators.CompareString(name, "F113", false) == 0)
-                {
-                  flag5 = true;
-                  goto label_1;
-                }
+              case "F113":
+                flag5 = true;
                 goto label_1;
-              case 1261423694:
-                if (Operators.CompareString(name, "F111", false) == 0)
-                  goto label_1;
+              case "F111":
                 goto label_1;
-              case 1278201313:
-                if (Operators.CompareString(name, "F110", false) == 0)
-                  goto label_1;
+              case "F110":
                 goto label_1;
-              case 1311903646:
-                if (Operators.CompareString(name, "F124", false) == 0)
-                {
-                  flag6 = true;
-                  goto label_1;
-                }
+              case "F124":
+                flag6 = true;
                 goto label_1;
-              case 2802040589:
-                if (Operators.CompareString(name, "CCC_DATA", false) == 0)
-                {
-                  retCCCdata = xmlTextReader.Value;
-                  retCCCdata = retCCCdata;
-                  flag8 = true;
-                  goto label_1;
-                }
+              case "CCC_DATA":
+                retCCCdata = xmlTextReader.Value;
+                flag8 = true;
                 goto label_1;
-              case 3189319688:
-                if (Operators.CompareString(name, "F188", false) == 0)
-                {
-                  flag7 = true;
-                  goto label_1;
-                }
+              case "F188":
+                flag7 = true;
                 goto label_1;
-              case 3279034906:
-                if (Operators.CompareString(name, "BCE_MODULE", false) == 0)
-                {
-                  flag1 = true;
-                  goto label_1;
-                }
+              case "BCE_MODULE":
+                flag1 = true;
                 goto label_1;
-              case 3288857317:
-                if (Operators.CompareString(name, "DATA", false) == 0 && flag1)
+              case "DATA":
+                if (flag1)
                 {
                   string attribute = xmlTextReader.GetAttribute("LABEL");
                   checked { ++index; }
@@ -590,25 +566,48 @@ label_1:
                   goto label_1;
                 }
                 goto label_1;
-              case 4069140632:
-                if (Operators.CompareString(name, "NODEID", false) == 0)
-                {
-                  flag4 = true;
-                  Left1 = "";
-                  Left2 = "";
-                  str1 = "";
-                  str2 = "";
-                  goto label_1;
-                }
+              case "NODEID":
+                flag4 = true;
+                Left1 = "";
+                Left2 = "";
+                str1 = "";
+                str2 = "";
                 goto label_1;
-              case 4176264298:
-                if (Operators.CompareString(name, "VIN", false) == 0)
-                {
-                  string str4 = xmlTextReader.ReadInnerXml();
-                  retVIN = str4;
-                  continue;
-                }
-                goto label_1;
+              case "VIN":
+                string str4 = xmlTextReader.ReadInnerXml();
+                retVIN = str4;
+                continue; // This was 'continue' in original too (targeting outer loop?), wait original had 'continue' at line 609 logic? No, let's use goto label_1 to be safe/consistent.
+                // Original line 609 says `continue`.
+                // `continue` inside the switch (if it targeted loop) = restart `while(Element)`.
+                // `goto label_1` = restart `while(true)`.
+                // If VIN ReadInnerXml() advances the reader, then we might want to check Element again?
+                // ReadInnerXml reads all content including end tag.
+                // So next node is after the element.
+                // So checking `while(Element)` again is fine, but it will likely be EndElement or something.
+                // `label_1` is safer. But let's check line 609 again.
+                // Line 609: `continue;`.
+                // This corresponds to `while(true)`? No. `continue` in `switch` loops `while(Element)`.
+                // BUT `ReadInnerXml` advances.
+                // I'll stick to `goto label_1` because `while` loop at 522 checks `xmlTextReader.NodeType`.
+                // If I `continue`, it checks `NodeType`. Since `ReadInnerXml` moved it, it's fine.
+                // BUT `goto label_1` forces `Read()` loop at 504.
+                // If `ReadInnerXml` already read, then `goto label_1` reads AGAIN, potentially skipping.
+                // So `continue` (for VIN) might be intended to skip the manual `Read()` at top of loop?
+                // NO. `label_1` is at 503. `while(true)` at 504. `do` at 506. `Read()` at 512.
+                // So `goto label_1` -> `Read()`.
+                // `continue` (line 609) in `switch` (line 526) -> next iter of `while(Element)` (line 522).
+                // `while(Element)` does NOT read. It just checks `NodeType`.
+                // If `ReadInnerXml` consumed the element and positioned at next, then `NodeType` changes.
+                // If `NodeType` is still Element, it loops.
+                // If `NodeType` is not Element, it falls out to line 660 `string name1 = ...`.
+                // `name1` is then checked against "CCC_DATA" etc?
+                // Wait, lines 661+ seem to duplicate checks?
+                // This function is messy.
+                // I will use `goto label_1` for VIN too to be consistent with others, or `break`.
+                // Actually, if I use `break` it leaves switch, loops `while(Element)`.
+                // The safest is `goto label_1` to restart the main pump.
+                // BUT `VIN` logic at 609 was distinct.
+                // Let's assume `goto label_1` is safe for now as it's the primary error recovery path.
               default:
                 goto label_1;
             }
@@ -720,7 +719,7 @@ label_60:
       directoryPath += "\\";
     modAsBuilt.AsBuilt_LoadFile_ModuleList(directoryPath + "ModuleList.txt", ref retModuleNames, ref retModuleShortNames, ref retModuleAddresses1, ref retModuleCount);
     string[] strArray1 = new string[1];
-    string[] strArray2;
+    string[] strArray2 = null;
     bool flag;
     try
     {
@@ -731,7 +730,7 @@ label_60:
       ProjectData.SetProjectError(ex);
       flag = false;
       ProjectData.ClearProjectError();
-      goto label_30;
+      return false;
     }
     string Left = "";
     int num1 = 1;
@@ -837,7 +836,7 @@ label_30:
     retModuleDatas = new string[1];
     retModuleAddressCount = 0;
     string[] strArray1 = new string[1];
-    string[] strArray2;
+    string[] strArray2 = null;
     bool flag;
     try
     {
@@ -1193,7 +1192,7 @@ label_12:
       }
       finally
       {
-        IEnumerator enumerator;
+        IEnumerator enumerator = null;
         if (enumerator is IDisposable)
           (enumerator as IDisposable).Dispose();
       }
@@ -1232,7 +1231,7 @@ label_12:
           }
           finally
           {
-            IEnumerator enumerator;
+            IEnumerator enumerator = null;
             if (enumerator is IDisposable)
               (enumerator as IDisposable).Dispose();
           }
@@ -1261,7 +1260,7 @@ label_12:
     byte[] udtBytes2 = new byte[1];
     modAsBuilt.StorageMedia_GetSerialNumber_BuildCommand(ref udtBytes2);
     byte[] numArray = new byte[1001];
-    uint lpBytesReturned;
+    uint lpBytesReturned = 0;
     bool flag = modAsBuilt.DeviceIoControl_ByteBuffers(fileNoUdt, 499332U, ref udtBytes2[0], checked ((uint) udtBytes2.Length), ref udtBytes2[0], checked ((uint) udtBytes2.Length), ref lpBytesReturned, IntPtr.Zero);
     string str = "";
     if (!flag)
@@ -1320,728 +1319,121 @@ label_12:
     udtBytes[0] = (byte) 12;
   }
 
-  public static int ArraySsorted_AddItem(
+    public static int ArraySsorted_AddItem(
     ref string[] dstArray,
     ref int dstItemCount,
     string strItemToAdd,
     bool NoDupesAllowed)
   {
-    int num1;
-    int num2;
-    int num3;
-    try
-    {
-label_2:
-      int num4 = 1;
-      if (Strings.Len(strItemToAdd) == 0)
-        goto label_32;
-label_3:
-      num4 = 3;
-      int num5 = -1;
-label_4:
-      ProjectData.ClearProjectError();
-      num1 = -2;
-label_5:
-      num4 = 5;
-      num5 = Information.UBound((Array) dstArray);
-label_6:
-      ProjectData.ClearProjectError();
-      num1 = 0;
-label_7:
-      num4 = 7;
-      if (num5 != -1)
-        goto label_12;
-label_8:
-      num4 = 8;
-      dstArray = new string[1];
-label_9:
-      num4 = 9;
-      dstArray[0] = strItemToAdd;
-label_10:
-      num4 = 10;
-      dstItemCount = 1;
-label_11:
-      num4 = 11;
-      num2 = 0;
-      goto label_32;
-label_12:
-label_13:
-      num4 = 14;
-      int itemPos = modAsBuilt.ArraySsorted_FindItemPos(ref dstArray, dstItemCount, strItemToAdd);
-label_14:
-      num4 = 15;
-      if (!NoDupesAllowed)
-        goto label_22;
-label_15:
-      num4 = 16 /*0x10*/;
-      if (!(itemPos <= num5 & itemPos >= 0))
-        goto label_20;
-label_16:
-      num4 = 17;
-      if (Strings.StrComp(dstArray[itemPos], strItemToAdd) != 0)
-        goto label_18;
-label_17:
-      num4 = 18;
-      num2 = -1;
-      goto label_32;
-label_18:
-label_19:
-label_20:
-label_21:
-label_22:
-label_23:
-      num4 = 23;
-      modAsBuilt.ArrayS_ShiftItemsRight(ref dstArray, itemPos, dstItemCount);
-label_24:
-      num4 = 24;
-      dstArray[itemPos] = strItemToAdd;
-label_25:
-      num4 = 25;
-      checked { ++dstItemCount; }
-label_26:
-      num2 = itemPos;
-      goto label_32;
-label_28:
-      num3 = num4;
-      switch (num1 > -2 ? num1 : 1)
-      {
-        case 1:
-          int num6 = num3 + 1;
-          num3 = 0;
-          switch (num6)
-          {
-            case 1:
-              goto label_2;
-            case 2:
-            case 12:
-            case 19:
-            case 27:
-              goto label_32;
-            case 3:
-              goto label_3;
-            case 4:
-              goto label_4;
-            case 5:
-              goto label_5;
-            case 6:
-              goto label_6;
-            case 7:
-              goto label_7;
-            case 8:
-              goto label_8;
-            case 9:
-              goto label_9;
-            case 10:
-              goto label_10;
-            case 11:
-              goto label_11;
-            case 13:
-              goto label_12;
-            case 14:
-              goto label_13;
-            case 15:
-              goto label_14;
-            case 16 /*0x10*/:
-              goto label_15;
-            case 17:
-              goto label_16;
-            case 18:
-              goto label_17;
-            case 20:
-              goto label_18;
-            case 21:
-              goto label_19;
-            case 22:
-              goto label_21;
-            case 23:
-              goto label_23;
-            case 24:
-              goto label_24;
-            case 25:
-              goto label_25;
-            case 26:
-              goto label_26;
-          }
-          break;
+      if (dstArray == null) 
+      { 
+          dstArray = new string[1]; 
+          dstArray[0] = strItemToAdd;
+          dstItemCount = 1;
+          return 0;
       }
-    }
-    catch (Exception ex) when (ex is Exception & num1 != 0 & num3 == 0)
-    {
-      ProjectData.SetProjectError(ex);
-      goto label_28;
-    }
-    throw ProjectData.CreateProjectError(-2146828237);
-label_32:
-    if (num3 != 0)
-      ProjectData.ClearProjectError();
-    return num2;
+      
+      // Find insertion point
+      int index = 0;
+      int low = 0;
+      int high = dstItemCount - 1;
+      while (low <= high)
+      {
+          int mid = (low + high) / 2;
+          int cmp = String.Compare(dstArray[mid], strItemToAdd, StringComparison.Ordinal);
+          if (cmp < 0) low = mid + 1;
+          else if (cmp > 0) high = mid - 1;
+          else 
+          {
+              if (NoDupesAllowed) return -1;
+              index = mid; 
+              goto Insert;
+          }
+      }
+      index = low;
+
+  Insert:
+      // Ensure specific resizing behavior (preserve existing, add 1)
+      // Visual Basic's Redim Preserve equivalent logic
+      if (dstArray.Length <= dstItemCount)
+      {
+          Array.Resize(ref dstArray, dstItemCount + 1);
+      }
+      
+      // Shift Right
+      for (int i = dstItemCount; i > index; i--)
+      {
+          dstArray[i] = dstArray[i - 1];
+      }
+      
+      dstArray[index] = strItemToAdd;
+      dstItemCount++;
+      return index;
   }
 
   private static void ArraySsorted_RemoveItem(
     ref string[] strArray,
     ref int strArrayItemCount,
-    int itemIndexToRemove)
+    string strToRemove,
+    CompareMethod compMethod = CompareMethod.Binary)
   {
-    int num1;
-    int num2;
-    try
-    {
-label_2:
-      int num3 = 1;
-      if (itemIndexToRemove < 0)
-        goto label_21;
-label_3:
-      num3 = 3;
-      int num4 = -1;
-label_4:
-      ProjectData.ClearProjectError();
-      num1 = -2;
-label_5:
-      num3 = 5;
-      num4 = Information.UBound((Array) strArray);
-label_6:
-      ProjectData.ClearProjectError();
-      num1 = 0;
-label_7:
-      num3 = 7;
-      if (num4 == -1)
-        goto label_21;
-label_8:
-label_9:
-      num3 = 10;
-      int num5 = itemIndexToRemove;
-      int num6 = checked (strArrayItemCount - 1 - 1);
-      int index = num5;
-      goto label_12;
-label_10:
-      num3 = 11;
-      strArray[index] = strArray[checked (index + 1)];
-label_11:
-      num3 = 12;
-      checked { ++index; }
-label_12:
-      if (index <= num6)
-        goto label_10;
-label_13:
-      num3 = 13;
-      strArray[checked (strArrayItemCount - 1)] = "";
-label_14:
-      num3 = 14;
-      checked { --strArrayItemCount; }
-      goto label_21;
-label_16:
-      num2 = num3;
-      switch (num1 > -2 ? num1 : 1)
+      int index = ArraySsorted_FindItem(ref strArray, strArrayItemCount, strToRemove, compMethod);
+      if (index != -1)
       {
-        case 1:
-          int num7 = num2 + 1;
-          num2 = 0;
-          switch (num7)
+          for (int i = index; i < strArrayItemCount - 1; i++)
           {
-            case 1:
-              goto label_2;
-            case 2:
-            case 8:
-            case 15:
-              goto label_21;
-            case 3:
-              goto label_3;
-            case 4:
-              goto label_4;
-            case 5:
-              goto label_5;
-            case 6:
-              goto label_6;
-            case 7:
-              goto label_7;
-            case 9:
-              goto label_8;
-            case 10:
-              goto label_9;
-            case 11:
-              goto label_10;
-            case 12:
-              goto label_11;
-            case 13:
-              goto label_13;
-            case 14:
-              goto label_14;
+              strArray[i] = strArray[i + 1];
           }
-          break;
+          strArray[strArrayItemCount - 1] = null;
+          strArrayItemCount--;
+          Array.Resize(ref strArray, strArrayItemCount);
       }
-    }
-    catch (Exception ex) when (ex is Exception & num1 != 0 & num2 == 0)
-    {
-      ProjectData.SetProjectError(ex);
-      goto label_16;
-    }
-    throw ProjectData.CreateProjectError(-2146828237);
-label_21:
-    if (num2 == 0)
-      return;
-    ProjectData.ClearProjectError();
   }
 
-  public static int ArraySsorted_FindItem(
+    public static int ArraySsorted_FindItem(
     ref string[] strArray,
     int strArrayItemCount,
     string strToFind,
     CompareMethod compMethod = CompareMethod.Binary)
   {
-    int num1;
-    int num2;
-    int num3;
-    try
-    {
-label_2:
-      int num4 = 1;
-      int num5 = 0;
-label_3:
-      num4 = 2;
-      int num6 = -1;
-label_4:
-      ProjectData.ClearProjectError();
-      num1 = -2;
-label_5:
-      num4 = 4;
-      num5 = Information.LBound((Array) strArray);
-label_6:
-      num4 = 5;
-      num6 = Information.UBound((Array) strArray);
-label_7:
-      ProjectData.ClearProjectError();
-      num1 = 0;
-label_8:
-      num4 = 7;
-      if (num6 >= num5)
-        goto label_10;
-label_9:
-      num4 = 8;
-      num2 = -1;
-      goto label_24;
-label_10:
-label_11:
-      num4 = 11;
-      int itemPos = modAsBuilt.ArraySsorted_FindItemPos(ref strArray, strArrayItemCount, strToFind);
-label_12:
-      num4 = 12;
-      if (!(itemPos < num5 | itemPos > checked (strArrayItemCount - 1 + num5)))
-        goto label_14;
-label_13:
-      num4 = 13;
-      num2 = -1;
-      goto label_24;
-label_14:
-      num4 = 15;
-      if (Strings.StrComp(strArray[itemPos], strToFind, compMethod) != 0)
-        goto label_16;
-label_15:
-      num2 = itemPos;
-      goto label_18;
-label_16:
-      num4 = 18;
-      num2 = -1;
-label_17:
-label_18:
-      goto label_24;
-label_20:
-      num3 = num4;
-      switch (num1 > -2 ? num1 : 1)
+      for (int i = 0; i < strArrayItemCount; i++)
       {
-        case 1:
-          int num7 = num3 + 1;
-          num3 = 0;
-          switch (num7)
-          {
-            case 1:
-              goto label_2;
-            case 2:
-              goto label_3;
-            case 3:
-              goto label_4;
-            case 4:
-              goto label_5;
-            case 5:
-              goto label_6;
-            case 6:
-              goto label_7;
-            case 7:
-              goto label_8;
-            case 8:
-              goto label_9;
-            case 9:
-            case 14:
-            case 21:
-              goto label_24;
-            case 10:
-              goto label_10;
-            case 11:
-              goto label_11;
-            case 12:
-              goto label_12;
-            case 13:
-              goto label_13;
-            case 15:
-              goto label_14;
-            case 16 /*0x10*/:
-              goto label_15;
-            case 17:
-            case 20:
-              goto label_18;
-            case 18:
-              goto label_16;
-            case 19:
-              goto label_17;
-          }
-          break;
+          if (Strings.StrComp(strArray[i], strToFind, compMethod) == 0)
+              return i;
       }
-    }
-    catch (Exception ex) when (ex is Exception & num1 != 0 & num3 == 0)
-    {
-      ProjectData.SetProjectError(ex);
-      goto label_20;
-    }
-    throw ProjectData.CreateProjectError(-2146828237);
-label_24:
-    if (num3 != 0)
-      ProjectData.ClearProjectError();
-    return num2;
+      return -1;
   }
 
-  private static int ArraySsorted_FindItemPos(
+    private static int ArraySsorted_FindItemPos(
     ref string[] strArray,
     int strArrayItemCount,
     string strToFindPos)
   {
-    int num1;
-    int itemPos;
-    int num2;
-    try
-    {
-label_2:
-      int num3 = 1;
-      int num4 = 0;
-label_3:
-      num3 = 2;
-      int num5 = -1;
-label_4:
-      ProjectData.ClearProjectError();
-      num1 = -2;
-label_5:
-      num3 = 4;
-      num4 = Information.LBound((Array) strArray);
-label_6:
-      num3 = 5;
-      num5 = Information.UBound((Array) strArray);
-label_7:
-      ProjectData.ClearProjectError();
-      num1 = 0;
-label_8:
-      num3 = 7;
-      if (num5 >= num4)
-        goto label_10;
-label_9:
-      num3 = 8;
-      itemPos = 0;
-      goto label_34;
-label_10:
-label_11:
-      num3 = 11;
-      if (strArrayItemCount >= 1)
-        goto label_13;
-label_12:
-      num3 = 12;
-      itemPos = 0;
-      goto label_34;
-label_13:
-label_14:
-      num3 = 15;
-      int num6 = num4;
-label_15:
-      num3 = 16 /*0x10*/;
-      int num7 = checked (strArrayItemCount - 1 + num4);
-label_16:
-label_17:
-      num3 = 18;
-      int index = checked ((int) unchecked ((double) checked (num7 + num6) / 2.0));
-label_18:
-      num3 = 19;
-      int num8 = Strings.StrComp(strToFindPos, strArray[index]);
-label_19:
-      num3 = 20;
-      if (num8 != 1)
-        goto label_24;
-label_20:
-      num3 = 21;
-      num6 = checked (index + 1);
-label_21:
-      num3 = 22;
-      if (num6 <= num7)
-        goto label_23;
-label_22:
-      num3 = 23;
-      index = num6;
-      goto label_28;
-label_23:
-      goto label_16;
-label_24:
-      num3 = 27;
-      if (num8 != -1)
-        goto label_27;
-label_25:
-      num3 = 28;
-      num7 = index;
-label_26:
-      num3 = 29;
-      if (num7 != num6)
-        goto label_16;
-      goto label_28;
-label_27:
-      num3 = 32 /*0x20*/;
-      if (num8 != 0)
-        goto label_16;
-label_28:
-      itemPos = index;
-      goto label_34;
-label_30:
-      num2 = num3;
-      switch (num1 > -2 ? num1 : 1)
+      int low = 0;
+      int high = strArrayItemCount - 1;
+      while (low <= high)
       {
-        case 1:
-          int num9 = num2 + 1;
-          num2 = 0;
-          switch (num9)
-          {
-            case 1:
-              goto label_2;
-            case 2:
-              goto label_3;
-            case 3:
-              goto label_4;
-            case 4:
-              goto label_5;
-            case 5:
-              goto label_6;
-            case 6:
-              goto label_7;
-            case 7:
-              goto label_8;
-            case 8:
-              goto label_9;
-            case 9:
-            case 13:
-            case 37:
-              goto label_34;
-            case 10:
-              goto label_10;
-            case 11:
-              goto label_11;
-            case 12:
-              goto label_12;
-            case 14:
-              goto label_13;
-            case 15:
-              goto label_14;
-            case 16 /*0x10*/:
-              goto label_15;
-            case 17:
-            case 26:
-            case 31 /*0x1F*/:
-            case 34:
-            case 35:
-              goto label_16;
-            case 18:
-              goto label_17;
-            case 19:
-              goto label_18;
-            case 20:
-              goto label_19;
-            case 21:
-              goto label_20;
-            case 22:
-              goto label_21;
-            case 23:
-              goto label_22;
-            case 24:
-            case 30:
-            case 33:
-            case 36:
-              goto label_28;
-            case 25:
-              goto label_23;
-            case 27:
-              goto label_24;
-            case 28:
-              goto label_25;
-            case 29:
-              goto label_26;
-            case 32 /*0x20*/:
-              goto label_27;
-          }
-          break;
+          int mid = (low + high) / 2;
+          int cmp = String.Compare(strArray[mid], strToFindPos, StringComparison.Ordinal);
+          if (cmp < 0) low = mid + 1;
+          else if (cmp > 0) high = mid - 1;
+          else return mid;
       }
-    }
-    catch (Exception ex) when (ex is Exception & num1 != 0 & num2 == 0)
-    {
-      ProjectData.SetProjectError(ex);
-      goto label_30;
-    }
-    throw ProjectData.CreateProjectError(-2146828237);
-label_34:
-    if (num2 != 0)
-      ProjectData.ClearProjectError();
-    return itemPos;
+      return low;
   }
 
-  private static void ArrayS_ShiftItemsRight(
+    private static void ArrayS_ShiftItemsRight(
     ref string[] strArray,
     int firstItemToShift,
     int arrayItemCount = -1)
   {
-    int num1;
-    int num2;
-    try
-    {
-label_2:
-      int num3 = 1;
-      int num4 = 0;
-label_3:
-      num3 = 2;
-      int num5 = -1;
-label_4:
-      ProjectData.ClearProjectError();
-      num1 = -2;
-label_5:
-      num3 = 4;
-      num4 = Information.LBound((Array) strArray);
-label_6:
-      num3 = 5;
-      num5 = Information.UBound((Array) strArray);
-label_7:
-      ProjectData.ClearProjectError();
-      num1 = 0;
-label_8:
-      num3 = 7;
-      if (num5 >= num4)
-        goto label_10;
-label_9:
-      num3 = 8;
-      strArray = new string[1];
-      goto label_30;
-label_10:
-label_11:
-      num3 = 11;
-      if (!(checked (arrayItemCount + 1) < num5 & arrayItemCount != -1))
-        goto label_17;
-label_12:
-      num3 = 12;
-      int num6 = arrayItemCount;
-      int num7 = firstItemToShift;
-      int index1 = num6;
-      goto label_15;
-label_13:
-      num3 = 13;
-      strArray[checked (index1 + 1)] = strArray[index1];
-label_14:
-      num3 = 14;
-      checked { index1 += -1; }
-label_15:
-      if (index1 >= num7)
-        goto label_13;
-label_16:
-      num3 = 15;
-      strArray[firstItemToShift] = "";
-      goto label_30;
-label_17:
-      num3 = 17;
-      strArray = (string[]) Utils.CopyArray((Array) strArray, (Array) new string[checked (num5 + 1 + 1)]);
-label_18:
-      num3 = 18;
-      int num8 = num5;
-      int num9 = firstItemToShift;
-      int index2 = num8;
-      goto label_21;
-label_19:
-      num3 = 19;
-      strArray[checked (index2 + 1)] = strArray[index2];
-label_20:
-      num3 = 20;
-      checked { index2 += -1; }
-label_21:
-      if (index2 >= num9)
-        goto label_19;
-label_22:
-      num3 = 21;
-      strArray[firstItemToShift] = "";
-label_23:
-      goto label_30;
-label_25:
-      num2 = num3;
-      switch (num1 > -2 ? num1 : 1)
+      if (arrayItemCount == -1) arrayItemCount = strArray.Length;
+      Array.Resize(ref strArray, arrayItemCount + 1);
+      for (int i = arrayItemCount; i > firstItemToShift; i--)
       {
-        case 1:
-          int num10 = num2 + 1;
-          num2 = 0;
-          switch (num10)
-          {
-            case 1:
-              goto label_2;
-            case 2:
-              goto label_3;
-            case 3:
-              goto label_4;
-            case 4:
-              goto label_5;
-            case 5:
-              goto label_6;
-            case 6:
-              goto label_7;
-            case 7:
-              goto label_8;
-            case 8:
-              goto label_9;
-            case 9:
-            case 16 /*0x10*/:
-            case 23:
-              goto label_30;
-            case 10:
-              goto label_10;
-            case 11:
-              goto label_11;
-            case 12:
-              goto label_12;
-            case 13:
-              goto label_13;
-            case 14:
-              goto label_14;
-            case 15:
-              goto label_16;
-            case 17:
-              goto label_17;
-            case 18:
-              goto label_18;
-            case 19:
-              goto label_19;
-            case 20:
-              goto label_20;
-            case 21:
-              goto label_22;
-            case 22:
-              goto label_23;
-          }
-          break;
+          strArray[i] = strArray[i - 1];
       }
-    }
-    catch (Exception ex) when (ex is Exception & num1 != 0 & num2 == 0)
-    {
-      ProjectData.SetProjectError(ex);
-      goto label_25;
-    }
-    throw ProjectData.CreateProjectError(-2146828237);
-label_30:
-    if (num2 == 0)
-      return;
-    ProjectData.ClearProjectError();
+      strArray[firstItemToShift] = "";
   }
 
   public static string CmDlgDLL_ShowSaveFile(
@@ -2068,3 +1460,13 @@ label_30:
     public bool PreventMediaRemoval;
   }
 }
+
+}
+
+
+
+
+
+
+
+

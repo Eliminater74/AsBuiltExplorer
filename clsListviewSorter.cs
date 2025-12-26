@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: AsBuiltExplorer.clsListviewSorter
 // Assembly: AsBuiltExplorer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9083D66F-6E27-42C7-99A4-392C98AEFBC8
@@ -10,8 +10,8 @@ using System;
 using System.Collections;
 using System.Windows.Forms;
 
-#nullable disable
-namespace AsBuiltExplorer;
+namespace AsBuiltExplorer
+{
 
 public class clsListviewSorter : IComparer
 {
@@ -41,3 +41,6 @@ public class clsListviewSorter : IComparer
     return Information.IsDate((object) text1) & Information.IsDate((object) text2) ? DateTime.Parse(text2).CompareTo(DateTime.Parse(text1)) : string.Compare(text2, text1);
   }
 }
+
+}
+

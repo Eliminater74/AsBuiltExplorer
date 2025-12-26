@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: AsBuiltExplorer.My.MyApplication
 // Assembly: AsBuiltExplorer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9083D66F-6E27-42C7-99A4-392C98AEFBC8
@@ -12,8 +12,8 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
-#nullable disable
-namespace AsBuiltExplorer.My;
+namespace AsBuiltExplorer.My
+{
 
 [GeneratedCode("MyTemplate", "11.0.0.0")]
 [EditorBrowsable(EditorBrowsableState.Never)]
@@ -47,4 +47,7 @@ internal class MyApplication : WindowsFormsApplicationBase
 
   [DebuggerStepThrough]
   protected override void OnCreateMainForm() => this.MainForm = (Form) MyProject.Forms.Form1;
+}
+
+
 }

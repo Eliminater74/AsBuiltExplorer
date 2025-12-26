@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: AsBuiltExplorer.My.MySettings
 // Assembly: AsBuiltExplorer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9083D66F-6E27-42C7-99A4-392C98AEFBC8
@@ -14,8 +14,8 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
-#nullable disable
-namespace AsBuiltExplorer.My;
+namespace AsBuiltExplorer.My
+{
 
 [CompilerGenerated]
 [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
@@ -49,7 +49,7 @@ internal sealed class MySettings : ApplicationSettingsBase
           Monitor.Enter(handlerLockObject, ref lockTaken);
           if (!MySettings.addedHandler)
           {
-            MyProject.Application.Shutdown += (ShutdownEventHandler) ([DebuggerNonUserCode, EditorBrowsable(EditorBrowsableState.Advanced)] (sender, e) =>
+             MyProject.Application.Shutdown += (ShutdownEventHandler) ((sender, e) =>
             {
               if (!MyProject.Application.SaveMySettingsOnExit)
                 return;
@@ -68,4 +68,7 @@ internal sealed class MySettings : ApplicationSettingsBase
       return defaultInstance;
     }
   }
+}
+
+
 }

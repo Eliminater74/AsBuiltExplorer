@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: AsBuiltExplorer.My.Resources.Resources
 // Assembly: AsBuiltExplorer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9083D66F-6E27-42C7-99A4-392C98AEFBC8
@@ -13,8 +13,8 @@ using System.Globalization;
 using System.Resources;
 using System.Runtime.CompilerServices;
 
-#nullable disable
-namespace AsBuiltExplorer.My.Resources;
+namespace AsBuiltExplorer.My.Resources
+{
 
 [StandardModule]
 [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
@@ -43,4 +43,7 @@ internal sealed class Resources
     get => AsBuiltExplorer.My.Resources.Resources.resourceCulture;
     set => AsBuiltExplorer.My.Resources.Resources.resourceCulture = value;
   }
+}
+
+
 }

@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: AsBuiltExplorer.My.MySettingsProperty
 // Assembly: AsBuiltExplorer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9083D66F-6E27-42C7-99A4-392C98AEFBC8
@@ -10,8 +10,8 @@ using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-#nullable disable
-namespace AsBuiltExplorer.My;
+namespace AsBuiltExplorer.My
+{
 
 [StandardModule]
 [HideModuleName]
@@ -28,4 +28,7 @@ internal sealed class MySettingsProperty
       return settings;
     }
   }
+}
+
+
 }

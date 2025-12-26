@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: AsBuiltExplorer.My.MyProject
 // Assembly: AsBuiltExplorer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9083D66F-6E27-42C7-99A4-392C98AEFBC8
@@ -18,8 +18,8 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-#nullable disable
-namespace AsBuiltExplorer.My;
+namespace AsBuiltExplorer.My
+{
 
 [StandardModule]
 [HideModuleName]
@@ -89,21 +89,18 @@ internal sealed class MyProject
       {
         return new T();
       }
-      catch (TargetInvocationException ex) when (
+      catch (TargetInvocationException ex)
       {
-        // ISSUE: unable to correctly present filter
-        ProjectData.SetProjectError((Exception) ex);
-        invocationException = ex;
-        if (invocationException.InnerException != null)
+         // Fixed broken decompiler exception filter
+        if (ex.InnerException != null)
         {
-          SuccessfulFiltering;
+             string resourceString = Utils.GetResourceString("WinForms_SeeInnerException", ex.InnerException.Message);
+             throw new InvalidOperationException(resourceString, ex.InnerException);
         }
         else
-          throw;
-      }
-      )
-      {
-        throw new InvalidOperationException(Utils.GetResourceString("WinForms_SeeInnerException", invocationException.InnerException.Message), invocationException.InnerException);
+        {
+             throw ex;
+        }
       }
       finally
       {
@@ -204,10 +201,17 @@ internal sealed class MyProject
       }
     }
 
+    [CompilerGenerated]
+    [ThreadStatic]
+    private static T m_ThreadStaticValue;
+
     [DebuggerHidden]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public ThreadSafeObjectProvider()
     {
     }
   }
+}
+
+
 }
