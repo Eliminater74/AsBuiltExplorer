@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using AsBuiltExplorer.My;
 
 namespace AsBuiltExplorer
 {
@@ -12,47 +10,213 @@ namespace AsBuiltExplorer
         private static Dictionary<string, string> _moduleNames = new Dictionary<string, string>();
         private static bool _isLoaded = false;
 
+        // Hardcoded database content to avoid external file dependencies
+        private static readonly string _dbContent = @"(Audio) Digital Signal Processing Module (DSP)|DSP|783
+4 Wheel Steering (WS4)|WS4|
+4X4 Control Module (4X4M)|4X4M|761
+Accessory Protocol Interface Module (APIM)|APIM|7D0
+Adaptive Front Lighting System (AFS)|AFS|
+Adaptive Front Lighting System / Auto Leveling Module (AFS/ALM)|AFS/ALM|
+Air Conditioning (AC)|AC|
+Air Conditioning Control Module (ACCM)|ACCM|7E7
+Air Suspension (4WAS)|4WAS|020
+All Terrain Control Module (ATCM)|ATCM|
+All Wheel Drive Module (AWD)|AWD|
+Alternative Fuel Control Module (AFCM)|AFCM|7E5
+Amplifier Module (AM)|AM|
+Anti-Lock Brake / Traction Control Module (ABS)|ABS|760
+Anti-Lock Brake / Traction Control Module (ESOF)|ESOF|
+A-STOP System (No Idling System) (A-STOP)|A-STOP|
+Audio Control Module (ACM)|ACM|727
+Audio Control Unit (ACU)|ACU|
+Audio Interface Module (AIM)|AIM|
+Audio Rear Control Unit (RCU)|RCU|774
+Auto Leveling Module (ALM)|ALM|
+Automatic Ride Control (ARC)|ARC|020
+Auxiliary Heater Control Module (AHCM)|AHCM|7E3
+Battery Charger Control Module (BCCM)|BCCM|
+Battery Control Module (OBD_BCM)|OBD_BCM|
+Battery Energy Control Module (BECM)|BECM|7E7
+Blind Spot Monitoring (Left) (BSML)|BSML|
+Blind Spot Monitoring (Right) (BSMR)|BSMR|
+Bluetooth Phone Module (BPM)|BPM|
+Body Control Module / Generic Electronic Module (BCM/GEM)|BCM/GEM|726
+Body Control Module B (BCMB)|BCMB|7B7
+Body Electronic Module (BEM)|BEM|
+Camera Module Rear (CMR)|CMR|
+Cellular Phone Module (CPM)|CPM|090
+Central Timer Module (CTM)|CTM|052
+Circuit Deactivation Ignition Module (CDIM)|CDIM|7E2
+Column Lock Module (CLM)|CLM|
+Compact Disc Player (CDP)|CDP|
+Connectivity Master Unit (CMU)|CMU|
+Convergence Telematics Module (CTMii)|CTMii|
+Cruise Control (CCM)|CCM|764
+Cruise-Control Module (CCM)|CCM|
+DC to DC Converter Control Module (DCDC)|DCDC|746
+Deployable Hood System (DHS)|DHS|
+Digital Audio Broadcast Module (DABM)|DABM|
+Digital Audio Control Module C (DACMC)|DACMC|7D5
+Driver Door Control Unit (DFDM)|DFDM|
+Driver/Dual Climate-Control Seat Module (DCSM)|DCSM|776
+Drivers Door Module (DDM)|DDM|740
+Driver's Seat Module (DSM)|DSM|744
+Electric Parking Brake (EPB)|EPB|02A
+Electronic Automatic Temperature Control (EATC)|EATC|098
+Electronic Crash Sensor (ECS)|ECS|058
+Electronic-Controlled Power Steering (EPS)|EPS|730
+Energy Management Module (EMM)|EMM|
+Fire Suppression System Module (FSSM)|FSSM|059
+Folding Top Control Module (FTCM)|FTCM|
+Forward Sensing Camera (FSC)|FSC|
+Front Body Control Module (F_BCM)|F_BCM|
+Front Control/Display Interface Module (FCDIM)|FCDIM|7A5
+Front Controls Interface Module (FCIM)|FCIM|7A7
+Front Display Interface Module (FDIM)|FDIM|7A6
+Front Distance Sensing Module (FDSM)|FDSM|
+Front Electronic Module (FEM)|FEM|052
+Front Lighting Control Module (FLM)|FLM|
+Fuel Additive Control Module (FACM)|FACM|
+Fuel Fired Coolant Heating Module (FFH)|FFH|00F
+Fuel Indication Module (FIM)|FIM|016
+Fuel Injection Control Module (FICM)|FICM|7E6
+Fuel Injection Control Module (OBD_FICM)|OBD_FICM|7E5
+Fuel Injection Pump (FIP)|FIP|016
+Fuel Operated Heater (FOH)|FOH|00F
+Gateway Module A (GWM)|GWM|716
+Gear Shift Module (GSM)|GSM|
+Generic Display Module (GDM)|GDM|
+Generic Electronic Module (GEM)|GEM|052
+Generic Electronic Module / Smart Junction Box (GEM/SJB)|GEM/SJB|052
+Generic Function Module (GFM)|GFM|
+Global Positioning System Module (GPSM)|GPSM|701
+Head Up Display (HUD)|HUD|7B2
+Headlamp Control Module (HCM)|HCM|734
+Headlamp Control Module 2(B) (HCM2)|HCM2|7C3
+Headlamp Leveling Module (HD_LVL)|HD_LVL|071
+Heated Steering Wheel Module (HSWM)|HSWM|714
+Heated Steering Wheel Module (HV)|HV|
+Heating Ventilation Air Conditioning (HVAC)|HVAC|733
+HVAC Integrated Module (HIM)|HIM|
+Hybrid Electronic Cluster (HEC)|HEC|060
+Image Processing Module A (IPMA)|IPMA|706
+Image Processing Module B (IPMB)|IPMB|7B1
+Information Center Module (ICM)|ICM|
+Injector Control Unit (ICU)|ICU|016
+Instrument Cluster (IC)|IC|060
+Instrument cluster (INST)|INST|
+Instrument Panel Control Module (IPC)|IPC|720
+Integrated Air Bag Module (IABM)|IABM|058
+Intelligent Cruise Control Module (ICCM)|ICCM|
+Intelligent Power Distribution Module (IPDM)|IPDM|
+Interior Lighting Control Module (ILCM)|ILCM|7B5
+Left High Intensity Discharge Lamp (LHID)|LHID|
+Left Power Sliding Door Module (LPSDM)|LPSDM|0B0
+Liftgate / Trunk Module (LTM)|LTM|775
+Lighting Control Module (LCM)|LCM|070
+Message Center (MC)|MC|061
+Motor Pretensioner Module (MPM)|MPM|
+Multifunction Steering Wheel (MFSW)|MFSW|
+Multi-Information Display (MID)|MID|
+Navigation Controller (NAV)|NAV|068
+Next Generation Speed Control Module (NGSC)|NGSC|013
+Occupant Classification System Module (OCS)|OCS|765
+Overhead Trip Computer (OTC)|OTC|061
+Park Brake Control Module (PBM)|PBM|
+Parking Aid Module (PAM)|PAM|736
+Passenger Climate-Control Seat Module (PCSM)|PCSM|730
+Passenger Climate-Control Seat Module 2 (rear) (PCSM2)|PCSM2|777
+Passenger Front Seat Module (PSM)|PSM|0A6
+Passengers Door Control Unit (PDM)|PDM|741
+Passive Anti-Theft System (PATS)|PATS|0C0
+Power Running Board (PRB)|PRB|766
+Power Steering Control Module (PSCM)|PSCM|242
+Powertrain Control Module (PCM)|PCM|7E0
+Rader Brake Support (EBS)|EBS|
+Rear Air Suspension Module (RASM)|RASM|020
+Rear Air Temperature Control (RATC)|RATC|099
+Rear Audio Control Module (RACM)|RACM|
+Rear Body Control Module (R_BCM)|R_BCM|
+Rear Electronic Module (REM)|REM|050
+Rear Gate/Trunk Module (RGTM)|RGTM|
+Rear Heating Ventilation Air Conditioning (RHVAC)|RHVAC|785
+Rear Left Door Control Unit (DRDM)|DRDM|
+Rear Lighting Control Module A (RLCMA)|RLCMA|
+Rear Right Door Control Unit (PRDM)|PRDM|
+Rear Seat Entertainment Module (RETM)|RETM|771
+Rear Vehicle Monitoring (RVM)|RVM|
+Reductant Control Module (DCU)|DCU|
+Remote Anti-Theft / Personality Module (RAP)|RAP|048
+Remote Climate Control (RCC)|RCC|098
+Remote Emergency Satellite Cellular Unit Module (RESCU)|RESCU|091
+Remote Function Actuator (RFA)|RFA|731
+Remote Keyless Entry (RKE)|RKE|
+Restraint Control Module (RCM)|RCM|737
+Retractable Hard Top (RHT)|RHT|
+Right High Intensity Discharge Lamp (RHID)|RHID|
+Right Power Sliding Door Module (RPSDM)|RPSDM|0B1
+Satellite Digital Audio Receiver System (SDARS)|SDARS|782
+Seat Control Module E (SCME)|SCME|
+Seat Control Module G (SCMG)|SCMG|712
+Seat Control Module H (SCMH)|SCMH|713
+Secondary OBD Control Module A (SOBDM)|SOBDM|
+Secondary OBD Control Module C (SOBDMC)|SOBDMC|
+Security module (CSM)|CSM|0C1
+Selective Catalytic Reduction (SCR)|SCR|
+Side Obstacle Detection Control Module - Left (SODL)|SODL|7C4
+Side Obstacle Detection Control Module - Right (SODR)|SODR|7C6
+Smart Brake Support/Mazda Radar Cruise Control (SBS/MRCC)|SBS/MRCC|
+Smart City Brake Support (ICA)|ICA|
+Smart Start Unit (SSU)|SSU|
+Speech Recognition Module (SRM)|SRM|772
+Steering Angle Sensor Module (SASM)|SASM|797
+Steering Column Control Module (SCCM)|SCCM|724
+Steering Column Locking Module (SCLM)|SCLM|0C3
+Steering Column/Instrument Panel/Lighting (SCIL)|SCIL|070
+Steering Effort Control Module (SECM)|SECM|7C5
+Supplemental Restraint System (SRS)|SRS|
+Telematic Control Unit Module (TCU)|TCU|
+Tire Pressure Monitor (RTM)|RTM|
+Tire Pressure Monitor (TPM)|TPM|
+Tracking and Blocking Module (TBM)|TBM|0CE
+Trailer Brake Control Module (TBC)|TBC|757
+Trailer Module (TRM)|TRM|791
+Transfer Case Control Module (TCCM)|TCCM|761
+Transmission Control Module (TCM)|TCM|7E1
+Transmission Range Control Module (TRCM)|TRCM|
+Variable Assist Power Steering (VAPS)|VAPS|030
+Vehicle Dynamics Module (VDM)|VDM|721
+Vehicle Emergency Messaging System (VEMS)|VEMS|091
+Vehicle Security Module (VSM)|VSM|755
+Virtual Image Cluster (VIC)|VIC|060";
+
         public static void LoadDatabase()
         {
             if (_isLoaded) return;
 
             try
             {
-                string dbPath = Path.Combine(MyProject.Application.Info.DirectoryPath, "Reference_ModuleList.txt");
-                if (!File.Exists(dbPath))
+                using (StringReader reader = new StringReader(_dbContent))
                 {
-                    // Optionally create default or just return
-                    return;
-                }
-
-                var lines = File.ReadAllLines(dbPath);
-                foreach (var line in lines)
-                {
-                    // Format: "Full Name (Abbr)|Abbr|Address"
-                    // Example: "Accessory Protocol Interface Module (APIM)|APIM|7D0"
-                    // Some lines might be missing address or abbreviation
-                    if (string.IsNullOrWhiteSpace(line)) continue;
-
-                    var parts = line.Split('|');
-                    if (parts.Length >= 3)
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        string fullName = parts[0].Trim();
-                        string abbr = parts[1].Trim();
-                        string address = parts[2].Trim(); // Hex address like "7D0"
+                        if (string.IsNullOrWhiteSpace(line)) continue;
 
-                        if (!string.IsNullOrEmpty(address))
+                        var parts = line.Split('|');
+                        if (parts.Length >= 3)
                         {
-                            // Store by address. If duplicates, last one wins or ignore? 
-                            // Let's use the first one or overwrite.
-                            // Database has some duplicates/overlapping ranges, but key is address prefix.
-                            // The AsBuilt data typically has "7D0-01-01". The module ID is "7D0".
-                            
-                            if (!_moduleNames.ContainsKey(address))
+                            string fullName = parts[0].Trim();
+                            string abbr = parts[1].Trim();
+                            string address = parts[2].Trim();
+
+                            if (!string.IsNullOrEmpty(address))
                             {
-                                // We'll store "Abbr - Full Name" or just "Abbr" depending on preference.
-                                // For now, let's store the Abbreviation if valid, else Full Name.
-                                string displayName = !string.IsNullOrEmpty(abbr) ? abbr : fullName;
-                                _moduleNames[address] = displayName;
+                                if (!_moduleNames.ContainsKey(address))
+                                {
+                                    string displayName = !string.IsNullOrEmpty(abbr) ? abbr : fullName;
+                                    _moduleNames[address] = displayName;
+                                }
                             }
                         }
                     }
@@ -61,24 +225,17 @@ namespace AsBuiltExplorer
             }
             catch (Exception ex)
             {
-                // Silently fail or log? For now, silent as it's an enhancement.
                 System.Diagnostics.Debug.WriteLine("Error loading module database: " + ex.Message);
             }
         }
 
         public static string GetModuleName(string address)
         {
-            // Address might be full line "7D0-01-01" or just "7D0"
-            // We need to extract the first part.
-            
             if (string.IsNullOrEmpty(address)) return "";
             if (!_isLoaded) LoadDatabase();
 
-            // Check exact match first
             if (_moduleNames.ContainsKey(address)) return _moduleNames[address];
 
-            // Check if it's a formatted address like "7D0-01-01" or "7D00101"
-            // Typically generic Ford modules are 3 hex chars.
             if (address.Length >= 3)
             {
                 string prefix = address.Substring(0, 3);
