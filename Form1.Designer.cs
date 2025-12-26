@@ -1471,6 +1471,7 @@ namespace AsBuiltExplorer
             this.TabPage6.ResumeLayout(false);
             this.ContextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
+            this.btnDeduceOpenETIS.Click += new System.EventHandler(this.Button2_Click_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1605,6 +1606,7 @@ namespace AsBuiltExplorer
   private TextBox TextBox6;
 }
 }
+
 
 
 

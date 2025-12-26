@@ -814,13 +814,13 @@ public partial class Form1 : Form
   {
     WebBrowser wbDeducer = this.wbDeducer;
     wbDeducer.ScriptErrorsSuppressed = true;
-    wbDeducer.Navigate("http://www.etis.ford.com/vehicleRegSelector.do");
+    wbDeducer.Navigate("https://www.motorcraftservice.com/AsBuilt");
     do
     {
       MyProject.Application.DoEvents();
     }
     while (wbDeducer.IsBusy);
-    wbDeducer.Navigate("http://www.etis.ford.com/vehicleRegSelector.do");
+    wbDeducer.Navigate("https://www.motorcraftservice.com/AsBuilt");
     do
     {
       MyProject.Application.DoEvents();
