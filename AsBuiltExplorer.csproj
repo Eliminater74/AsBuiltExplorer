@@ -94,6 +94,7 @@
     <Compile Include="Utilities\SQLiteHelper.cs" />
     <Compile Include="Utilities\VehicleDatabase.cs" />
     <Compile Include="Utilities\modAsBuilt.cs" />
+    <Compile Include="Utilities\VINDecoder.cs" />
     <Compile Include="My\MyApplication.cs" />
     <Compile Include="My\MyComputer.cs" />
     <Compile Include="My\MyProject.cs" />

@@ -3173,6 +3173,42 @@ label_24:
       Process.Start("https://github.com/Eliminater74/AsBuiltExplorer");
   }
 
+  private void btnDecode_Click(object sender, EventArgs e)
+  {
+      string vin = txtVinInput.Text.Trim();
+      lvwDecodeResults.Items.Clear();
+
+      var results = VINDecoder.Decode(vin);
+      
+      foreach (var r in results)
+      {
+          ListViewItem lvi = new ListViewItem(r.Position);
+          lvi.SubItems.Add(r.Value);
+          lvi.SubItems.Add(r.Meaning);
+          lvi.SubItems.Add(r.Notes);
+          lvwDecodeResults.Items.Add(lvi);
+      }
+  }
+
+  private void cmbSavedVehicles_SelectedIndexChanged(object sender, EventArgs e)
+  {
+      if (cmbSavedVehicles.SelectedItem is VehicleEntry v)
+      {
+          txtVinInput.Text = v.VIN;
+      }
+  }
+
+  private void TabPage9_Enter(object sender, EventArgs e)
+  {
+      VehicleDatabase.Load(); // Ensure latest
+      cmbSavedVehicles.Items.Clear();
+      foreach (var v in VehicleDatabase.Entries)
+      {
+          cmbSavedVehicles.Items.Add(v);
+      }
+      if (cmbSavedVehicles.Items.Count > 0) cmbSavedVehicles.SelectedIndex = 0;
+  }
+
   private void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
   {
       Graphics g = e.Graphics;

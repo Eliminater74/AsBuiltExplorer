@@ -141,6 +141,17 @@ namespace AsBuiltExplorer
             this.Label19 = new System.Windows.Forms.Label();
             this.lstBit_Years = new System.Windows.Forms.CheckedListBox();
             this.lstBit_Models = new System.Windows.Forms.CheckedListBox();
+            this.TabPage9 = new System.Windows.Forms.TabPage();
+            this.lblVinInput = new System.Windows.Forms.Label();
+            this.txtVinInput = new System.Windows.Forms.TextBox();
+            this.lblVinSelect = new System.Windows.Forms.Label();
+            this.cmbSavedVehicles = new System.Windows.Forms.ComboBox();
+            this.btnDecode = new System.Windows.Forms.Button();
+            this.lvwDecodeResults = new System.Windows.Forms.ListView();
+            this.colPos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colVal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colMean = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colNotes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnDB1 = new System.Windows.Forms.Button();
             this.btnDB2 = new System.Windows.Forms.Button();
             this.btnDB3 = new System.Windows.Forms.Button();
@@ -214,6 +225,7 @@ namespace AsBuiltExplorer
             this.TabControl1.Controls.Add(this.TabPage4);
             this.TabControl1.Controls.Add(this.TabPage5);
             this.TabControl1.Controls.Add(this.TabPage6);
+            this.TabControl1.Controls.Add(this.TabPage9);
             this.TabControl1.Controls.Add(this.TabPage7);
             this.TabControl1.Controls.Add(this.TabPage8);
             this.TabControl1.Location = new System.Drawing.Point(16, 15);
@@ -1235,6 +1247,106 @@ namespace AsBuiltExplorer
             this.lstDeduceFactoryOptions.Size = new System.Drawing.Size(368, 84);
             this.lstDeduceFactoryOptions.TabIndex = 0;
             // 
+            // TabPage9
+            // 
+            this.TabPage9.Controls.Add(this.lvwDecodeResults);
+            this.TabPage9.Controls.Add(this.btnDecode);
+            this.TabPage9.Controls.Add(this.cmbSavedVehicles);
+            this.TabPage9.Controls.Add(this.lblVinSelect);
+            this.TabPage9.Controls.Add(this.txtVinInput);
+            this.TabPage9.Controls.Add(this.lblVinInput);
+            this.TabPage9.Location = new System.Drawing.Point(4, 25);
+            this.TabPage9.Name = "TabPage9";
+            this.TabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage9.Size = new System.Drawing.Size(991, 562);
+            this.TabPage9.TabIndex = 8;
+            this.TabPage9.Text = "VIN Decoder";
+            this.TabPage9.UseVisualStyleBackColor = true;
+            this.TabPage9.Enter += new System.EventHandler(this.TabPage9_Enter);
+            // 
+            // lblVinInput
+            // 
+            this.lblVinInput.AutoSize = true;
+            this.lblVinInput.Location = new System.Drawing.Point(20, 30);
+            this.lblVinInput.Name = "lblVinInput";
+            this.lblVinInput.Size = new System.Drawing.Size(69, 16);
+            this.lblVinInput.TabIndex = 0;
+            this.lblVinInput.Text = "Enter VIN:";
+            // 
+            // txtVinInput
+            // 
+            this.txtVinInput.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtVinInput.Location = new System.Drawing.Point(100, 27);
+            this.txtVinInput.MaxLength = 17;
+            this.txtVinInput.Name = "txtVinInput";
+            this.txtVinInput.Size = new System.Drawing.Size(200, 22);
+            this.txtVinInput.TabIndex = 1;
+            // 
+            // lblVinSelect
+            // 
+            this.lblVinSelect.AutoSize = true;
+            this.lblVinSelect.Location = new System.Drawing.Point(340, 30);
+            this.lblVinSelect.Name = "lblVinSelect";
+            this.lblVinSelect.Size = new System.Drawing.Size(130, 16);
+            this.lblVinSelect.TabIndex = 2;
+            this.lblVinSelect.Text = "Or Saved Vehicle:";
+            // 
+            // cmbSavedVehicles
+            // 
+            this.cmbSavedVehicles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSavedVehicles.FormattingEnabled = true;
+            this.cmbSavedVehicles.Location = new System.Drawing.Point(480, 26);
+            this.cmbSavedVehicles.Name = "cmbSavedVehicles";
+            this.cmbSavedVehicles.Size = new System.Drawing.Size(250, 24);
+            this.cmbSavedVehicles.TabIndex = 3;
+            this.cmbSavedVehicles.SelectedIndexChanged += new System.EventHandler(this.cmbSavedVehicles_SelectedIndexChanged);
+            // 
+            // btnDecode
+            // 
+            this.btnDecode.Location = new System.Drawing.Point(760, 25);
+            this.btnDecode.Name = "btnDecode";
+            this.btnDecode.Size = new System.Drawing.Size(100, 27);
+            this.btnDecode.TabIndex = 4;
+            this.btnDecode.Text = "Decode";
+            this.btnDecode.UseVisualStyleBackColor = true;
+            this.btnDecode.Click += new System.EventHandler(this.btnDecode_Click);
+            // 
+            // lvwDecodeResults
+            // 
+            this.lvwDecodeResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colPos,
+            this.colVal,
+            this.colMean,
+            this.colNotes});
+            this.lvwDecodeResults.FullRowSelect = true;
+            this.lvwDecodeResults.GridLines = true;
+            this.lvwDecodeResults.Location = new System.Drawing.Point(23, 70);
+            this.lvwDecodeResults.Name = "lvwDecodeResults";
+            this.lvwDecodeResults.Size = new System.Drawing.Size(950, 470);
+            this.lvwDecodeResults.TabIndex = 5;
+            this.lvwDecodeResults.UseCompatibleStateImageBehavior = false;
+            this.lvwDecodeResults.View = System.Windows.Forms.View.Details;
+            // 
+            // colPos
+            // 
+            this.colPos.Text = "Position";
+            this.colPos.Width = 80;
+            // 
+            // colVal
+            // 
+            this.colVal.Text = "Value";
+            this.colVal.Width = 80;
+            // 
+            // colMean
+            // 
+            this.colMean.Text = "Meaning";
+            this.colMean.Width = 250;
+            // 
+            // colNotes
+            // 
+            this.colNotes.Text = "Notes / How to Decode";
+            this.colNotes.Width = 500;
+            // 
             // TabPage5
             // 
             this.TabPage5.BackColor = System.Drawing.SystemColors.Control;
@@ -1671,6 +1783,9 @@ namespace AsBuiltExplorer
             this.TabPage7.ResumeLayout(false);
             this.TabPage8.ResumeLayout(false);
             this.TabPage8.PerformLayout();
+            this.TabPage9.SuspendLayout();
+            this.TabPage9.ResumeLayout(false);
+            this.TabPage9.PerformLayout();
             this.ContextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.TabPage5.Click += new System.EventHandler(this.TabPage5_Click);
@@ -1696,6 +1811,8 @@ namespace AsBuiltExplorer
             this.EntireLineToolStripMenuItem.Click += new System.EventHandler(this.EntireLineToolStripMenuItem_Click);
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             this.btnDeduceOpenETIS.Click += new System.EventHandler(this.Button2_Click_1);
+            this.ClientSize = new System.Drawing.Size(1150, 650);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1843,6 +1960,18 @@ namespace AsBuiltExplorer
    private System.Windows.Forms.Label lblAboutCredits;
    private System.Windows.Forms.Label lblAboutMoto;
    private System.Windows.Forms.LinkLabel lnkAboutGithub;
+   // VIN Decoder Controls
+   private System.Windows.Forms.TabPage TabPage9;
+   private System.Windows.Forms.Label lblVinInput;
+   private System.Windows.Forms.TextBox txtVinInput;
+   private System.Windows.Forms.Label lblVinSelect;
+   private System.Windows.Forms.ComboBox cmbSavedVehicles;
+   private System.Windows.Forms.Button btnDecode;
+   private System.Windows.Forms.ListView lvwDecodeResults;
+   private System.Windows.Forms.ColumnHeader colPos;
+   private System.Windows.Forms.ColumnHeader colVal;
+   private System.Windows.Forms.ColumnHeader colMean;
+   private System.Windows.Forms.ColumnHeader colNotes;
  }
 }
 
