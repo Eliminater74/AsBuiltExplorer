@@ -1,0 +1,17 @@
+Feature Name,Module,Address,Data1,Data2,Data3,Notes
+Tire Size / Axle Ratio,SJB,726-12-01,xxxx,,,Critical: Must also update PCM & ABS to avoid P1639/Light. Unit: Rev/Mile.
+Keypad / Entry Logic,SJB,726-01-01,xxxx,,,Bit 0 or 1 usually toggles Keypad.
+TPMS Pressure Threshold,SJB,726-02-01,xxxx,,,Hex Value = PSI (e.g. 23=35psi, 2D=45psi). Front/Rear bytes.
+Lighting/Locks (Dark Car/Auto-Lock),SJB,726-02-01,xxxx,,,Dark Car (Police Mode) often in Plain English Config. Disables interior lights.
+ABS VIN Block,ABS,760-01-01,xxxx,,,Contains ASCII VIN. Critical if swapping ABS module (VIN Mismatch).
+TPMS Placard Pressure,SJB,726-11-01,xxxx,,,Hex value = PSI
+Feature Enablers (Compass/Therm/MsgCenter),IPC,720-01-01,xxxx,,,
+Chimes / Seatbelt,IPC,720-01-02,xxxx,,,
+Audio Config (Sub/Aux),ACM,727-01-01,xxxx,,,Byte 1 or 2 toggles Sub/Aux
+EQ / Sound Profile,ACM,727-01-02,xxxx,,,
+Auto Headlights Enable,SJB,726-09-01,xxxx,,,Compare vs XLT for Auto Lamp bit
+Auto Headlights Enable (Alt),SJB,726-10-01,xxxx,,,Compare vs XLT for Auto Lamp bit
+Power Running Boards Menu,ICM,720-01-01,xxxx,,,Req PRB Module 7L7Z-14C177. Magic Bit: 'D'=Enable, '7'=Disable (e.g. DFF6 vs 7FF6).
+Power Liftgate Enable (SJB),SJB,726-04-01,xxxx,,,Requires LGM. Check if LGM exists on network.
+Power Liftgate Enable (Alt),SJB,726-02-01,xxxx,,,Also check for LGM enable.
+Touch Screen / Nav Type,ACM,727-01-01,xxxx,,,Byte 1: 0/1=Std, 8/9/A=Nav. 1040=Std (No Sub), 4840=Prem (Sub), 4848=Prem/RSE.
