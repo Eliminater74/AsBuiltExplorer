@@ -112,6 +112,64 @@ public partial class Form1 : Form
   {
       ModuleDatabase.LoadDatabase();
       CommonDatabase.Load(); // Triggers Migration
+      ApplyTheme();
+  }
+
+  private void pbSettings_Click(object sender, EventArgs e)
+  {
+      using (var frm = new AsBuiltExplorer.Forms.frmSettings())
+      {
+          if (frm.ShowDialog() == DialogResult.OK)
+          {
+              if (frm.ThemeChanged) ApplyTheme();
+          }
+      }
+  }
+
+  private void ApplyTheme()
+  {
+      bool isDark = ("Dark" == My.MySettings.Default.AppTheme);
+      Color backColor = isDark ? Color.FromArgb(45, 45, 48) : SystemColors.Control;
+      Color foreColor = isDark ? Color.White : SystemColors.ControlText;
+      
+      this.BackColor = backColor;
+      this.ForeColor = foreColor;
+      
+      foreach (Control c in this.Controls)
+      {
+          UpdateControlTheme(c, backColor, foreColor);
+      }
+  }
+
+  private void UpdateControlTheme(Control c, Color back, Color fore)
+  {
+       if (c is Button || c is CheckBox || c is RadioButton || c is Label || c is GroupBox || c is TabPage)
+       {
+           c.ForeColor = fore;
+           c.BackColor = back;
+       }
+       else if (c is TextBox || c is ListBox || c is ListView || c is ComboBox || c is RichTextBox)
+       {
+           // Inputs usually stay white or need specific dark styling
+           if (back != SystemColors.Control) // Dark mode
+           {
+               c.BackColor = Color.FromArgb(30, 30, 30);
+               c.ForeColor = Color.White;
+           }
+           else
+           {
+               c.BackColor = SystemColors.Window;
+               c.ForeColor = SystemColors.WindowText;
+           }
+       }
+       
+       if (c.HasChildren)
+       {
+           foreach (Control child in c.Controls)
+           {
+               UpdateControlTheme(child, back, fore);
+           }
+       }
   }
 
   private void Button2_Click(object sender, EventArgs e)

@@ -62,8 +62,17 @@ internal sealed class MySettings : ApplicationSettingsBase
       MySettings defaultInstance = MySettings.defaultInstance;
       return defaultInstance;
     }
+    }
+
+    [UserScopedSettingAttribute()]
+    [DefaultSettingValueAttribute("Light")]
+    public string AppTheme
+    {
+        get { return ((string)(this["AppTheme"])); }
+        set { this["AppTheme"] = value; }
+    }
   }
 }
 
 
-}
+

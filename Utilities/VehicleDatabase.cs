@@ -276,5 +276,22 @@ namespace AsBuiltExplorer
             }
             Load();
         }
+
+        public static void ClearDatabase()
+        {
+            using (var conn = SQLiteHelper.GetConnection())
+            {
+                using (var cmd = new System.Data.SQLite.SQLiteCommand("DELETE FROM Vehicles", conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                // Vacuum to reclaim space and reset auto-increment
+                using (var cmd = new System.Data.SQLite.SQLiteCommand("VACUUM", conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            Load();
+        }
     }
 }

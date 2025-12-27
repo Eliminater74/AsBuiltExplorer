@@ -208,6 +208,7 @@ namespace AsBuiltExplorer
             this.DeleteFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Label8 = new System.Windows.Forms.Label();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbSettings = new System.Windows.Forms.PictureBox();
             this.TabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.ContextMenuStrip1.SuspendLayout();
@@ -1879,6 +1880,19 @@ namespace AsBuiltExplorer
             this.PictureBox1.TabStop = false;
             this.PictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
+            // pbSettings
+            // 
+            this.pbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbSettings.ImageLocation = "settings_icon.png";
+            this.pbSettings.Location = new System.Drawing.Point(135, 601);
+            this.pbSettings.Name = "pbSettings";
+            this.pbSettings.Size = new System.Drawing.Size(52, 52);
+            this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbSettings.TabIndex = 99;
+            this.pbSettings.TabStop = false;
+            this.pbSettings.Click += new System.EventHandler(this.pbSettings_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1886,6 +1900,7 @@ namespace AsBuiltExplorer
             this.Controls.Add(this.Label8);
             this.Controls.Add(this.TabControl1);
             this.Controls.Add(this.PictureBox1);
+            this.Controls.Add(this.pbSettings);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -1913,6 +1928,7 @@ namespace AsBuiltExplorer
             this.TabPage9.PerformLayout();
             this.ContextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
             this.TabPage5.Click += new System.EventHandler(this.TabPage5_Click);
             this.lvwBrowser.SelectedIndexChanged += new System.EventHandler(this.lvwBrowser_SelectedIndexChanged);
             this.Button6.Click += new System.EventHandler(this.Button6_Click_1);
@@ -2114,7 +2130,10 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.Label lblModPlatform;
     private System.Windows.Forms.Label lblModsHelp;
     private System.Windows.Forms.ColumnHeader colModTitle;
+
     private System.Windows.Forms.ColumnHeader colModCat;
+
+    private System.Windows.Forms.PictureBox pbSettings;
  }
 }
 
