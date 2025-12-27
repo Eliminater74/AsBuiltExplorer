@@ -82,7 +82,7 @@ namespace AsBuiltExplorer
             this.Label7 = new System.Windows.Forms.Label();
             this.Label6 = new System.Windows.Forms.Label();
             this.TabPage2 = new System.Windows.Forms.TabPage();
-            this.TextBox5 = new System.Windows.Forms.TextBox();
+
             this.Button3 = new System.Windows.Forms.Button();
             this.Button2 = new System.Windows.Forms.Button();
             this.Label16 = new System.Windows.Forms.Label();
@@ -159,6 +159,8 @@ namespace AsBuiltExplorer
             this.Label17 = new System.Windows.Forms.Label();
             this.TextBox3 = new System.Windows.Forms.TextBox();
             this.Label18 = new System.Windows.Forms.Label();
+            this.grpChecksum = new System.Windows.Forms.GroupBox();
+            this.grpConverter = new System.Windows.Forms.GroupBox();
             this.tbxDeduceReport2 = new System.Windows.Forms.TextBox();
             this.Button4 = new System.Windows.Forms.Button();
             this.TabPage6 = new System.Windows.Forms.TabPage();
@@ -689,31 +691,8 @@ namespace AsBuiltExplorer
             // TabPage2
             // 
             this.TabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.TabPage2.Controls.Add(this.TextBox5);
-            this.TabPage2.Controls.Add(this.Button3);
-            this.TabPage2.Controls.Add(this.Button2);
-            this.TabPage2.Controls.Add(this.Label16);
-            this.TabPage2.Controls.Add(this.Label15);
-            this.TabPage2.Controls.Add(this.tbxChecksumBin);
-            this.TabPage2.Controls.Add(this.tbxConvertBin);
-            this.TabPage2.Controls.Add(this.tbxConvertHex);
-            this.TabPage2.Controls.Add(this.tbxData3bin2);
-            this.TabPage2.Controls.Add(this.tbxData2bin2);
-            this.TabPage2.Controls.Add(this.tbxData1bin2);
-            this.TabPage2.Controls.Add(this.tbxData3bin1);
-            this.TabPage2.Controls.Add(this.tbxData2bin1);
-            this.TabPage2.Controls.Add(this.tbxData1bin1);
-            this.TabPage2.Controls.Add(this.tbxChecksumHex);
-            this.TabPage2.Controls.Add(this.Label5);
-            this.TabPage2.Controls.Add(this.Button1);
-            this.TabPage2.Controls.Add(this.tbxData3hex);
-            this.TabPage2.Controls.Add(this.Label4);
-            this.TabPage2.Controls.Add(this.tbxData2hex);
-            this.TabPage2.Controls.Add(this.Label3);
-            this.TabPage2.Controls.Add(this.tbxData1hex);
-            this.TabPage2.Controls.Add(this.Label2);
-            this.TabPage2.Controls.Add(this.tbxModIDhex);
-            this.TabPage2.Controls.Add(this.Label1);
+            this.TabPage2.Controls.Add(this.grpConverter);
+            this.TabPage2.Controls.Add(this.grpChecksum);
             this.TabPage2.Location = new System.Drawing.Point(4, 25);
             this.TabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.TabPage2.Name = "TabPage2";
@@ -723,21 +702,52 @@ namespace AsBuiltExplorer
             this.TabPage2.Text = "Checksum Calc";
             this.TabPage2.Click += new System.EventHandler(this.TabPage2_Click);
             // 
-            // TextBox5
+            // grpChecksum
             // 
-            this.TextBox5.BackColor = System.Drawing.SystemColors.Info;
-            this.TextBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBox5.Location = new System.Drawing.Point(485, 22);
-            this.TextBox5.Multiline = true;
-            this.TextBox5.Name = "TextBox5";
-            this.TextBox5.Size = new System.Drawing.Size(173, 215);
-            this.TextBox5.TabIndex = 24;
-            this.TextBox5.Text = "This is just a checksum calculator. Entire your module data (including the checks" +
-    "um). \r\n\r\nClick Re-Calc, and a new checksum will be provided below.";
+            this.grpChecksum.Controls.Add(this.Label1);
+            this.grpChecksum.Controls.Add(this.tbxModIDhex);
+            this.grpChecksum.Controls.Add(this.Label2);
+            this.grpChecksum.Controls.Add(this.tbxData1hex);
+            this.grpChecksum.Controls.Add(this.Label3);
+            this.grpChecksum.Controls.Add(this.tbxData2hex);
+            this.grpChecksum.Controls.Add(this.Label4);
+            this.grpChecksum.Controls.Add(this.tbxData3hex);
+            this.grpChecksum.Controls.Add(this.Button1);
+            this.grpChecksum.Controls.Add(this.Label5);
+            this.grpChecksum.Controls.Add(this.tbxChecksumHex);
+            this.grpChecksum.Controls.Add(this.tbxData1bin1);
+            this.grpChecksum.Controls.Add(this.tbxData2bin1);
+            this.grpChecksum.Controls.Add(this.tbxData3bin1);
+            this.grpChecksum.Controls.Add(this.tbxData1bin2);
+            this.grpChecksum.Controls.Add(this.tbxData2bin2);
+            this.grpChecksum.Controls.Add(this.tbxData3bin2);
+            this.grpChecksum.Controls.Add(this.tbxChecksumBin);
+            this.grpChecksum.Location = new System.Drawing.Point(20, 20);
+            this.grpChecksum.Name = "grpChecksum";
+            this.grpChecksum.Size = new System.Drawing.Size(600, 260);
+            this.grpChecksum.TabIndex = 0;
+            this.grpChecksum.TabStop = false;
+            this.grpChecksum.Text = "As-Built Checksum Calculator";
+            // 
+            // grpConverter
+            // 
+            this.grpConverter.Controls.Add(this.Label15);
+            this.grpConverter.Controls.Add(this.Label16);
+            this.grpConverter.Controls.Add(this.Button2);
+            this.grpConverter.Controls.Add(this.Button3);
+            this.grpConverter.Controls.Add(this.tbxConvertHex);
+            this.grpConverter.Controls.Add(this.tbxConvertBin);
+
+            this.grpConverter.Location = new System.Drawing.Point(20, 300);
+            this.grpConverter.Name = "grpConverter";
+            this.grpConverter.Size = new System.Drawing.Size(400, 150);
+            this.grpConverter.TabIndex = 1;
+            this.grpConverter.TabStop = false;
+            this.grpConverter.Text = "Quick Converter";
             // 
             // Button3
-            // 
-            this.Button3.Location = new System.Drawing.Point(86, 408);
+            //  
+            this.Button3.Location = new System.Drawing.Point(250, 65);
             this.Button3.Name = "Button3";
             this.Button3.Size = new System.Drawing.Size(100, 27);
             this.Button3.TabIndex = 23;
@@ -746,7 +756,7 @@ namespace AsBuiltExplorer
             // 
             // Button2
             // 
-            this.Button2.Location = new System.Drawing.Point(86, 319);
+            this.Button2.Location = new System.Drawing.Point(180, 25);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(100, 27);
             this.Button2.TabIndex = 22;
@@ -756,7 +766,7 @@ namespace AsBuiltExplorer
             // Label16
             // 
             this.Label16.AutoSize = true;
-            this.Label16.Location = new System.Drawing.Point(33, 383);
+            this.Label16.Location = new System.Drawing.Point(20, 70);
             this.Label16.Name = "Label16";
             this.Label16.Size = new System.Drawing.Size(29, 16);
             this.Label16.TabIndex = 21;
@@ -765,7 +775,7 @@ namespace AsBuiltExplorer
             // Label15
             // 
             this.Label15.AutoSize = true;
-            this.Label15.Location = new System.Drawing.Point(33, 355);
+            this.Label15.Location = new System.Drawing.Point(20, 30);
             this.Label15.Name = "Label15";
             this.Label15.Size = new System.Drawing.Size(34, 16);
             this.Label15.TabIndex = 20;
@@ -775,7 +785,7 @@ namespace AsBuiltExplorer
             // 
             this.tbxChecksumBin.BackColor = System.Drawing.SystemColors.Control;
             this.tbxChecksumBin.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxChecksumBin.Location = new System.Drawing.Point(280, 219);
+            this.tbxChecksumBin.Location = new System.Drawing.Point(220, 207);
             this.tbxChecksumBin.Margin = new System.Windows.Forms.Padding(4);
             this.tbxChecksumBin.MaxLength = 8;
             this.tbxChecksumBin.Name = "tbxChecksumBin";
@@ -786,7 +796,7 @@ namespace AsBuiltExplorer
             // tbxConvertBin
             // 
             this.tbxConvertBin.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxConvertBin.Location = new System.Drawing.Point(86, 380);
+            this.tbxConvertBin.Location = new System.Drawing.Point(60, 67);
             this.tbxConvertBin.Name = "tbxConvertBin";
             this.tbxConvertBin.Size = new System.Drawing.Size(170, 22);
             this.tbxConvertBin.TabIndex = 18;
@@ -794,7 +804,7 @@ namespace AsBuiltExplorer
             // tbxConvertHex
             // 
             this.tbxConvertHex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxConvertHex.Location = new System.Drawing.Point(86, 352);
+            this.tbxConvertHex.Location = new System.Drawing.Point(60, 27);
             this.tbxConvertHex.Name = "tbxConvertHex";
             this.tbxConvertHex.Size = new System.Drawing.Size(100, 22);
             this.tbxConvertHex.TabIndex = 17;
@@ -803,7 +813,7 @@ namespace AsBuiltExplorer
             // 
             this.tbxData3bin2.BackColor = System.Drawing.SystemColors.Control;
             this.tbxData3bin2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData3bin2.Location = new System.Drawing.Point(326, 117);
+            this.tbxData3bin2.Location = new System.Drawing.Point(320, 122);
             this.tbxData3bin2.Margin = new System.Windows.Forms.Padding(4);
             this.tbxData3bin2.MaxLength = 8;
             this.tbxData3bin2.Name = "tbxData3bin2";
@@ -815,7 +825,7 @@ namespace AsBuiltExplorer
             // 
             this.tbxData2bin2.BackColor = System.Drawing.SystemColors.Control;
             this.tbxData2bin2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData2bin2.Location = new System.Drawing.Point(326, 85);
+            this.tbxData2bin2.Location = new System.Drawing.Point(320, 92);
             this.tbxData2bin2.Margin = new System.Windows.Forms.Padding(4);
             this.tbxData2bin2.MaxLength = 8;
             this.tbxData2bin2.Name = "tbxData2bin2";
@@ -827,7 +837,7 @@ namespace AsBuiltExplorer
             // 
             this.tbxData1bin2.BackColor = System.Drawing.SystemColors.Control;
             this.tbxData1bin2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData1bin2.Location = new System.Drawing.Point(326, 53);
+            this.tbxData1bin2.Location = new System.Drawing.Point(320, 62);
             this.tbxData1bin2.Margin = new System.Windows.Forms.Padding(4);
             this.tbxData1bin2.MaxLength = 8;
             this.tbxData1bin2.Name = "tbxData1bin2";
@@ -839,7 +849,7 @@ namespace AsBuiltExplorer
             // 
             this.tbxData3bin1.BackColor = System.Drawing.SystemColors.Control;
             this.tbxData3bin1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData3bin1.Location = new System.Drawing.Point(229, 117);
+            this.tbxData3bin1.Location = new System.Drawing.Point(220, 122);
             this.tbxData3bin1.Margin = new System.Windows.Forms.Padding(4);
             this.tbxData3bin1.MaxLength = 8;
             this.tbxData3bin1.Name = "tbxData3bin1";
@@ -851,7 +861,7 @@ namespace AsBuiltExplorer
             // 
             this.tbxData2bin1.BackColor = System.Drawing.SystemColors.Control;
             this.tbxData2bin1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData2bin1.Location = new System.Drawing.Point(229, 85);
+            this.tbxData2bin1.Location = new System.Drawing.Point(220, 92);
             this.tbxData2bin1.Margin = new System.Windows.Forms.Padding(4);
             this.tbxData2bin1.MaxLength = 8;
             this.tbxData2bin1.Name = "tbxData2bin1";
@@ -863,7 +873,7 @@ namespace AsBuiltExplorer
             // 
             this.tbxData1bin1.BackColor = System.Drawing.SystemColors.Control;
             this.tbxData1bin1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData1bin1.Location = new System.Drawing.Point(229, 53);
+            this.tbxData1bin1.Location = new System.Drawing.Point(220, 62);
             this.tbxData1bin1.Margin = new System.Windows.Forms.Padding(4);
             this.tbxData1bin1.MaxLength = 8;
             this.tbxData1bin1.Name = "tbxData1bin1";
@@ -874,7 +884,7 @@ namespace AsBuiltExplorer
             // tbxChecksumHex
             // 
             this.tbxChecksumHex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxChecksumHex.Location = new System.Drawing.Point(143, 219);
+            this.tbxChecksumHex.Location = new System.Drawing.Point(130, 207);
             this.tbxChecksumHex.Margin = new System.Windows.Forms.Padding(4);
             this.tbxChecksumHex.MaxLength = 2;
             this.tbxChecksumHex.Name = "tbxChecksumHex";
@@ -887,7 +897,7 @@ namespace AsBuiltExplorer
             // Label5
             // 
             this.Label5.AutoSize = true;
-            this.Label5.Location = new System.Drawing.Point(28, 221);
+            this.Label5.Location = new System.Drawing.Point(20, 210);
             this.Label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label5.Name = "Label5";
             this.Label5.Size = new System.Drawing.Size(73, 16);
@@ -896,7 +906,7 @@ namespace AsBuiltExplorer
             // 
             // Button1
             // 
-            this.Button1.Location = new System.Drawing.Point(30, 157);
+            this.Button1.Location = new System.Drawing.Point(130, 160);
             this.Button1.Margin = new System.Windows.Forms.Padding(4);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(268, 41);
@@ -908,7 +918,7 @@ namespace AsBuiltExplorer
             // tbxData3hex
             // 
             this.tbxData3hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData3hex.Location = new System.Drawing.Point(118, 117);
+            this.tbxData3hex.Location = new System.Drawing.Point(130, 122);
             this.tbxData3hex.Margin = new System.Windows.Forms.Padding(4);
             this.tbxData3hex.MaxLength = 5;
             this.tbxData3hex.Name = "tbxData3hex";
@@ -920,7 +930,7 @@ namespace AsBuiltExplorer
             // Label4
             // 
             this.Label4.AutoSize = true;
-            this.Label4.Location = new System.Drawing.Point(27, 119);
+            this.Label4.Location = new System.Drawing.Point(20, 125);
             this.Label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(39, 16);
@@ -930,7 +940,7 @@ namespace AsBuiltExplorer
             // tbxData2hex
             // 
             this.tbxData2hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData2hex.Location = new System.Drawing.Point(118, 85);
+            this.tbxData2hex.Location = new System.Drawing.Point(130, 92);
             this.tbxData2hex.Margin = new System.Windows.Forms.Padding(4);
             this.tbxData2hex.MaxLength = 5;
             this.tbxData2hex.Name = "tbxData2hex";
@@ -942,7 +952,7 @@ namespace AsBuiltExplorer
             // Label3
             // 
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(27, 87);
+            this.Label3.Location = new System.Drawing.Point(20, 95);
             this.Label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(39, 16);
@@ -953,7 +963,7 @@ namespace AsBuiltExplorer
             // tbxData1hex
             // 
             this.tbxData1hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData1hex.Location = new System.Drawing.Point(118, 53);
+            this.tbxData1hex.Location = new System.Drawing.Point(130, 62);
             this.tbxData1hex.Margin = new System.Windows.Forms.Padding(4);
             this.tbxData1hex.MaxLength = 5;
             this.tbxData1hex.Name = "tbxData1hex";
@@ -965,7 +975,7 @@ namespace AsBuiltExplorer
             // Label2
             // 
             this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(27, 55);
+            this.Label2.Location = new System.Drawing.Point(20, 65);
             this.Label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(39, 16);
@@ -975,7 +985,7 @@ namespace AsBuiltExplorer
             // tbxModIDhex
             // 
             this.tbxModIDhex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxModIDhex.Location = new System.Drawing.Point(118, 23);
+            this.tbxModIDhex.Location = new System.Drawing.Point(130, 27);
             this.tbxModIDhex.Margin = new System.Windows.Forms.Padding(4);
             this.tbxModIDhex.MaxLength = 10;
             this.tbxModIDhex.Name = "tbxModIDhex";
@@ -986,7 +996,7 @@ namespace AsBuiltExplorer
             // Label1
             // 
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(27, 25);
+            this.Label1.Location = new System.Drawing.Point(20, 30);
             this.Label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(71, 16);
@@ -1932,13 +1942,14 @@ namespace AsBuiltExplorer
   private Label Label23;
   private TextBox tbxCompFile3;
   private Label Label22;
-  private TextBox TextBox5;
   private TabPage TabPage6;
   private ColumnHeader ColumnHeader10;
   private ColumnHeader ColumnHeader11;
   private ColumnHeader ColumnHeader12;
   private ColumnHeader ColumnHeader13;
   private ColumnHeader ColumnHeader14;
+    private System.Windows.Forms.GroupBox grpChecksum;
+    private System.Windows.Forms.GroupBox grpConverter;
   private ToolStripSeparator ToolStripMenuItem1;
   private Label lblComp4VIN;
   private Label lblComp3VIN;
