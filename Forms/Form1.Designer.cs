@@ -995,7 +995,7 @@ namespace AsBuiltExplorer
             this.TabPage3.Name = "TabPage3";
             this.TabPage3.Size = new System.Drawing.Size(991, 562);
             this.TabPage3.TabIndex = 2;
-            this.TabPage3.Text = "Deducer - Get Data";
+            this.TabPage3.Text = "MotorCraft AsBuilt Data";
             this.TabPage3.Enter += new System.EventHandler(this.TabPage3_Enter);
             // 
             // grpDeduceSelection
