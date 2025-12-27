@@ -83,8 +83,7 @@ namespace AsBuiltExplorer
             this.Label6 = new System.Windows.Forms.Label();
             this.TabPage2 = new System.Windows.Forms.TabPage();
 
-            this.Button3 = new System.Windows.Forms.Button();
-            this.Button2 = new System.Windows.Forms.Button();
+            this.TabPage4 = new System.Windows.Forms.TabPage();
             this.Label16 = new System.Windows.Forms.Label();
             this.Label15 = new System.Windows.Forms.Label();
             this.tbxChecksumBin = new System.Windows.Forms.TextBox();
@@ -108,14 +107,15 @@ namespace AsBuiltExplorer
             this.tbxModIDhex = new System.Windows.Forms.TextBox();
             this.Label1 = new System.Windows.Forms.Label();
             this.TabPage3 = new System.Windows.Forms.TabPage();
-            this.TextBox6 = new System.Windows.Forms.TextBox();
-            this.TextBox2 = new System.Windows.Forms.TextBox();
-            this.Label12 = new System.Windows.Forms.Label();
-            this.Label9 = new System.Windows.Forms.Label();
-            this.chkDeduceDownloadAB = new System.Windows.Forms.CheckBox();
-            this.btnDeduceSaveInfo = new System.Windows.Forms.Button();
+            this.grpDeduceSelection = new System.Windows.Forms.GroupBox();
+            this.lblDeduceSelect = new System.Windows.Forms.Label();
+            this.cmbDeduceSavedVehicles = new System.Windows.Forms.ComboBox();
+            this.lblDeduceOr = new System.Windows.Forms.Label();
+            this.txtDeduceVIN = new System.Windows.Forms.TextBox();
+            this.btnDeduceGo = new System.Windows.Forms.Button();
+            this.grpDeduceBrowser = new System.Windows.Forms.GroupBox();
             this.wbDeducer = new System.Windows.Forms.WebBrowser();
-            this.btnDeduceOpenETIS = new System.Windows.Forms.Button();
+            this.btnDeduceSaveAB = new System.Windows.Forms.Button();
             this.TabPage4 = new System.Windows.Forms.TabPage();
             this.chkDeduceDoCCC = new System.Windows.Forms.CheckBox();
             this.Button8 = new System.Windows.Forms.Button();
@@ -733,8 +733,7 @@ namespace AsBuiltExplorer
             // 
             this.grpConverter.Controls.Add(this.Label15);
             this.grpConverter.Controls.Add(this.Label16);
-            this.grpConverter.Controls.Add(this.Button2);
-            this.grpConverter.Controls.Add(this.Button3);
+
             this.grpConverter.Controls.Add(this.tbxConvertHex);
             this.grpConverter.Controls.Add(this.tbxConvertBin);
 
@@ -744,24 +743,8 @@ namespace AsBuiltExplorer
             this.grpConverter.TabIndex = 1;
             this.grpConverter.TabStop = false;
             this.grpConverter.Text = "Quick Converter";
-            // 
-            // Button3
-            //  
-            this.Button3.Location = new System.Drawing.Point(250, 65);
-            this.Button3.Name = "Button3";
-            this.Button3.Size = new System.Drawing.Size(100, 27);
-            this.Button3.TabIndex = 23;
-            this.Button3.Text = "Bin to Hex";
-            this.Button3.UseVisualStyleBackColor = true;
-            // 
-            // Button2
-            // 
-            this.Button2.Location = new System.Drawing.Point(180, 25);
-            this.Button2.Name = "Button2";
-            this.Button2.Size = new System.Drawing.Size(100, 27);
-            this.Button2.TabIndex = 22;
-            this.Button2.Text = "Hex to Bin";
-            this.Button2.UseVisualStyleBackColor = true;
+
+
             // 
             // Label16
             // 
@@ -1006,109 +989,133 @@ namespace AsBuiltExplorer
             // TabPage3
             // 
             this.TabPage3.BackColor = System.Drawing.SystemColors.Control;
-            this.TabPage3.Controls.Add(this.TextBox6);
-            this.TabPage3.Controls.Add(this.TextBox2);
-            this.TabPage3.Controls.Add(this.Label12);
-            this.TabPage3.Controls.Add(this.Label9);
-            this.TabPage3.Controls.Add(this.chkDeduceDownloadAB);
-            this.TabPage3.Controls.Add(this.btnDeduceSaveInfo);
-            this.TabPage3.Controls.Add(this.wbDeducer);
-            this.TabPage3.Controls.Add(this.btnDeduceOpenETIS);
+            this.TabPage3.Controls.Add(this.grpDeduceBrowser);
+            this.TabPage3.Controls.Add(this.grpDeduceSelection);
             this.TabPage3.Location = new System.Drawing.Point(4, 25);
             this.TabPage3.Name = "TabPage3";
             this.TabPage3.Size = new System.Drawing.Size(991, 562);
             this.TabPage3.TabIndex = 2;
             this.TabPage3.Text = "Deducer - Get Data";
+            this.TabPage3.Enter += new System.EventHandler(this.TabPage3_Enter);
             // 
-            // TextBox6
+            // grpDeduceSelection
             // 
-            this.TextBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextBox6.BackColor = System.Drawing.SystemColors.Info;
-            this.TextBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBox6.ForeColor = System.Drawing.Color.Red;
-            this.TextBox6.Location = new System.Drawing.Point(596, 86);
-            this.TextBox6.Multiline = true;
-            this.TextBox6.Name = "TextBox6";
-            this.TextBox6.Size = new System.Drawing.Size(199, 124);
-            this.TextBox6.TabIndex = 10;
-            this.TextBox6.Text = "The Deducer tool is now unusable, due to the ETIS site being shut down. Unless th" +
-    "ere is another site to correlate VIN to vehicle features, this will remain broke" +
-    "n.";
+            this.grpDeduceSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpDeduceSelection.Controls.Add(this.btnDeduceGo);
+            this.grpDeduceSelection.Controls.Add(this.txtDeduceVIN);
+            this.grpDeduceSelection.Controls.Add(this.lblDeduceOr);
+            this.grpDeduceSelection.Controls.Add(this.cmbDeduceSavedVehicles);
+            this.grpDeduceSelection.Controls.Add(this.lblDeduceSelect);
+            this.grpDeduceSelection.Location = new System.Drawing.Point(20, 15);
+            this.grpDeduceSelection.Name = "grpDeduceSelection";
+            this.grpDeduceSelection.Size = new System.Drawing.Size(950, 60);
+            this.grpDeduceSelection.TabIndex = 0;
+            this.grpDeduceSelection.TabStop = false;
+            this.grpDeduceSelection.Text = "Vehicle Selection";
             // 
-            // TextBox2
+            // lblDeduceSelect
             // 
-            this.TextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextBox2.BackColor = System.Drawing.SystemColors.Info;
-            this.TextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBox2.Location = new System.Drawing.Point(596, 232);
-            this.TextBox2.Multiline = true;
-            this.TextBox2.Name = "TextBox2";
-            this.TextBox2.Size = new System.Drawing.Size(199, 308);
-            this.TextBox2.TabIndex = 9;
-            this.TextBox2.Text = resources.GetString("TextBox2.Text");
+            this.lblDeduceSelect.AutoSize = true;
+            this.lblDeduceSelect.Location = new System.Drawing.Point(15, 25);
+            this.lblDeduceSelect.Name = "lblDeduceSelect";
+            this.lblDeduceSelect.Size = new System.Drawing.Size(130, 16);
+            this.lblDeduceSelect.TabIndex = 0;
+            this.lblDeduceSelect.Text = "Select Saved Vehicle:";
             // 
-            // Label12
+            // cmbDeduceSavedVehicles
             // 
-            this.Label12.AutoSize = true;
-            this.Label12.Location = new System.Drawing.Point(214, 48);
-            this.Label12.Name = "Label12";
-            this.Label12.Size = new System.Drawing.Size(456, 16);
-            this.Label12.TabIndex = 2;
-            this.Label12.Text = "When prompted, save the .AB file in the \"Deducer\" subfolder of this program.";
+            this.cmbDeduceSavedVehicles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDeduceSavedVehicles.FormattingEnabled = true;
+            this.cmbDeduceSavedVehicles.Location = new System.Drawing.Point(151, 22);
+            this.cmbDeduceSavedVehicles.Name = "cmbDeduceSavedVehicles";
+            this.cmbDeduceSavedVehicles.Size = new System.Drawing.Size(200, 24);
+            this.cmbDeduceSavedVehicles.TabIndex = 1;
+            this.cmbDeduceSavedVehicles.SelectedIndexChanged += new System.EventHandler(this.cmbDeduceSavedVehicles_SelectedIndexChanged);
             // 
-            // Label9
+            // lblDeduceOr
             // 
-            this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(18, 48);
-            this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(138, 16);
-            this.Label9.TabIndex = 8;
-            this.Label9.Text = "Search the VIN below:";
+            this.lblDeduceOr.AutoSize = true;
+            this.lblDeduceOr.Location = new System.Drawing.Point(370, 25);
+            this.lblDeduceOr.Name = "lblDeduceOr";
+            this.lblDeduceOr.Size = new System.Drawing.Size(90, 16);
+            this.lblDeduceOr.TabIndex = 2;
+            this.lblDeduceOr.Text = "Or Enter VIN:";
             // 
-            // chkDeduceDownloadAB
+            // txtDeduceVIN
             // 
-            this.chkDeduceDownloadAB.AutoSize = true;
-            this.chkDeduceDownloadAB.Checked = true;
-            this.chkDeduceDownloadAB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDeduceDownloadAB.Enabled = false;
-            this.chkDeduceDownloadAB.Location = new System.Drawing.Point(340, 21);
-            this.chkDeduceDownloadAB.Name = "chkDeduceDownloadAB";
-            this.chkDeduceDownloadAB.Size = new System.Drawing.Size(111, 20);
-            this.chkDeduceDownloadAB.TabIndex = 7;
-            this.chkDeduceDownloadAB.Text = "Download .AB";
-            this.chkDeduceDownloadAB.UseVisualStyleBackColor = true;
-            this.chkDeduceDownloadAB.Visible = false;
+            this.txtDeduceVIN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDeduceVIN.Location = new System.Drawing.Point(466, 22);
+            this.txtDeduceVIN.MaxLength = 17;
+            this.txtDeduceVIN.Name = "txtDeduceVIN";
+            this.txtDeduceVIN.Size = new System.Drawing.Size(180, 22);
+            this.txtDeduceVIN.TabIndex = 3;
             // 
-            // btnDeduceSaveInfo
+            // btnDeduceGo
             // 
-            this.btnDeduceSaveInfo.Location = new System.Drawing.Point(208, 17);
-            this.btnDeduceSaveInfo.Name = "btnDeduceSaveInfo";
-            this.btnDeduceSaveInfo.Size = new System.Drawing.Size(96, 26);
-            this.btnDeduceSaveInfo.TabIndex = 5;
-            this.btnDeduceSaveInfo.Text = "Save Info";
-            this.btnDeduceSaveInfo.UseVisualStyleBackColor = true;
+            this.btnDeduceGo.Location = new System.Drawing.Point(670, 20);
+            this.btnDeduceGo.Name = "btnDeduceGo";
+            this.btnDeduceGo.Size = new System.Drawing.Size(180, 26);
+            this.btnDeduceGo.TabIndex = 4;
+            this.btnDeduceGo.Text = "Open Motorcraft Website >>";
+            this.btnDeduceGo.UseVisualStyleBackColor = true;
+            this.btnDeduceGo.Click += new System.EventHandler(this.btnDeduceGo_Click);
+            // 
+            // grpDeduceBrowser
+            // 
+            this.grpDeduceBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpDeduceBrowser.Controls.Add(this.btnDeduceSaveAB);
+            this.grpDeduceBrowser.Controls.Add(this.wbDeducer);
+            this.grpDeduceBrowser.Location = new System.Drawing.Point(20, 85);
+            this.grpDeduceBrowser.Name = "grpDeduceBrowser";
+            this.grpDeduceBrowser.Size = new System.Drawing.Size(950, 460);
+            this.grpDeduceBrowser.TabIndex = 1;
+            this.grpDeduceBrowser.TabStop = false;
+            this.grpDeduceBrowser.Text = "Browser & Actions";
             // 
             // wbDeducer
             // 
             this.wbDeducer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.wbDeducer.Location = new System.Drawing.Point(15, 86);
+            this.wbDeducer.Location = new System.Drawing.Point(15, 25);
             this.wbDeducer.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbDeducer.Name = "wbDeducer";
-            this.wbDeducer.Size = new System.Drawing.Size(552, 451);
-            this.wbDeducer.TabIndex = 4;
+            this.wbDeducer.Size = new System.Drawing.Size(920, 390);
+            this.wbDeducer.TabIndex = 0;
             this.wbDeducer.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbDeducer_DocumentCompleted);
-            this.wbDeducer.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.wbDeducer_Navigating);
             // 
-            // btnDeduceOpenETIS
+            // btnDeduceSaveAB
             // 
-            this.btnDeduceOpenETIS.Location = new System.Drawing.Point(15, 17);
-            this.btnDeduceOpenETIS.Name = "btnDeduceOpenETIS";
-            this.btnDeduceOpenETIS.Size = new System.Drawing.Size(106, 26);
-            this.btnDeduceOpenETIS.TabIndex = 2;
-            this.btnDeduceOpenETIS.Text = "Open ETIS";
-            this.btnDeduceOpenETIS.UseVisualStyleBackColor = true;
+            this.btnDeduceSaveAB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeduceSaveAB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeduceSaveAB.ForeColor = System.Drawing.Color.DarkGreen;
+            this.btnDeduceSaveAB.Location = new System.Drawing.Point(785, 425);
+            this.btnDeduceSaveAB.Name = "btnDeduceSaveAB";
+            this.btnDeduceSaveAB.Size = new System.Drawing.Size(150, 28);
+            this.btnDeduceSaveAB.TabIndex = 1;
+            this.btnDeduceSaveAB.Text = "Save As-Built File";
+            this.btnDeduceSaveAB.UseVisualStyleBackColor = true;
+            this.btnDeduceSaveAB.Click += new System.EventHandler(this.btnDeduceSaveAB_Click);
+            // 
+            // 
+
+
+
+
+
+
+
+
+
+            // 
+            // wbDeducer
+            // 
+
+
+
             // 
             // TabPage4
             // 
@@ -1811,11 +1818,9 @@ namespace AsBuiltExplorer
             this.Button9.Click += new System.EventHandler(this.Button9_Click);
             this.Button8.Click += new System.EventHandler(this.Button8_Click);
             this.Button4.Click += new System.EventHandler(this.Button4_Click);
-            this.btnDeduceSaveInfo.Click += new System.EventHandler(this.Button3_Click);
-            this.Button3.Click += new System.EventHandler(this.Button3_Click_1);
-            this.Button2.Click += new System.EventHandler(this.Button2_Click_2);
-            this.btnDeduceLoadOptions.Click += new System.EventHandler(this.btnDeduceLoadOptions_Click);
+
             this.btnDeduceFigureIt.Click += new System.EventHandler(this.btnDeduceFigureIt_Click);
+            this.btnDeduceLoadOptions.Click += new System.EventHandler(this.btnDeduceLoadOptions_Click);
             this.TabPage4.Click += new System.EventHandler(this.TabPage4_Click);
             this.BinaryToolStripMenuItem.Click += new System.EventHandler(this.BinaryToolStripMenuItem_Click);
             this.Data3hexToolStripMenuItem.Click += new System.EventHandler(this.Data3hexToolStripMenuItem_Click);
@@ -1823,7 +1828,7 @@ namespace AsBuiltExplorer
             this.Data1hexToolStripMenuItem.Click += new System.EventHandler(this.Data1hexToolStripMenuItem_Click);
             this.EntireLineToolStripMenuItem.Click += new System.EventHandler(this.EntireLineToolStripMenuItem_Click);
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
-            this.btnDeduceOpenETIS.Click += new System.EventHandler(this.Button2_Click_1);
+
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1850,22 +1855,19 @@ namespace AsBuiltExplorer
   private ToolStripMenuItem Data2hexToolStripMenuItem;
   private ToolStripMenuItem Data3hexToolStripMenuItem;
   private ToolStripMenuItem BinaryToolStripMenuItem;
-  private Button btnDeduceOpenETIS;
+
   private WebBrowser wbDeducer;
-  private Button btnDeduceSaveInfo;
-  private TabPage TabPage4;
-  private Button btnDeduceFigureIt;
-  private Button btnDeduceLoadOptions;
-  private Button Button3;
-  private Button Button2;
-  private TabPage TabPage5;
-  private Button Button4;
-  private Button Button8;
-  private Button Button6;
-  private Button Button5;
-  private Button Button9;
-  private Button Button7;
+
+
+
   private ListView lvwBrowser;
+  private System.Windows.Forms.TabPage TabPage5;
+  private System.Windows.Forms.Button Button4;
+  private System.Windows.Forms.Button Button8;
+  private System.Windows.Forms.Button Button6;
+  private System.Windows.Forms.Button Button5;
+  private System.Windows.Forms.Button Button9;
+  private System.Windows.Forms.Button Button7;
   private Button btnBrowseRefresh;
   private ContextMenuStrip ContextMenuStrip2;
   private ToolStripMenuItem SetAsCompare1ToolStripMenuItem;
@@ -1904,18 +1906,12 @@ namespace AsBuiltExplorer
   private ColumnHeader ColumnHeader6;
   private Label Label8;
   private TabPage TabPage3;
-  private CheckBox chkDeduceDownloadAB;
+
   private TextBox tbxDeduceReport;
   private ListBox lstDeduceFactoryOptions;
-  private Label Label9;
+
   private CheckedListBox lstDeduceModels;
-  private CheckedListBox lstDeduceYears;
-  private Label Label11;
-  private Label Label10;
-  private Label Label12;
-  private TextBox TextBox2;
-  private TextBox TextBox1;
-  private Label Label13;
+
   private Label Label14;
   private TextBox tbxConvertBin;
   private TextBox tbxConvertHex;
@@ -1962,7 +1958,7 @@ namespace AsBuiltExplorer
   private System.Windows.Forms.Button btnDB3;
   private System.Windows.Forms.Button btnDB4;
   private System.Windows.Forms.ToolStripMenuItem IdentifyToolStripMenuItem;
-  private TextBox TextBox6;
+
     private System.Windows.Forms.Button btnViewDefs;
    private System.Windows.Forms.TabPage TabPage7;
    private System.Windows.Forms.TabPage TabPage8;
@@ -1983,12 +1979,28 @@ namespace AsBuiltExplorer
    private System.Windows.Forms.ColumnHeader colPos;
    private System.Windows.Forms.ColumnHeader colVal;
    private System.Windows.Forms.ColumnHeader colMean;
-   private System.Windows.Forms.ColumnHeader colNotes;
+    private System.Windows.Forms.ColumnHeader colNotes;
+    
+    // Deducer Controls
+    private System.Windows.Forms.GroupBox grpDeduceSelection;
+    private System.Windows.Forms.Label lblDeduceSelect;
+    private System.Windows.Forms.ComboBox cmbDeduceSavedVehicles;
+    private System.Windows.Forms.Label lblDeduceOr;
+    private System.Windows.Forms.TextBox txtDeduceVIN;
+    private System.Windows.Forms.Button btnDeduceGo;
+    private System.Windows.Forms.GroupBox grpDeduceBrowser;
+    private System.Windows.Forms.Button btnDeduceSaveAB;
+    
+    // TabPage4 Controls (Restored)
+    private System.Windows.Forms.TabPage TabPage4;
+    private System.Windows.Forms.Button btnDeduceLoadOptions;
+    private System.Windows.Forms.CheckedListBox lstDeduceYears;
+    private System.Windows.Forms.Button btnDeduceFigureIt;
+    private System.Windows.Forms.TextBox TextBox1;
+    private System.Windows.Forms.Label Label10;
+    private System.Windows.Forms.Label Label11;
+    private System.Windows.Forms.Label Label13;
  }
 }
-
-
-
-
 
 

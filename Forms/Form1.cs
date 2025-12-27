@@ -774,151 +774,79 @@ public partial class Form1 : Form
     e.Cancel = true;
   }
 
-  private void Button2_Click_1(object sender, EventArgs e)
+  private void btnDeduceGo_Click(object sender, EventArgs e)
   {
-    WebBrowser wbDeducer = this.wbDeducer;
-    wbDeducer.ScriptErrorsSuppressed = true;
-    wbDeducer.Navigate("https://www.motorcraftservice.com/AsBuilt");
-    do
-    {
-      MyProject.Application.DoEvents();
-    }
-    while (wbDeducer.IsBusy);
-    wbDeducer.Navigate("https://www.motorcraftservice.com/AsBuilt");
-    do
-    {
-      MyProject.Application.DoEvents();
-    }
-    while (wbDeducer.IsBusy);
-  }
-
-  private void Button3_Click(object sender, EventArgs e)
-  {
-    string directoryPath = MyProject.Application.Info.DirectoryPath;
-    if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
-      directoryPath += "\\";
-    string path1 = directoryPath + "Deducer";
-    try
-    {
-      Directory.CreateDirectory(path1);
-    }
-    catch (Exception ex)
-    {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
-    }
-    string documentText = this.wbDeducer.DocumentText;
-    string str = "";
-    int num1 = Strings.InStr(1, documentText, "VIN=");
-    if (num1 > 0)
-      str = Strings.Replace(Strings.Mid(documentText, checked (num1 + 4), 17), "\"", "");
-    string path2 = $"{path1}\\{str}.ETIS.HTML";
-    try
-    {
-      if (System.IO.File.Exists(path2))
-      {
-        if (Interaction.MsgBox((object) $"VIN {str} ETIS data already exists.  Continue?", MsgBoxStyle.YesNo) == MsgBoxResult.No)
-        {
-          this.btnDeduceOpenETIS.PerformClick();
-          return;
-        }
-        System.IO.File.Delete(path2);
-      }
-    }
-    catch (Exception ex)
-    {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
-    }
-    System.IO.File.WriteAllText(path2, this.wbDeducer.DocumentText);
-    this.wbDeducer.Navigate("https://www.motorcraftservice.com/AsBuilt");
-    int num2 = (int) Interaction.MsgBox((object) "ETIS Data saved");
-    do
-    {
-      MyProject.Application.DoEvents();
-    }
-    while (this.wbDeducer.IsBusy);
-    HtmlElement Expression = modAsBuilt.DOM_WaitForElement_ByID(this.wbDeducer, "VIN", 20.0);
-    if (!Information.IsNothing((object) Expression))
-    {
-      Expression.SetAttribute("value", str);
-      if (!Information.IsNothing((object) modAsBuilt.DOM_WaitForElement_ByTag(this.wbDeducer, "type", "submit", 10.0)))
-      {
-        Expression.Parent.Parent.InvokeMember("submit");
-        do
-        {
-          MyProject.Application.DoEvents();
-        }
-        while (this.wbDeducer.IsBusy);
-        string path3 = $"{path1}\\{str}.AB.HTML";
-        try
-        {
-          if (System.IO.File.Exists(path3))
-            System.IO.File.Delete(path3);
-        }
-        catch (Exception ex)
-        {
-          ProjectData.SetProjectError(ex);
-          ProjectData.ClearProjectError();
-        }
-        System.IO.File.WriteAllText(path3, this.wbDeducer.DocumentText);
-        int num3 = (int) Interaction.MsgBox((object) "As-Built HTML saved.");
-        if (this.chkDeduceDownloadAB.Checked)
-        {
-          long tickCount = modAsBuilt.System_GetTickCount();
-          Thread.Sleep(300);
-          MyProject.Application.DoEvents();
-          HtmlElement htmlElement = modAsBuilt.DOM_WaitForElement_ByTag(this.wbDeducer, "type", "submit", 10.0);
-          htmlElement.InvokeMember("click");
-          MyProject.Application.DoEvents();
-          htmlElement.InvokeMember("submit");
-          MyProject.Application.DoEvents();
-          do
-          {
-            MyProject.Application.DoEvents();
-            Thread.Sleep(100);
-          }
-          while (checked (modAsBuilt.System_GetTickCount() - tickCount) <= 8000L);
-        }
-        MyProject.Application.DoEvents();
-        this.btnDeduceOpenETIS.PerformClick();
-      }
-    }
+      string vin = txtDeduceVIN.Text.Trim();
+      wbDeducer.ScriptErrorsSuppressed = true;
+      wbDeducer.Navigate("https://www.motorcraftservice.com/AsBuilt");
   }
 
   private void wbDeducer_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
   {
+      string vin = txtDeduceVIN.Text.Trim();
+      if (string.IsNullOrEmpty(vin)) return;
+
+      if (wbDeducer.Url.ToString().ToLower().Contains("motorcraftservice.com"))
+      {
+          HtmlElement vinBox = wbDeducer.Document.GetElementById("VIN");
+          if (vinBox == null) vinBox = wbDeducer.Document.GetElementById("vin");
+          
+          if (vinBox != null)
+          {
+              vinBox.SetAttribute("value", vin);
+          }
+      }
   }
 
-  private void wbDeducer_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+  private void btnDeduceSaveAB_Click(object sender, EventArgs e)
   {
-    string directoryPath = MyProject.Application.Info.DirectoryPath;
-    if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
-      directoryPath += "\\";
-    string path = directoryPath + "Deducer";
-    try
-    {
-      Directory.CreateDirectory(path);
-    }
-    catch (Exception ex)
-    {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
-    }
-    string fileName = path + "\\New.ab";
-    if (Operators.CompareString(Strings.UCase(Strings.Right(e.Url.ToString(), 3)), ".AB", false) != 0)
-      return;
-    e.Cancel = true;
-    new WebClient()
-    {
-      Headers = {
-        {
-          HttpRequestHeader.Cookie,
-          this.wbDeducer.Document.Cookie
-        }
+      try
+      {
+          string vin = txtDeduceVIN.Text.Trim();
+          if (string.IsNullOrEmpty(vin)) vin = "Unknown_VIN";
+          
+          string dir = Path.Combine(MyProject.Application.Info.DirectoryPath, "AsBuiltData");
+          if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+          
+          string filename = Path.Combine(dir, $"{vin}.ab");
+          
+          string content = wbDeducer.DocumentText;
+          if (content.Length < 100)
+          {
+               MessageBox.Show("Page content seems too short. Make sure the AsBuilt data is loaded.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               return;
+          }
+
+          File.WriteAllText(filename, content);
+          MessageBox.Show($"File saved successfully:\n{filename}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
-    }.DownloadFile(e.Url, fileName);
+      catch (Exception ex)
+      {
+          MessageBox.Show($"Error saving file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
   }
+  
+  private void cmbDeduceSavedVehicles_SelectedIndexChanged(object sender, EventArgs e)
+  {
+       if (cmbDeduceSavedVehicles.SelectedItem is VehicleEntry v)
+       {
+           txtDeduceVIN.Text = v.VIN;
+       }
+  }
+
+  private void TabPage3_Enter(object sender, EventArgs e)
+  {
+      VehicleDatabase.Load();
+      cmbDeduceSavedVehicles.Items.Clear();
+      cmbDeduceSavedVehicles.Items.Add("-- Not Used --");
+      foreach (var v in VehicleDatabase.Entries)
+      {
+          cmbDeduceSavedVehicles.Items.Add(v);
+      }
+      if (cmbDeduceSavedVehicles.Items.Count > 0) cmbDeduceSavedVehicles.SelectedIndex = 0;
+  }
+
+
 
   private void wbDeducer_FileDownload(object sender, EventArgs e) => ++this.abDownloadTriggered;
 
