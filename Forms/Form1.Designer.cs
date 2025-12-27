@@ -148,6 +148,7 @@ namespace AsBuiltExplorer
             this.cmbSavedVehicles = new System.Windows.Forms.ComboBox();
             this.btnDecode = new System.Windows.Forms.Button();
             this.lvwDecodeResults = new System.Windows.Forms.ListView();
+            this.lvwDecodeResults.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvwDecodeResults_MouseClick);
             this.colPos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colVal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colMean = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));

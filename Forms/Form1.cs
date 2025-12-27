@@ -3084,6 +3084,22 @@ label_24:
       }
   }
 
+  private void lvwDecodeResults_MouseClick(object sender, MouseEventArgs e)
+  {
+      ListViewHitTestInfo hit = lvwDecodeResults.HitTest(e.Location);
+      if (hit.Item != null)
+      {
+          if (hit.Item.Text == "URL")
+          {
+              string url = hit.Item.SubItems[3].Text; // Notes column has the URL
+              if (url.StartsWith("http"))
+              {
+                  Process.Start(url);
+              }
+          }
+      }
+  }
+
   private void cmbSavedVehicles_SelectedIndexChanged(object sender, EventArgs e)
   {
       if (cmbSavedVehicles.SelectedItem is VehicleEntry v)
