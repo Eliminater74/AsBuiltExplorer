@@ -7,10 +7,11 @@ namespace AsBuiltExplorer
 {
     public class VehicleEntry
     {
+        public int ID { get; set; }
         public string FriendlyName { get; set; }
         public string VIN { get; set; }
         public string FilePath { get; set; }
-        public string FileContent { get; set; } // Store the actual data
+        public string FileContent { get; set; }
 
         public override string ToString()
         {
@@ -22,65 +23,118 @@ namespace AsBuiltExplorer
 
     public static class VehicleDatabase
     {
-        private static string _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vehicles.xml");
         public static List<VehicleEntry> Entries { get; private set; } = new List<VehicleEntry>();
 
         public static void Load()
         {
             try
             {
-                if (File.Exists(_dbPath))
+                SQLiteHelper.Initialize(); // Ensure DB exists
+                MigrateFromXML(); // One-time check
+
+                Entries.Clear();
+                using (var conn = SQLiteHelper.GetConnection())
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<VehicleEntry>));
-                    using (FileStream fs = new FileStream(_dbPath, FileMode.Open))
+                    string sql = "SELECT * FROM Vehicles";
+                    using (var cmd = new System.Data.SQLite.SQLiteCommand(sql, conn))
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        Entries = (List<VehicleEntry>)serializer.Deserialize(fs);
+                        while (reader.Read())
+                        {
+                            Entries.Add(new VehicleEntry
+                            {
+                                ID = Convert.ToInt32(reader["ID"]),
+                                FriendlyName = reader["FriendlyName"].ToString(),
+                                VIN = reader["VIN"].ToString(),
+                                FilePath = reader["FilePath"].ToString(),
+                                FileContent = reader["FileContent"].ToString()
+                            });
+                        }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Silently fail or log? For now, just ensure list is empty on fail to prevent crash
-                Entries = new List<VehicleEntry>();
+                // Log error?
             }
         }
 
-        public static void Save()
+        private static void MigrateFromXML()
         {
-            try
+            // If XML exists but DB was just created (empty), let's import
+            string xmlPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vehicles.xml");
+            if (File.Exists(xmlPath))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<VehicleEntry>));
-                using (TextWriter writer = new StreamWriter(_dbPath))
+                // Check if DB is empty
+                bool isDbEmpty = true;
+                using (var conn = SQLiteHelper.GetConnection())
                 {
-                    serializer.Serialize(writer, Entries);
+                    using (var cmd = new System.Data.SQLite.SQLiteCommand("SELECT COUNT(*) FROM Vehicles", conn))
+                    {
+                        long count = (long)cmd.ExecuteScalar();
+                        if (count > 0) isDbEmpty = false;
+                    }
+                }
+
+                if (isDbEmpty)
+                {
+                    try
+                    {
+                        XmlSerializer serializer = new XmlSerializer(typeof(List<VehicleEntry>));
+                        using (FileStream fs = new FileStream(xmlPath, FileMode.Open))
+                        {
+                            var xmlEntries = (List<VehicleEntry>)serializer.Deserialize(fs);
+                            foreach(var v in xmlEntries)
+                            {
+                                AddEntry(v.FriendlyName, v.VIN, v.FilePath, v.FileContent);
+                            }
+                        }
+                        // Rename XML to indicate migration done
+                        File.Move(xmlPath, xmlPath + ".bak");
+                    }
+                    catch { }
                 }
             }
-            catch (Exception)
-            {
-                // Handle save error
-            }
         }
 
-        public static void AddEntry(string name, string vin, string path)
+        public static void AddEntry(string name, string vin, string path, string content = null)
         {
-            string content = "";
-            try 
+            if(content == null)
             {
-                if(File.Exists(path)) content = File.ReadAllText(path).Trim();
+                try 
+                {
+                    if(File.Exists(path)) content = File.ReadAllText(path).Trim();
+                }
+                catch {}
             }
-            catch {}
 
-            Entries.Add(new VehicleEntry { FriendlyName = name, VIN = vin, FilePath = path, FileContent = content });
-            Save();
+            using (var conn = SQLiteHelper.GetConnection())
+            {
+                string sql = "INSERT INTO Vehicles (FriendlyName, VIN, FilePath, FileContent) VALUES (@Name, @Vin, @Path, @Content)";
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.Parameters.AddWithValue("@Vin", vin);
+                    cmd.Parameters.AddWithValue("@Path", path);
+                    cmd.Parameters.AddWithValue("@Content", content ?? "");
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            Load(); // Refresh list from DB
         }
 
         public static void DeleteEntry(VehicleEntry entry)
         {
-            if (Entries.Contains(entry))
+             using (var conn = SQLiteHelper.GetConnection())
             {
-                Entries.Remove(entry);
-                Save();
+                string sql = "DELETE FROM Vehicles WHERE ID = @ID";
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", entry.ID);
+                    cmd.ExecuteNonQuery();
+                }
             }
+            Load();
         }
     }
 }
