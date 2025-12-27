@@ -13,11 +13,16 @@ namespace AsBuiltExplorer
             txtPath.Text = currentPath;
             txtVIN.Text = currentVIN;
             
-            // Auto-suggest name from VIN (just simplistic for now)
+            // Auto-suggest name from VIN
             if (!string.IsNullOrEmpty(currentVIN))
             {
-                // Try to see if this VIN already exists? 
-                // For now, let user type name
+                VehicleEntry temp = new VehicleEntry { VIN = currentVIN };
+                VehicleDatabase.UpdateVehicleDataFromVIN(temp);
+                if (!string.IsNullOrEmpty(temp.Model))
+                {
+                    // "2008 Ford Expedition EL XLT (1FMFK...)"
+                    txtName.Text = $"{temp.Year} {temp.Make} {temp.Model} ({currentVIN})".Trim();
+                }
             }
         }
 

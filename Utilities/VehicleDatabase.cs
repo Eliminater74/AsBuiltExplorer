@@ -97,7 +97,7 @@ namespace AsBuiltExplorer
             }
         }
 
-        private static void UpdateVehicleDataFromVIN(VehicleEntry v)
+        public static void UpdateVehicleDataFromVIN(VehicleEntry v)
         {
             var results = VINDecoder.Decode(v.VIN);
             
