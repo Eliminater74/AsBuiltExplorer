@@ -69,6 +69,7 @@ Generated\ Files/
 *.trx
 
 *.ps1
+*.ab
 
 # NUnit
 *.VisualState.xml
