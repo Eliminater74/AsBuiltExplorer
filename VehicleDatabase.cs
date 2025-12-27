@@ -10,6 +10,7 @@ namespace AsBuiltExplorer
         public string FriendlyName { get; set; }
         public string VIN { get; set; }
         public string FilePath { get; set; }
+        public string FileContent { get; set; } // Store the actual data
 
         public override string ToString()
         {
@@ -62,9 +63,14 @@ namespace AsBuiltExplorer
 
         public static void AddEntry(string name, string vin, string path)
         {
-            // Update existing if path matches or vin matches? No, just add new for now. 
-            // Better: Allow duplicates, user can delete.
-            Entries.Add(new VehicleEntry { FriendlyName = name, VIN = vin, FilePath = path });
+            string content = "";
+            try 
+            {
+                if(File.Exists(path)) content = File.ReadAllText(path).Trim();
+            }
+            catch {}
+
+            Entries.Add(new VehicleEntry { FriendlyName = name, VIN = vin, FilePath = path, FileContent = content });
             Save();
         }
 

@@ -450,7 +450,7 @@ label_9:
         ProjectData.ClearProjectError();
         goto label_6;
       }
-      fileType = Strings.InStr(1, String1, "<AS_BUILT_DATA><VEHICLE>", CompareMethod.Text) == 0 ? (Strings.InStr(1, String1, "<DirectConfiguration>", CompareMethod.Text) == 0 ? "ABT" : "UCDS") : "AB";
+      fileType = Strings.InStr(1, String1, "<AS_BUILT_DATA>", CompareMethod.Text) == 0 ? (Strings.InStr(1, String1, "<DirectConfiguration>", CompareMethod.Text) == 0 ? "ABT" : "UCDS") : "AB";
     }
 label_6:
     return fileType;

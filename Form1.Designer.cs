@@ -76,6 +76,7 @@ namespace AsBuiltExplorer
             this.ExportModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToUCDSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToABTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.IdentifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Label7 = new System.Windows.Forms.Label();
             this.Label6 = new System.Windows.Forms.Label();
             this.TabPage2 = new System.Windows.Forms.TabPage();
@@ -533,7 +534,8 @@ namespace AsBuiltExplorer
             this.ContextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CopyToolStripMenuItem,
-            this.ExportModuleToolStripMenuItem});
+            this.ExportModuleToolStripMenuItem,
+            this.IdentifyToolStripMenuItem});
             this.ContextMenuStrip1.Name = "ContextMenuStrip1";
             this.ContextMenuStrip1.Size = new System.Drawing.Size(152, 48);
             this.ContextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
@@ -604,6 +606,13 @@ namespace AsBuiltExplorer
             this.ToABTToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.ToABTToolStripMenuItem.Text = "To ABT...";
             this.ToABTToolStripMenuItem.Click += new System.EventHandler(this.ToABTToolStripMenuItem_Click);
+            // 
+            // IdentifyToolStripMenuItem
+            // 
+            this.IdentifyToolStripMenuItem.Name = "IdentifyToolStripMenuItem";
+            this.IdentifyToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.IdentifyToolStripMenuItem.Text = "Identify Feature";
+            this.IdentifyToolStripMenuItem.Click += new System.EventHandler(this.IdentifyToolStripMenuItem_Click);
             // 
             // Label7
             // 
@@ -1692,6 +1701,7 @@ namespace AsBuiltExplorer
   private System.Windows.Forms.Button btnDB2;
   private System.Windows.Forms.Button btnDB3;
   private System.Windows.Forms.Button btnDB4;
+  private System.Windows.Forms.ToolStripMenuItem IdentifyToolStripMenuItem;
   private TextBox TextBox6;
 }
 }

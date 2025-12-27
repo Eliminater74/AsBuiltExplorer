@@ -163,12 +163,12 @@ public partial class Form1 : Form
     string[] retModInfo_Calibrations4 = new string[1];
     int retModInfo_Count4 = 0;
     string retCCCdata4 = "";
-    string text1 = this.tbxCompFile1.Text;
+    string text1 = this.tbxCompFile1.Text.Trim();
     bool flag1 = false;
     string[] strArray5 = new string[1];
     string retVIN1 = "";
     string fileType1 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text1);
-    string[] inpFileArray1 = Strings.Split(this.tbxCompFile1.Text, "|");
+    string[] inpFileArray1 = Strings.Split(text1, "|");
     if (Operators.CompareString(fileType1, "ABT", false) == 0)
     {
       flag1 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray1, inpFileArray1.Length, ref strArray1, ref retModuleDatas1, ref num1);
@@ -184,12 +184,16 @@ public partial class Form1 : Form
       flag1 = modAsBuilt.AsBuilt_LoadFile_UCDS(text1, ref strArray1, ref retModuleDatas1, ref num1);
       this.lblComp1VIN.Text = "No VIN (UCDS)";
     }
-    string text2 = this.tbxCompFile2.Text;
+    else if (!string.IsNullOrWhiteSpace(text1))
+    {
+        MessageBox.Show("Could not load File 1: " + text1 + "\r\nFile not found or unknown format.\r\n(Check if file was moved or deleted)", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+    string text2 = this.tbxCompFile2.Text.Trim();
     bool flag2 = false;
     string[] strArray6 = new string[1];
     string retVIN2 = "";
     string fileType2 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text2);
-    string[] inpFileArray2 = Strings.Split(this.tbxCompFile2.Text, "|");
+    string[] inpFileArray2 = Strings.Split(text2, "|");
     if (Operators.CompareString(fileType2, "ABT", false) == 0)
     {
       flag2 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray2, inpFileArray2.Length, ref strArray2, ref retModuleDatas2, ref num2);
@@ -205,12 +209,16 @@ public partial class Form1 : Form
       flag2 = modAsBuilt.AsBuilt_LoadFile_UCDS(text2, ref strArray2, ref retModuleDatas2, ref num2);
       this.lblComp2VIN.Text = "No VIN (UCDS)";
     }
-    string text3 = this.tbxCompFile3.Text;
+    else if (!string.IsNullOrWhiteSpace(text2))
+    {
+        MessageBox.Show("Could not load File 2: " + text2 + "\r\nFile not found or unknown format.\r\n(Check if file was moved or deleted)", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+    string text3 = this.tbxCompFile3.Text.Trim();
     bool flag3 = false;
     string[] strArray7 = new string[1];
     string retVIN3 = "";
     string fileType3 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text3);
-    string[] inpFileArray3 = Strings.Split(this.tbxCompFile3.Text, "|");
+    string[] inpFileArray3 = Strings.Split(text3, "|");
     if (Operators.CompareString(fileType3, "ABT", false) == 0)
     {
       flag3 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray3, inpFileArray3.Length, ref strArray3, ref retModuleDatas3, ref num3);
@@ -226,7 +234,7 @@ public partial class Form1 : Form
       flag3 = modAsBuilt.AsBuilt_LoadFile_UCDS(text3, ref strArray3, ref retModuleDatas3, ref num3);
       this.lblComp3VIN.Text = "No VIN (UCDS)";
     }
-    string text4 = this.tbxCompFile4.Text;
+    string text4 = this.tbxCompFile4.Text.Trim();
     bool flag4 = false;
     string[] strArray8 = new string[1];
     string retVIN4 = "";
@@ -3035,6 +3043,30 @@ label_24:
       checked { ++num2; }
     }
     this.tbxDeduceReport2.Text = stringBuilder.ToString();
+  }
+
+  private void IdentifyToolStripMenuItem_Click(object sender, EventArgs e)
+  {
+      if (this.ListView1.SelectedItems.Count == 0) return;
+      
+      ListViewItem lvi = this.ListView1.SelectedItems[0];
+      string addr = lvi.Text; 
+      
+      if (lvi.SubItems.Count < 5) return;
+
+      string d1 = lvi.SubItems[2].Text;
+      string d2 = lvi.SubItems[3].Text;
+      string d3 = lvi.SubItems[4].Text;
+
+      CommonFeature f = CommonDatabase.FindMatch(addr, d1, d2, d3);
+      if (f != null)
+      {
+          MessageBox.Show($"Found Feature:\nName: {f.Name}\nModule: {f.Module}\nNotes: {f.Notes}", "Feature Identified", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      }
+      else
+      {
+          MessageBox.Show("No specific feature match found in the common database for this address and data.", "No Match", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      }
   }
 
   private void chkCompareShowNames_CheckedChanged(object sender, EventArgs e)

@@ -71,7 +71,29 @@ namespace AsBuiltExplorer
         {
             if (lstVehicles.SelectedItem is VehicleEntry entry)
             {
-                SelectedFilePath = entry.FilePath;
+                // Logic: If original path exists, use it.
+                // If not, but we have Content, write to Cache and use that.
+                string finalPath = entry.FilePath;
+                
+                if (!System.IO.File.Exists(finalPath))
+                {
+                    if (!string.IsNullOrEmpty(entry.FileContent))
+                    {
+                        // Create cache dir
+                        string cacheDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Cache");
+                        System.IO.Directory.CreateDirectory(cacheDir);
+                        
+                        // Sanitize filename from VIN or Name
+                        string safeName = entry.VIN;
+                        if(string.IsNullOrEmpty(safeName)) safeName = "Unknown_" + Guid.NewGuid().ToString().Substring(0,8);
+                        
+                        string cacheFile = System.IO.Path.Combine(cacheDir, safeName + ".ab");
+                        System.IO.File.WriteAllText(cacheFile, entry.FileContent);
+                        finalPath = cacheFile;
+                    }
+                }
+
+                SelectedFilePath = finalPath;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
