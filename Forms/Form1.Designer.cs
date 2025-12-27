@@ -1884,8 +1884,8 @@ namespace AsBuiltExplorer
             // 
             this.pbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbSettings.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbSettings.ImageLocation = "settings_icon.png";
-            this.pbSettings.Location = new System.Drawing.Point(135, 601);
+            this.pbSettings.ImageLocation = "Resources\\settings_icon.png";
+            this.pbSettings.Location = new System.Drawing.Point(135, 590);
             this.pbSettings.Name = "pbSettings";
             this.pbSettings.Size = new System.Drawing.Size(52, 52);
             this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

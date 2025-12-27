@@ -135,6 +135,11 @@ public partial class Form1 : Form
       this.BackColor = backColor;
       this.ForeColor = foreColor;
       
+      
+      
+      // Always use OwnerDraw to ensure horizontal text and consistent styling
+      TabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
+      
       foreach (Control c in this.Controls)
       {
           UpdateControlTheme(c, backColor, foreColor);
@@ -3194,15 +3199,27 @@ label_24:
       // Get the real bounds for the tab rectangle.
       Rectangle _tabBounds = TabControl1.GetTabRect(e.Index);
 
+      bool isDark = ("Dark" == My.MySettings.Default.AppTheme);
+      Color backColor = isDark ? Color.FromArgb(45, 45, 48) : SystemColors.Control;
+      Color foreColor = isDark ? Color.White : SystemColors.ControlText;
+      Color selectedBack = isDark ? Color.FromArgb(60, 60, 60) : Color.White;
+      Color selectedFore = isDark ? Color.Cyan : Color.Black; 
+
       if (e.State == DrawItemState.Selected)
       {
-          _textBrush = new SolidBrush(Color.Black);
-          g.FillRectangle(Brushes.White, e.Bounds);
+          _textBrush = new SolidBrush(selectedFore);
+          using (SolidBrush sb = new SolidBrush(selectedBack))
+          {
+             g.FillRectangle(sb, e.Bounds);
+          }
       }
       else
       {
-          _textBrush = new SolidBrush(e.ForeColor);
-          g.FillRectangle(SystemBrushes.Control, e.Bounds);
+          _textBrush = new SolidBrush(foreColor);
+           using (SolidBrush sb = new SolidBrush(backColor))
+          {
+             g.FillRectangle(sb, e.Bounds);
+          }
       }
 
       // Use our own font properties
