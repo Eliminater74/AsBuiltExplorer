@@ -34,9 +34,7 @@ namespace AsBuiltExplorer
     {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.MenuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.DatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewKnownCodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.TabPage1 = new System.Windows.Forms.TabPage();
             this.chkShowOnlyMismatches = new System.Windows.Forms.CheckBox();
@@ -69,9 +67,7 @@ namespace AsBuiltExplorer
             this.ColumnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.MenuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.DatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewKnownCodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnViewDefs = new System.Windows.Forms.Button();
             this.ContextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EntireLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,31 +179,7 @@ namespace AsBuiltExplorer
             this.ContextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // MenuStrip1
-            // 
-            this.MenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DatabaseToolStripMenuItem});
-            this.MenuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.MenuStrip1.Name = "MenuStrip1";
-            this.MenuStrip1.Size = new System.Drawing.Size(999, 24);
-            this.MenuStrip1.TabIndex = 22;
-            this.MenuStrip1.Text = "MenuStrip1";
-            // 
-            // DatabaseToolStripMenuItem
-            // 
-            this.DatabaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ViewKnownCodesToolStripMenuItem});
-            this.DatabaseToolStripMenuItem.Name = "DatabaseToolStripMenuItem";
-            this.DatabaseToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.DatabaseToolStripMenuItem.Text = "Database";
-            // 
-            // ViewKnownCodesToolStripMenuItem
-            // 
-            this.ViewKnownCodesToolStripMenuItem.Name = "ViewKnownCodesToolStripMenuItem";
-            this.ViewKnownCodesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ViewKnownCodesToolStripMenuItem.Text = "View Known Codes";
-            this.ViewKnownCodesToolStripMenuItem.Click += new System.EventHandler(this.ViewKnownCodesToolStripMenuItem_Click);
+
             // 
             // TabControl1
             // 
@@ -230,6 +202,7 @@ namespace AsBuiltExplorer
             // TabPage1
             // 
             this.TabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.TabPage1.Controls.Add(this.btnViewDefs);
             this.TabPage1.Controls.Add(this.btnDB4);
             this.TabPage1.Controls.Add(this.btnDB3);
             this.TabPage1.Controls.Add(this.btnDB2);
@@ -465,7 +438,19 @@ namespace AsBuiltExplorer
             this.btnDB4.TabIndex = 103;
             this.btnDB4.Text = "DB";
             this.btnDB4.UseVisualStyleBackColor = true;
+            this.btnDB4.UseVisualStyleBackColor = true;
             this.btnDB4.Click += new System.EventHandler(this.btnDB4_Click);
+            // 
+            // btnViewDefs
+            // 
+            this.btnViewDefs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewDefs.Location = new System.Drawing.Point(650, 155);
+            this.btnViewDefs.Name = "btnViewDefs";
+            this.btnViewDefs.Size = new System.Drawing.Size(140, 40);
+            this.btnViewDefs.TabIndex = 105;
+            this.btnViewDefs.Text = "View Code Library";
+            this.btnViewDefs.UseVisualStyleBackColor = true;
+            this.btnViewDefs.Click += new System.EventHandler(this.btnViewDefs_Click);
             // 
             // tbxCompFile2
             // 
@@ -1550,9 +1535,7 @@ namespace AsBuiltExplorer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1029, 646);
             this.Controls.Add(this.Label8);
-            this.Controls.Add(this.MenuStrip1);
             this.Controls.Add(this.TabControl1);
-            this.MainMenuStrip = this.MenuStrip1;
             this.Controls.Add(this.PictureBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1736,9 +1719,7 @@ namespace AsBuiltExplorer
   private System.Windows.Forms.Button btnDB4;
   private System.Windows.Forms.ToolStripMenuItem IdentifyToolStripMenuItem;
   private TextBox TextBox6;
-  private System.Windows.Forms.MenuStrip MenuStrip1;
-  private System.Windows.Forms.ToolStripMenuItem DatabaseToolStripMenuItem;
-  private System.Windows.Forms.ToolStripMenuItem ViewKnownCodesToolStripMenuItem;
+  private System.Windows.Forms.Button btnViewDefs;
 }
 }
 

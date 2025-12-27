@@ -96,7 +96,7 @@ namespace AsBuiltExplorer
             this.Controls.Add(this.dgvCodes);
             this.Controls.Add(this.panel1);
             this.Name = "frmDefinitionsDB";
-            this.Text = "Known Codes Database";
+            this.Text = "Complete Vehicle Database (Holy Grail)";
             this.Load += new System.EventHandler(this.frmDefinitionsDB_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodes)).EndInit();
             this.panel1.ResumeLayout(false);
