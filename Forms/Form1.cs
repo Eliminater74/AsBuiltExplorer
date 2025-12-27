@@ -148,6 +148,16 @@ public partial class Form1 : Form
 
   private void UpdateControlTheme(Control c, Color back, Color fore)
   {
+       // Skip controls that have custom color coding we want to preserve
+       if (c.Name != null && (
+           c.Name.StartsWith("lblComp") || 
+           c.Name.StartsWith("tbxComp") ||
+           c.Name == "Label6" || c.Name == "Label7" ||
+           c.Name == "Label22" || c.Name == "Label23"))
+       {
+           return;
+       }
+
        if (c is Button || c is CheckBox || c is RadioButton || c is Label || c is GroupBox || c is TabPage)
        {
            c.ForeColor = fore;
