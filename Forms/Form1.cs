@@ -822,6 +822,10 @@ public partial class Form1 : Form
               item.SubItems.Add("");
               item.SubItems.Add(v.VIN);
               
+              // CRITICAL: Set Name to FilePath so Context Menus work (they read .Name)
+              item.Name = v.FilePath; 
+              item.Tag = v; // Store full object for future use
+
               lvwBrowser.Items.Add(item);
           }
       }
@@ -2554,64 +2558,7 @@ public partial class Form1 : Form
 
   private void Button10_Click(object sender, EventArgs e)
   {
-    string directoryPath = MyProject.Application.Info.DirectoryPath;
-    if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
-      directoryPath += "\\";
-    string path = directoryPath + "Deducer";
-    try
-    {
-      Directory.CreateDirectory(path);
-    }
-    catch (Exception ex)
-    {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
-    }
-    string[] strArray1 = new string[1];
-    string[] files = Directory.GetFiles(path, "*.ETIS.HTML");
-    Array.Sort<string>(files);
-    this.lvwBrowser.BeginUpdate();
-    this.lvwBrowser.Items.Clear();
-    int num = checked (files.Length - 1);
-    int index = 0;
-    while (index <= num)
-    {
-      FileInfo fileInfo = new FileInfo(files[index]);
-      string inpFileName = Strings.Replace(files[index], ".ETIS.", ".AB.");
-      string[] retModuleAddresses = new string[1];
-      string[] retModuleDatas = new string[1];
-      int retModuleAddressCount = 0;
-      string retVIN = "";
-      string retCarModel = "";
-      string retCarYear = "";
-      string[] retModInfo_IDs = new string[1];
-      string[] retModInfo_Names = new string[1];
-      string[] retModInfo_Descs = new string[1];
-      int retModInfo_Count = 0;
-      modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName, ref retModuleAddresses, ref retModuleDatas, ref retModuleAddressCount, ref retVIN, ref retCarModel, ref retCarYear, ref retModInfo_IDs, ref retModInfo_Names, ref retModInfo_Descs, ref retModInfo_Count);
-      ListViewItem listViewItem = this.lvwBrowser.Items.Add(Path.GetFileName(files[index]));
-      ListViewItem.ListViewSubItemCollection subItems = listViewItem.SubItems;
-      string[] strArray2 = new string[7];
-      DateTime lastWriteTime = fileInfo.LastWriteTime;
-      strArray2[0] = Conversions.ToString(lastWriteTime.Year);
-      strArray2[1] = "-";
-      lastWriteTime = fileInfo.LastWriteTime;
-      strArray2[2] = Strings.Format((object) lastWriteTime.Month, "00");
-      strArray2[3] = "-";
-      lastWriteTime = fileInfo.LastWriteTime;
-      strArray2[4] = Strings.Format((object) lastWriteTime.Day, "00");
-      strArray2[5] = "   ";
-      lastWriteTime = fileInfo.LastWriteTime;
-      strArray2[6] = lastWriteTime.ToShortTimeString();
-      string text = string.Concat(strArray2);
-      subItems.Add(text);
-      listViewItem.SubItems.Add(retCarYear);
-      listViewItem.SubItems.Add(retCarModel);
-      listViewItem.SubItems.Add(retVIN);
-      listViewItem.Name = Strings.Replace(files[index], ".ETIS.HTML", ".AB", Compare: CompareMethod.Text);
-      checked { ++index; }
-    }
-    this.lvwBrowser.EndUpdate();
+      // Legacy "Deducer" folder scraper - Disabled in favor of VehicleDatabase
   }
 
   private void Form1_MaximumSizeChanged(object sender, EventArgs e)
@@ -2620,6 +2567,7 @@ public partial class Form1 : Form
 
   private void Form1_Shown(object sender, EventArgs e)
   {
+      this.btnBrowseRefresh.PerformClick();
   }
 
   private void lvwBrowser_SelectedIndexChanged(object sender, EventArgs e)
