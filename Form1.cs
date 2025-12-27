@@ -2806,7 +2806,7 @@ public partial class Form1 : Form
 
   private void PictureBox1_Click(object sender, EventArgs e)
   {
-    Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jesse_programmer%40yahoo%2ecom&lc=US&item_name=AsBuiltExplorer&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+    Process.Start("https://www.paypal.com/donate/?business=X76ZW4RHA6T9C&no_recurring=0&item_name=I+build+and+maintain+open-source+projects+for+the+community.+Any+support+helps+me+keep+improving+and+maintaining+them.&currency_code=USD");
   }
 
   private void ToUCDSToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3166,9 +3166,40 @@ label_24:
     public string carCCCbin;
     public bool[] abBinaryBool;
   }
+
+
+  private void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
+  {
+      Graphics g = e.Graphics;
+      Brush _textBrush;
+
+      // Get the item from the collection.
+      TabPage _tabPage = TabControl1.TabPages[e.Index];
+
+      // Get the real bounds for the tab rectangle.
+      Rectangle _tabBounds = TabControl1.GetTabRect(e.Index);
+
+      if (e.State == DrawItemState.Selected)
+      {
+          _textBrush = new SolidBrush(Color.Black);
+          g.FillRectangle(Brushes.White, e.Bounds);
+      }
+      else
+      {
+          _textBrush = new SolidBrush(e.ForeColor);
+          g.FillRectangle(SystemBrushes.Control, e.Bounds);
+      }
+
+      // Use our own font properties
+      Font _tabFont = new Font("Microsoft Sans Serif", 9.0f, FontStyle.Regular, GraphicsUnit.Point);
+
+      // Draw string. Center the text.
+      StringFormat _stringFlags = new StringFormat();
+      _stringFlags.Alignment = StringAlignment.Center;
+      _stringFlags.LineAlignment = StringAlignment.Center;
+      
+      g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
+  }
 }
-
-
-
 }
 
