@@ -78,5 +78,21 @@ namespace AsBuiltExplorer
                  }
             }
         }
+
+        public static System.Data.DataTable GetAllCodes()
+        {
+            var dt = new System.Data.DataTable();
+            using (var conn = GetConnection())
+            {
+                using (var cmd = new SQLiteCommand("SELECT * FROM CommonCodes ORDER BY Module, Address", conn))
+                {
+                    using (var da = new SQLiteDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
     }
 }

@@ -110,6 +110,16 @@ public partial class Form1 : Form
   private void Form1_Load(object sender, EventArgs e)
   {
       ModuleDatabase.LoadDatabase();
+      CommonDatabase.Load(); // Triggers Migration
+      
+      // Ensure UI
+      if (this.MenuStrip1 != null)
+      {
+          this.MainMenuStrip = this.MenuStrip1;
+          this.MenuStrip1.Visible = true;
+          this.MenuStrip1.Dock = DockStyle.Top;
+          this.MenuStrip1.BringToFront();
+      }
   }
 
   private void Button2_Click(object sender, EventArgs e)
@@ -3118,6 +3128,14 @@ label_24:
   private void btnDB4_Click(object sender, EventArgs e)
   {
       ShowVehicleDB(this.tbxCompFile4, this.lblComp4VIN);
+  }
+
+  private void ViewKnownCodesToolStripMenuItem_Click(object sender, EventArgs e)
+  {
+      using (frmDefinitionsDB frm = new frmDefinitionsDB())
+      {
+          frm.ShowDialog();
+      }
   }
 
   private void ShowVehicleDB(TextBox tbxFile, Label lblVIN)

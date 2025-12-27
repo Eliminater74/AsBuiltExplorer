@@ -78,6 +78,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDefinitionsDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDefinitionsDB.Designer.cs">
+      <DependentUpon>frmDefinitionsDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVehicleDB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDefinitionsDB.resx">
+      <DependentUpon>frmDefinitionsDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx" />
   </ItemGroup>
