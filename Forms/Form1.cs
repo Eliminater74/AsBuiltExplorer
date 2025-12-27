@@ -801,6 +801,11 @@ public partial class Form1 : Form
   
   private void btnBrowseRefresh_Click(object sender, EventArgs e)
   {
+      PopulateVehicleList();
+  }
+
+  private void PopulateVehicleList()
+  {
       VehicleDatabase.Load();
       lvwBrowser.Items.Clear();
       lvwBrowser.BeginUpdate();
@@ -2572,7 +2577,7 @@ public partial class Form1 : Form
 
   private void Form1_Shown(object sender, EventArgs e)
   {
-      this.btnBrowseRefresh.PerformClick();
+      PopulateVehicleList();
   }
 
   private void lvwBrowser_SelectedIndexChanged(object sender, EventArgs e)

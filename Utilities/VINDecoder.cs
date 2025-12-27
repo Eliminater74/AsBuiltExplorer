@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace AsBuiltExplorer
 {
@@ -13,6 +14,127 @@ namespace AsBuiltExplorer
             public string Notes { get; set; }
         }
 
+        // --- Data Definitions ---
+
+        // Position 1-3: WMI
+        private static readonly Dictionary<string, (string Make, string Type, string Country)> WMIData = new Dictionary<string, (string, string, string)>
+        {
+            { "1FA", ("Ford", "Car", "USA") },
+            { "1FM", ("Ford", "Truck/SUV", "USA") },
+            { "1FT", ("Ford", "Truck", "USA") },
+            { "1FC", ("Ford", "Stripped Chassis", "USA") },
+            { "1LN", ("Lincoln", "Car", "USA") }, 
+            { "1ME", ("Mercury", "Car", "USA") },
+            { "2FA", ("Ford", "Car", "Canada") },
+            { "2FM", ("Ford", "Truck/SUV", "Canada") },
+            { "3FA", ("Ford", "Car", "Mexico") },
+            { "3FT", ("Ford", "Truck", "Mexico") },
+            { "NM0", ("Ford", "Truck", "Turkey") },
+            { "5L", ("Lincoln", "SUV", "USA") }, 
+        };
+
+        // Position 4 (Cars): Restraint
+        private static readonly Dictionary<char, string> RestraintCodes = new Dictionary<char, string>
+        {
+            { 'P', "Active Belts + Front Airbags" },
+            { 'H', "Active Belts + Front/Side Airbags" },
+            { 'R', "Active Belts + Front/Side Airbags" },
+            { 'C', "Convertible + Side Airbags" },
+            { '6', "Coupe (S550 Mustang)" } 
+        };
+
+        // Position 4 (Trucks): GVWR
+        private static readonly Dictionary<char, string> GVWRCodes = new Dictionary<char, string>
+        {
+            { 'B', "Class B (3,001-4,000 lbs)" },
+            { 'C', "Class C (4,001-5,000 lbs)" },
+            { 'D', "Class D (5,001-6,000 lbs)" },
+            { 'E', "Class E (6,001-7,000 lbs)" },
+            { 'F', "Class F (7,001-8,000 lbs)" },
+            { 'W', "Class H (9,001-10,000 lbs)" }
+        };
+
+        // Method B: Modern Series Codes (Pos 5-7, 3 chars)
+        private static readonly Dictionary<string, (string Model, string Trim, string Drive)> ModernSeries = new Dictionary<string, (string, string, string)>
+        {
+            // Mustang S550
+            { "P8T", ("Mustang", "EcoBoost (Base)", "RWD") },
+            { "P8U", ("Mustang", "EcoBoost Premium", "RWD") },
+            { "P8C", ("Mustang", "GT (Base)", "RWD") },
+            { "P8F", ("Mustang", "GT Premium", "RWD") },
+            { "P8J", ("Mustang", "Shelby GT350/GT500", "RWD") },
+            
+            // F-150 Modern (Examples)
+            { "W1E", ("F-150", "Crew Cab", "4x4") },
+            { "W1C", ("F-150", "Crew Cab", "4x2") },
+        };
+
+        // Method A: Legacy Body Codes (Pos 5)
+        private static readonly Dictionary<char, string> LegacyBodyCodes = new Dictionary<char, string>
+        {
+            { 'U', "SUV Short Wheelbase (Expedition/Explorer)" },
+            { 'K', "SUV Long Wheelbase (Expedition EL / Navigator L)" },
+            { 'F', "Regular Cab" },
+            { 'X', "SuperCab" },
+            { 'W', "Crew Cab" },
+            { 'M', "Mercury Mountaineer" }
+        };
+
+        // Method A: Legacy Series Codes (Pos 6-7)
+        private static readonly Dictionary<string, string> LegacySeriesCodes = new Dictionary<string, string>
+        {
+            { "15", "XLT 2WD" },
+            { "16", "XLT 4WD" },
+            { "17", "Eddie Bauer / King Ranch 2WD" },
+            { "18", "Eddie Bauer / King Ranch 4WD" },
+            { "19", "Limited 2WD" },
+            { "20", "Limited 4WD" },
+            { "27", "Lincoln Navigator 2WD" },
+            { "28", "Lincoln Navigator 4WD" },
+            { "60", "Mountaineer Base RWD" },
+            { "70", "Mountaineer Premier AWD" }
+        };
+
+        // Position 8: Engine
+        private static readonly Dictionary<char, string> EngineCodes = new Dictionary<char, string>
+        {
+            { '5', "5.4L 3V Triton V8" },
+            { 'W', "4.6L V8 (Romeo)" },
+            { '6', "4.6L V8 (Windsor)" },
+            { '8', "4.6L 2V V8 (Base F-150)" },
+            { 'F', "5.0L Coyote V8" },
+            { 'T', "3.5L EcoBoost V6" },
+            { 'H', "2.3L EcoBoost I4" },
+            { 'V', "5.4L 4V DOHC V8 (Navigator / Shelby)" },
+            { 'J', "5.2L Voodoo V8 (Shelby)" },
+            { '9', "6.7L PowerStroke Diesel" }
+        };
+
+        // Standard VIN Year Map (Pos 10)
+        private static readonly Dictionary<char, string> YearCodes = new Dictionary<char, string>
+        {
+            { 'V', "1997" }, { 'W', "1998" }, { 'X', "1999" }, { 'Y', "2000" },
+            { '1', "2001" }, { '2', "2002" }, { '3', "2003" }, { '4', "2004" },
+            { '5', "2005" }, { '6', "2006" }, { '7', "2007" }, { '8', "2008" },
+            { '9', "2009" }, { 'A', "2010" }, { 'B', "2011" }, { 'C', "2012" },
+            { 'D', "2013" }, { 'E', "2014" }, { 'F', "2015" }, { 'G', "2016" },
+            { 'H', "2017" }, { 'J', "2018" }, { 'K', "2019" }, { 'L', "2020" },
+            { 'M', "2021" }, { 'N', "2022" }, { 'P', "2023" }, { 'R', "2024" }
+        };
+
+        // Position 11: Plant
+        private static readonly Dictionary<char, string> PlantCodes = new Dictionary<char, string>
+        {
+            { 'F', "Dearborn, MI" },
+            { 'K', "Claycomo / Kansas City, MO" },
+            { 'L', "Michigan Truck (Wayne, MI)" },
+            { 'E', "Kentucky Truck (Louisville, KY)" },
+            { 'R', "Hermosillo, Mexico" },
+            { '5', "Flat Rock, MI" },
+            { 'G', "Chicago, IL" },
+            { 'B', "Oakville, Ontario" }
+        };
+
         public static List<DecodeResult> Decode(string vin)
         {
             var results = new List<DecodeResult>();
@@ -24,195 +146,160 @@ namespace AsBuiltExplorer
 
             vin = vin.ToUpper();
 
-            // --- 1-3: WMI (World Manufacturer Identifier) ---
+            // --- 1-3: WMI ---
             string wmi = vin.Substring(0, 3);
-            string wmiMeaning = "Unknown Manufacturer";
-            string make = "Unknown"; // Internal helper for context
+            string make = "Unknown";
+            string type = "Unknown";
+            string country = "Unknown";
             
-            // Ford
-            if (wmi.StartsWith("1FM")) { wmiMeaning = "Ford Motor Company (MPV)"; make = "Ford"; }
-            else if (wmi.StartsWith("1FT")) { wmiMeaning = "Ford Motor Company (Truck)"; make = "Ford"; }
-            else if (wmi.StartsWith("1F")) { wmiMeaning = "Ford Motor Company (USA)"; make = "Ford"; }
-            // Lincoln
-            else if (wmi.StartsWith("1LN")) { wmiMeaning = "Lincoln (Ford Motor Company)"; make = "Lincoln"; }
-            else if (wmi.StartsWith("1L")) { wmiMeaning = "Lincoln (USA)"; make = "Lincoln"; }
-            // Mercury
-            else if (wmi.StartsWith("1ME")) { wmiMeaning = "Mercury (Ford Motor Company)"; make = "Mercury"; }
-            else if (wmi.StartsWith("1M")) { wmiMeaning = "Mercury (USA)"; make = "Mercury"; }
-            // Canada/Mexico Broad Checks
-            else if (wmi.StartsWith("2")) { wmiMeaning = "Ford Canada"; make = "Ford"; }
-            else if (wmi.StartsWith("3")) { wmiMeaning = "Ford Mexico"; make = "Ford"; }
-
-            results.Add(new DecodeResult { Position = "1-3", Value = wmi, Meaning = wmiMeaning, Notes = "Manufacturer" });
-
-
-            // --- 4: Brake/GVWR or Restraint System ---
-            char pos4 = vin[3];
-            string pos4Meaning = "Brake/GVWR / Restraint System";
-            if (pos4 == 'F') pos4Meaning = "7,001-8,000 lbs GVWR (Standard Hydraulic Brakes)";
-            else if (pos4 == 'B') pos4Meaning = "5,001-6,000 lbs GVWR";
-            else if (pos4 == 'C') pos4Meaning = "6,001-7,000 lbs GVWR";
-            else if (pos4 == 'D') pos4Meaning = "7,001-8,000 lbs GVWR";
-            else if (pos4 == 'E') pos4Meaning = "8,001-9,000 lbs GVWR";
-            else if (pos4 == 'P') pos4Meaning = "Passenger Car: Manual Belts w/ 2 Airbags";
-            else if (pos4 == 'R') pos4Meaning = "Passenger Car: Manual Belts w/ 2 Airbags + Side Airbags";
-            
-            results.Add(new DecodeResult { Position = "4", Value = pos4.ToString(), Meaning = "GVWR Class / Safety", Notes = pos4Meaning });
-
-
-            // --- 5-7: Model Specific (Body/Series) ---
-            char body = vin[4];
-            string series = vin.Substring(5, 2);
-            
-            string bodyMeaning = "Model Specific Body Code";
-            string bodyNotes = "";
-            string seriesMeaning = "Model Specific Series Code";
-            string seriesNotes = "";
-
-            // Dictionary Mapping for known Series codes (Position 6-7)
-            var seriesMap = new Dictionary<string, (string Trim, string Drive, string Notes)>
+            if (WMIData.ContainsKey(wmi))
             {
-                // Ford Expedition
-                { "15", ("XLT", "2WD", "Expedition: Standard Audio, No Power Liftgate.") },
-                { "16", ("XLT", "4WD", "Expedition: Heavy Duty / Fleet. Good source for skid plates.") },
-                { "17", ("Eddie Bauer / King Ranch", "2WD", "Luxury Trim.") },
-                { "18", ("Eddie Bauer / King Ranch", "4WD", "Luxury Trim w/ Subwoofer/Nav.") },
-                { "19", ("Limited", "2WD", "Top Tier Luxury. Chrome accents.") },
-                { "20", ("Limited", "4WD", "Top Tier Luxury. HD mechanical parts.") },
-                // Lincoln Navigator
-                { "27", ("Luxury", "2WD", "**PARTS TIP**: Better sound deadening, double-pane glass, console parts.") },
-                { "28", ("Luxury", "4WD", "**PARTS TIP**: Air Ride suspension is common.") },
-                // Mercury Mountaineer
-                { "60", ("Base", "RWD", "Mountaineer Base.") },
-                { "70", ("Premier", "AWD", "**PARTS TIP**: Check for 'Audiophile' Subwoofer/Amps.") }
-            };
+                var d = WMIData[wmi];
+                make = d.Make;
+                type = d.Type;
+                country = d.Country;
+            }
+            results.Add(new DecodeResult { Position = "1-3", Value = wmi, Meaning = $"{make} ({type})", Notes = $"Made in {country}" });
 
-            if (seriesMap.ContainsKey(series))
+            // --- 4: VDS ---
+            char c4 = vin[3];
+            string m4 = "Unknown";
+            bool isTruck = type.Contains("Truck") || type.Contains("SUV");
+            bool isCar = type.Contains("Car");
+
+            if (isCar)
             {
-                var s = seriesMap[series];
-                seriesMeaning = $"{s.Trim} ({s.Drive})";
-                seriesNotes = s.Notes;
+                if (RestraintCodes.ContainsKey(c4)) m4 = RestraintCodes[c4];
+                else m4 = "Unknown Restraint Code";
+            }
+            else 
+            {
+                if (GVWRCodes.ContainsKey(c4)) m4 = GVWRCodes[c4];
+                else m4 = "Unknown GVWR or Brake Code";
+            }
+            results.Add(new DecodeResult { Position = "4", Value = c4.ToString(), Meaning = isCar ? "Restraint Sys" : "GVWR/Brakes", Notes = m4 });
+
+            // --- 5-7: Model/Series ---
+            string s567 = vin.Substring(4, 3);
+            if (ModernSeries.ContainsKey(s567))
+            {
+                var mod = ModernSeries[s567];
+                results.Add(new DecodeResult { Position = "5-7", Value = s567, Meaning = $"{mod.Model} {mod.Trim}", Notes = $"Drive: {mod.Drive} (Modern Code)" });
             }
             else
             {
-                 // Default Fallbacks if not in specific map
-                 if (make == "Ford") seriesMeaning = "Unknown Ford Series"; 
-                 else if (make == "Lincoln") seriesMeaning = "Unknown Lincoln Series";
-                 else if (make == "Mercury") seriesMeaning = "Unknown Mercury Series";
-            }
+                char c5 = vin[4]; // Body
+                string s67 = vin.Substring(5, 2); // Series/Trim
 
-            // Body Style Heuristics
-            if (make == "Ford")
-            {
-                 if (body == 'U') { bodyMeaning = "Standard / Short Wheelbase"; bodyNotes = "(Expedition) - Doors/Glass unique to SWB."; }
-                 else if (body == 'K') { bodyMeaning = "Extended Length (EL/MAX)"; bodyNotes = "(Expedition EL) - **PARTS ALERT**: Rear doors/glass are unique to EL."; }
-                 else if (body == 'W') { bodyMeaning = "Crew Cab"; bodyNotes = "(F-Series)"; }
-                 else if (body == 'X') { bodyMeaning = "SuperCab"; bodyNotes = "(F-Series)"; }
-                 else if (body == 'F') { bodyMeaning = "Regular Cab"; bodyNotes = "(F-Series)"; }
-            }
-            else if (make == "Lincoln")
-            {
-                 if (body == 'L') { bodyMeaning = "Standard Length"; bodyNotes = "(Navigator) - Matches Ford 'U'."; }
-                 else if (body == 'J') { bodyMeaning = "Extended Length (L)"; bodyNotes = "(Navigator L) - Matches Ford 'K'. Unique Rear Doors."; }
-            }
-             else if (make == "Mercury")
-            {
-                 if (body == 'M') { bodyMeaning = "MPV"; bodyNotes = "(Mountaineer) - Twin to Explorer."; }
-            }
+                string bodyStr = LegacyBodyCodes.ContainsKey(c5) ? LegacyBodyCodes[c5] : "Unknown Body";
+                string trimStr = LegacySeriesCodes.ContainsKey(s67) ? LegacySeriesCodes[s67] : "Unknown Series";
+                
+                string inferredModel = "";
+                if (bodyStr.Contains("Expedition")) inferredModel = "Expedition";
+                else if (bodyStr.Contains("Navigator")) inferredModel = "Navigator";
+                else if (bodyStr.Contains("Mountaineer")) inferredModel = "Mountaineer";
+                else if (bodyStr.Contains("Cab")) inferredModel = "F-Series";
 
-            results.Add(new DecodeResult { Position = "5", Value = body.ToString(), Meaning = "Body Style", Notes = $"{bodyMeaning} {bodyNotes}" });
-            results.Add(new DecodeResult { Position = "6-7", Value = series, Meaning = "Series / Trim", Notes = $"{seriesMeaning} {seriesNotes}" });
-
+                results.Add(new DecodeResult { Position = "5", Value = c5.ToString(), Meaning = "Body Style", Notes = bodyStr });
+                results.Add(new DecodeResult { Position = "6-7", Value = s67, Meaning = "Series/Trim", Notes = trimStr + (string.IsNullOrEmpty(inferredModel) ? "" : $" ({inferredModel})") });
+            }
 
             // --- 8: Engine ---
-            char engine = vin[7];
-            string engineMeaning = "Unknown Engine";
-            // Common Ford Family Engines
-            if (engine == '5') engineMeaning = "5.4L 3V Triton V8";
-            else if (engine == '8') engineMeaning = "4.6L 2V V8 (Base F-150)"; // Added from verified Python logic
-            else if (engine == 'W') engineMeaning = "4.6L 2V-3V V8";
-            else if (engine == 'V') engineMeaning = "5.4L 4V DOHC V8 (Navigator / Shelby)";
-            // Add specific note for Mercury/Lincoln interchange if needed
-            
-            results.Add(new DecodeResult { Position = "8", Value = engine.ToString(), Meaning = "Engine", Notes = engineMeaning });
+            char c8 = vin[7];
+            string engineStr = EngineCodes.ContainsKey(c8) ? EngineCodes[c8] : "Unknown Engine";
+            results.Add(new DecodeResult { Position = "8", Value = c8.ToString(), Meaning = "Engine", Notes = engineStr });
 
-
-            // --- 9: Check Digit ---
-            results.Add(new DecodeResult { Position = "9", Value = vin[8].ToString(), Meaning = "Check Digit", Notes = "Math Code for verification." });
-
+            // --- 9: Check Digit Verification ---
+            char checkDigit = vin[8];
+            bool isValid = VerifyCheckDigit(vin);
+            results.Add(new DecodeResult { Position = "9", Value = checkDigit.ToString(), Meaning = "Check Digit", Notes = isValid ? "Valid" : "INVALID CHECKSUM" });
 
             // --- 10: Year ---
-            char year = vin[9];
-            string yearStr = GetYear(year);
-            results.Add(new DecodeResult { Position = "10", Value = year.ToString(), Meaning = "Model Year", Notes = yearStr });
-
+            char c10 = vin[9];
+            string yearStr = YearCodes.ContainsKey(c10) ? YearCodes[c10] : "Unknown Year";
+            results.Add(new DecodeResult { Position = "10", Value = c10.ToString(), Meaning = "Model Year", Notes = yearStr });
 
             // --- 11: Plant ---
-            char plant = vin[10];
-            string plantMeaning = "Unknown Plant";
-            switch(plant)
+            char c11 = vin[10];
+            string plantStr = PlantCodes.ContainsKey(c11) ? PlantCodes[c11] : "Unknown Plant";
+            results.Add(new DecodeResult { Position = "11", Value = c11.ToString(), Meaning = "Assembly Plant", Notes = plantStr });
+
+            // --- 12: Build Date (2010+) or Sequence ---
+            // Note: 12-17 is Pos, but for modern 2010+ Ford, Pos 11 is Year, Pos 12 is Month.
+            // Wait, standard VIN Pos 10 is Year. Ford "Hidden Date" usually involves Pos 11 and 12 *in the sequence* logic?
+            // Actually, for Ford: 
+            // Pos 10 = Model Year.
+            // Pos 11 = Plant.
+            // Pos 12-17 = Sequence.
+            // The USER said: "11th Digit (Year) and 12th Digit (Month) form a date code... For 2010+ Fords".
+            // However, standard VIN Pos 11 is PLANT. 
+            // Let's assume the user means the *Sequence Number* (last 6 digits) implies date, OR there is a specific override.
+            // Re-reading user: "11th Digit: Year... 12th Digit: Month".
+            // Standard VIN: Pos 10=Year, Pos 11=Plant.
+            // Maybe user means bits inside the Sequence (Pos 12 is first digit of sequence)?
+            // IF Pos 12 is Month code, that assumes Sequence is 6 digits? Yes.
+            // Let's implement User's Logic for Pos 12 (first char of sequence) as Month if Year >= 2010.
+
+            string sequence = vin.Substring(11); // 6 chars
+            string extraInfo = "";
+
+            int yearVal;
+            if (int.TryParse(yearStr, out yearVal) && yearVal >= 2010)
             {
-                case 'L': plantMeaning = "Michigan Truck (Wayne, MI) - Expedition/Navigator"; break;
-                case 'F': plantMeaning = "Dearborn, MI - F-Series / Mustang"; break;
-                case 'K': plantMeaning = "Kansas City, MO (Claycomo) - F-Series / Escape"; break;
-                case 'E': plantMeaning = "Kentucky Truck (Louisville, KY) - Super Duty"; break;
-                case 'G': plantMeaning = "Chicago, IL - Taurus / Explorer"; break;
-                case 'R': plantMeaning = "Flat Rock (AAI), MI - Mustang / Fusion"; break;
-                case 'W': plantMeaning = "Wayne Stamping (Wayne, MI) - Focus"; break;
-                case 'H': plantMeaning = "Lorain, OH - Econoline (Older)"; break;
-                case 'B': plantMeaning = "Oakville, Ontario - Edge / Flex"; break;
-                case '5': plantMeaning = "Flat Rock, MI (Mazda/AutoAlliance)"; break;
-                case 'N': plantMeaning = "Chicago, IL"; break;
-                case 'M': plantMeaning = "Cuautitlan, Mexico"; break;
-                case 'U': plantMeaning = "Louisville, KY - Explorer / Mountaineer"; break;
+                 // Try to decode Month from Pos 12 (Index 11 in 0-indexed string, which is first char of sequence)
+                 // User says: "12th Digit is Month".
+                 char monthChar = vin[11];
+                 extraInfo = " (Month Code may be: " + monthChar + ")";
             }
-            results.Add(new DecodeResult { Position = "11", Value = plant.ToString(), Meaning = "Assembly Plant", Notes = plantMeaning });
 
+            results.Add(new DecodeResult { Position = "12-17", Value = sequence, Meaning = "Production Sequence", Notes = "Serial Number" + extraInfo });
 
-            // --- 12-17: Sequence ---
-            results.Add(new DecodeResult { Position = "12-17", Value = vin.Substring(11), Meaning = "Production Sequence", Notes = "Serial Number" });
+            // --- Window Sticker Link ---
+            string stickerUrl = $"https://www.windowsticker.forddirect.com/windowsticker.pdf?vin={vin}";
+            results.Add(new DecodeResult { Position = "URL", Value = "Link", Meaning = "Window Sticker", Notes = stickerUrl });
 
             return results;
         }
 
-        private static string GetYear(char c)
+        private static bool VerifyCheckDigit(string vin)
         {
-            // Standard VIN Year Code (recycles every 30 years)
-            // L, M, N, P, R, S, T, V, W, X, Y, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, G, H, J, K
-            switch (c)
+            if (vin.Length != 17) return false;
+            
+            int[] weights = { 8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int sum = 0;
+
+            for (int i = 0; i < 17; i++)
             {
-                case 'V': return "1997";
-                case 'W': return "1998";
-                case 'X': return "1999";
-                case 'Y': return "2000";
-                case '1': return "2001";
-                case '2': return "2002";
-                case '3': return "2003";
-                case '4': return "2004";
-                case '5': return "2005";
-                case '6': return "2006";
-                case '7': return "2007";
-                case '8': return "2008";
-                case '9': return "2009";
-                case 'A': return "1980 / 2010"; // Context usually obvious
-                case 'B': return "1981 / 2011";
-                case 'C': return "1982 / 2012";
-                case 'D': return "1983 / 2013";
-                case 'E': return "1984 / 2014";
-                case 'F': return "1985 / 2015";
-                case 'G': return "1986 / 2016";
-                case 'H': return "1987 / 2017";
-                case 'J': return "1988 / 2018";
-                case 'K': return "1989 / 2019";
-                case 'L': return "1990 / 2020";
-                case 'M': return "1991 / 2021";
-                case 'N': return "1992 / 2022";
-                case 'P': return "1993 / 2023";
-                case 'R': return "1994 / 2024";
-                case 'S': return "1995 / 2025";
-                case 'T': return "1996 / 2026";
-                default: return "Unknown";
+                char c = vin[i];
+                int val = 0;
+                if (char.IsDigit(c)) val = c - '0';
+                else if (c >= 'A' && c <= 'Z')
+                {
+                    switch (c)
+                    {
+                        case 'A': case 'J': val = 1; break;
+                        case 'B': case 'K': case 'S': val = 2; break;
+                        case 'C': case 'L': case 'T': val = 3; break;
+                        case 'D': case 'M': case 'U': val = 4; break;
+                        case 'E': case 'N': case 'V': val = 5; break;
+                        case 'F': case 'W': val = 6; break;
+                        case 'G': case 'P': case 'X': val = 7; break;
+                        case 'H': case 'Y': val = 8; break;
+                        case 'R': case 'Z': val = 9; break;
+                        default: return false; // Invalid char (I, O, Q)
+                    }
+                }
+                else return false;
+
+                if (i == 8) continue; // Skip check digit position in sum (weight is 0 anyway)
+                
+                sum += val * weights[i];
             }
+
+            int remainder = sum % 11;
+            char expected = (remainder == 10) ? 'X' : (char)('0' + remainder);
+
+            return vin[8] == expected;
         }
     }
 }

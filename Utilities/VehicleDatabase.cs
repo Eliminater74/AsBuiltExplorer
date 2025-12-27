@@ -84,50 +84,88 @@ namespace AsBuiltExplorer
 
         private static void RefineEntries()
         {
-            // Auto-decode any entries missing data
+            // Auto-decode any entries missing data or with generic data
             foreach (var v in Entries)
             {
+                // Re-decode if missing or if it has the generic "Series/Trim" bad data
                 if (!string.IsNullOrEmpty(v.VIN) && v.VIN.Length == 17 &&
-                    (string.IsNullOrEmpty(v.Year) || string.IsNullOrEmpty(v.Model)))
+                    (string.IsNullOrEmpty(v.Year) || string.IsNullOrEmpty(v.Model) || v.Model.Contains("Series/Trim") || v.Model.Contains("Unknown")))
                 {
-                    var results = VINDecoder.Decode(v.VIN);
-                    
-                    // Year
-                    var resYear = results.Find(x => x.Position == "10");
-                    if (resYear != null) v.Year = resYear.Notes; // e.g. "2008"
-
-                    // Make
-                    var resMake = results.Find(x => x.Position == "1-3");
-                    if (resMake != null) 
-                    {
-                        if (resMake.Meaning.Contains("Ford")) v.Make = "Ford";
-                        else if (resMake.Meaning.Contains("Lincoln")) v.Make = "Lincoln";
-                        else if (resMake.Meaning.Contains("Mercury")) v.Make = "Mercury";
-                        else v.Make = "Ford"; // Default
-                    }
-
-                    // Model (Series)
-                    var resModel = results.Find(x => x.Position == "6-7");
-                    if (resModel != null)
-                    {
-                         // "XLT (4WD)" -> "XLT"
-                         v.Model = resModel.Meaning; // Store raw for now, e.g. "XLT (2WD)" or "Navigator"
-                         
-                         // Clean up Model string if needed? User wants "Expedition EL XLT"
-                         // Decode logic returns "XLT (2WD)" for Series. Body returns "Expedition EL"
-                         var resBody = results.Find(x => x.Position == "5");
-                         if (resBody != null)
-                         {
-                             // Extract "Expedition" from "Standard / Short Wheelbase (Expedition)..."
-                             // This relies on consistent VINDecoder notes format.
-                             // For now, let's just stick to what the decoder has.
-                         }
-                    }
-
+                    UpdateVehicleDataFromVIN(v);
                     UpdateEntry(v);
                 }
             }
         }
+
+        private static void UpdateVehicleDataFromVIN(VehicleEntry v)
+        {
+            var results = VINDecoder.Decode(v.VIN);
+            
+            // Year
+            var resYear = results.Find(x => x.Position == "10");
+            if (resYear != null) v.Year = resYear.Notes; 
+
+            // Make
+            var resMake = results.Find(x => x.Position == "1-3");
+            if (resMake != null) 
+            {
+                if (resMake.Meaning.Contains("Ford")) v.Make = "Ford";
+                else if (resMake.Meaning.Contains("Lincoln")) v.Make = "Lincoln";
+                else if (resMake.Meaning.Contains("Mercury")) v.Make = "Mercury";
+                else v.Make = "Ford"; 
+            }
+
+            // Model Logic
+            // Check for Modern Series first (Pos 5-7)
+            var resModern = results.Find(x => x.Position == "5-7");
+            if (resModern != null)
+            {
+                // Meaning: "Mustang EcoBoost (Base)"
+                v.Model = resModern.Meaning;
+            }
+            else
+            {
+                // Legacy Logic: Combine Body (Pos 5) + Trim (Pos 6-7)
+                var resBody = results.Find(x => x.Position == "5");
+                var resTrim = results.Find(x => x.Position == "6-7");
+                
+                string bodyPart = "";
+                string trimPart = "";
+
+                if (resBody != null)
+                {
+                    // Body Notes often has junk like "(Expedition) - Doors/Glass..."
+                    // We want "Expedition" or "Expedition EL"
+                    // Simple heuristic: Take the bold part or the first few words?
+                    // User's decoding logic put meaningful text in Notes, e.g. "Extended Length (EL/MAX) (Expedition EL)..."
+                    // Let's try to grab specific keywords if present, or just use the Notes but truncated.
+                    // Actually, my VINDecoder V2 puts: "Standard / Short Wheelbase (Expedition)..."
+                    // Let's rely on simple keyword extraction for cleanliness:
+                    string n = resBody.Notes;
+                    if (n.Contains("Expedition EL")) bodyPart = "Expedition EL";
+                    else if (n.Contains("Expedition")) bodyPart = "Expedition";
+                    else if (n.Contains("Navigator L")) bodyPart = "Navigator L";
+                    else if (n.Contains("Navigator")) bodyPart = "Navigator";
+                    else if (n.Contains("Mountaineer")) bodyPart = "Mountaineer";
+                    else if (n.Contains("F-Series")) bodyPart = "F-Series";
+                    else if (n.Contains("Mustang")) bodyPart = "Mustang";
+                    else bodyPart = resBody.Meaning; // Fallback "Body Style" - bad. Use Notes first bit.
+                }
+
+                if (resTrim != null)
+                {
+                    // Notes: "XLT 2WD. This is..."
+                    // Split by period to get the first sentence.
+                    string n = resTrim.Notes;
+                    int dotIndex = n.IndexOf('.');
+                    if (dotIndex > 0) trimPart = n.Substring(0, dotIndex);
+                    else trimPart = n;
+                }
+                
+                v.Model = $"{bodyPart} {trimPart}".Trim();
+            }
+        }
+
 
         private static void UpdateEntry(VehicleEntry v)
         {
@@ -190,22 +228,12 @@ namespace AsBuiltExplorer
 
         public static void AddEntry(string name, string vin, string path, string content = null)
         {
-            string year = "", make = "", model = "";
+            VehicleEntry tempV = new VehicleEntry { VIN = vin };
             
             // Auto-Decode on Add
             if (!string.IsNullOrEmpty(vin) && vin.Length == 17)
             {
-                var results = VINDecoder.Decode(vin);
-                var resYear = results.Find(x => x.Position == "10");
-                if (resYear != null) year = resYear.Notes;
-                
-                var resMake = results.Find(x => x.Position == "1-3");
-                if (resMake != null && resMake.Meaning.Contains("Lincoln")) make = "Lincoln";
-                else if (resMake != null && resMake.Meaning.Contains("Mercury")) make = "Mercury";
-                else make = "Ford";
-                
-                var resModel = results.Find(x => x.Position == "6-7");
-                if (resModel != null) model = resModel.Meaning;
+                UpdateVehicleDataFromVIN(tempV);
             }
 
             if(content == null)
@@ -226,9 +254,9 @@ namespace AsBuiltExplorer
                     cmd.Parameters.AddWithValue("@Vin", vin);
                     cmd.Parameters.AddWithValue("@Path", path);
                     cmd.Parameters.AddWithValue("@Content", content ?? "");
-                    cmd.Parameters.AddWithValue("@Year", year);
-                    cmd.Parameters.AddWithValue("@Make", make);
-                    cmd.Parameters.AddWithValue("@Model", model);
+                    cmd.Parameters.AddWithValue("@Year", tempV.Year ?? "");
+                    cmd.Parameters.AddWithValue("@Make", tempV.Make ?? "");
+                    cmd.Parameters.AddWithValue("@Model", tempV.Model ?? "");
                     cmd.ExecuteNonQuery();
                 }
             }
