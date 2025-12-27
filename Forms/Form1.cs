@@ -119,7 +119,7 @@ public partial class Form1 : Form
     string[] retModuleNames = new string[1];
     string[] retModuleShortNames = new string[1];
     string[] retModuleAddresses = new string[1];
-    int retModuleCount = 0;
+
     string directoryPath = MyProject.Application.Info.DirectoryPath;
     if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
       directoryPath += "\\";
@@ -261,8 +261,9 @@ public partial class Form1 : Form
     string retData3_1 = "";
     ListViewItem listViewItem1 = (ListViewItem) null;
     ListViewItem.ListViewSubItem listViewSubItem = (ListViewItem.ListViewSubItem) null;
-    string str2 = "";
+
     string str3 = modAsBuilt.AsBuilt_Ascii2Hex(retVIN1);
+    string str2 = "";
     string Right1 = "";
     int num5 = checked (num1 - 1);
     int index1 = 0;
@@ -345,6 +346,7 @@ public partial class Form1 : Form
       checked { ++index1; }
     }
     bool flag5 = false;
+
     int num12 = checked (num2 - 1);
     int index4 = 0;
     while (index4 <= num12)
@@ -2113,10 +2115,11 @@ public partial class Form1 : Form
         string str3 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
         string[] strArray2 = new string[1];
         string[] strArray3 = new string[1];
-        int num6 = 0;
+    
         string[] strArray4 = new string[1];
         string[] strArray5 = new string[1];
         string[] strArray6 = new string[1];
+        int num6 = 0;
         int num7 = 0;
         string inpFileName1 = str3;
         ref string[] local1 = ref strArray2;

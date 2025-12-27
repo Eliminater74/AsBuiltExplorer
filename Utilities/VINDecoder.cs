@@ -224,35 +224,64 @@ namespace AsBuiltExplorer
             string plantStr = PlantCodes.ContainsKey(c11) ? PlantCodes[c11] : "Unknown Plant";
             results.Add(new DecodeResult { Position = "11", Value = c11.ToString(), Meaning = "Assembly Plant", Notes = plantStr });
 
-            // --- 12: Build Date (2010+) or Sequence ---
-            // Note: 12-17 is Pos, but for modern 2010+ Ford, Pos 11 is Year, Pos 12 is Month.
-            // Wait, standard VIN Pos 10 is Year. Ford "Hidden Date" usually involves Pos 11 and 12 *in the sequence* logic?
-            // Actually, for Ford: 
-            // Pos 10 = Model Year.
-            // Pos 11 = Plant.
-            // Pos 12-17 = Sequence.
-            // The USER said: "11th Digit (Year) and 12th Digit (Month) form a date code... For 2010+ Fords".
-            // However, standard VIN Pos 11 is PLANT. 
-            // Let's assume the user means the *Sequence Number* (last 6 digits) implies date, OR there is a specific override.
-            // Re-reading user: "11th Digit: Year... 12th Digit: Month".
-            // Standard VIN: Pos 10=Year, Pos 11=Plant.
-            // Maybe user means bits inside the Sequence (Pos 12 is first digit of sequence)?
-            // IF Pos 12 is Month code, that assumes Sequence is 6 digits? Yes.
-            // Let's implement User's Logic for Pos 12 (first char of sequence) as Month if Year >= 2010.
-
-            string sequence = vin.Substring(11); // 6 chars
-            string extraInfo = "";
-
-            int yearVal;
-            if (int.TryParse(yearStr, out yearVal) && yearVal >= 2010)
+            // --- 12: Estimated Build Date ---
+            string buildDateEst = "Unknown";
+            string buildDateNotes = "";
+            
+            // Parse Year
+            int modelYear = 0;
+            if (int.TryParse(GetYear(c10), out modelYear))
             {
-                 // Try to decode Month from Pos 12 (Index 11 in 0-indexed string, which is first char of sequence)
-                 // User says: "12th Digit is Month".
-                 char monthChar = vin[11];
-                 extraInfo = " (Month Code may be: " + monthChar + ")";
-            }
+                if (modelYear < 2010)
+                {
+                    // Legacy Estimation: Sequence Number
+                    // Start ~August of previous year (Conservative Estimate)
+                    string seqStr = vin.Substring(11);
+                    string digits = Regex.Replace(seqStr, "[^0-9]", "");
+                    if (int.TryParse(digits, out int seqNum))
+                    {
+                        // User Formula: 51k = Jan/Feb 2008 (Model 2008)
+                        // This implies ~8,500 units/month starting Aug 2007.
+                        double monthsAfterAug = (double)seqNum / 8500.0;
+                        DateTime startProduction = new DateTime(modelYear - 1, 8, 1); 
+                        DateTime estDate = startProduction.AddMonths((int)monthsAfterAug);
+                        
+                        buildDateEst = estDate.ToString("MMMM yyyy");
+                        buildDateNotes = $"Est. based on Sequence #{seqNum}";
+                    }
+                }
+                else
+                {
+                    // Modern Logic: Pos 12 Month Code (A-M skip I)
+                    char monthCode = vin[11]; // Pos 12
+                    int month = 0;
+                     switch (monthCode)
+                    {
+                        case 'A': month = 1; break;
+                        case 'B': month = 2; break;
+                        case 'C': month = 3; break;
+                        case 'D': month = 4; break;
+                        case 'E': month = 5; break;
+                        case 'F': month = 6; break;
+                        case 'G': month = 7; break;
+                        case 'H': month = 8; break;
+                        case 'J': month = 9; break; // Skip I
+                        case 'K': month = 10; break;
+                        case 'L': month = 11; break;
+                        case 'M': month = 12; break;
+                    }
 
-            results.Add(new DecodeResult { Position = "12-17", Value = sequence, Meaning = "Production Sequence", Notes = "Serial Number" + extraInfo });
+                    if (month > 0)
+                    {
+                        buildDateEst = new DateTime(2000, month, 1).ToString("MMMM");
+                        buildDateNotes = $"Month Code '{monthCode}'";
+                    }
+                }
+            }
+            results.Add(new DecodeResult { Position = "Calc", Value = "Date", Meaning = "Est. Build Date", Notes = $"{buildDateEst} ({buildDateNotes})" });
+
+            string sequence = vin.Substring(11);
+
 
             // --- Window Sticker Link ---
             string stickerUrl = $"https://www.windowsticker.forddirect.com/windowsticker.pdf?vin={vin}";
@@ -300,6 +329,44 @@ namespace AsBuiltExplorer
             char expected = (remainder == 10) ? 'X' : (char)('0' + remainder);
 
             return vin[8] == expected;
+        }
+        private static string GetYear(char c)
+        {
+            // Standard VIN Year Code (recycles every 30 years)
+            switch (c)
+            {
+                case 'V': return "1997";
+                case 'W': return "1998";
+                case 'X': return "1999";
+                case 'Y': return "2000";
+                case '1': return "2001";
+                case '2': return "2002";
+                case '3': return "2003";
+                case '4': return "2004";
+                case '5': return "2005";
+                case '6': return "2006";
+                case '7': return "2007";
+                case '8': return "2008";
+                case '9': return "2009";
+                case 'A': return "1980 / 2010";
+                case 'B': return "1981 / 2011";
+                case 'C': return "1982 / 2012";
+                case 'D': return "1983 / 2013";
+                case 'E': return "1984 / 2014";
+                case 'F': return "1985 / 2015";
+                case 'G': return "1986 / 2016";
+                case 'H': return "1987 / 2017";
+                case 'J': return "1988 / 2018";
+                case 'K': return "1989 / 2019";
+                case 'L': return "1990 / 2020";
+                case 'M': return "1991 / 2021";
+                case 'N': return "1992 / 2022";
+                case 'P': return "1993 / 2023";
+                case 'R': return "1994 / 2024";
+                case 'S': return "1995 / 2025";
+                case 'T': return "1996 / 2026";
+                default: return "Unknown";
+            }
         }
     }
 }

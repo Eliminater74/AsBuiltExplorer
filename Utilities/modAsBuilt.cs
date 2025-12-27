@@ -664,13 +664,13 @@ label_1:
               {
                 flag4 = false;
                 if (Strings.InStr(1, inpFileName, "1FAHP2KT0DG105299", CompareMethod.Text) != 0)
-                  inpFileName = inpFileName;
+                  //inpFileName = inpFileName;
                 retModInfo_IDs = (string[]) Utils.CopyArray((Array) retModInfo_IDs, (Array) new string[checked (retModInfo_Count + 1)]);
                 retModInfo_PartNumbers = (string[]) Utils.CopyArray((Array) retModInfo_PartNumbers, (Array) new string[checked (retModInfo_Count + 1)]);
                 retModInfo_Strategies = (string[]) Utils.CopyArray((Array) retModInfo_Strategies, (Array) new string[checked (retModInfo_Count + 1)]);
                 retModInfo_Calibrations = (string[]) Utils.CopyArray((Array) retModInfo_Calibrations, (Array) new string[checked (retModInfo_Count + 1)]);
                 if (Operators.CompareString(Left2, "", false) == 0)
-                  Left2 = Left2;
+                  //Left2 = Left2;
                 retModInfo_IDs[retModInfo_Count] = Left1;
                 retModInfo_PartNumbers[retModInfo_Count] = Left2;
                 retModInfo_Strategies[retModInfo_Count] = str1;
@@ -767,8 +767,7 @@ label_60:
       if (strArray2[index1].StartsWith("<DID ID=\"DE"))
       {
         string str2 = Strings.Mid(strArray2[index1], 16 /*0x10*/, checked (Strings.Len(strArray2[index1]) - 15 - 6));
-        if (Operators.CompareString(Left, "", false) != 0)
-          ;
+        // if (Operators.CompareString(Left, "", false) != 0) ;
         int Expression = 1;
         int Start = 1;
         while (Start <= Strings.Len(str2))
@@ -789,7 +788,7 @@ label_60:
       checked { ++index1; }
     }
     flag = true;
-label_30:
+    //label_30:
     return flag;
   }
 
@@ -1450,10 +1449,12 @@ label_12:
     return str;
   }
 
+#pragma warning disable CS0649
   private struct PREVENT_MEDIA_REMOVAL
   {
     public bool PreventMediaRemoval;
   }
+#pragma warning restore CS0649
 }
 
 }
