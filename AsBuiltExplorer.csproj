@@ -112,14 +112,15 @@
     <EmbeddedResource Include="Resources.resx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="app.config" />
-    <Content Include="CommonCodes.csv">
+    <Content Include="CustomCSV\CommonCodes.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CommonCodes2.csv">
+    <Content Include="CustomCSV\CommonCodes_SJB.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CommonCodes_SJB.csv">
+    <Content Include="CustomCSV\CommonCodes2.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
