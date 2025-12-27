@@ -798,33 +798,7 @@ public partial class Form1 : Form
       }
   }
 
-  private void btnDeduceSaveAB_Click(object sender, EventArgs e)
-  {
-      try
-      {
-          string vin = txtDeduceVIN.Text.Trim();
-          if (string.IsNullOrEmpty(vin)) vin = "Unknown_VIN";
-          
-          string dir = Path.Combine(MyProject.Application.Info.DirectoryPath, "AsBuiltData");
-          if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-          
-          string filename = Path.Combine(dir, $"{vin}.ab");
-          
-          string content = wbDeducer.DocumentText;
-          if (content.Length < 100)
-          {
-               MessageBox.Show("Page content seems too short. Make sure the AsBuilt data is loaded.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-               return;
-          }
 
-          File.WriteAllText(filename, content);
-          MessageBox.Show($"File saved successfully:\n{filename}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-      }
-      catch (Exception ex)
-      {
-          MessageBox.Show($"Error saving file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }
-  }
   
   private void cmbDeduceSavedVehicles_SelectedIndexChanged(object sender, EventArgs e)
   {

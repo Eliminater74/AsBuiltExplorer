@@ -115,7 +115,7 @@ namespace AsBuiltExplorer
             this.btnDeduceGo = new System.Windows.Forms.Button();
             this.grpDeduceBrowser = new System.Windows.Forms.GroupBox();
             this.wbDeducer = new System.Windows.Forms.WebBrowser();
-            this.btnDeduceSaveAB = new System.Windows.Forms.Button();
+
             this.TabPage4 = new System.Windows.Forms.TabPage();
             this.chkDeduceDoCCC = new System.Windows.Forms.CheckBox();
             this.Button8 = new System.Windows.Forms.Button();
@@ -1066,7 +1066,7 @@ namespace AsBuiltExplorer
             this.grpDeduceBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpDeduceBrowser.Controls.Add(this.btnDeduceSaveAB);
+
             this.grpDeduceBrowser.Controls.Add(this.wbDeducer);
             this.grpDeduceBrowser.Location = new System.Drawing.Point(20, 85);
             this.grpDeduceBrowser.Name = "grpDeduceBrowser";
@@ -1086,19 +1086,7 @@ namespace AsBuiltExplorer
             this.wbDeducer.Size = new System.Drawing.Size(920, 390);
             this.wbDeducer.TabIndex = 0;
             this.wbDeducer.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbDeducer_DocumentCompleted);
-            // 
-            // btnDeduceSaveAB
-            // 
-            this.btnDeduceSaveAB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeduceSaveAB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeduceSaveAB.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnDeduceSaveAB.Location = new System.Drawing.Point(785, 425);
-            this.btnDeduceSaveAB.Name = "btnDeduceSaveAB";
-            this.btnDeduceSaveAB.Size = new System.Drawing.Size(150, 28);
-            this.btnDeduceSaveAB.TabIndex = 1;
-            this.btnDeduceSaveAB.Text = "Save As-Built File";
-            this.btnDeduceSaveAB.UseVisualStyleBackColor = true;
-            this.btnDeduceSaveAB.Click += new System.EventHandler(this.btnDeduceSaveAB_Click);
+
             // 
             // 
 
@@ -1989,7 +1977,6 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.TextBox txtDeduceVIN;
     private System.Windows.Forms.Button btnDeduceGo;
     private System.Windows.Forms.GroupBox grpDeduceBrowser;
-    private System.Windows.Forms.Button btnDeduceSaveAB;
     
     // TabPage4 Controls (Restored)
     private System.Windows.Forms.TabPage TabPage4;
