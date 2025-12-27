@@ -4,6 +4,7 @@ using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -3156,6 +3157,75 @@ label_24:
       
       g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
   }
+
+
+
+  private void tabMods_Enter(object sender, EventArgs e)
+  {
+      // Populate Platform Combo if empty
+      if (cmbModPlatform.Items.Count == 0)
+      {
+          // Get unique platforms
+          HashSet<string> platforms = new HashSet<string>();
+          foreach (var m in ModDatabase.Mods)
+          {
+              platforms.Add(m.Platform);
+          }
+          foreach (var p in platforms)
+          {
+              cmbModPlatform.Items.Add(p);
+          }
+          if (cmbModPlatform.Items.Count > 0) cmbModPlatform.SelectedIndex = 0;
+      }
+  }
+
+  private void cmbModPlatform_SelectedIndexChanged(object sender, EventArgs e)
+  {
+      lvwMods.Items.Clear();
+      rtbModDetails.Clear();
+      string selectedPlatform = cmbModPlatform.SelectedItem?.ToString();
+
+      if (string.IsNullOrEmpty(selectedPlatform)) return;
+
+      foreach (var m in ModDatabase.Mods)
+      {
+          if (m.Platform == selectedPlatform)
+          {
+              ListViewItem lvi = new ListViewItem(m.Title);
+              lvi.SubItems.Add(m.Category);
+              lvi.Tag = m; // Store reference
+              lvwMods.Items.Add(lvi);
+          }
+      }
+  }
+
+  private void lvwMods_SelectedIndexChanged(object sender, EventArgs e)
+  {
+      if (lvwMods.SelectedItems.Count > 0)
+      {
+          if (lvwMods.SelectedItems[0].Tag is ModEntry m)
+          {
+              rtbModDetails.Clear();
+              
+              // Simple Formatting
+              rtbModDetails.SelectionFont = new Font(rtbModDetails.Font.FontFamily, 14, FontStyle.Bold);
+              rtbModDetails.AppendText(m.Title + "\r\n");
+              
+              rtbModDetails.SelectionFont = new Font(rtbModDetails.Font.FontFamily, 10, FontStyle.Italic);
+              rtbModDetails.AppendText(m.Category + "\r\n\r\n");
+
+              rtbModDetails.SelectionFont = new Font(rtbModDetails.Font.FontFamily, 11, FontStyle.Regular);
+              rtbModDetails.AppendText(m.Description + "\r\n\r\n");
+              
+              rtbModDetails.SelectionFont = new Font(rtbModDetails.Font.FontFamily, 10, FontStyle.Bold | FontStyle.Underline);
+              rtbModDetails.AppendText("INSTRUCTIONS:\r\n");
+              
+              rtbModDetails.SelectionFont = new Font("Consolas", 10, FontStyle.Regular);
+              rtbModDetails.AppendText(m.Instructions);
+          }
+      }
+
+}
 }
 }
 

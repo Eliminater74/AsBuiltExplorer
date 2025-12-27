@@ -162,7 +162,18 @@ namespace AsBuiltExplorer
             this.Label18 = new System.Windows.Forms.Label();
             this.grpChecksum = new System.Windows.Forms.GroupBox();
             this.grpConverter = new System.Windows.Forms.GroupBox();
+            this.grpChecksum = new System.Windows.Forms.GroupBox();
+            this.grpConverter = new System.Windows.Forms.GroupBox();
             this.tbxDeduceReport2 = new System.Windows.Forms.TextBox();
+            this.tabMods = new System.Windows.Forms.TabPage();
+            this.splitMods = new System.Windows.Forms.SplitContainer();
+            this.lvwMods = new System.Windows.Forms.ListView();
+            this.rtbModDetails = new System.Windows.Forms.RichTextBox();
+            this.cmbModPlatform = new System.Windows.Forms.ComboBox();
+            this.lblModPlatform = new System.Windows.Forms.Label();
+            this.lblModsHelp = new System.Windows.Forms.Label();
+            this.colModTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colModCat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Button4 = new System.Windows.Forms.Button();
             this.TabPage6 = new System.Windows.Forms.TabPage();
             this.btnBrowseRefresh = new System.Windows.Forms.Button();
@@ -212,6 +223,109 @@ namespace AsBuiltExplorer
             this.SuspendLayout();
 
             // 
+            // tabMods
+            // 
+            this.tabMods.Controls.Add(this.splitMods);
+            this.tabMods.Controls.Add(this.lblModsHelp);
+            this.tabMods.Controls.Add(this.cmbModPlatform);
+            this.tabMods.Controls.Add(this.lblModPlatform);
+            this.tabMods.Location = new System.Drawing.Point(4, 22);
+            this.tabMods.Name = "tabMods";
+            this.tabMods.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMods.Size = new System.Drawing.Size(1126, 626);
+            this.tabMods.TabIndex = 8;
+            this.tabMods.Text = "Vehicle Mods";
+            this.tabMods.UseVisualStyleBackColor = true;
+            this.tabMods.Enter += new System.EventHandler(this.tabMods_Enter);
+            // 
+            // splitMods
+            // 
+            this.splitMods.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitMods.Location = new System.Drawing.Point(6, 45);
+            this.splitMods.Name = "splitMods";
+            // 
+            // splitMods.Panel1
+            // 
+            this.splitMods.Panel1.Controls.Add(this.lvwMods);
+            // 
+            // splitMods.Panel2
+            // 
+            this.splitMods.Panel2.Controls.Add(this.rtbModDetails);
+            this.splitMods.Size = new System.Drawing.Size(1114, 575);
+            this.splitMods.SplitterDistance = 350;
+            this.splitMods.TabIndex = 3;
+            // 
+            // lvwMods
+            // 
+            this.lvwMods.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colModTitle,
+            this.colModCat});
+            this.lvwMods.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvwMods.FullRowSelect = true;
+            this.lvwMods.GridLines = true;
+            this.lvwMods.HideSelection = false;
+            this.lvwMods.Location = new System.Drawing.Point(0, 0);
+            this.lvwMods.MultiSelect = false;
+            this.lvwMods.Name = "lvwMods";
+            this.lvwMods.Size = new System.Drawing.Size(350, 575);
+            this.lvwMods.TabIndex = 0;
+            this.lvwMods.UseCompatibleStateImageBehavior = false;
+            this.lvwMods.View = System.Windows.Forms.View.Details;
+            this.lvwMods.SelectedIndexChanged += new System.EventHandler(this.lvwMods_SelectedIndexChanged);
+            // 
+            // rtbModDetails
+            // 
+            this.rtbModDetails.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rtbModDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbModDetails.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbModDetails.Location = new System.Drawing.Point(0, 0);
+            this.rtbModDetails.Name = "rtbModDetails";
+            this.rtbModDetails.ReadOnly = true;
+            this.rtbModDetails.Size = new System.Drawing.Size(760, 575);
+            this.rtbModDetails.TabIndex = 0;
+            this.rtbModDetails.Text = "";
+            // 
+            // cmbModPlatform
+            // 
+            this.cmbModPlatform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbModPlatform.FormattingEnabled = true;
+            this.cmbModPlatform.Location = new System.Drawing.Point(70, 15);
+            this.cmbModPlatform.Name = "cmbModPlatform";
+            this.cmbModPlatform.Size = new System.Drawing.Size(250, 21);
+            this.cmbModPlatform.TabIndex = 1;
+            this.cmbModPlatform.SelectedIndexChanged += new System.EventHandler(this.cmbModPlatform_SelectedIndexChanged);
+            // 
+            // lblModPlatform
+            // 
+            this.lblModPlatform.AutoSize = true;
+            this.lblModPlatform.Location = new System.Drawing.Point(15, 18);
+            this.lblModPlatform.Name = "lblModPlatform";
+            this.lblModPlatform.Size = new System.Drawing.Size(48, 13);
+            this.lblModPlatform.TabIndex = 0;
+            this.lblModPlatform.Text = "Platform:";
+            // 
+            // lblModsHelp
+            // 
+            this.lblModsHelp.AutoSize = true;
+            this.lblModsHelp.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.lblModsHelp.Location = new System.Drawing.Point(340, 18);
+            this.lblModsHelp.Name = "lblModsHelp";
+            this.lblModsHelp.Size = new System.Drawing.Size(250, 13);
+            this.lblModsHelp.TabIndex = 2;
+            this.lblModsHelp.Text = "Select a modification to view instructions details.";
+            // 
+            // colModTitle
+            // 
+            this.colModTitle.Text = "Modification";
+            this.colModTitle.Width = 200;
+            // 
+            // colModCat
+            // 
+            this.colModCat.Text = "Category";
+            this.colModCat.Width = 100;
+            // 
             // TabControl1
             // 
             this.TabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
@@ -226,6 +340,7 @@ namespace AsBuiltExplorer
             this.TabControl1.Controls.Add(this.TabPage2);
             this.TabControl1.Controls.Add(this.TabPage3);
             this.TabControl1.Controls.Add(this.TabPage4);
+            this.TabControl1.Controls.Add(this.tabMods);
             this.TabControl1.Controls.Add(this.TabPage5);
             this.TabControl1.Controls.Add(this.TabPage6);
             this.TabControl1.Controls.Add(this.TabPage9);
@@ -1989,6 +2104,17 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.Label Label10;
     private System.Windows.Forms.Label Label11;
     private System.Windows.Forms.Label Label13;
+    
+    // Mods Tab Controls
+    private System.Windows.Forms.TabPage tabMods;
+    private System.Windows.Forms.SplitContainer splitMods;
+    private System.Windows.Forms.ListView lvwMods;
+    private System.Windows.Forms.RichTextBox rtbModDetails;
+    private System.Windows.Forms.ComboBox cmbModPlatform;
+    private System.Windows.Forms.Label lblModPlatform;
+    private System.Windows.Forms.Label lblModsHelp;
+    private System.Windows.Forms.ColumnHeader colModTitle;
+    private System.Windows.Forms.ColumnHeader colModCat;
  }
 }
 
