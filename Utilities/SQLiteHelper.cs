@@ -33,12 +33,20 @@ namespace AsBuiltExplorer
                         FriendlyName TEXT,
                         VIN TEXT,
                         FilePath TEXT,
-                        FileContent TEXT
+                        FileContent TEXT,
+                        Year TEXT,
+                        Make TEXT,
+                        Model TEXT
                     )";
                 using (var cmd = new SQLiteCommand(sql, conn))
                 {
                     cmd.ExecuteNonQuery();
                 }
+
+                // Migration: Add columns if they don't exist (for existing DBs)
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Year TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Make TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Model TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
             }
         }
 

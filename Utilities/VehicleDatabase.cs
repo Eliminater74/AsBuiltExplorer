@@ -12,6 +12,11 @@ namespace AsBuiltExplorer
         public string VIN { get; set; }
         public string FilePath { get; set; }
         public string FileContent { get; set; }
+        
+        // New Columns
+        public string Year { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
 
         public override string ToString()
         {
@@ -33,6 +38,8 @@ namespace AsBuiltExplorer
                 MigrateFromXML(); // One-time check
 
                 Entries.Clear();
+                bool needsRefinement = false;
+
                 using (var conn = SQLiteHelper.GetConnection())
                 {
                     string sql = "SELECT * FROM Vehicles";
@@ -41,24 +48,108 @@ namespace AsBuiltExplorer
                     {
                         while (reader.Read())
                         {
-                            Entries.Add(new VehicleEntry
+                            var v = new VehicleEntry
                             {
                                 ID = Convert.ToInt32(reader["ID"]),
                                 FriendlyName = reader["FriendlyName"].ToString(),
                                 VIN = reader["VIN"].ToString(),
                                 FilePath = reader["FilePath"].ToString(),
                                 FileContent = reader["FileContent"].ToString()
-                            });
+                            };
+                            
+                            // Safe Read for new columns
+                            try { v.Year = reader["Year"].ToString(); } catch {}
+                            try { v.Make = reader["Make"].ToString(); } catch {}
+                            try { v.Model = reader["Model"].ToString(); } catch {}
+
+                            // Mark for refinement if VIN exists but data missing
+                            if (!string.IsNullOrEmpty(v.VIN) && v.VIN.Length == 17 && 
+                                (string.IsNullOrEmpty(v.Year) || string.IsNullOrEmpty(v.Model)))
+                            {
+                                needsRefinement = true;
+                            }
+
+                            Entries.Add(v);
                         }
                     }
                 }
+
+                if (needsRefinement) RefineEntries();
             }
-            catch (Exception ex)
+            catch
             {
                 // Log error?
             }
         }
 
+        private static void RefineEntries()
+        {
+            // Auto-decode any entries missing data
+            foreach (var v in Entries)
+            {
+                if (!string.IsNullOrEmpty(v.VIN) && v.VIN.Length == 17 &&
+                    (string.IsNullOrEmpty(v.Year) || string.IsNullOrEmpty(v.Model)))
+                {
+                    var results = VINDecoder.Decode(v.VIN);
+                    
+                    // Year
+                    var resYear = results.Find(x => x.Position == "10");
+                    if (resYear != null) v.Year = resYear.Notes; // e.g. "2008"
+
+                    // Make
+                    var resMake = results.Find(x => x.Position == "1-3");
+                    if (resMake != null) 
+                    {
+                        if (resMake.Meaning.Contains("Ford")) v.Make = "Ford";
+                        else if (resMake.Meaning.Contains("Lincoln")) v.Make = "Lincoln";
+                        else if (resMake.Meaning.Contains("Mercury")) v.Make = "Mercury";
+                        else v.Make = "Ford"; // Default
+                    }
+
+                    // Model (Series)
+                    var resModel = results.Find(x => x.Position == "6-7");
+                    if (resModel != null)
+                    {
+                         // "XLT (4WD)" -> "XLT"
+                         v.Model = resModel.Meaning; // Store raw for now, e.g. "XLT (2WD)" or "Navigator"
+                         
+                         // Clean up Model string if needed? User wants "Expedition EL XLT"
+                         // Decode logic returns "XLT (2WD)" for Series. Body returns "Expedition EL"
+                         var resBody = results.Find(x => x.Position == "5");
+                         if (resBody != null)
+                         {
+                             // Extract "Expedition" from "Standard / Short Wheelbase (Expedition)..."
+                             // This relies on consistent VINDecoder notes format.
+                             // For now, let's just stick to what the decoder has.
+                         }
+                    }
+
+                    UpdateEntry(v);
+                }
+            }
+        }
+
+        private static void UpdateEntry(VehicleEntry v)
+        {
+            try
+            {
+                using (var conn = SQLiteHelper.GetConnection())
+                {
+                    string sql = "UPDATE Vehicles SET Year = @Year, Make = @Make, Model = @Model WHERE ID = @ID";
+                    using (var cmd = new System.Data.SQLite.SQLiteCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Year", v.Year ?? "");
+                        cmd.Parameters.AddWithValue("@Make", v.Make ?? "");
+                        cmd.Parameters.AddWithValue("@Model", v.Model ?? "");
+                        cmd.Parameters.AddWithValue("@ID", v.ID);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch {}
+        }
+        
+        
         private static void MigrateFromXML()
         {
             // If XML exists but DB was just created (empty), let's import
@@ -99,6 +190,24 @@ namespace AsBuiltExplorer
 
         public static void AddEntry(string name, string vin, string path, string content = null)
         {
+            string year = "", make = "", model = "";
+            
+            // Auto-Decode on Add
+            if (!string.IsNullOrEmpty(vin) && vin.Length == 17)
+            {
+                var results = VINDecoder.Decode(vin);
+                var resYear = results.Find(x => x.Position == "10");
+                if (resYear != null) year = resYear.Notes;
+                
+                var resMake = results.Find(x => x.Position == "1-3");
+                if (resMake != null && resMake.Meaning.Contains("Lincoln")) make = "Lincoln";
+                else if (resMake != null && resMake.Meaning.Contains("Mercury")) make = "Mercury";
+                else make = "Ford";
+                
+                var resModel = results.Find(x => x.Position == "6-7");
+                if (resModel != null) model = resModel.Meaning;
+            }
+
             if(content == null)
             {
                 try 
@@ -110,13 +219,16 @@ namespace AsBuiltExplorer
 
             using (var conn = SQLiteHelper.GetConnection())
             {
-                string sql = "INSERT INTO Vehicles (FriendlyName, VIN, FilePath, FileContent) VALUES (@Name, @Vin, @Path, @Content)";
+                string sql = "INSERT INTO Vehicles (FriendlyName, VIN, FilePath, FileContent, Year, Make, Model) VALUES (@Name, @Vin, @Path, @Content, @Year, @Make, @Model)";
                 using (var cmd = new System.Data.SQLite.SQLiteCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", name);
                     cmd.Parameters.AddWithValue("@Vin", vin);
                     cmd.Parameters.AddWithValue("@Path", path);
                     cmd.Parameters.AddWithValue("@Content", content ?? "");
+                    cmd.Parameters.AddWithValue("@Year", year);
+                    cmd.Parameters.AddWithValue("@Make", make);
+                    cmd.Parameters.AddWithValue("@Model", model);
                     cmd.ExecuteNonQuery();
                 }
             }

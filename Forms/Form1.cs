@@ -115,8 +115,7 @@ public partial class Form1 : Form
 
   private void Button2_Click(object sender, EventArgs e)
   {
-    string Left1 = "";
-    string str1 = "";
+
     string[] retModuleNames = new string[1];
     string[] retModuleShortNames = new string[1];
     string[] retModuleAddresses = new string[1];
@@ -814,12 +813,18 @@ public partial class Form1 : Form
               string dateStr = "--";
               try {
                   if (!string.IsNullOrEmpty(v.FilePath) && File.Exists(v.FilePath))
-                      dateStr = File.GetLastWriteTime(v.FilePath).ToShortDateString();
+                      dateStr = File.GetLastWriteTime(v.FilePath).ToString("g"); // Short Date + Time
               } catch {}
               
               item.SubItems.Add(dateStr);
-              item.SubItems.Add("");
-              item.SubItems.Add("");
+              
+              // Year
+              item.SubItems.Add(v.Year ?? "");
+              
+              // Model (Make + Model)
+              string fullModel = (v.Make + " " + v.Model).Trim();
+              item.SubItems.Add(fullModel);
+              
               item.SubItems.Add(v.VIN);
               
               // CRITICAL: Set Name to FilePath so Context Menus work (they read .Name)
