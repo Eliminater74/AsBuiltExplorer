@@ -79,8 +79,14 @@ namespace AsBuiltExplorer
         {
             try
             {
+                // Look in CustomCSV directory
                 string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-                string[] files = Directory.GetFiles(baseDir, "CommonCodes*.csv");
+                string customCsvDir = Path.Combine(baseDir, "CustomCSV");
+
+                if (!Directory.Exists(customCsvDir)) return;
+
+                // Load ALL .csv files
+                string[] files = Directory.GetFiles(customCsvDir, "*.csv");
 
                 if (files.Length == 0) return;
 
@@ -88,7 +94,7 @@ namespace AsBuiltExplorer
                 {
                     ParseAndInsertCSV(path);
                     
-                    // Rename to .bak to complete migration
+                    // User Request: Rename old CSV to .bak
                     try
                     {
                         string backupPath = path + ".bak";

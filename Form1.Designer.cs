@@ -183,6 +183,11 @@ namespace AsBuiltExplorer
             // 
             // TabControl1
             // 
+            this.TabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.TabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.TabControl1.ItemSize = new System.Drawing.Size(50, 180);
+            this.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.TabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.TabControl1_DrawItem);
             this.TabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
