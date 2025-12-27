@@ -3196,12 +3196,17 @@ label_24:
       {
           txtVinInput.Text = v.VIN;
       }
+      else if (cmbSavedVehicles.SelectedIndex == 0) // Not Used
+      {
+          // Do not clear. Just allow manual entry.
+      }
   }
 
   private void TabPage9_Enter(object sender, EventArgs e)
   {
       VehicleDatabase.Load(); // Ensure latest
       cmbSavedVehicles.Items.Clear();
+      cmbSavedVehicles.Items.Add("-- Not Used --"); // Default manual entry
       foreach (var v in VehicleDatabase.Entries)
       {
           cmbSavedVehicles.Items.Add(v);

@@ -232,7 +232,7 @@ namespace AsBuiltExplorer
             this.TabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(999, 591);
+            this.TabControl1.Size = new System.Drawing.Size(1120, 591);
             this.TabControl1.TabIndex = 0;
             // 
             // TabPage1
@@ -1258,7 +1258,7 @@ namespace AsBuiltExplorer
             this.TabPage9.Location = new System.Drawing.Point(4, 25);
             this.TabPage9.Name = "TabPage9";
             this.TabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage9.Size = new System.Drawing.Size(991, 562);
+            this.TabPage9.Size = new System.Drawing.Size(1112, 562);
             this.TabPage9.TabIndex = 8;
             this.TabPage9.Text = "VIN Decoder";
             this.TabPage9.UseVisualStyleBackColor = true;
@@ -1322,7 +1322,10 @@ namespace AsBuiltExplorer
             this.lvwDecodeResults.GridLines = true;
             this.lvwDecodeResults.Location = new System.Drawing.Point(23, 70);
             this.lvwDecodeResults.Name = "lvwDecodeResults";
-            this.lvwDecodeResults.Size = new System.Drawing.Size(950, 470);
+            this.lvwDecodeResults.Size = new System.Drawing.Size(1100, 470);
+            this.lvwDecodeResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwDecodeResults.TabIndex = 5;
             this.lvwDecodeResults.UseCompatibleStateImageBehavior = false;
             this.lvwDecodeResults.View = System.Windows.Forms.View.Details;
@@ -1757,7 +1760,7 @@ namespace AsBuiltExplorer
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1029, 646);
+            this.ClientSize = new System.Drawing.Size(1150, 650);
             this.Controls.Add(this.Label8);
             this.Controls.Add(this.TabControl1);
             this.Controls.Add(this.PictureBox1);
@@ -1811,8 +1814,6 @@ namespace AsBuiltExplorer
             this.EntireLineToolStripMenuItem.Click += new System.EventHandler(this.EntireLineToolStripMenuItem_Click);
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             this.btnDeduceOpenETIS.Click += new System.EventHandler(this.Button2_Click_1);
-            this.ClientSize = new System.Drawing.Size(1150, 650);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 
