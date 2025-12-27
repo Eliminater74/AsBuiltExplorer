@@ -15,3 +15,23 @@ Power Running Boards Menu,ICM,720-01-01,xxxx,,,Req PRB Module 7L7Z-14C177. Magic
 Power Liftgate Enable (SJB),SJB,726-04-01,xxxx,,,Requires LGM. Check if LGM exists on network.
 Power Liftgate Enable (Alt),SJB,726-02-01,xxxx,,,Also check for LGM enable.
 Touch Screen / Nav Type,ACM,727-01-01,xxxx,,,Byte 1: 0/1=Std, 8/9/A=Nav. 1040=Std (No Sub), 4840=Prem (Sub), 4848=Prem/RSE.
+
+# --- Holy Grail Master Config (2007-2009 Expedition) ---
+Audio: Base (No Sub/Sat),ACM,727-01-01,1040,,,Factory Standard (Clean Signal).
+Audio: Sat Radio (No Sub),ACM,727-01-01,1840,,,Sat Enabled. Internal Amp.
+Audio: Audiophile (Sub Only),ACM,727-01-01,1048,,,Subwoofer Enabled (Low Level). No Sat.
+Audio: Audiophile + Sat,ACM,727-01-01,1848,,,Subwoofer + Sat Radio.
+Audio: Premium + RSE (DVD),ACM,727-01-01,4848,,,Rear Seat Ent + Subwoofer.
+Msg Center: Basic,IPC,720-01-01,9905,,,Early XLT Basic Display.
+Msg Center: Enabled,IPC,720-01-01,9105,,,Standard Message Center.
+Power Boards: Menu ENABLED,IPC,720-01-01,xxxx,DFF6,,Adds 'Running Boards' to Menu (Req Module).
+Power Boards: Menu DISABLED,IPC,720-01-01,xxxx,7FF6,,Hides Menu.
+TPMS: 35 PSI (Standard),SJB,726-02-01,xxxx,2323,xxxx,Factory Setting (23 Hex).
+TPMS: 45 PSI (Load D),SJB,726-02-01,xxxx,2D2D,xxxx,Set for Heavy Duty Tires.
+TPMS: 50 PSI (Load E),SJB,726-02-01,xxxx,3232,xxxx,Set for Max Load Tires.
+TPMS: 60 PSI (Max),SJB,726-02-01,xxxx,3C3C,xxxx,Max Threshold.
+Reverse Sensing: Enabled,PAM,736-01-01,5600,AA00,3F,Requires PAM Module (736).
+Power Liftgate: Identification,LTM,776-xx-xx,xxxx,,,Presence indicates Power Liftgate (Module 776).
+Climate: Manual Hardware,HVAC,Hardware,14C258,,,Manual Knobs (3-Dial). Hardware limitation.
+Climate: Digital Hardware,HVAC,Hardware,14C239,,,EATC Digital. Hardware limitation.
+ABS VIN Stamp,ABS,760-01-01,xxxx,,,First block of ASCII VIN (1FMF...). Must match truck.
