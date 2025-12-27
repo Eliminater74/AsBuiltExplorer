@@ -152,7 +152,22 @@ namespace AsBuiltExplorer
             this.Button4 = new System.Windows.Forms.Button();
             this.TabPage6 = new System.Windows.Forms.TabPage();
             this.btnBrowseRefresh = new System.Windows.Forms.Button();
-            this.lvwBrowser = new System.Windows.Forms.ListView();
+            // 
+            // TabPage7
+            // 
+            this.TabPage7 = new System.Windows.Forms.TabPage();
+            // 
+            // TabPage8
+            // 
+            this.TabPage8 = new System.Windows.Forms.TabPage();
+            this.lblAboutTitle = new System.Windows.Forms.Label();
+            this.lblAboutVersion = new System.Windows.Forms.Label();
+            this.lblAboutDev = new System.Windows.Forms.Label();
+            this.lblAboutCredits = new System.Windows.Forms.Label();
+            this.lblAboutMoto = new System.Windows.Forms.Label();
+            this.lnkAboutGithub = new System.Windows.Forms.LinkLabel();
+            // 
+             this.lvwBrowser = new System.Windows.Forms.ListView();
             this.ColumnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colModuleName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -176,6 +191,8 @@ namespace AsBuiltExplorer
             this.TabPage4.SuspendLayout();
             this.TabPage5.SuspendLayout();
             this.TabPage6.SuspendLayout();
+            this.TabPage7.SuspendLayout();
+            this.TabPage8.SuspendLayout();
             this.ContextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -197,6 +214,8 @@ namespace AsBuiltExplorer
             this.TabControl1.Controls.Add(this.TabPage4);
             this.TabControl1.Controls.Add(this.TabPage5);
             this.TabControl1.Controls.Add(this.TabPage6);
+            this.TabControl1.Controls.Add(this.TabPage7);
+            this.TabControl1.Controls.Add(this.TabPage8);
             this.TabControl1.Location = new System.Drawing.Point(16, 15);
             this.TabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.TabControl1.Name = "TabControl1";
@@ -1407,6 +1426,94 @@ namespace AsBuiltExplorer
             this.btnBrowseRefresh.Text = "Refresh";
             this.btnBrowseRefresh.UseVisualStyleBackColor = true;
             // 
+            // TabPage7
+            // 
+            this.TabPage7.BackColor = System.Drawing.SystemColors.Control;
+            this.TabPage7.Location = new System.Drawing.Point(4, 25);
+            this.TabPage7.Name = "TabPage7";
+            this.TabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage7.Size = new System.Drawing.Size(991, 562);
+            this.TabPage7.TabIndex = 6;
+            this.TabPage7.Text = "Help";
+            // 
+            // TabPage8
+            // 
+            this.TabPage8.BackColor = System.Drawing.SystemColors.Control;
+            this.TabPage8.Controls.Add(this.lnkAboutGithub);
+            this.TabPage8.Controls.Add(this.lblAboutMoto);
+            this.TabPage8.Controls.Add(this.lblAboutCredits);
+            this.TabPage8.Controls.Add(this.lblAboutDev);
+            this.TabPage8.Controls.Add(this.lblAboutVersion);
+            this.TabPage8.Controls.Add(this.lblAboutTitle);
+            this.TabPage8.Location = new System.Drawing.Point(4, 25);
+            this.TabPage8.Name = "TabPage8";
+            this.TabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage8.Size = new System.Drawing.Size(991, 562);
+            this.TabPage8.TabIndex = 7;
+            this.TabPage8.Text = "About";
+            // 
+            // lblAboutTitle
+            // 
+            this.lblAboutTitle.AutoSize = true;
+            this.lblAboutTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAboutTitle.Location = new System.Drawing.Point(50, 50);
+            this.lblAboutTitle.Name = "lblAboutTitle";
+            this.lblAboutTitle.Size = new System.Drawing.Size(262, 37);
+            this.lblAboutTitle.TabIndex = 0;
+            this.lblAboutTitle.Text = "AsBuiltExplorer";
+            // 
+            // lblAboutVersion
+            // 
+            this.lblAboutVersion.AutoSize = true;
+            this.lblAboutVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAboutVersion.Location = new System.Drawing.Point(53, 97);
+            this.lblAboutVersion.Name = "lblAboutVersion";
+            this.lblAboutVersion.Size = new System.Drawing.Size(63, 20);
+            this.lblAboutVersion.TabIndex = 1;
+            this.lblAboutVersion.Text = "Version";
+            // 
+            // lblAboutDev
+            // 
+            this.lblAboutDev.AutoSize = true;
+            this.lblAboutDev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAboutDev.Location = new System.Drawing.Point(53, 140);
+            this.lblAboutDev.Name = "lblAboutDev";
+            this.lblAboutDev.Size = new System.Drawing.Size(193, 20);
+            this.lblAboutDev.TabIndex = 2;
+            this.lblAboutDev.Text = "Developed by Eliminater74";
+            // 
+            // lblAboutCredits
+            // 
+            this.lblAboutCredits.AutoSize = true;
+            this.lblAboutCredits.Location = new System.Drawing.Point(54, 200);
+            this.lblAboutCredits.Name = "lblAboutCredits";
+            this.lblAboutCredits.Size = new System.Drawing.Size(400, 32);
+            this.lblAboutCredits.TabIndex = 3;
+            this.lblAboutCredits.Text = "Based on CompulsiveCode by Jesse Yeager.\r\nBig thanks to the open source community.";
+            // 
+            // lblAboutMoto
+            // 
+            this.lblAboutMoto.AutoSize = true;
+            this.lblAboutMoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAboutMoto.ForeColor = System.Drawing.Color.DarkBlue;
+            this.lblAboutMoto.Location = new System.Drawing.Point(53, 300);
+            this.lblAboutMoto.Name = "lblAboutMoto";
+            this.lblAboutMoto.Size = new System.Drawing.Size(111, 24);
+            this.lblAboutMoto.TabIndex = 4;
+            this.lblAboutMoto.Text = "PureFusion";
+            // 
+            // lnkAboutGithub
+            // 
+            this.lnkAboutGithub.AutoSize = true;
+            this.lnkAboutGithub.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkAboutGithub.Location = new System.Drawing.Point(54, 350);
+            this.lnkAboutGithub.Name = "lnkAboutGithub";
+            this.lnkAboutGithub.Size = new System.Drawing.Size(320, 17);
+            this.lnkAboutGithub.TabIndex = 5;
+            this.lnkAboutGithub.TabStop = true;
+            this.lnkAboutGithub.Text = "https://github.com/Eliminater74/AsBuiltExplorer";
+            this.lnkAboutGithub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAboutGithub_LinkClicked);
+            // 
             // lvwBrowser
             // 
             this.lvwBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1561,6 +1668,9 @@ namespace AsBuiltExplorer
             this.TabPage5.ResumeLayout(false);
             this.TabPage5.PerformLayout();
             this.TabPage6.ResumeLayout(false);
+            this.TabPage7.ResumeLayout(false);
+            this.TabPage8.ResumeLayout(false);
+            this.TabPage8.PerformLayout();
             this.ContextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.TabPage5.Click += new System.EventHandler(this.TabPage5_Click);
@@ -1724,8 +1834,16 @@ namespace AsBuiltExplorer
   private System.Windows.Forms.Button btnDB4;
   private System.Windows.Forms.ToolStripMenuItem IdentifyToolStripMenuItem;
   private TextBox TextBox6;
-  private System.Windows.Forms.Button btnViewDefs;
-}
+    private System.Windows.Forms.Button btnViewDefs;
+   private System.Windows.Forms.TabPage TabPage7;
+   private System.Windows.Forms.TabPage TabPage8;
+   private System.Windows.Forms.Label lblAboutTitle;
+   private System.Windows.Forms.Label lblAboutVersion;
+   private System.Windows.Forms.Label lblAboutDev;
+   private System.Windows.Forms.Label lblAboutCredits;
+   private System.Windows.Forms.Label lblAboutMoto;
+   private System.Windows.Forms.LinkLabel lnkAboutGithub;
+ }
 }
 
 

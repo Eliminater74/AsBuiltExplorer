@@ -3168,6 +3168,11 @@ label_24:
   }
 
 
+  private void lnkAboutGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+  {
+      Process.Start("https://github.com/Eliminater74/AsBuiltExplorer");
+  }
+
   private void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
   {
       Graphics g = e.Graphics;
