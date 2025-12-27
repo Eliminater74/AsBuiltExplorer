@@ -800,6 +800,37 @@ public partial class Form1 : Form
 
 
   
+  private void btnBrowseRefresh_Click(object sender, EventArgs e)
+  {
+      VehicleDatabase.Load();
+      lvwBrowser.Items.Clear();
+      lvwBrowser.BeginUpdate();
+      try
+      {
+          foreach (var v in VehicleDatabase.Entries)
+          {
+              var item = new ListViewItem(v.FriendlyName);
+              // Date
+              string dateStr = "--";
+              try {
+                  if (!string.IsNullOrEmpty(v.FilePath) && File.Exists(v.FilePath))
+                      dateStr = File.GetLastWriteTime(v.FilePath).ToShortDateString();
+              } catch {}
+              
+              item.SubItems.Add(dateStr);
+              item.SubItems.Add("");
+              item.SubItems.Add("");
+              item.SubItems.Add(v.VIN);
+              
+              lvwBrowser.Items.Add(item);
+          }
+      }
+      finally
+      {
+          lvwBrowser.EndUpdate();
+      }
+  }
+
   private void cmbDeduceSavedVehicles_SelectedIndexChanged(object sender, EventArgs e)
   {
        if (cmbDeduceSavedVehicles.SelectedItem is VehicleEntry v)

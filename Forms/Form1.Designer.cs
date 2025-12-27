@@ -1534,7 +1534,7 @@ namespace AsBuiltExplorer
             this.TabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.TabPage6.Size = new System.Drawing.Size(991, 565);
             this.TabPage6.TabIndex = 5;
-            this.TabPage6.Text = "AsBuilt Browser";
+            this.TabPage6.Text = "Vehicle Database";
             // 
             // btnBrowseRefresh
             // 
@@ -1545,6 +1545,7 @@ namespace AsBuiltExplorer
             this.btnBrowseRefresh.TabIndex = 1;
             this.btnBrowseRefresh.Text = "Refresh";
             this.btnBrowseRefresh.UseVisualStyleBackColor = true;
+            this.btnBrowseRefresh.Click += new System.EventHandler(this.btnBrowseRefresh_Click);
             // 
             // TabPage7
             // 
