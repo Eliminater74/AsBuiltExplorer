@@ -148,7 +148,7 @@
     <Content Include="CustomCSV\CommonCodes2.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="AsBuiltData\**">
+    <Content Include="AsBuiltData\1FMFK15598LA51274.ab">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
