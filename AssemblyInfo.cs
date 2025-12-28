@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("AsBuiltExplorer")]
+[assembly: AssemblyTitle("AsBuiltExplorer Toolkit")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("PureFusion")]
 [assembly: AssemblyProduct("AsBuiltExplorer")]
