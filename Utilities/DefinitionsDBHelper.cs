@@ -25,6 +25,8 @@ namespace AsBuiltExplorer
                 string sql = @"
                     CREATE TABLE IF NOT EXISTS CommonCodes (
                         ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Era TEXT,
+                        Model TEXT,
                         FeatureName TEXT,
                         Module TEXT,
                         Address TEXT,
@@ -38,6 +40,14 @@ namespace AsBuiltExplorer
                     cmd.ExecuteNonQuery();
                 }
             }
+
+            // Migration: Add columns if missing (Simple check)
+            using (var conn = new SQLiteConnection(_connectionString))
+            {
+                conn.Open();
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE CommonCodes ADD COLUMN Era TEXT", conn)) cmd.ExecuteNonQuery(); } catch { }
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE CommonCodes ADD COLUMN Model TEXT", conn)) cmd.ExecuteNonQuery(); } catch { }
+            }
         }
 
         public static SQLiteConnection GetConnection()
@@ -47,7 +57,7 @@ namespace AsBuiltExplorer
             return conn;
         }
 
-        public static void AddEntry(string name, string module, string address, string d1, string d2, string d3, string notes)
+        public static void AddEntry(string era, string model, string name, string module, string address, string d1, string d2, string d3, string notes)
         {
             using (var conn = GetConnection())
             {
@@ -63,9 +73,11 @@ namespace AsBuiltExplorer
                     if (count > 0) return; // Skip duplicate
                 }
 
-                string query = "INSERT INTO CommonCodes (FeatureName, Module, Address, Data1Mask, Data2Mask, Data3Mask, Notes) VALUES (@name, @mod, @addr, @d1, @d2, @d3, @notes)";
+                string query = "INSERT INTO CommonCodes (Era, Model, FeatureName, Module, Address, Data1Mask, Data2Mask, Data3Mask, Notes) VALUES (@era, @model, @name, @mod, @addr, @d1, @d2, @d3, @notes)";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
+                    cmd.Parameters.AddWithValue("@era", era);
+                    cmd.Parameters.AddWithValue("@model", model);
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@mod", module);
                     cmd.Parameters.AddWithValue("@addr", address);

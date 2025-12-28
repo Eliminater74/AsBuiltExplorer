@@ -11,6 +11,8 @@ namespace AsBuiltExplorer
     public class CommonFeature
     {
         public int ID { get; set; }
+        public string Era { get; set; }
+        public string Model { get; set; }
         public string Name { get; set; }
         public string Module { get; set; }
         public string Address { get; set; }
@@ -68,6 +70,8 @@ namespace AsBuiltExplorer
                         var f = new CommonFeature
                         {
                             ID = Convert.ToInt32(reader["ID"]),
+                            Era = reader["Era"] != DBNull.Value ? reader["Era"].ToString() : "",
+                            Model = reader["Model"] != DBNull.Value ? reader["Model"].ToString() : "",
                             Name = reader["FeatureName"].ToString(),
                             Module = reader["Module"].ToString(),
                             Address = reader["Address"].ToString(),
@@ -90,6 +94,71 @@ namespace AsBuiltExplorer
             if (!_loaded) Load();
             if (_lookup.ContainsKey(address)) return _lookup[address];
             return new List<CommonFeature>();
+        }
+
+        public static List<string> GetMatchingFeatures(string address, string d1, string d2, string d3, int year)
+        {
+            var candidates = GetFeaturesForAddress(address);
+            List<string> matches = new List<string>();
+
+            // Determine Era
+            string targetEra = (year > 0 && year < 2011) ? "Legacy" : "Modern"; // Default to Modern if unknown
+
+            foreach (var f in candidates)
+            {
+                // Filter by Era if specified in DB
+                if (!string.IsNullOrEmpty(f.Era))
+                {
+                    if (!f.Era.Equals("All", StringComparison.OrdinalIgnoreCase) && 
+                        !f.Era.Equals(targetEra, StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue; // Era Mismatch
+                    }
+                }
+
+                // Basic matching logic: If mask is present, data must match it
+                // We assume masks are stored as Hex strings like "720-01-01" or just "xxxx"
+                // Actually, typically they are just the data part.
+                
+                bool match = true;
+                if (!IsHexMatch(d1, f.Data1Mask)) match = false;
+                if (match && !IsHexMatch(d2, f.Data2Mask)) match = false;
+                if (match && !IsHexMatch(d3, f.Data3Mask)) match = false;
+
+                if (match)
+                {
+                    matches.Add(f.Name);
+                }
+            }
+            return matches;
+        }
+
+        private static bool IsHexMatch(string data, string mask)
+        {
+            if (string.IsNullOrWhiteSpace(mask)) return true; // Empty mask = match anything (or ignore?) -> Usually ignore if not specified
+            // If data is missing but mask interacts, fail? 
+            if (string.IsNullOrWhiteSpace(data)) return false; 
+
+            // Standardize
+            data = data.Trim().ToUpper().Replace(" ", "");
+            mask = mask.Trim().ToUpper().Replace(" ", "").Replace("-", ""); // Allow masks to have hyphens maybe?
+
+            // Length check? Masks might be shorter or longer.
+            // Usually we compare minimal length.
+            int len = Math.Min(data.Length, mask.Length);
+            
+            for (int i = 0; i < len; i++)
+            {
+                char m = mask[i];
+                char d = data[i];
+
+                // 'X' or '?' matches any nibble
+                if (m == 'X' || m == '?') continue;
+                
+                // Otherwise must match exactly
+                if (m != d) return false;
+            }
+            return true;
         }
 
         private static void ImportFromCSV()
@@ -183,6 +252,37 @@ namespace AsBuiltExplorer
                     d2 = parts.Count > 2 ? parts[2].Trim() : "";
                     d3 = parts.Count > 3 ? parts[3].Trim() : "";
                     name = parts.Count > 4 ? parts[4].Trim() : "";
+                }
+                else if (detectedFormat == 3) // Format 3: Master CSV (Era, Model, Module, Address, HexMask, Value, Desc, Notes)
+                {
+                     // Era=0, Model=1, Module=2, Address=3, HexMask=4, Value=5, Desc=6, Notes=7
+                     string era = parts.Count > 0 ? parts[0].Trim() : "";
+                     string model = parts.Count > 1 ? parts[1].Trim() : "";
+                     module = parts.Count > 2 ? parts[2].Trim() : "";
+                     address = parts.Count > 3 ? parts[3].Trim() : "";
+                     string hexMask = parts.Count > 4 ? parts[4].Trim() : ""; // 0000-FFFF-0000
+                     string valHex = parts.Count > 5 ? parts[5].Trim() : ""; // 2323
+                     name = parts.Count > 6 ? parts[6].Trim() : "";
+                     notes = parts.Count > 7 ? parts[7].Trim() : "";
+                     
+                     // Parse HexMask to distribute Value
+                      // Expecting "XXXX-XXXX-XXXX" or similar.
+                      // Logic: If segment is non-zero (F or other), apply Value to it?
+                      // User said: "Hex Mask: 0000-FFFF-0000, Value: 2323". This implies Value goes to the middle block.
+                      // Robust Logic: Split Mask. Count significant blocks. If 1 significant block, put value there.
+                      
+                      var maskParts = hexMask.Split('-');
+                      if (maskParts.Length == 3)
+                      {
+                          // Simple heuristic: If mask part contains 'F', put value there.
+                          // Limitation: Assumes value is exactly for ONE block.
+                          if (maskParts[0].Contains("F")) d1 = valHex;
+                          else if (maskParts[1].Contains("F")) d2 = valHex;
+                          else if (maskParts[2].Contains("F")) d3 = valHex;
+                      }
+                      
+                      DefinitionsDBHelper.AddEntry(era, model, name, module, address, d1, d2, d3, notes);
+                      continue; // Special insert, skip standard insert below
                 }
                 else if (detectedFormat == 1) // Format 2 (2GFusions/CommonCodes2): Index | Polyglot(Addr/Mod/Name) | D1 | D2?
                 {
@@ -338,14 +438,13 @@ namespace AsBuiltExplorer
                 d1 = d1.Replace(" ", "").Replace("-", ""); // Also strip hyphens if pseudo-mask used them
                 d2 = d2.Replace(" ", "").Replace("-", "");
                 d3 = d3.Replace(" ", "").Replace("-", "");
-
                 // Only insert if we have at least one mask
                 if (string.IsNullOrEmpty(d1) && string.IsNullOrEmpty(d2) && string.IsNullOrEmpty(d3)) continue;
                 
-                // Skip Header-like lines
-                if (name.ToLower() == "feature name" || module.ToLower() == "module") continue;
+                if (String.IsNullOrEmpty(address)) continue;
 
-                DefinitionsDBHelper.AddEntry(name, module, address, d1, d2, d3, notes);
+                if (detectedFormat != 3) // Standard Add (no Era/Model)
+                    DefinitionsDBHelper.AddEntry("", "", name, module, address, d1, d2, d3, notes);
             }
         }
 

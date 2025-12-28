@@ -67,6 +67,7 @@ namespace AsBuiltExplorer
             this.ColumnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colKnownFeatures = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -553,6 +554,7 @@ namespace AsBuiltExplorer
             this.ColumnHeader4,
             this.ColumnHeader5,
             this.ColumnHeader6,
+            this.colKnownFeatures,
             this.ColumnHeader7,
             this.ColumnHeader8,
             this.ColumnHeader9});
@@ -601,7 +603,12 @@ namespace AsBuiltExplorer
             // ColumnHeader6
             // 
             this.ColumnHeader6.Text = "Binary";
-            this.ColumnHeader6.Width = 473;
+            this.ColumnHeader6.Width = 338;
+            // 
+            // colKnownFeatures
+            // 
+            this.colKnownFeatures.Text = "Known Features";
+            this.colKnownFeatures.Width = 300;
             // 
             // ColumnHeader7
             // 
@@ -1696,7 +1703,6 @@ namespace AsBuiltExplorer
             // tbxDeduceReport2
             // 
             this.tbxDeduceReport2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbxDeduceReport2.Location = new System.Drawing.Point(24, 343);
             this.tbxDeduceReport2.MaxLength = 5000000;
             this.tbxDeduceReport2.Multiline = true;
             this.tbxDeduceReport2.Name = "tbxDeduceReport2";
@@ -2357,8 +2363,9 @@ namespace AsBuiltExplorer
 
     private System.Windows.Forms.ColumnHeader colModCat;
     private System.Windows.Forms.ToolStripMenuItem EditFeaturesToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem DecodeNHTSAToolStripMenuItem; // Added
-    private System.Windows.Forms.ToolStripMenuItem ScanLibraryToolStripMenuItem; // Added
+    private System.Windows.Forms.ToolStripMenuItem DecodeNHTSAToolStripMenuItem; 
+    private System.Windows.Forms.ToolStripMenuItem ScanLibraryToolStripMenuItem; 
+    private System.Windows.Forms.ColumnHeader colKnownFeatures;
     private System.Windows.Forms.PictureBox pbSettings;
     private System.Windows.Forms.Button btnDB_Scan;
     private System.Windows.Forms.ColumnHeader colFeatures; // Added
