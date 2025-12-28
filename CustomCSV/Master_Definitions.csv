@@ -12,7 +12,7 @@ Legacy,Super Duty,IC,720-01-01,0000-000F-0000,B,Compass: Disabled,Disables Compa
 Modern,F-150 (15+),BCM,726-27-01,0000-0001-0000,0,Bambi Mode: Enabled,Fogs stay ON with High Beams
 Modern,F-150 (15+),BCM,726-27-01,0000-0001-0000,1,Bambi Mode: Disabled,Factory Setting (Fogs cut out)
 Modern,F-150 (15+),BCM,726-41-02,0000-0001-0000,0,Double Honk: Disabled,No honk when leaving running truck
-Modern,F-150 (15+),BCM,726-41-02,0000-0001-0000,1,Double Honk: Enabled,Factory Setting
+ Modern,F-150 (15+),BCM,726-41-02,0000-0001-0000,1,Double Honk: Enabled,Factory Setting
 Modern,F-150 (15+),BCM,726-17-01,0000-0001-0000,1,Global Window: Open (BCM),Part 1 of 2
 Modern,F-150 (15+),BCM,726-17-02,0000-0001-0000,1,Global Window: Close (BCM),Part 2 of 2
 Modern,Mustang S550,ACM,727-01-01,0000-0001-0000,0,Active Noise Control: Disabled,Turns off fake engine noise
@@ -25,3 +25,4 @@ Modern,F-150 (15+),IPC,720-07-01,0000-000F-0000,5,Temps: Enabled,Show Numbers ab
 Modern,Super Duty,IPC,720-01-01,0000-000F-0000,9,DPF %: Enabled,Show Soot Level in Cluster
 Modern,F-150 (15+),DDM,740-05-01,0000-0001-0000,1,Global Window: Open (Driver),Part 3 of 4
 Modern,F-150 (15+),PDM,741-05-01,0000-0001-0000,1,Global Window: Open (Pass),Part 4 of 4
+Modern,Test,IC,720-02-01,FFFF-0000-0000,3146,Test: Cluster Region US,Verified Match
