@@ -1029,7 +1029,7 @@ public partial class Form1 : Form
       
       if(features.Count == 0)
       {
-          MessageBox.Show("No vehicle features found in the database.\n\nWays to fix this:\n1. Import vehicles with associated .ETIS.HTML files.\n2. Manually tag vehicles: Go to 'Vehicle Database', right-click a vehicle, and select 'Edit Features...'.\n\nOnce vehicles are tagged with features (e.g. 'CruiseControl'), they will appear here.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          MessageBox.Show("No vehicle features found in the database.\n\nTo Auto-Discover Features:\n1. Go to the 'Vehicle Database' tab.\n2. Select your vehicles.\n3. Right-Click and choose 'Decode with NHTSA (Online)'.\n\nThis will automatically fetch official specs (Trim, Drive, Series) using the government API and populate this list.", "No Features Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
   }
 
