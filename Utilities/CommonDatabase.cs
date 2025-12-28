@@ -181,20 +181,30 @@ namespace AsBuiltExplorer
                 }
                 else if (detectedFormat == 3)
                 {
-                    // Format: Name | Module | Address | Default | Mask | Notes
+                    // Format: Feature Name | Module | Address | D1 | D2 | D3 | Notes
                     name = col0;
                     module = col1;
                     address = col2;
+
+                    // Skip Header Row if detected
+                    if (name.ToLower().Contains("feature") && address.ToLower().Contains("address")) continue;
                     
-                    // Mask in Col 4
-                    string maskRaw = parts.Count > 4 ? parts[4].Trim() : "";
-                    var masks = maskRaw.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    d1 = parts.Count > 3 ? parts[3].Trim() : "";
+                    d2 = parts.Count > 4 ? parts[4].Trim() : "";
+                    d3 = parts.Count > 5 ? parts[5].Trim() : "";
                     
-                    if (masks.Length > 0) d1 = masks[0];
-                    if (masks.Length > 1) d2 = masks[1];
-                    if (masks.Length > 2) d3 = masks[2];
-                    
-                    notes = parts.Count > 5 ? parts[5].Trim() : "";
+                    // If D1 contains spaces, it might be a single column "D1 D2 D3" format
+                    // But usually Livnitup spreadsheets use separate columns: Value, D2, D3
+                    // Let's check for spaces just in case
+                    if (d1.Contains(" "))
+                    {
+                         var masks = d1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                         if (masks.Length > 0) d1 = masks[0];
+                         if (masks.Length > 1) d2 = masks[1];
+                         if (masks.Length > 2) d3 = masks[2];
+                    }
+
+                    notes = parts.Count > 6 ? parts[6].Trim() : "";
                 }
 
                 // Handle Persistence / Merged Cells
