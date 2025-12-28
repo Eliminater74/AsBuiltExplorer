@@ -113,6 +113,11 @@ public partial class Form1 : Form
       ModuleDatabase.LoadDatabase();
       CommonDatabase.Load(); // Triggers Migration
       ApplyTheme();
+
+      // Set Version from Assembly
+      var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+      this.Text = $"AsBuiltExplorer v{version.Major}.{version.Minor}.{version.Build}";
+      this.lblAboutVersion.Text = $"Version {version}";
   }
 
   private void pbSettings_Click(object sender, EventArgs e)
