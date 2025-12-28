@@ -53,6 +53,9 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
   </ItemGroup>
@@ -149,6 +152,7 @@
   <ItemGroup>
     <None Include="README.md" />
     <None Include="app.config" />
+    <Content Include="app_icon.ico" />
     <Content Include="CustomCSV\CommonCodes.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
