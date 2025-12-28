@@ -3646,14 +3646,14 @@ label_24:
                     
                     // Parse
                     var vInfo = new VehicleInfo(); 
-                    if (modAsBuilt.AsBuilt_LoadFile_AB(tempFile, ref vInfo))
+                    if (LoadVehicleInfo(tempFile, ref vInfo))
                     {
                          List<string> foundFeatures = new List<string>();
                          // Iterate modules in vehicle
                          for(int i = 0; i < vInfo.abModuleAddrCount; i++)
                          {
                              string addr = vInfo.abModuleAddresses[i]; // e.g. 720-01-01
-                             string data = vInfo.abModuleValues[i];    // e.g. 01020304
+                             string data = vInfo.abModuleDatasHex[i];    // e.g. 01020304
                             
                              // Look up in CommonDB
                              var candidates = CommonDatabase.GetFeaturesForAddress(addr);
@@ -3661,16 +3661,7 @@ label_24:
                              {
                                  // Check mask against data
                                  // Helper needed. CommonDatabase has MatchMask but it expects split D1,D2,D3.
-                                 // The loader puts all data in 'abModuleValues'? 
-                                 // Let's check 'AsBuilt_LoadFile_AB'. It puts Hex Data in abModuleValues.
-                                 // We need to split it if the mask is split?
-                                 // Or use a helper that takes raw hex.
-                                 
-                                 // Simplification: We will pass data to a helper and let it split?
-                                 // CommonDatabase stores D1, D2, D3 masks.
-                                 // We need to parse 'data' into D1/D2/D3.
-                                 // Assuming data format: "D1 D2 D3" or just continuous hex?
-                                 // Inspection of modAsBuilt needed. For now assume continuous hex string.
+                                 // The loader puts all data in 'abModuleDatasHex'
                                  // We need to split into blocks.
                                  
                                  string[] blocks = SplitHexUnk(data); // "AABB", "CCDD"...
@@ -3678,9 +3669,12 @@ label_24:
                                  string d2 = blocks.Length > 1 ? blocks[1] : "";
                                  string d3 = blocks.Length > 2 ? blocks[2] : "";
 
-                                 if (CommonDatabase.FindMatch(addr, d1, d2, d3) == cand) // Reuse FindMatch logic
+                                 if (CommonDatabase.FindMatch(addr, d1, d2, d3) != null) // Reuse FindMatch
                                  {
-                                      foundFeatures.Add(cand.Name);
+                                      // Only add specific matches, check logic
+                                      var match = CommonDatabase.FindMatch(addr, d1, d2, d3);
+                                      if (match.Name == cand.Name)
+                                        foundFeatures.Add(cand.Name);
                                  }
                              }
                          }
@@ -3734,6 +3728,49 @@ label_24:
         {
              MessageBox.Show("No known library features found in selected vehicles.", "Scan Complete");
         }
+    }
+
+    private bool LoadVehicleInfo(string tempFile, ref VehicleInfo vInfo)
+    {
+        // Wrapper for legacy modAsBuilt call
+        string[] retModuleAddresses = new string[0];
+        string[] retModuleDatas = new string[0];
+        int retModuleAddressCount = 0;
+        string retVIN = "";
+        string[] retModInfo_IDs = new string[0];
+        string[] retModInfo_PartNumbers = new string[0];
+        string[] retModInfo_Strategies = new string[0];
+        string[] retModInfo_Calibrations = new string[0];
+        int retModInfo_Count = 0;
+        string retCCCdata = "";
+
+        // Default to AB format assumption for Library Scan
+        bool success = modAsBuilt.AsBuilt_LoadFile_AB(tempFile, 
+            ref retModuleAddresses, 
+            ref retModuleDatas, 
+            ref retModuleAddressCount, 
+            ref retVIN, 
+            ref retModInfo_IDs, 
+            ref retModInfo_PartNumbers, 
+            ref retModInfo_Strategies, 
+            ref retModInfo_Calibrations, 
+            ref retModInfo_Count, 
+            ref retCCCdata);
+            
+        if (success)
+        {
+            vInfo.abModuleAddresses = retModuleAddresses;
+            vInfo.abModuleDatasHex = retModuleDatas;
+            vInfo.abModuleAddrCount = retModuleAddressCount;
+            vInfo.carVIN = retVIN;
+            
+            // Dummy init required arrays to prevent null refs elsewhere?
+            vInfo.abModuleInfo_PartNums = retModInfo_PartNumbers;
+            vInfo.abModuleInfo_Names = new string[retModuleAddressCount];
+            vInfo.abModuleInfo_Descriptions = new string[retModuleAddressCount]; 
+            // etc
+        }
+        return success;
     }
 
     private string[] SplitHexUnk(string hex)

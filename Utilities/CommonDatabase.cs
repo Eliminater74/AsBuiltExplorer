@@ -205,9 +205,10 @@ namespace AsBuiltExplorer
                 if (string.IsNullOrEmpty(address)) continue;
 
                 // Cleanup Masks (Wildcards)
-                d1 = d1.Replace("*", "x").Replace(" ", "");
-                d2 = d2.Replace("*", "x").Replace(" ", "");
-                d3 = d3.Replace("*", "x").Replace(" ", "");
+                // Cleanup Masks (Wildcards)
+                d1 = d1.Replace(" ", "");
+                d2 = d2.Replace(" ", "");
+                d3 = d3.Replace(" ", "");
 
                 // Only insert if we have at least one mask
                 if (string.IsNullOrEmpty(d1) && string.IsNullOrEmpty(d2) && string.IsNullOrEmpty(d3)) continue;
