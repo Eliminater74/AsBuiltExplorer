@@ -221,6 +221,33 @@ namespace AsBuiltExplorer
                 // Skip Header-like lines that slipped through (e.g. "Address" as name?)
                 if (name.ToLower() == "feature name" || module.ToLower() == "module") continue;
 
+                // --- Heuristic Cleanup ---
+                // Problem: Some files put "Note: ..." in D2 or D3 columns
+                // Check if D2 looks like a note
+                if (!string.IsNullOrEmpty(d2) && (d2.ToLower().Contains("note:") || d2.Contains("(") || d2.Length > 12))
+                {
+                    // If D2 is a note, D3 is probably part of it too
+                    string append = d2;
+                    if (!string.IsNullOrEmpty(d3)) append += " " + d3;
+                    
+                    if (!string.IsNullOrEmpty(notes)) notes = append + " " + notes;
+                    else notes = append;
+                    
+                    d2 = "";
+                    d3 = "";
+                }
+                
+                // Check if D3 looks like a note
+                if (!string.IsNullOrEmpty(d3) && (d3.ToLower().Contains("note:") || d3.Contains("(") || d3.Length > 12))
+                {
+                     if (!string.IsNullOrEmpty(notes)) notes = d3 + " " + notes;
+                     else notes = d3;
+                     d3 = "";
+                }
+
+                // Problem: Some files have an Index number in the Module column
+                if (Regex.IsMatch(module, @"^\d+$")) module = "";
+
                 DefinitionsDBHelper.AddEntry(name, module, address, d1, d2, d3, notes);
             }
         }
