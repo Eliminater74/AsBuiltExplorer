@@ -120,19 +120,6 @@
   <metadata name="ContextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="TextBox2.Text" xml:space="preserve">
-    <value>This tool is used to collect AsBuilt Data.  The program stores: 
-
-- ETIS info as HTML 
-- AsBuilt info as HTML
-- AsBuilt info in .AB format
-
-All three are required for the "Deducer" tools.
-
-The more data collected, the more precisely the program can identify bits that correspond to factory features.
-
-Get VINs from used-car websites, filtering on vehicle / year.</value>
-  </data>
   <data name="TextBox1.Text" xml:space="preserve">
     <value>This tool identifies perfect-match bits (bits that are always on in vehicles with the selected feature, and off in vehicles without the selected feature).  
 

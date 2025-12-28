@@ -34,12 +34,15 @@ namespace AsBuiltExplorer
     {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.TabPage1 = new System.Windows.Forms.TabPage();
+            this.btnViewDefs = new System.Windows.Forms.Button();
+            this.btnDB4 = new System.Windows.Forms.Button();
+            this.btnDB3 = new System.Windows.Forms.Button();
+            this.btnDB2 = new System.Windows.Forms.Button();
+            this.btnDB1 = new System.Windows.Forms.Button();
             this.chkShowOnlyMismatches = new System.Windows.Forms.CheckBox();
             this.chkCompareShowNames = new System.Windows.Forms.CheckBox();
-            this.chkCompareShowNames.CheckedChanged += new System.EventHandler(this.chkCompareShowNames_CheckedChanged);
             this.lblComp4VIN = new System.Windows.Forms.Label();
             this.lblComp3VIN = new System.Windows.Forms.Label();
             this.lblComp2VIN = new System.Windows.Forms.Label();
@@ -67,7 +70,6 @@ namespace AsBuiltExplorer
             this.ColumnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnViewDefs = new System.Windows.Forms.Button();
             this.ContextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EntireLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,39 +84,54 @@ namespace AsBuiltExplorer
             this.Label7 = new System.Windows.Forms.Label();
             this.Label6 = new System.Windows.Forms.Label();
             this.TabPage2 = new System.Windows.Forms.TabPage();
-
-            this.Label16 = new System.Windows.Forms.Label();
+            this.grpAudio = new System.Windows.Forms.GroupBox();
+            this.lblAudio_Desc = new System.Windows.Forms.Label();
+            this.tbxAudio_Hex = new System.Windows.Forms.TextBox();
+            this.chkAudio_Sat = new System.Windows.Forms.CheckBox();
+            this.chkAudio_DVD = new System.Windows.Forms.CheckBox();
+            this.chkAudio_Sub = new System.Windows.Forms.CheckBox();
+            this.grpVIN = new System.Windows.Forms.GroupBox();
+            this.lblVIN_Desc = new System.Windows.Forms.Label();
+            this.btnVIN_Convert = new System.Windows.Forms.Button();
+            this.txtVIN_Hex = new System.Windows.Forms.TextBox();
+            this.txtVIN_Input = new System.Windows.Forms.TextBox();
+            this.grpTPMS = new System.Windows.Forms.GroupBox();
+            this.lblTPMS_Desc = new System.Windows.Forms.Label();
+            this.tbxTPMS_Hex = new System.Windows.Forms.TextBox();
+            this.numTPMS_PSI = new System.Windows.Forms.NumericUpDown();
+            this.grpConverter = new System.Windows.Forms.GroupBox();
             this.Label15 = new System.Windows.Forms.Label();
-            this.tbxChecksumBin = new System.Windows.Forms.TextBox();
-            this.tbxConvertBin = new System.Windows.Forms.TextBox();
+            this.Label16 = new System.Windows.Forms.Label();
             this.tbxConvertHex = new System.Windows.Forms.TextBox();
-            this.tbxData3bin2 = new System.Windows.Forms.TextBox();
-            this.tbxData2bin2 = new System.Windows.Forms.TextBox();
-            this.tbxData1bin2 = new System.Windows.Forms.TextBox();
-            this.tbxData3bin1 = new System.Windows.Forms.TextBox();
-            this.tbxData2bin1 = new System.Windows.Forms.TextBox();
-            this.tbxData1bin1 = new System.Windows.Forms.TextBox();
-            this.tbxChecksumHex = new System.Windows.Forms.TextBox();
-            this.Label5 = new System.Windows.Forms.Label();
-            this.Button1 = new System.Windows.Forms.Button();
-            this.tbxData3hex = new System.Windows.Forms.TextBox();
-            this.Label4 = new System.Windows.Forms.Label();
-            this.tbxData2hex = new System.Windows.Forms.TextBox();
-            this.Label3 = new System.Windows.Forms.Label();
-            this.tbxData1hex = new System.Windows.Forms.TextBox();
-            this.Label2 = new System.Windows.Forms.Label();
-            this.tbxModIDhex = new System.Windows.Forms.TextBox();
+            this.tbxConvertBin = new System.Windows.Forms.TextBox();
+            this.grpChecksum = new System.Windows.Forms.GroupBox();
             this.Label1 = new System.Windows.Forms.Label();
+            this.tbxModIDhex = new System.Windows.Forms.TextBox();
+            this.Label2 = new System.Windows.Forms.Label();
+            this.tbxData1hex = new System.Windows.Forms.TextBox();
+            this.Label3 = new System.Windows.Forms.Label();
+            this.tbxData2hex = new System.Windows.Forms.TextBox();
+            this.Label4 = new System.Windows.Forms.Label();
+            this.tbxData3hex = new System.Windows.Forms.TextBox();
+            this.Button1 = new System.Windows.Forms.Button();
+            this.Label5 = new System.Windows.Forms.Label();
+            this.tbxChecksumHex = new System.Windows.Forms.TextBox();
+            this.tbxData1bin1 = new System.Windows.Forms.TextBox();
+            this.tbxData2bin1 = new System.Windows.Forms.TextBox();
+            this.tbxData3bin1 = new System.Windows.Forms.TextBox();
+            this.tbxData1bin2 = new System.Windows.Forms.TextBox();
+            this.tbxData2bin2 = new System.Windows.Forms.TextBox();
+            this.tbxData3bin2 = new System.Windows.Forms.TextBox();
+            this.tbxChecksumBin = new System.Windows.Forms.TextBox();
             this.TabPage3 = new System.Windows.Forms.TabPage();
-            this.grpDeduceSelection = new System.Windows.Forms.GroupBox();
-            this.lblDeduceSelect = new System.Windows.Forms.Label();
-            this.cmbDeduceSavedVehicles = new System.Windows.Forms.ComboBox();
-            this.lblDeduceOr = new System.Windows.Forms.Label();
-            this.txtDeduceVIN = new System.Windows.Forms.TextBox();
-            this.btnDeduceGo = new System.Windows.Forms.Button();
             this.grpDeduceBrowser = new System.Windows.Forms.GroupBox();
             this.wbDeducer = new System.Windows.Forms.WebBrowser();
-
+            this.grpDeduceSelection = new System.Windows.Forms.GroupBox();
+            this.btnDeduceGo = new System.Windows.Forms.Button();
+            this.txtDeduceVIN = new System.Windows.Forms.TextBox();
+            this.lblDeduceOr = new System.Windows.Forms.Label();
+            this.cmbDeduceSavedVehicles = new System.Windows.Forms.ComboBox();
+            this.lblDeduceSelect = new System.Windows.Forms.Label();
             this.TabPage4 = new System.Windows.Forms.TabPage();
             this.chkDeduceDoCCC = new System.Windows.Forms.CheckBox();
             this.Button8 = new System.Windows.Forms.Button();
@@ -129,6 +146,15 @@ namespace AsBuiltExplorer
             this.btnDeduceFigureIt = new System.Windows.Forms.Button();
             this.btnDeduceLoadOptions = new System.Windows.Forms.Button();
             this.lstDeduceFactoryOptions = new System.Windows.Forms.ListBox();
+            this.tabMods = new System.Windows.Forms.TabPage();
+            this.splitMods = new System.Windows.Forms.SplitContainer();
+            this.lvwMods = new System.Windows.Forms.ListView();
+            this.colModTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colModCat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.rtbModDetails = new System.Windows.Forms.RichTextBox();
+            this.lblModsHelp = new System.Windows.Forms.Label();
+            this.cmbModPlatform = new System.Windows.Forms.ComboBox();
+            this.lblModPlatform = new System.Windows.Forms.Label();
             this.TabPage5 = new System.Windows.Forms.TabPage();
             this.Button10 = new System.Windows.Forms.Button();
             this.TextBox4 = new System.Windows.Forms.TextBox();
@@ -140,75 +166,16 @@ namespace AsBuiltExplorer
             this.Label19 = new System.Windows.Forms.Label();
             this.lstBit_Years = new System.Windows.Forms.CheckedListBox();
             this.lstBit_Models = new System.Windows.Forms.CheckedListBox();
-            this.TabPage9 = new System.Windows.Forms.TabPage();
-            this.lblVinInput = new System.Windows.Forms.Label();
-            this.txtVinInput = new System.Windows.Forms.TextBox();
-            this.lblVinSelect = new System.Windows.Forms.Label();
-            this.cmbSavedVehicles = new System.Windows.Forms.ComboBox();
-            this.btnDecode = new System.Windows.Forms.Button();
-            this.lvwDecodeResults = new System.Windows.Forms.ListView();
-            this.lvwDecodeResults.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvwDecodeResults_MouseClick);
-            this.colPos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colVal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colMean = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colNotes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnDB1 = new System.Windows.Forms.Button();
-            this.btnDB2 = new System.Windows.Forms.Button();
-            this.btnDB3 = new System.Windows.Forms.Button();
-            this.btnDB4 = new System.Windows.Forms.Button();
             this.Label17 = new System.Windows.Forms.Label();
             this.TextBox3 = new System.Windows.Forms.TextBox();
             this.Label18 = new System.Windows.Forms.Label();
-            this.grpChecksum = new System.Windows.Forms.GroupBox();
-            this.grpConverter = new System.Windows.Forms.GroupBox();
-            this.grpTPMS = new System.Windows.Forms.GroupBox();
-            this.numTPMS_PSI = new System.Windows.Forms.NumericUpDown();
-            this.tbxTPMS_Hex = new System.Windows.Forms.TextBox();
-            this.lblTPMS_Desc = new System.Windows.Forms.Label();
-            this.grpAudio = new System.Windows.Forms.GroupBox();
-            this.chkAudio_Sub = new System.Windows.Forms.CheckBox();
-            this.chkAudio_DVD = new System.Windows.Forms.CheckBox();
-            this.chkAudio_Sat = new System.Windows.Forms.CheckBox();
-            this.tbxAudio_Hex = new System.Windows.Forms.TextBox();
-            this.lblAudio_Desc = new System.Windows.Forms.Label();
-            this.grpVIN = new System.Windows.Forms.GroupBox();
-            this.txtVIN_Input = new System.Windows.Forms.TextBox();
-            this.txtVIN_Hex = new System.Windows.Forms.TextBox();
-            this.btnVIN_Convert = new System.Windows.Forms.Button();
-            this.lblVIN_Desc = new System.Windows.Forms.Label();
-
             this.tbxDeduceReport2 = new System.Windows.Forms.TextBox();
-            this.tabMods = new System.Windows.Forms.TabPage();
-            this.splitMods = new System.Windows.Forms.SplitContainer();
-            this.lvwMods = new System.Windows.Forms.ListView();
-            this.rtbModDetails = new System.Windows.Forms.RichTextBox();
-            this.cmbModPlatform = new System.Windows.Forms.ComboBox();
-            this.lblModPlatform = new System.Windows.Forms.Label();
-            this.lblModsHelp = new System.Windows.Forms.Label();
-            this.colModTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colModCat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Button4 = new System.Windows.Forms.Button();
             this.TabPage6 = new System.Windows.Forms.TabPage();
             this.btnBrowseRefresh = new System.Windows.Forms.Button();
-            // 
-            // TabPage7
-            // 
-            this.TabPage7 = new System.Windows.Forms.TabPage();
-            // 
-            // TabPage8
-            // 
-            this.TabPage8 = new System.Windows.Forms.TabPage();
-            this.lblAboutTitle = new System.Windows.Forms.Label();
-            this.lblAboutVersion = new System.Windows.Forms.Label();
-            this.lblAboutDev = new System.Windows.Forms.Label();
-            this.lblAboutCredits = new System.Windows.Forms.Label();
-            this.lblAboutMoto = new System.Windows.Forms.Label();
-            this.lnkAboutGithub = new System.Windows.Forms.LinkLabel();
-            // 
-             this.lvwBrowser = new System.Windows.Forms.ListView();
+            this.lvwBrowser = new System.Windows.Forms.ListView();
             this.ColumnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-
             this.ColumnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -219,6 +186,25 @@ namespace AsBuiltExplorer
             this.SetAsCompare4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.DeleteFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TabPage9 = new System.Windows.Forms.TabPage();
+            this.lvwDecodeResults = new System.Windows.Forms.ListView();
+            this.colPos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colVal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colMean = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colNotes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnDecode = new System.Windows.Forms.Button();
+            this.cmbSavedVehicles = new System.Windows.Forms.ComboBox();
+            this.lblVinSelect = new System.Windows.Forms.Label();
+            this.txtVinInput = new System.Windows.Forms.TextBox();
+            this.lblVinInput = new System.Windows.Forms.Label();
+            this.TabPage7 = new System.Windows.Forms.TabPage();
+            this.TabPage8 = new System.Windows.Forms.TabPage();
+            this.lnkAboutGithub = new System.Windows.Forms.LinkLabel();
+            this.lblAboutMoto = new System.Windows.Forms.Label();
+            this.lblAboutCredits = new System.Windows.Forms.Label();
+            this.lblAboutDev = new System.Windows.Forms.Label();
+            this.lblAboutVersion = new System.Windows.Forms.Label();
+            this.lblAboutTitle = new System.Windows.Forms.Label();
             this.Label8 = new System.Windows.Forms.Label();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbSettings = new System.Windows.Forms.PictureBox();
@@ -226,127 +212,33 @@ namespace AsBuiltExplorer
             this.TabPage1.SuspendLayout();
             this.ContextMenuStrip1.SuspendLayout();
             this.TabPage2.SuspendLayout();
+            this.grpAudio.SuspendLayout();
+            this.grpVIN.SuspendLayout();
+            this.grpTPMS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTPMS_PSI)).BeginInit();
+            this.grpConverter.SuspendLayout();
+            this.grpChecksum.SuspendLayout();
             this.TabPage3.SuspendLayout();
+            this.grpDeduceBrowser.SuspendLayout();
+            this.grpDeduceSelection.SuspendLayout();
             this.TabPage4.SuspendLayout();
+            this.tabMods.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitMods)).BeginInit();
+            this.splitMods.Panel1.SuspendLayout();
+            this.splitMods.Panel2.SuspendLayout();
+            this.splitMods.SuspendLayout();
             this.TabPage5.SuspendLayout();
             this.TabPage6.SuspendLayout();
-            this.TabPage7.SuspendLayout();
-            this.TabPage8.SuspendLayout();
             this.ContextMenuStrip2.SuspendLayout();
+            this.TabPage9.SuspendLayout();
+            this.TabPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
             this.SuspendLayout();
-
-            // 
-            // tabMods
-            // 
-            this.tabMods.Controls.Add(this.splitMods);
-            this.tabMods.Controls.Add(this.lblModsHelp);
-            this.tabMods.Controls.Add(this.cmbModPlatform);
-            this.tabMods.Controls.Add(this.lblModPlatform);
-            this.tabMods.Location = new System.Drawing.Point(4, 22);
-            this.tabMods.Name = "tabMods";
-            this.tabMods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMods.Size = new System.Drawing.Size(1126, 626);
-            this.tabMods.TabIndex = 8;
-            this.tabMods.Text = "Vehicle Mods";
-            this.tabMods.UseVisualStyleBackColor = true;
-            this.tabMods.Enter += new System.EventHandler(this.tabMods_Enter);
-            // 
-            // splitMods
-            // 
-            this.splitMods.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitMods.Location = new System.Drawing.Point(6, 45);
-            this.splitMods.Name = "splitMods";
-            // 
-            // splitMods.Panel1
-            // 
-            this.splitMods.Panel1.Controls.Add(this.lvwMods);
-            // 
-            // splitMods.Panel2
-            // 
-            this.splitMods.Panel2.Controls.Add(this.rtbModDetails);
-            this.splitMods.Size = new System.Drawing.Size(1114, 575);
-            this.splitMods.SplitterDistance = 350;
-            this.splitMods.TabIndex = 3;
-            // 
-            // lvwMods
-            // 
-            this.lvwMods.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colModTitle,
-            this.colModCat});
-            this.lvwMods.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvwMods.FullRowSelect = true;
-            this.lvwMods.GridLines = true;
-            this.lvwMods.HideSelection = false;
-            this.lvwMods.Location = new System.Drawing.Point(0, 0);
-            this.lvwMods.MultiSelect = false;
-            this.lvwMods.Name = "lvwMods";
-            this.lvwMods.Size = new System.Drawing.Size(350, 575);
-            this.lvwMods.TabIndex = 0;
-            this.lvwMods.UseCompatibleStateImageBehavior = false;
-            this.lvwMods.View = System.Windows.Forms.View.Details;
-            this.lvwMods.SelectedIndexChanged += new System.EventHandler(this.lvwMods_SelectedIndexChanged);
-            // 
-            // rtbModDetails
-            // 
-            this.rtbModDetails.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rtbModDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbModDetails.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbModDetails.Location = new System.Drawing.Point(0, 0);
-            this.rtbModDetails.Name = "rtbModDetails";
-            this.rtbModDetails.ReadOnly = true;
-            this.rtbModDetails.Size = new System.Drawing.Size(760, 575);
-            this.rtbModDetails.TabIndex = 0;
-            this.rtbModDetails.Text = "";
-            // 
-            // cmbModPlatform
-            // 
-            this.cmbModPlatform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbModPlatform.FormattingEnabled = true;
-            this.cmbModPlatform.Location = new System.Drawing.Point(70, 15);
-            this.cmbModPlatform.Name = "cmbModPlatform";
-            this.cmbModPlatform.Size = new System.Drawing.Size(250, 21);
-            this.cmbModPlatform.TabIndex = 1;
-            this.cmbModPlatform.SelectedIndexChanged += new System.EventHandler(this.cmbModPlatform_SelectedIndexChanged);
-            // 
-            // lblModPlatform
-            // 
-            this.lblModPlatform.AutoSize = true;
-            this.lblModPlatform.Location = new System.Drawing.Point(15, 18);
-            this.lblModPlatform.Name = "lblModPlatform";
-            this.lblModPlatform.Size = new System.Drawing.Size(48, 13);
-            this.lblModPlatform.TabIndex = 0;
-            this.lblModPlatform.Text = "Platform:";
-            // 
-            // lblModsHelp
-            // 
-            this.lblModsHelp.AutoSize = true;
-            this.lblModsHelp.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.lblModsHelp.Location = new System.Drawing.Point(340, 18);
-            this.lblModsHelp.Name = "lblModsHelp";
-            this.lblModsHelp.Size = new System.Drawing.Size(250, 13);
-            this.lblModsHelp.TabIndex = 2;
-            this.lblModsHelp.Text = "Select a modification to view instructions details.";
-            // 
-            // colModTitle
-            // 
-            this.colModTitle.Text = "Modification";
-            this.colModTitle.Width = 200;
-            // 
-            // colModCat
-            // 
-            this.colModCat.Text = "Category";
-            this.colModCat.Width = 100;
             // 
             // TabControl1
             // 
             this.TabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.TabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.TabControl1.ItemSize = new System.Drawing.Size(50, 180);
-            this.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.TabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.TabControl1_DrawItem);
             this.TabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -360,12 +252,17 @@ namespace AsBuiltExplorer
             this.TabControl1.Controls.Add(this.TabPage9);
             this.TabControl1.Controls.Add(this.TabPage7);
             this.TabControl1.Controls.Add(this.TabPage8);
+            this.TabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.TabControl1.ItemSize = new System.Drawing.Size(50, 180);
             this.TabControl1.Location = new System.Drawing.Point(16, 15);
             this.TabControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.TabControl1.Multiline = true;
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(1120, 591);
+            this.TabControl1.Size = new System.Drawing.Size(1181, 605);
+            this.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.TabControl1.TabIndex = 0;
+            this.TabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.TabControl1_DrawItem);
             // 
             // TabPage1
             // 
@@ -396,14 +293,69 @@ namespace AsBuiltExplorer
             this.TabPage1.Controls.Add(this.ListView1);
             this.TabPage1.Controls.Add(this.Label7);
             this.TabPage1.Controls.Add(this.Label6);
-            this.TabPage1.Location = new System.Drawing.Point(4, 25);
+            this.TabPage1.Location = new System.Drawing.Point(184, 4);
             this.TabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.TabPage1.Name = "TabPage1";
             this.TabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.TabPage1.Size = new System.Drawing.Size(991, 562);
+            this.TabPage1.Size = new System.Drawing.Size(932, 583);
             this.TabPage1.TabIndex = 0;
             this.TabPage1.Text = "Compare As-Built";
             this.TabPage1.Click += new System.EventHandler(this.TabPage1_Click);
+            // 
+            // btnViewDefs
+            // 
+            this.btnViewDefs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewDefs.Location = new System.Drawing.Point(650, 155);
+            this.btnViewDefs.Name = "btnViewDefs";
+            this.btnViewDefs.Size = new System.Drawing.Size(140, 40);
+            this.btnViewDefs.TabIndex = 105;
+            this.btnViewDefs.Text = "View Code Library";
+            this.btnViewDefs.UseVisualStyleBackColor = true;
+            this.btnViewDefs.Click += new System.EventHandler(this.btnViewDefs_Click);
+            // 
+            // btnDB4
+            // 
+            this.btnDB4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDB4.Location = new System.Drawing.Point(642, 112);
+            this.btnDB4.Name = "btnDB4";
+            this.btnDB4.Size = new System.Drawing.Size(40, 27);
+            this.btnDB4.TabIndex = 103;
+            this.btnDB4.Text = "DB";
+            this.btnDB4.UseVisualStyleBackColor = true;
+            this.btnDB4.Click += new System.EventHandler(this.btnDB4_Click);
+            // 
+            // btnDB3
+            // 
+            this.btnDB3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDB3.Location = new System.Drawing.Point(642, 81);
+            this.btnDB3.Name = "btnDB3";
+            this.btnDB3.Size = new System.Drawing.Size(40, 27);
+            this.btnDB3.TabIndex = 102;
+            this.btnDB3.Text = "DB";
+            this.btnDB3.UseVisualStyleBackColor = true;
+            this.btnDB3.Click += new System.EventHandler(this.btnDB3_Click);
+            // 
+            // btnDB2
+            // 
+            this.btnDB2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDB2.Location = new System.Drawing.Point(642, 50);
+            this.btnDB2.Name = "btnDB2";
+            this.btnDB2.Size = new System.Drawing.Size(40, 27);
+            this.btnDB2.TabIndex = 101;
+            this.btnDB2.Text = "DB";
+            this.btnDB2.UseVisualStyleBackColor = true;
+            this.btnDB2.Click += new System.EventHandler(this.btnDB2_Click);
+            // 
+            // btnDB1
+            // 
+            this.btnDB1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDB1.Location = new System.Drawing.Point(642, 19);
+            this.btnDB1.Name = "btnDB1";
+            this.btnDB1.Size = new System.Drawing.Size(40, 27);
+            this.btnDB1.TabIndex = 100;
+            this.btnDB1.Text = "DB";
+            this.btnDB1.UseVisualStyleBackColor = true;
+            this.btnDB1.Click += new System.EventHandler(this.btnDB1_Click);
             // 
             // chkShowOnlyMismatches
             // 
@@ -477,6 +429,7 @@ namespace AsBuiltExplorer
             this.Button9.TabIndex = 14;
             this.Button9.Text = "Browse...";
             this.Button9.UseVisualStyleBackColor = true;
+            this.Button9.Click += new System.EventHandler(this.Button9_Click);
             // 
             // tbxCompFile4
             // 
@@ -504,6 +457,7 @@ namespace AsBuiltExplorer
             this.Button7.TabIndex = 11;
             this.Button7.Text = "Browse...";
             this.Button7.UseVisualStyleBackColor = true;
+            this.Button7.Click += new System.EventHandler(this.Button7_Click);
             // 
             // tbxCompFile3
             // 
@@ -563,62 +517,6 @@ namespace AsBuiltExplorer
             this.btnCompBrowse1.Text = "Browse...";
             this.btnCompBrowse1.UseVisualStyleBackColor = true;
             this.btnCompBrowse1.Click += new System.EventHandler(this.btnCompBrowse1_Click);
-            // 
-            // btnDB1
-            // 
-            this.btnDB1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDB1.Location = new System.Drawing.Point(642, 19);
-            this.btnDB1.Name = "btnDB1";
-            this.btnDB1.Size = new System.Drawing.Size(40, 27);
-            this.btnDB1.TabIndex = 100;
-            this.btnDB1.Text = "DB";
-            this.btnDB1.UseVisualStyleBackColor = true;
-            this.btnDB1.Click += new System.EventHandler(this.btnDB1_Click);
-            // 
-            // btnDB2
-            // 
-            this.btnDB2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDB2.Location = new System.Drawing.Point(642, 50);
-            this.btnDB2.Name = "btnDB2";
-            this.btnDB2.Size = new System.Drawing.Size(40, 27);
-            this.btnDB2.TabIndex = 101;
-            this.btnDB2.Text = "DB";
-            this.btnDB2.UseVisualStyleBackColor = true;
-            this.btnDB2.Click += new System.EventHandler(this.btnDB2_Click);
-            // 
-            // btnDB3
-            // 
-            this.btnDB3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDB3.Location = new System.Drawing.Point(642, 81);
-            this.btnDB3.Name = "btnDB3";
-            this.btnDB3.Size = new System.Drawing.Size(40, 27);
-            this.btnDB3.TabIndex = 102;
-            this.btnDB3.Text = "DB";
-            this.btnDB3.UseVisualStyleBackColor = true;
-            this.btnDB3.Click += new System.EventHandler(this.btnDB3_Click);
-            // 
-            // btnDB4
-            // 
-            this.btnDB4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDB4.Location = new System.Drawing.Point(642, 112);
-            this.btnDB4.Name = "btnDB4";
-            this.btnDB4.Size = new System.Drawing.Size(40, 27);
-            this.btnDB4.TabIndex = 103;
-            this.btnDB4.Text = "DB";
-            this.btnDB4.UseVisualStyleBackColor = true;
-            this.btnDB4.UseVisualStyleBackColor = true;
-            this.btnDB4.Click += new System.EventHandler(this.btnDB4_Click);
-            // 
-            // btnViewDefs
-            // 
-            this.btnViewDefs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewDefs.Location = new System.Drawing.Point(650, 155);
-            this.btnViewDefs.Name = "btnViewDefs";
-            this.btnViewDefs.Size = new System.Drawing.Size(140, 40);
-            this.btnViewDefs.TabIndex = 105;
-            this.btnViewDefs.Text = "View Code Library";
-            this.btnViewDefs.UseVisualStyleBackColor = true;
-            this.btnViewDefs.Click += new System.EventHandler(this.btnViewDefs_Click);
             // 
             // tbxCompFile2
             // 
@@ -721,7 +619,7 @@ namespace AsBuiltExplorer
             this.ExportModuleToolStripMenuItem,
             this.IdentifyToolStripMenuItem});
             this.ContextMenuStrip1.Name = "ContextMenuStrip1";
-            this.ContextMenuStrip1.Size = new System.Drawing.Size(152, 48);
+            this.ContextMenuStrip1.Size = new System.Drawing.Size(157, 70);
             this.ContextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
             // 
             // CopyToolStripMenuItem
@@ -733,38 +631,44 @@ namespace AsBuiltExplorer
             this.Data3hexToolStripMenuItem,
             this.BinaryToolStripMenuItem});
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.CopyToolStripMenuItem.Text = "Copy";
+            this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // EntireLineToolStripMenuItem
             // 
             this.EntireLineToolStripMenuItem.Name = "EntireLineToolStripMenuItem";
             this.EntireLineToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.EntireLineToolStripMenuItem.Text = "Entire Line";
+            this.EntireLineToolStripMenuItem.Click += new System.EventHandler(this.EntireLineToolStripMenuItem_Click);
             // 
             // Data1hexToolStripMenuItem
             // 
             this.Data1hexToolStripMenuItem.Name = "Data1hexToolStripMenuItem";
             this.Data1hexToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.Data1hexToolStripMenuItem.Text = "Data 1 (hex)";
+            this.Data1hexToolStripMenuItem.Click += new System.EventHandler(this.Data1hexToolStripMenuItem_Click);
             // 
             // Data2hexToolStripMenuItem
             // 
             this.Data2hexToolStripMenuItem.Name = "Data2hexToolStripMenuItem";
             this.Data2hexToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.Data2hexToolStripMenuItem.Text = "Data 2 (hex)";
+            this.Data2hexToolStripMenuItem.Click += new System.EventHandler(this.Data2hexToolStripMenuItem_Click);
             // 
             // Data3hexToolStripMenuItem
             // 
             this.Data3hexToolStripMenuItem.Name = "Data3hexToolStripMenuItem";
             this.Data3hexToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.Data3hexToolStripMenuItem.Text = "Data 3 (hex)";
+            this.Data3hexToolStripMenuItem.Click += new System.EventHandler(this.Data3hexToolStripMenuItem_Click);
             // 
             // BinaryToolStripMenuItem
             // 
             this.BinaryToolStripMenuItem.Name = "BinaryToolStripMenuItem";
             this.BinaryToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.BinaryToolStripMenuItem.Text = "Binary";
+            this.BinaryToolStripMenuItem.Click += new System.EventHandler(this.BinaryToolStripMenuItem_Click);
             // 
             // ExportModuleToolStripMenuItem
             // 
@@ -772,7 +676,7 @@ namespace AsBuiltExplorer
             this.ToUCDSToolStripMenuItem,
             this.ToABTToolStripMenuItem});
             this.ExportModuleToolStripMenuItem.Name = "ExportModuleToolStripMenuItem";
-            this.ExportModuleToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.ExportModuleToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.ExportModuleToolStripMenuItem.Text = "Export Module";
             this.ExportModuleToolStripMenuItem.DropDownOpening += new System.EventHandler(this.ExportModuleToolStripMenuItem_DropDownOpening);
             this.ExportModuleToolStripMenuItem.Click += new System.EventHandler(this.ExportModuleToolStripMenuItem_Click);
@@ -794,7 +698,7 @@ namespace AsBuiltExplorer
             // IdentifyToolStripMenuItem
             // 
             this.IdentifyToolStripMenuItem.Name = "IdentifyToolStripMenuItem";
-            this.IdentifyToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.IdentifyToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.IdentifyToolStripMenuItem.Text = "Identify Feature";
             this.IdentifyToolStripMenuItem.Click += new System.EventHandler(this.IdentifyToolStripMenuItem_Click);
             // 
@@ -826,14 +730,222 @@ namespace AsBuiltExplorer
             this.TabPage2.Controls.Add(this.grpTPMS);
             this.TabPage2.Controls.Add(this.grpConverter);
             this.TabPage2.Controls.Add(this.grpChecksum);
-            this.TabPage2.Location = new System.Drawing.Point(4, 25);
+            this.TabPage2.Location = new System.Drawing.Point(184, 4);
             this.TabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.TabPage2.Name = "TabPage2";
             this.TabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.TabPage2.Size = new System.Drawing.Size(991, 562);
+            this.TabPage2.Size = new System.Drawing.Size(993, 597);
             this.TabPage2.TabIndex = 1;
             this.TabPage2.Text = "Calculators & Tools";
             this.TabPage2.Click += new System.EventHandler(this.TabPage2_Click);
+            // 
+            // grpAudio
+            // 
+            this.grpAudio.Controls.Add(this.lblAudio_Desc);
+            this.grpAudio.Controls.Add(this.tbxAudio_Hex);
+            this.grpAudio.Controls.Add(this.chkAudio_Sat);
+            this.grpAudio.Controls.Add(this.chkAudio_DVD);
+            this.grpAudio.Controls.Add(this.chkAudio_Sub);
+            this.grpAudio.Location = new System.Drawing.Point(440, 460);
+            this.grpAudio.Name = "grpAudio";
+            this.grpAudio.Size = new System.Drawing.Size(250, 150);
+            this.grpAudio.TabIndex = 4;
+            this.grpAudio.TabStop = false;
+            this.grpAudio.Text = "Audio Config (Legacy)";
+            // 
+            // lblAudio_Desc
+            // 
+            this.lblAudio_Desc.AutoSize = true;
+            this.lblAudio_Desc.Location = new System.Drawing.Point(20, 110);
+            this.lblAudio_Desc.Name = "lblAudio_Desc";
+            this.lblAudio_Desc.Size = new System.Drawing.Size(94, 16);
+            this.lblAudio_Desc.TabIndex = 4;
+            this.lblAudio_Desc.Text = "727-01-01 Hex:";
+            // 
+            // tbxAudio_Hex
+            // 
+            this.tbxAudio_Hex.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxAudio_Hex.Location = new System.Drawing.Point(120, 105);
+            this.tbxAudio_Hex.Name = "tbxAudio_Hex";
+            this.tbxAudio_Hex.ReadOnly = true;
+            this.tbxAudio_Hex.Size = new System.Drawing.Size(80, 26);
+            this.tbxAudio_Hex.TabIndex = 3;
+            // 
+            // chkAudio_Sat
+            // 
+            this.chkAudio_Sat.AutoSize = true;
+            this.chkAudio_Sat.Location = new System.Drawing.Point(20, 75);
+            this.chkAudio_Sat.Name = "chkAudio_Sat";
+            this.chkAudio_Sat.Size = new System.Drawing.Size(114, 20);
+            this.chkAudio_Sat.TabIndex = 2;
+            this.chkAudio_Sat.Text = "Satellite Radio";
+            this.chkAudio_Sat.UseVisualStyleBackColor = true;
+            this.chkAudio_Sat.CheckedChanged += new System.EventHandler(this.chkAudio_CheckedChanged);
+            // 
+            // chkAudio_DVD
+            // 
+            this.chkAudio_DVD.AutoSize = true;
+            this.chkAudio_DVD.Location = new System.Drawing.Point(20, 50);
+            this.chkAudio_DVD.Name = "chkAudio_DVD";
+            this.chkAudio_DVD.Size = new System.Drawing.Size(172, 20);
+            this.chkAudio_DVD.TabIndex = 1;
+            this.chkAudio_DVD.Text = "Rear DVD Entertainment";
+            this.chkAudio_DVD.UseVisualStyleBackColor = true;
+            this.chkAudio_DVD.CheckedChanged += new System.EventHandler(this.chkAudio_CheckedChanged);
+            // 
+            // chkAudio_Sub
+            // 
+            this.chkAudio_Sub.AutoSize = true;
+            this.chkAudio_Sub.Location = new System.Drawing.Point(20, 25);
+            this.chkAudio_Sub.Name = "chkAudio_Sub";
+            this.chkAudio_Sub.Size = new System.Drawing.Size(164, 20);
+            this.chkAudio_Sub.TabIndex = 0;
+            this.chkAudio_Sub.Text = "Audiophile / Subwoofer";
+            this.chkAudio_Sub.UseVisualStyleBackColor = true;
+            this.chkAudio_Sub.CheckedChanged += new System.EventHandler(this.chkAudio_CheckedChanged);
+            // 
+            // grpVIN
+            // 
+            this.grpVIN.Controls.Add(this.lblVIN_Desc);
+            this.grpVIN.Controls.Add(this.btnVIN_Convert);
+            this.grpVIN.Controls.Add(this.txtVIN_Hex);
+            this.grpVIN.Controls.Add(this.txtVIN_Input);
+            this.grpVIN.Location = new System.Drawing.Point(710, 20);
+            this.grpVIN.Name = "grpVIN";
+            this.grpVIN.Size = new System.Drawing.Size(260, 430);
+            this.grpVIN.TabIndex = 3;
+            this.grpVIN.TabStop = false;
+            this.grpVIN.Text = "VIN to Hex (ABS Fix)";
+            // 
+            // lblVIN_Desc
+            // 
+            this.lblVIN_Desc.AutoSize = true;
+            this.lblVIN_Desc.Location = new System.Drawing.Point(20, 420);
+            this.lblVIN_Desc.Name = "lblVIN_Desc";
+            this.lblVIN_Desc.Size = new System.Drawing.Size(0, 16);
+            this.lblVIN_Desc.TabIndex = 3;
+            // 
+            // btnVIN_Convert
+            // 
+            this.btnVIN_Convert.Location = new System.Drawing.Point(20, 60);
+            this.btnVIN_Convert.Name = "btnVIN_Convert";
+            this.btnVIN_Convert.Size = new System.Drawing.Size(220, 30);
+            this.btnVIN_Convert.TabIndex = 1;
+            this.btnVIN_Convert.Text = "Convert to Hex Blocks";
+            this.btnVIN_Convert.UseVisualStyleBackColor = true;
+            this.btnVIN_Convert.Click += new System.EventHandler(this.btnVIN_Convert_Click);
+            // 
+            // txtVIN_Hex
+            // 
+            this.txtVIN_Hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVIN_Hex.Location = new System.Drawing.Point(20, 100);
+            this.txtVIN_Hex.Multiline = true;
+            this.txtVIN_Hex.Name = "txtVIN_Hex";
+            this.txtVIN_Hex.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtVIN_Hex.Size = new System.Drawing.Size(220, 310);
+            this.txtVIN_Hex.TabIndex = 2;
+            // 
+            // txtVIN_Input
+            // 
+            this.txtVIN_Input.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtVIN_Input.Location = new System.Drawing.Point(20, 30);
+            this.txtVIN_Input.MaxLength = 17;
+            this.txtVIN_Input.Name = "txtVIN_Input";
+            this.txtVIN_Input.Size = new System.Drawing.Size(220, 22);
+            this.txtVIN_Input.TabIndex = 0;
+            this.txtVIN_Input.Text = "VIN...";
+            // 
+            // grpTPMS
+            // 
+            this.grpTPMS.Controls.Add(this.lblTPMS_Desc);
+            this.grpTPMS.Controls.Add(this.tbxTPMS_Hex);
+            this.grpTPMS.Controls.Add(this.numTPMS_PSI);
+            this.grpTPMS.Location = new System.Drawing.Point(440, 300);
+            this.grpTPMS.Name = "grpTPMS";
+            this.grpTPMS.Size = new System.Drawing.Size(250, 150);
+            this.grpTPMS.TabIndex = 2;
+            this.grpTPMS.TabStop = false;
+            this.grpTPMS.Text = "Tire Pressure (TPMS)";
+            // 
+            // lblTPMS_Desc
+            // 
+            this.lblTPMS_Desc.AutoSize = true;
+            this.lblTPMS_Desc.Location = new System.Drawing.Point(20, 70);
+            this.lblTPMS_Desc.Name = "lblTPMS_Desc";
+            this.lblTPMS_Desc.Size = new System.Drawing.Size(182, 32);
+            this.lblTPMS_Desc.TabIndex = 2;
+            this.lblTPMS_Desc.Text = "Enter PSI. Result is Hex value\r\nfor 726-02-01.";
+            // 
+            // tbxTPMS_Hex
+            // 
+            this.tbxTPMS_Hex.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxTPMS_Hex.Location = new System.Drawing.Point(120, 30);
+            this.tbxTPMS_Hex.Name = "tbxTPMS_Hex";
+            this.tbxTPMS_Hex.ReadOnly = true;
+            this.tbxTPMS_Hex.Size = new System.Drawing.Size(60, 26);
+            this.tbxTPMS_Hex.TabIndex = 1;
+            this.tbxTPMS_Hex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // numTPMS_PSI
+            // 
+            this.numTPMS_PSI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numTPMS_PSI.Location = new System.Drawing.Point(20, 30);
+            this.numTPMS_PSI.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.numTPMS_PSI.Name = "numTPMS_PSI";
+            this.numTPMS_PSI.Size = new System.Drawing.Size(80, 26);
+            this.numTPMS_PSI.TabIndex = 0;
+            this.numTPMS_PSI.ValueChanged += new System.EventHandler(this.numTPMS_PSI_ValueChanged);
+            // 
+            // grpConverter
+            // 
+            this.grpConverter.Controls.Add(this.Label15);
+            this.grpConverter.Controls.Add(this.Label16);
+            this.grpConverter.Controls.Add(this.tbxConvertHex);
+            this.grpConverter.Controls.Add(this.tbxConvertBin);
+            this.grpConverter.Location = new System.Drawing.Point(20, 300);
+            this.grpConverter.Name = "grpConverter";
+            this.grpConverter.Size = new System.Drawing.Size(400, 150);
+            this.grpConverter.TabIndex = 1;
+            this.grpConverter.TabStop = false;
+            this.grpConverter.Text = "Quick Converter";
+            // 
+            // Label15
+            // 
+            this.Label15.AutoSize = true;
+            this.Label15.Location = new System.Drawing.Point(20, 30);
+            this.Label15.Name = "Label15";
+            this.Label15.Size = new System.Drawing.Size(34, 16);
+            this.Label15.TabIndex = 20;
+            this.Label15.Text = "Hex:";
+            // 
+            // Label16
+            // 
+            this.Label16.AutoSize = true;
+            this.Label16.Location = new System.Drawing.Point(20, 70);
+            this.Label16.Name = "Label16";
+            this.Label16.Size = new System.Drawing.Size(29, 16);
+            this.Label16.TabIndex = 21;
+            this.Label16.Text = "Bin:";
+            // 
+            // tbxConvertHex
+            // 
+            this.tbxConvertHex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxConvertHex.Location = new System.Drawing.Point(60, 27);
+            this.tbxConvertHex.Name = "tbxConvertHex";
+            this.tbxConvertHex.Size = new System.Drawing.Size(100, 22);
+            this.tbxConvertHex.TabIndex = 17;
+            // 
+            // tbxConvertBin
+            // 
+            this.tbxConvertBin.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxConvertBin.Location = new System.Drawing.Point(60, 67);
+            this.tbxConvertBin.Name = "tbxConvertBin";
+            this.tbxConvertBin.Size = new System.Drawing.Size(170, 22);
+            this.tbxConvertBin.TabIndex = 18;
             // 
             // grpChecksum
             // 
@@ -862,302 +974,114 @@ namespace AsBuiltExplorer
             this.grpChecksum.TabStop = false;
             this.grpChecksum.Text = "As-Built Checksum Calculator";
             // 
-            // grpConverter
+            // Label1
             // 
-            this.grpConverter.Controls.Add(this.Label15);
-            this.grpConverter.Controls.Add(this.Label16);
-
-            this.grpConverter.Controls.Add(this.tbxConvertHex);
-            this.grpConverter.Controls.Add(this.tbxConvertBin);
-
-            this.grpConverter.Location = new System.Drawing.Point(20, 300);
-            this.grpConverter.Name = "grpConverter";
-            this.grpConverter.Size = new System.Drawing.Size(400, 150);
-            this.grpConverter.TabIndex = 1;
-            this.grpConverter.TabStop = false;
-            this.grpConverter.Text = "Quick Converter";
+            this.Label1.AutoSize = true;
+            this.Label1.Location = new System.Drawing.Point(20, 30);
+            this.Label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label1.Name = "Label1";
+            this.Label1.Size = new System.Drawing.Size(71, 16);
+            this.Label1.TabIndex = 0;
+            this.Label1.Text = "Module ID:";
             // 
-            // grpTPMS
+            // tbxModIDhex
             // 
-            this.grpTPMS.Controls.Add(this.lblTPMS_Desc);
-            this.grpTPMS.Controls.Add(this.tbxTPMS_Hex);
-            this.grpTPMS.Controls.Add(this.numTPMS_PSI);
-            this.grpTPMS.Location = new System.Drawing.Point(440, 300);
-            this.grpTPMS.Name = "grpTPMS";
-            this.grpTPMS.Size = new System.Drawing.Size(250, 150);
-            this.grpTPMS.TabIndex = 2;
-            this.grpTPMS.TabStop = false;
-            this.grpTPMS.Text = "Tire Pressure (TPMS)";
+            this.tbxModIDhex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxModIDhex.Location = new System.Drawing.Point(130, 27);
+            this.tbxModIDhex.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxModIDhex.MaxLength = 10;
+            this.tbxModIDhex.Name = "tbxModIDhex";
+            this.tbxModIDhex.Size = new System.Drawing.Size(102, 22);
+            this.tbxModIDhex.TabIndex = 1;
+            this.tbxModIDhex.Text = "720-01-02";
             // 
-            // numTPMS_PSI
+            // Label2
             // 
-            this.numTPMS_PSI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numTPMS_PSI.Location = new System.Drawing.Point(20, 30);
-            this.numTPMS_PSI.Maximum = new decimal(new int[] {
-            120,
-            0,
-            0,
-            0});
-            this.numTPMS_PSI.Name = "numTPMS_PSI";
-            this.numTPMS_PSI.Size = new System.Drawing.Size(80, 26);
-            this.numTPMS_PSI.TabIndex = 0;
-            this.numTPMS_PSI.ValueChanged += new System.EventHandler(this.numTPMS_PSI_ValueChanged);
+            this.Label2.AutoSize = true;
+            this.Label2.Location = new System.Drawing.Point(20, 65);
+            this.Label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label2.Name = "Label2";
+            this.Label2.Size = new System.Drawing.Size(39, 16);
+            this.Label2.TabIndex = 2;
+            this.Label2.Text = "Data:";
             // 
-            // tbxTPMS_Hex
+            // tbxData1hex
             // 
-            this.tbxTPMS_Hex.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxTPMS_Hex.Location = new System.Drawing.Point(120, 30);
-            this.tbxTPMS_Hex.Name = "tbxTPMS_Hex";
-            this.tbxTPMS_Hex.ReadOnly = true;
-            this.tbxTPMS_Hex.Size = new System.Drawing.Size(60, 26);
-            this.tbxTPMS_Hex.TabIndex = 1;
-            this.tbxTPMS_Hex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxData1hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxData1hex.Location = new System.Drawing.Point(130, 62);
+            this.tbxData1hex.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxData1hex.MaxLength = 5;
+            this.tbxData1hex.Name = "tbxData1hex";
+            this.tbxData1hex.Size = new System.Drawing.Size(68, 22);
+            this.tbxData1hex.TabIndex = 3;
+            this.tbxData1hex.Text = "8AFC";
+            this.tbxData1hex.TextChanged += new System.EventHandler(this.tbxData1hex_TextChanged);
             // 
-            // lblTPMS_Desc
+            // Label3
             // 
-            this.lblTPMS_Desc.AutoSize = true;
-            this.lblTPMS_Desc.Location = new System.Drawing.Point(20, 70);
-            this.lblTPMS_Desc.Name = "lblTPMS_Desc";
-            this.lblTPMS_Desc.Size = new System.Drawing.Size(200, 32);
-            this.lblTPMS_Desc.TabIndex = 2;
-            this.lblTPMS_Desc.Text = "Enter PSI. Result is Hex value\r\nfor 726-02-01.";
+            this.Label3.AutoSize = true;
+            this.Label3.Location = new System.Drawing.Point(20, 95);
+            this.Label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label3.Name = "Label3";
+            this.Label3.Size = new System.Drawing.Size(39, 16);
+            this.Label3.TabIndex = 4;
+            this.Label3.Text = "Data:";
+            this.Label3.Click += new System.EventHandler(this.Label3_Click);
             // 
-            // grpAudio
+            // tbxData2hex
             // 
-            this.grpAudio.Controls.Add(this.lblAudio_Desc);
-            this.grpAudio.Controls.Add(this.tbxAudio_Hex);
-            this.grpAudio.Controls.Add(this.chkAudio_Sat);
-            this.grpAudio.Controls.Add(this.chkAudio_DVD);
-            this.grpAudio.Controls.Add(this.chkAudio_Sub);
-            this.grpAudio.Location = new System.Drawing.Point(440, 460);
-            this.grpAudio.Name = "grpAudio";
-            this.grpAudio.Size = new System.Drawing.Size(250, 150);
-            this.grpAudio.TabIndex = 4;
-            this.grpAudio.TabStop = false;
-            this.grpAudio.Text = "Audio Config (Legacy)";
+            this.tbxData2hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxData2hex.Location = new System.Drawing.Point(130, 92);
+            this.tbxData2hex.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxData2hex.MaxLength = 5;
+            this.tbxData2hex.Name = "tbxData2hex";
+            this.tbxData2hex.Size = new System.Drawing.Size(68, 22);
+            this.tbxData2hex.TabIndex = 5;
+            this.tbxData2hex.Text = "40F0";
+            this.tbxData2hex.TextChanged += new System.EventHandler(this.tbxData2hex_TextChanged);
             // 
-            // chkAudio_Sub
+            // Label4
             // 
-            this.chkAudio_Sub.AutoSize = true;
-            this.chkAudio_Sub.Location = new System.Drawing.Point(20, 25);
-            this.chkAudio_Sub.Name = "chkAudio_Sub";
-            this.chkAudio_Sub.Size = new System.Drawing.Size(160, 20);
-            this.chkAudio_Sub.TabIndex = 0;
-            this.chkAudio_Sub.Text = "Audiophile / Subwoofer";
-            this.chkAudio_Sub.UseVisualStyleBackColor = true;
-            this.chkAudio_Sub.CheckedChanged += new System.EventHandler(this.chkAudio_CheckedChanged);
+            this.Label4.AutoSize = true;
+            this.Label4.Location = new System.Drawing.Point(20, 125);
+            this.Label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label4.Name = "Label4";
+            this.Label4.Size = new System.Drawing.Size(39, 16);
+            this.Label4.TabIndex = 6;
+            this.Label4.Text = "Data:";
             // 
-            // chkAudio_DVD
+            // tbxData3hex
             // 
-            this.chkAudio_DVD.AutoSize = true;
-            this.chkAudio_DVD.Location = new System.Drawing.Point(20, 50);
-            this.chkAudio_DVD.Name = "chkAudio_DVD";
-            this.chkAudio_DVD.Size = new System.Drawing.Size(160, 20);
-            this.chkAudio_DVD.TabIndex = 1;
-            this.chkAudio_DVD.Text = "Rear DVD Entertainment";
-            this.chkAudio_DVD.UseVisualStyleBackColor = true;
-            this.chkAudio_DVD.CheckedChanged += new System.EventHandler(this.chkAudio_CheckedChanged);
+            this.tbxData3hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxData3hex.Location = new System.Drawing.Point(130, 122);
+            this.tbxData3hex.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxData3hex.MaxLength = 5;
+            this.tbxData3hex.Name = "tbxData3hex";
+            this.tbxData3hex.Size = new System.Drawing.Size(68, 22);
+            this.tbxData3hex.TabIndex = 7;
+            this.tbxData3hex.Text = "3F1F";
+            this.tbxData3hex.TextChanged += new System.EventHandler(this.tbxData3hex_TextChanged);
             // 
-            // chkAudio_Sat
+            // Button1
             // 
-            this.chkAudio_Sat.AutoSize = true;
-            this.chkAudio_Sat.Location = new System.Drawing.Point(20, 75);
-            this.chkAudio_Sat.Name = "chkAudio_Sat";
-            this.chkAudio_Sat.Size = new System.Drawing.Size(120, 20);
-            this.chkAudio_Sat.TabIndex = 2;
-            this.chkAudio_Sat.Text = "Satellite Radio";
-            this.chkAudio_Sat.UseVisualStyleBackColor = true;
-            this.chkAudio_Sat.CheckedChanged += new System.EventHandler(this.chkAudio_CheckedChanged);
+            this.Button1.Location = new System.Drawing.Point(130, 160);
+            this.Button1.Margin = new System.Windows.Forms.Padding(4);
+            this.Button1.Name = "Button1";
+            this.Button1.Size = new System.Drawing.Size(268, 41);
+            this.Button1.TabIndex = 8;
+            this.Button1.Text = "Re-Calc Checksum (last byte)";
+            this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // tbxAudio_Hex
+            // Label5
             // 
-            this.tbxAudio_Hex.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxAudio_Hex.Location = new System.Drawing.Point(120, 105);
-            this.tbxAudio_Hex.Name = "tbxAudio_Hex";
-            this.tbxAudio_Hex.ReadOnly = true;
-            this.tbxAudio_Hex.Size = new System.Drawing.Size(80, 26);
-            this.tbxAudio_Hex.TabIndex = 3;
-            // 
-            // lblAudio_Desc
-            // 
-            this.lblAudio_Desc.AutoSize = true;
-            this.lblAudio_Desc.Location = new System.Drawing.Point(20, 110);
-            this.lblAudio_Desc.Name = "lblAudio_Desc";
-            this.lblAudio_Desc.Size = new System.Drawing.Size(90, 16);
-            this.lblAudio_Desc.TabIndex = 4;
-            this.lblAudio_Desc.Text = "727-01-01 Hex:";
-            // 
-            // grpVIN
-            // 
-            this.grpVIN.Controls.Add(this.lblVIN_Desc);
-            this.grpVIN.Controls.Add(this.btnVIN_Convert);
-            this.grpVIN.Controls.Add(this.txtVIN_Hex);
-            this.grpVIN.Controls.Add(this.txtVIN_Input);
-            this.grpVIN.Location = new System.Drawing.Point(710, 20);
-            this.grpVIN.Name = "grpVIN";
-            this.grpVIN.Size = new System.Drawing.Size(260, 430);
-            this.grpVIN.TabIndex = 3;
-            this.grpVIN.TabStop = false;
-            this.grpVIN.Text = "VIN to Hex (ABS Fix)";
-            // 
-            // txtVIN_Input
-            // 
-            this.txtVIN_Input.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtVIN_Input.Location = new System.Drawing.Point(20, 30);
-            this.txtVIN_Input.MaxLength = 17;
-            this.txtVIN_Input.Name = "txtVIN_Input";
-            this.txtVIN_Input.Size = new System.Drawing.Size(220, 22);
-            this.txtVIN_Input.TabIndex = 0;
-            this.txtVIN_Input.Text = "VIN...";
-            // 
-            // btnVIN_Convert
-            // 
-            this.btnVIN_Convert.Location = new System.Drawing.Point(20, 60);
-            this.btnVIN_Convert.Name = "btnVIN_Convert";
-            this.btnVIN_Convert.Size = new System.Drawing.Size(220, 30);
-            this.btnVIN_Convert.TabIndex = 1;
-            this.btnVIN_Convert.Text = "Convert to Hex Blocks";
-            this.btnVIN_Convert.UseVisualStyleBackColor = true;
-            this.btnVIN_Convert.Click += new System.EventHandler(this.btnVIN_Convert_Click);
-            // 
-            // txtVIN_Hex
-            // 
-            this.txtVIN_Hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVIN_Hex.Location = new System.Drawing.Point(20, 100);
-            this.txtVIN_Hex.Multiline = true;
-            this.txtVIN_Hex.Name = "txtVIN_Hex";
-            this.txtVIN_Hex.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtVIN_Hex.Size = new System.Drawing.Size(220, 310);
-            this.txtVIN_Hex.TabIndex = 2;
-            // 
-            // lblVIN_Desc
-            // 
-            this.lblVIN_Desc.AutoSize = true;
-            this.lblVIN_Desc.Location = new System.Drawing.Point(20, 420);
-            this.lblVIN_Desc.Name = "lblVIN_Desc";
-            this.lblVIN_Desc.Size = new System.Drawing.Size(0, 16);
-            this.lblVIN_Desc.TabIndex = 3;
-            
-
-
-            // 
-            // Label16
-            // 
-            this.Label16.AutoSize = true;
-            this.Label16.Location = new System.Drawing.Point(20, 70);
-            this.Label16.Name = "Label16";
-            this.Label16.Size = new System.Drawing.Size(29, 16);
-            this.Label16.TabIndex = 21;
-            this.Label16.Text = "Bin:";
-            // 
-            // Label15
-            // 
-            this.Label15.AutoSize = true;
-            this.Label15.Location = new System.Drawing.Point(20, 30);
-            this.Label15.Name = "Label15";
-            this.Label15.Size = new System.Drawing.Size(34, 16);
-            this.Label15.TabIndex = 20;
-            this.Label15.Text = "Hex:";
-            // 
-            // tbxChecksumBin
-            // 
-            this.tbxChecksumBin.BackColor = System.Drawing.SystemColors.Control;
-            this.tbxChecksumBin.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxChecksumBin.Location = new System.Drawing.Point(220, 207);
-            this.tbxChecksumBin.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxChecksumBin.MaxLength = 8;
-            this.tbxChecksumBin.Name = "tbxChecksumBin";
-            this.tbxChecksumBin.Size = new System.Drawing.Size(89, 22);
-            this.tbxChecksumBin.TabIndex = 19;
-            this.tbxChecksumBin.Text = "00011111";
-            // 
-            // tbxConvertBin
-            // 
-            this.tbxConvertBin.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxConvertBin.Location = new System.Drawing.Point(60, 67);
-            this.tbxConvertBin.Name = "tbxConvertBin";
-            this.tbxConvertBin.Size = new System.Drawing.Size(170, 22);
-            this.tbxConvertBin.TabIndex = 18;
-            // 
-            // tbxConvertHex
-            // 
-            this.tbxConvertHex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxConvertHex.Location = new System.Drawing.Point(60, 27);
-            this.tbxConvertHex.Name = "tbxConvertHex";
-            this.tbxConvertHex.Size = new System.Drawing.Size(100, 22);
-            this.tbxConvertHex.TabIndex = 17;
-            // 
-            // tbxData3bin2
-            // 
-            this.tbxData3bin2.BackColor = System.Drawing.SystemColors.Control;
-            this.tbxData3bin2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData3bin2.Location = new System.Drawing.Point(320, 122);
-            this.tbxData3bin2.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxData3bin2.MaxLength = 8;
-            this.tbxData3bin2.Name = "tbxData3bin2";
-            this.tbxData3bin2.Size = new System.Drawing.Size(89, 22);
-            this.tbxData3bin2.TabIndex = 16;
-            this.tbxData3bin2.Text = "00011111";
-            // 
-            // tbxData2bin2
-            // 
-            this.tbxData2bin2.BackColor = System.Drawing.SystemColors.Control;
-            this.tbxData2bin2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData2bin2.Location = new System.Drawing.Point(320, 92);
-            this.tbxData2bin2.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxData2bin2.MaxLength = 8;
-            this.tbxData2bin2.Name = "tbxData2bin2";
-            this.tbxData2bin2.Size = new System.Drawing.Size(89, 22);
-            this.tbxData2bin2.TabIndex = 15;
-            this.tbxData2bin2.Text = "11110000";
-            // 
-            // tbxData1bin2
-            // 
-            this.tbxData1bin2.BackColor = System.Drawing.SystemColors.Control;
-            this.tbxData1bin2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData1bin2.Location = new System.Drawing.Point(320, 62);
-            this.tbxData1bin2.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxData1bin2.MaxLength = 8;
-            this.tbxData1bin2.Name = "tbxData1bin2";
-            this.tbxData1bin2.Size = new System.Drawing.Size(89, 22);
-            this.tbxData1bin2.TabIndex = 14;
-            this.tbxData1bin2.Text = "11111100";
-            // 
-            // tbxData3bin1
-            // 
-            this.tbxData3bin1.BackColor = System.Drawing.SystemColors.Control;
-            this.tbxData3bin1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData3bin1.Location = new System.Drawing.Point(220, 122);
-            this.tbxData3bin1.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxData3bin1.MaxLength = 8;
-            this.tbxData3bin1.Name = "tbxData3bin1";
-            this.tbxData3bin1.Size = new System.Drawing.Size(89, 22);
-            this.tbxData3bin1.TabIndex = 13;
-            this.tbxData3bin1.Text = "00111111";
-            // 
-            // tbxData2bin1
-            // 
-            this.tbxData2bin1.BackColor = System.Drawing.SystemColors.Control;
-            this.tbxData2bin1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData2bin1.Location = new System.Drawing.Point(220, 92);
-            this.tbxData2bin1.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxData2bin1.MaxLength = 8;
-            this.tbxData2bin1.Name = "tbxData2bin1";
-            this.tbxData2bin1.Size = new System.Drawing.Size(89, 22);
-            this.tbxData2bin1.TabIndex = 12;
-            this.tbxData2bin1.Text = "01000000";
-            // 
-            // tbxData1bin1
-            // 
-            this.tbxData1bin1.BackColor = System.Drawing.SystemColors.Control;
-            this.tbxData1bin1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData1bin1.Location = new System.Drawing.Point(220, 62);
-            this.tbxData1bin1.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxData1bin1.MaxLength = 8;
-            this.tbxData1bin1.Name = "tbxData1bin1";
-            this.tbxData1bin1.Size = new System.Drawing.Size(89, 22);
-            this.tbxData1bin1.TabIndex = 11;
-            this.tbxData1bin1.Text = "10001010";
+            this.Label5.AutoSize = true;
+            this.Label5.Location = new System.Drawing.Point(20, 210);
+            this.Label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label5.Name = "Label5";
+            this.Label5.Size = new System.Drawing.Size(73, 16);
+            this.Label5.TabIndex = 9;
+            this.Label5.Text = "Checksum:";
             // 
             // tbxChecksumHex
             // 
@@ -1172,126 +1096,126 @@ namespace AsBuiltExplorer
             this.tbxChecksumHex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbxChecksumHex.TextChanged += new System.EventHandler(this.tbxChecksumHex_TextChanged);
             // 
-            // Label5
+            // tbxData1bin1
             // 
-            this.Label5.AutoSize = true;
-            this.Label5.Location = new System.Drawing.Point(20, 210);
-            this.Label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(73, 16);
-            this.Label5.TabIndex = 9;
-            this.Label5.Text = "Checksum:";
+            this.tbxData1bin1.BackColor = System.Drawing.SystemColors.Control;
+            this.tbxData1bin1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxData1bin1.Location = new System.Drawing.Point(220, 62);
+            this.tbxData1bin1.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxData1bin1.MaxLength = 8;
+            this.tbxData1bin1.Name = "tbxData1bin1";
+            this.tbxData1bin1.Size = new System.Drawing.Size(89, 22);
+            this.tbxData1bin1.TabIndex = 11;
+            this.tbxData1bin1.Text = "10001010";
             // 
-            // Button1
+            // tbxData2bin1
             // 
-            this.Button1.Location = new System.Drawing.Point(130, 160);
-            this.Button1.Margin = new System.Windows.Forms.Padding(4);
-            this.Button1.Name = "Button1";
-            this.Button1.Size = new System.Drawing.Size(268, 41);
-            this.Button1.TabIndex = 8;
-            this.Button1.Text = "Re-Calc Checksum (last byte)";
-            this.Button1.UseVisualStyleBackColor = true;
-            this.Button1.Click += new System.EventHandler(this.Button1_Click);
+            this.tbxData2bin1.BackColor = System.Drawing.SystemColors.Control;
+            this.tbxData2bin1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxData2bin1.Location = new System.Drawing.Point(220, 92);
+            this.tbxData2bin1.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxData2bin1.MaxLength = 8;
+            this.tbxData2bin1.Name = "tbxData2bin1";
+            this.tbxData2bin1.Size = new System.Drawing.Size(89, 22);
+            this.tbxData2bin1.TabIndex = 12;
+            this.tbxData2bin1.Text = "01000000";
             // 
-            // tbxData3hex
+            // tbxData3bin1
             // 
-            this.tbxData3hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData3hex.Location = new System.Drawing.Point(130, 122);
-            this.tbxData3hex.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxData3hex.MaxLength = 5;
-            this.tbxData3hex.Name = "tbxData3hex";
-            this.tbxData3hex.Size = new System.Drawing.Size(68, 22);
-            this.tbxData3hex.TabIndex = 7;
-            this.tbxData3hex.Text = "3F1F";
-            this.tbxData3hex.TextChanged += new System.EventHandler(this.tbxData3hex_TextChanged);
+            this.tbxData3bin1.BackColor = System.Drawing.SystemColors.Control;
+            this.tbxData3bin1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxData3bin1.Location = new System.Drawing.Point(220, 122);
+            this.tbxData3bin1.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxData3bin1.MaxLength = 8;
+            this.tbxData3bin1.Name = "tbxData3bin1";
+            this.tbxData3bin1.Size = new System.Drawing.Size(89, 22);
+            this.tbxData3bin1.TabIndex = 13;
+            this.tbxData3bin1.Text = "00111111";
             // 
-            // Label4
+            // tbxData1bin2
             // 
-            this.Label4.AutoSize = true;
-            this.Label4.Location = new System.Drawing.Point(20, 125);
-            this.Label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(39, 16);
-            this.Label4.TabIndex = 6;
-            this.Label4.Text = "Data:";
+            this.tbxData1bin2.BackColor = System.Drawing.SystemColors.Control;
+            this.tbxData1bin2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxData1bin2.Location = new System.Drawing.Point(320, 62);
+            this.tbxData1bin2.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxData1bin2.MaxLength = 8;
+            this.tbxData1bin2.Name = "tbxData1bin2";
+            this.tbxData1bin2.Size = new System.Drawing.Size(89, 22);
+            this.tbxData1bin2.TabIndex = 14;
+            this.tbxData1bin2.Text = "11111100";
             // 
-            // tbxData2hex
+            // tbxData2bin2
             // 
-            this.tbxData2hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData2hex.Location = new System.Drawing.Point(130, 92);
-            this.tbxData2hex.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxData2hex.MaxLength = 5;
-            this.tbxData2hex.Name = "tbxData2hex";
-            this.tbxData2hex.Size = new System.Drawing.Size(68, 22);
-            this.tbxData2hex.TabIndex = 5;
-            this.tbxData2hex.Text = "40F0";
-            this.tbxData2hex.TextChanged += new System.EventHandler(this.TextBox3_TextChanged);
+            this.tbxData2bin2.BackColor = System.Drawing.SystemColors.Control;
+            this.tbxData2bin2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxData2bin2.Location = new System.Drawing.Point(320, 92);
+            this.tbxData2bin2.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxData2bin2.MaxLength = 8;
+            this.tbxData2bin2.Name = "tbxData2bin2";
+            this.tbxData2bin2.Size = new System.Drawing.Size(89, 22);
+            this.tbxData2bin2.TabIndex = 15;
+            this.tbxData2bin2.Text = "11110000";
             // 
-            // Label3
+            // tbxData3bin2
             // 
-            this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(20, 95);
-            this.Label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(39, 16);
-            this.Label3.TabIndex = 4;
-            this.Label3.Text = "Data:";
-            this.Label3.Click += new System.EventHandler(this.Label3_Click);
+            this.tbxData3bin2.BackColor = System.Drawing.SystemColors.Control;
+            this.tbxData3bin2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxData3bin2.Location = new System.Drawing.Point(320, 122);
+            this.tbxData3bin2.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxData3bin2.MaxLength = 8;
+            this.tbxData3bin2.Name = "tbxData3bin2";
+            this.tbxData3bin2.Size = new System.Drawing.Size(89, 22);
+            this.tbxData3bin2.TabIndex = 16;
+            this.tbxData3bin2.Text = "00011111";
             // 
-            // tbxData1hex
+            // tbxChecksumBin
             // 
-            this.tbxData1hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxData1hex.Location = new System.Drawing.Point(130, 62);
-            this.tbxData1hex.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxData1hex.MaxLength = 5;
-            this.tbxData1hex.Name = "tbxData1hex";
-            this.tbxData1hex.Size = new System.Drawing.Size(68, 22);
-            this.tbxData1hex.TabIndex = 3;
-            this.tbxData1hex.Text = "8AFC";
-            this.tbxData1hex.TextChanged += new System.EventHandler(this.tbxData1hex_TextChanged);
-            // 
-            // Label2
-            // 
-            this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(20, 65);
-            this.Label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label2.Name = "Label2";
-            this.Label2.Size = new System.Drawing.Size(39, 16);
-            this.Label2.TabIndex = 2;
-            this.Label2.Text = "Data:";
-            // 
-            // tbxModIDhex
-            // 
-            this.tbxModIDhex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxModIDhex.Location = new System.Drawing.Point(130, 27);
-            this.tbxModIDhex.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxModIDhex.MaxLength = 10;
-            this.tbxModIDhex.Name = "tbxModIDhex";
-            this.tbxModIDhex.Size = new System.Drawing.Size(102, 22);
-            this.tbxModIDhex.TabIndex = 1;
-            this.tbxModIDhex.Text = "720-01-02";
-            // 
-            // Label1
-            // 
-            this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(20, 30);
-            this.Label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(71, 16);
-            this.Label1.TabIndex = 0;
-            this.Label1.Text = "Module ID:";
+            this.tbxChecksumBin.BackColor = System.Drawing.SystemColors.Control;
+            this.tbxChecksumBin.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxChecksumBin.Location = new System.Drawing.Point(220, 207);
+            this.tbxChecksumBin.Margin = new System.Windows.Forms.Padding(4);
+            this.tbxChecksumBin.MaxLength = 8;
+            this.tbxChecksumBin.Name = "tbxChecksumBin";
+            this.tbxChecksumBin.Size = new System.Drawing.Size(89, 22);
+            this.tbxChecksumBin.TabIndex = 19;
+            this.tbxChecksumBin.Text = "00011111";
             // 
             // TabPage3
             // 
             this.TabPage3.BackColor = System.Drawing.SystemColors.Control;
             this.TabPage3.Controls.Add(this.grpDeduceBrowser);
             this.TabPage3.Controls.Add(this.grpDeduceSelection);
-            this.TabPage3.Location = new System.Drawing.Point(4, 25);
+            this.TabPage3.Location = new System.Drawing.Point(184, 4);
             this.TabPage3.Name = "TabPage3";
-            this.TabPage3.Size = new System.Drawing.Size(991, 562);
+            this.TabPage3.Size = new System.Drawing.Size(932, 583);
             this.TabPage3.TabIndex = 2;
             this.TabPage3.Text = "MotorCraft AsBuilt Data";
             this.TabPage3.Enter += new System.EventHandler(this.TabPage3_Enter);
+            // 
+            // grpDeduceBrowser
+            // 
+            this.grpDeduceBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpDeduceBrowser.Controls.Add(this.wbDeducer);
+            this.grpDeduceBrowser.Location = new System.Drawing.Point(20, 85);
+            this.grpDeduceBrowser.Name = "grpDeduceBrowser";
+            this.grpDeduceBrowser.Size = new System.Drawing.Size(950, 460);
+            this.grpDeduceBrowser.TabIndex = 1;
+            this.grpDeduceBrowser.TabStop = false;
+            this.grpDeduceBrowser.Text = "Browser & Actions";
+            // 
+            // wbDeducer
+            // 
+            this.wbDeducer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.wbDeducer.Location = new System.Drawing.Point(15, 25);
+            this.wbDeducer.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbDeducer.Name = "wbDeducer";
+            this.wbDeducer.Size = new System.Drawing.Size(1670, 750);
+            this.wbDeducer.TabIndex = 0;
+            this.wbDeducer.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbDeducer_DocumentCompleted);
             // 
             // grpDeduceSelection
             // 
@@ -1309,14 +1233,33 @@ namespace AsBuiltExplorer
             this.grpDeduceSelection.TabStop = false;
             this.grpDeduceSelection.Text = "Vehicle Selection";
             // 
-            // lblDeduceSelect
+            // btnDeduceGo
             // 
-            this.lblDeduceSelect.AutoSize = true;
-            this.lblDeduceSelect.Location = new System.Drawing.Point(15, 25);
-            this.lblDeduceSelect.Name = "lblDeduceSelect";
-            this.lblDeduceSelect.Size = new System.Drawing.Size(130, 16);
-            this.lblDeduceSelect.TabIndex = 0;
-            this.lblDeduceSelect.Text = "Select Saved Vehicle:";
+            this.btnDeduceGo.Location = new System.Drawing.Point(670, 20);
+            this.btnDeduceGo.Name = "btnDeduceGo";
+            this.btnDeduceGo.Size = new System.Drawing.Size(180, 26);
+            this.btnDeduceGo.TabIndex = 4;
+            this.btnDeduceGo.Text = "Open Motorcraft Website >>";
+            this.btnDeduceGo.UseVisualStyleBackColor = true;
+            this.btnDeduceGo.Click += new System.EventHandler(this.btnDeduceGo_Click);
+            // 
+            // txtDeduceVIN
+            // 
+            this.txtDeduceVIN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDeduceVIN.Location = new System.Drawing.Point(466, 22);
+            this.txtDeduceVIN.MaxLength = 17;
+            this.txtDeduceVIN.Name = "txtDeduceVIN";
+            this.txtDeduceVIN.Size = new System.Drawing.Size(180, 22);
+            this.txtDeduceVIN.TabIndex = 3;
+            // 
+            // lblDeduceOr
+            // 
+            this.lblDeduceOr.AutoSize = true;
+            this.lblDeduceOr.Location = new System.Drawing.Point(370, 25);
+            this.lblDeduceOr.Name = "lblDeduceOr";
+            this.lblDeduceOr.Size = new System.Drawing.Size(83, 16);
+            this.lblDeduceOr.TabIndex = 2;
+            this.lblDeduceOr.Text = "Or Enter VIN:";
             // 
             // cmbDeduceSavedVehicles
             // 
@@ -1328,77 +1271,14 @@ namespace AsBuiltExplorer
             this.cmbDeduceSavedVehicles.TabIndex = 1;
             this.cmbDeduceSavedVehicles.SelectedIndexChanged += new System.EventHandler(this.cmbDeduceSavedVehicles_SelectedIndexChanged);
             // 
-            // lblDeduceOr
+            // lblDeduceSelect
             // 
-            this.lblDeduceOr.AutoSize = true;
-            this.lblDeduceOr.Location = new System.Drawing.Point(370, 25);
-            this.lblDeduceOr.Name = "lblDeduceOr";
-            this.lblDeduceOr.Size = new System.Drawing.Size(90, 16);
-            this.lblDeduceOr.TabIndex = 2;
-            this.lblDeduceOr.Text = "Or Enter VIN:";
-            // 
-            // txtDeduceVIN
-            // 
-            this.txtDeduceVIN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtDeduceVIN.Location = new System.Drawing.Point(466, 22);
-            this.txtDeduceVIN.MaxLength = 17;
-            this.txtDeduceVIN.Name = "txtDeduceVIN";
-            this.txtDeduceVIN.Size = new System.Drawing.Size(180, 22);
-            this.txtDeduceVIN.TabIndex = 3;
-            // 
-            // btnDeduceGo
-            // 
-            this.btnDeduceGo.Location = new System.Drawing.Point(670, 20);
-            this.btnDeduceGo.Name = "btnDeduceGo";
-            this.btnDeduceGo.Size = new System.Drawing.Size(180, 26);
-            this.btnDeduceGo.TabIndex = 4;
-            this.btnDeduceGo.Text = "Open Motorcraft Website >>";
-            this.btnDeduceGo.UseVisualStyleBackColor = true;
-            this.btnDeduceGo.Click += new System.EventHandler(this.btnDeduceGo_Click);
-            // 
-            // grpDeduceBrowser
-            // 
-            this.grpDeduceBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-
-            this.grpDeduceBrowser.Controls.Add(this.wbDeducer);
-            this.grpDeduceBrowser.Location = new System.Drawing.Point(20, 85);
-            this.grpDeduceBrowser.Name = "grpDeduceBrowser";
-            this.grpDeduceBrowser.Size = new System.Drawing.Size(950, 460);
-            this.grpDeduceBrowser.TabIndex = 1;
-            this.grpDeduceBrowser.TabStop = false;
-            this.grpDeduceBrowser.Text = "Browser & Actions";
-            // 
-            // wbDeducer
-            // 
-            this.wbDeducer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.wbDeducer.Location = new System.Drawing.Point(15, 25);
-            this.wbDeducer.MinimumSize = new System.Drawing.Size(20, 20);
-            this.wbDeducer.Name = "wbDeducer";
-            this.wbDeducer.Size = new System.Drawing.Size(920, 390);
-            this.wbDeducer.TabIndex = 0;
-            this.wbDeducer.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbDeducer_DocumentCompleted);
-
-            // 
-            // 
-
-
-
-
-
-
-
-
-
-            // 
-            // wbDeducer
-            // 
-
-
-
+            this.lblDeduceSelect.AutoSize = true;
+            this.lblDeduceSelect.Location = new System.Drawing.Point(15, 25);
+            this.lblDeduceSelect.Name = "lblDeduceSelect";
+            this.lblDeduceSelect.Size = new System.Drawing.Size(139, 16);
+            this.lblDeduceSelect.TabIndex = 0;
+            this.lblDeduceSelect.Text = "Select Saved Vehicle:";
             // 
             // TabPage4
             // 
@@ -1416,11 +1296,12 @@ namespace AsBuiltExplorer
             this.TabPage4.Controls.Add(this.btnDeduceFigureIt);
             this.TabPage4.Controls.Add(this.btnDeduceLoadOptions);
             this.TabPage4.Controls.Add(this.lstDeduceFactoryOptions);
-            this.TabPage4.Location = new System.Drawing.Point(4, 22);
+            this.TabPage4.Location = new System.Drawing.Point(184, 4);
             this.TabPage4.Name = "TabPage4";
-            this.TabPage4.Size = new System.Drawing.Size(991, 565);
+            this.TabPage4.Size = new System.Drawing.Size(932, 583);
             this.TabPage4.TabIndex = 3;
             this.TabPage4.Text = "Deducer - Feature by Vehicles";
+            this.TabPage4.Click += new System.EventHandler(this.TabPage4_Click);
             // 
             // chkDeduceDoCCC
             // 
@@ -1441,6 +1322,7 @@ namespace AsBuiltExplorer
             this.Button8.Text = "Try Every Option";
             this.Button8.UseVisualStyleBackColor = true;
             this.Button8.Visible = false;
+            this.Button8.Click += new System.EventHandler(this.Button8_Click);
             // 
             // Label14
             // 
@@ -1527,6 +1409,7 @@ namespace AsBuiltExplorer
             this.btnDeduceFigureIt.TabIndex = 2;
             this.btnDeduceFigureIt.Text = "Find Perfect Bits";
             this.btnDeduceFigureIt.UseVisualStyleBackColor = true;
+            this.btnDeduceFigureIt.Click += new System.EventHandler(this.btnDeduceFigureIt_Click);
             // 
             // btnDeduceLoadOptions
             // 
@@ -1536,6 +1419,7 @@ namespace AsBuiltExplorer
             this.btnDeduceLoadOptions.TabIndex = 1;
             this.btnDeduceLoadOptions.Text = "Load Stored Data";
             this.btnDeduceLoadOptions.UseVisualStyleBackColor = true;
+            this.btnDeduceLoadOptions.Click += new System.EventHandler(this.btnDeduceLoadOptions_Click);
             // 
             // lstDeduceFactoryOptions
             // 
@@ -1547,108 +1431,108 @@ namespace AsBuiltExplorer
             this.lstDeduceFactoryOptions.Size = new System.Drawing.Size(368, 84);
             this.lstDeduceFactoryOptions.TabIndex = 0;
             // 
-            // TabPage9
+            // tabMods
             // 
-            this.TabPage9.Controls.Add(this.lvwDecodeResults);
-            this.TabPage9.Controls.Add(this.btnDecode);
-            this.TabPage9.Controls.Add(this.cmbSavedVehicles);
-            this.TabPage9.Controls.Add(this.lblVinSelect);
-            this.TabPage9.Controls.Add(this.txtVinInput);
-            this.TabPage9.Controls.Add(this.lblVinInput);
-            this.TabPage9.Location = new System.Drawing.Point(4, 25);
-            this.TabPage9.Name = "TabPage9";
-            this.TabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage9.Size = new System.Drawing.Size(1112, 562);
-            this.TabPage9.TabIndex = 8;
-            this.TabPage9.Text = "VIN Decoder";
-            this.TabPage9.UseVisualStyleBackColor = true;
-            this.TabPage9.Enter += new System.EventHandler(this.TabPage9_Enter);
+            this.tabMods.Controls.Add(this.splitMods);
+            this.tabMods.Controls.Add(this.lblModsHelp);
+            this.tabMods.Controls.Add(this.cmbModPlatform);
+            this.tabMods.Controls.Add(this.lblModPlatform);
+            this.tabMods.Location = new System.Drawing.Point(184, 4);
+            this.tabMods.Name = "tabMods";
+            this.tabMods.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMods.Size = new System.Drawing.Size(932, 583);
+            this.tabMods.TabIndex = 8;
+            this.tabMods.Text = "Vehicle Mods";
+            this.tabMods.UseVisualStyleBackColor = true;
+            this.tabMods.Enter += new System.EventHandler(this.tabMods_Enter);
             // 
-            // lblVinInput
+            // splitMods
             // 
-            this.lblVinInput.AutoSize = true;
-            this.lblVinInput.Location = new System.Drawing.Point(20, 30);
-            this.lblVinInput.Name = "lblVinInput";
-            this.lblVinInput.Size = new System.Drawing.Size(69, 16);
-            this.lblVinInput.TabIndex = 0;
-            this.lblVinInput.Text = "Enter VIN:";
-            // 
-            // txtVinInput
-            // 
-            this.txtVinInput.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtVinInput.Location = new System.Drawing.Point(100, 27);
-            this.txtVinInput.MaxLength = 17;
-            this.txtVinInput.Name = "txtVinInput";
-            this.txtVinInput.Size = new System.Drawing.Size(200, 22);
-            this.txtVinInput.TabIndex = 1;
-            // 
-            // lblVinSelect
-            // 
-            this.lblVinSelect.AutoSize = true;
-            this.lblVinSelect.Location = new System.Drawing.Point(340, 30);
-            this.lblVinSelect.Name = "lblVinSelect";
-            this.lblVinSelect.Size = new System.Drawing.Size(130, 16);
-            this.lblVinSelect.TabIndex = 2;
-            this.lblVinSelect.Text = "Or Saved Vehicle:";
-            // 
-            // cmbSavedVehicles
-            // 
-            this.cmbSavedVehicles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSavedVehicles.FormattingEnabled = true;
-            this.cmbSavedVehicles.Location = new System.Drawing.Point(480, 26);
-            this.cmbSavedVehicles.Name = "cmbSavedVehicles";
-            this.cmbSavedVehicles.Size = new System.Drawing.Size(250, 24);
-            this.cmbSavedVehicles.TabIndex = 3;
-            this.cmbSavedVehicles.SelectedIndexChanged += new System.EventHandler(this.cmbSavedVehicles_SelectedIndexChanged);
-            // 
-            // btnDecode
-            // 
-            this.btnDecode.Location = new System.Drawing.Point(760, 25);
-            this.btnDecode.Name = "btnDecode";
-            this.btnDecode.Size = new System.Drawing.Size(100, 27);
-            this.btnDecode.TabIndex = 4;
-            this.btnDecode.Text = "Decode";
-            this.btnDecode.UseVisualStyleBackColor = true;
-            this.btnDecode.Click += new System.EventHandler(this.btnDecode_Click);
-            // 
-            // lvwDecodeResults
-            // 
-            this.lvwDecodeResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colPos,
-            this.colVal,
-            this.colMean,
-            this.colNotes});
-            this.lvwDecodeResults.FullRowSelect = true;
-            this.lvwDecodeResults.GridLines = true;
-            this.lvwDecodeResults.Location = new System.Drawing.Point(23, 70);
-            this.lvwDecodeResults.Name = "lvwDecodeResults";
-            this.lvwDecodeResults.Size = new System.Drawing.Size(1100, 470);
-            this.lvwDecodeResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.splitMods.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvwDecodeResults.TabIndex = 5;
-            this.lvwDecodeResults.UseCompatibleStateImageBehavior = false;
-            this.lvwDecodeResults.View = System.Windows.Forms.View.Details;
+            this.splitMods.Location = new System.Drawing.Point(9, 48);
+            this.splitMods.Name = "splitMods";
             // 
-            // colPos
+            // splitMods.Panel1
             // 
-            this.colPos.Text = "Position";
-            this.colPos.Width = 80;
+            this.splitMods.Panel1.Controls.Add(this.lvwMods);
             // 
-            // colVal
+            // splitMods.Panel2
             // 
-            this.colVal.Text = "Value";
-            this.colVal.Width = 80;
+            this.splitMods.Panel2.Controls.Add(this.rtbModDetails);
+            this.splitMods.Size = new System.Drawing.Size(2034, 1095);
+            this.splitMods.SplitterDistance = 639;
+            this.splitMods.TabIndex = 3;
             // 
-            // colMean
+            // lvwMods
             // 
-            this.colMean.Text = "Meaning";
-            this.colMean.Width = 250;
+            this.lvwMods.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colModTitle,
+            this.colModCat});
+            this.lvwMods.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvwMods.FullRowSelect = true;
+            this.lvwMods.GridLines = true;
+            this.lvwMods.HideSelection = false;
+            this.lvwMods.Location = new System.Drawing.Point(0, 0);
+            this.lvwMods.MultiSelect = false;
+            this.lvwMods.Name = "lvwMods";
+            this.lvwMods.Size = new System.Drawing.Size(639, 1095);
+            this.lvwMods.TabIndex = 0;
+            this.lvwMods.UseCompatibleStateImageBehavior = false;
+            this.lvwMods.View = System.Windows.Forms.View.Details;
+            this.lvwMods.SelectedIndexChanged += new System.EventHandler(this.lvwMods_SelectedIndexChanged);
             // 
-            // colNotes
+            // colModTitle
             // 
-            this.colNotes.Text = "Notes / How to Decode";
-            this.colNotes.Width = 500;
+            this.colModTitle.Text = "Modification";
+            this.colModTitle.Width = 200;
+            // 
+            // colModCat
+            // 
+            this.colModCat.Text = "Category";
+            this.colModCat.Width = 100;
+            // 
+            // rtbModDetails
+            // 
+            this.rtbModDetails.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rtbModDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbModDetails.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbModDetails.Location = new System.Drawing.Point(0, 0);
+            this.rtbModDetails.Name = "rtbModDetails";
+            this.rtbModDetails.ReadOnly = true;
+            this.rtbModDetails.Size = new System.Drawing.Size(1391, 1095);
+            this.rtbModDetails.TabIndex = 0;
+            this.rtbModDetails.Text = "";
+            // 
+            // lblModsHelp
+            // 
+            this.lblModsHelp.AutoSize = true;
+            this.lblModsHelp.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.lblModsHelp.Location = new System.Drawing.Point(343, 21);
+            this.lblModsHelp.Name = "lblModsHelp";
+            this.lblModsHelp.Size = new System.Drawing.Size(290, 16);
+            this.lblModsHelp.TabIndex = 2;
+            this.lblModsHelp.Text = "Select a modification to view instructions details.";
+            // 
+            // cmbModPlatform
+            // 
+            this.cmbModPlatform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbModPlatform.FormattingEnabled = true;
+            this.cmbModPlatform.Location = new System.Drawing.Point(70, 15);
+            this.cmbModPlatform.Name = "cmbModPlatform";
+            this.cmbModPlatform.Size = new System.Drawing.Size(250, 24);
+            this.cmbModPlatform.TabIndex = 1;
+            this.cmbModPlatform.SelectedIndexChanged += new System.EventHandler(this.cmbModPlatform_SelectedIndexChanged);
+            // 
+            // lblModPlatform
+            // 
+            this.lblModPlatform.AutoSize = true;
+            this.lblModPlatform.Location = new System.Drawing.Point(18, 21);
+            this.lblModPlatform.Name = "lblModPlatform";
+            this.lblModPlatform.Size = new System.Drawing.Size(59, 16);
+            this.lblModPlatform.TabIndex = 0;
+            this.lblModPlatform.Text = "Platform:";
             // 
             // TabPage5
             // 
@@ -1668,12 +1552,13 @@ namespace AsBuiltExplorer
             this.TabPage5.Controls.Add(this.Label18);
             this.TabPage5.Controls.Add(this.tbxDeduceReport2);
             this.TabPage5.Controls.Add(this.Button4);
-            this.TabPage5.Location = new System.Drawing.Point(4, 22);
+            this.TabPage5.Location = new System.Drawing.Point(184, 4);
             this.TabPage5.Name = "TabPage5";
             this.TabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage5.Size = new System.Drawing.Size(991, 565);
+            this.TabPage5.Size = new System.Drawing.Size(932, 583);
             this.TabPage5.TabIndex = 4;
             this.TabPage5.Text = "Deducer - Vehicle/Feature by Bit";
+            this.TabPage5.Click += new System.EventHandler(this.TabPage5_Click);
             // 
             // Button10
             // 
@@ -1720,6 +1605,7 @@ namespace AsBuiltExplorer
             this.Button6.TabIndex = 27;
             this.Button6.Text = "Load Modules";
             this.Button6.UseVisualStyleBackColor = true;
+            this.Button6.Click += new System.EventHandler(this.Button6_Click_1);
             // 
             // Button5
             // 
@@ -1729,6 +1615,7 @@ namespace AsBuiltExplorer
             this.Button5.TabIndex = 26;
             this.Button5.Text = "Load Stored Data";
             this.Button5.UseVisualStyleBackColor = true;
+            this.Button5.Click += new System.EventHandler(this.Button5_Click_1);
             // 
             // Label20
             // 
@@ -1818,16 +1705,17 @@ namespace AsBuiltExplorer
             this.Button4.TabIndex = 13;
             this.Button4.Text = "Find Feature";
             this.Button4.UseVisualStyleBackColor = true;
+            this.Button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // TabPage6
             // 
             this.TabPage6.BackColor = System.Drawing.SystemColors.Control;
             this.TabPage6.Controls.Add(this.btnBrowseRefresh);
             this.TabPage6.Controls.Add(this.lvwBrowser);
-            this.TabPage6.Location = new System.Drawing.Point(4, 22);
+            this.TabPage6.Location = new System.Drawing.Point(184, 4);
             this.TabPage6.Name = "TabPage6";
             this.TabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage6.Size = new System.Drawing.Size(991, 565);
+            this.TabPage6.Size = new System.Drawing.Size(932, 583);
             this.TabPage6.TabIndex = 5;
             this.TabPage6.Text = "Vehicle Database";
             // 
@@ -1840,95 +1728,7 @@ namespace AsBuiltExplorer
             this.btnBrowseRefresh.TabIndex = 1;
             this.btnBrowseRefresh.Text = "Refresh";
             this.btnBrowseRefresh.UseVisualStyleBackColor = true;
-            this.btnBrowseRefresh.Click += new System.EventHandler(this.btnBrowseRefresh_Click);
-            // 
-            // TabPage7
-            // 
-            this.TabPage7.BackColor = System.Drawing.SystemColors.Control;
-            this.TabPage7.Location = new System.Drawing.Point(4, 25);
-            this.TabPage7.Name = "TabPage7";
-            this.TabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage7.Size = new System.Drawing.Size(991, 562);
-            this.TabPage7.TabIndex = 6;
-            this.TabPage7.Text = "Help";
-            // 
-            // TabPage8
-            // 
-            this.TabPage8.BackColor = System.Drawing.SystemColors.Control;
-            this.TabPage8.Controls.Add(this.lnkAboutGithub);
-            this.TabPage8.Controls.Add(this.lblAboutMoto);
-            this.TabPage8.Controls.Add(this.lblAboutCredits);
-            this.TabPage8.Controls.Add(this.lblAboutDev);
-            this.TabPage8.Controls.Add(this.lblAboutVersion);
-            this.TabPage8.Controls.Add(this.lblAboutTitle);
-            this.TabPage8.Location = new System.Drawing.Point(4, 25);
-            this.TabPage8.Name = "TabPage8";
-            this.TabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage8.Size = new System.Drawing.Size(991, 562);
-            this.TabPage8.TabIndex = 7;
-            this.TabPage8.Text = "About";
-            // 
-            // lblAboutTitle
-            // 
-            this.lblAboutTitle.AutoSize = true;
-            this.lblAboutTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAboutTitle.Location = new System.Drawing.Point(50, 50);
-            this.lblAboutTitle.Name = "lblAboutTitle";
-            this.lblAboutTitle.Size = new System.Drawing.Size(262, 37);
-            this.lblAboutTitle.TabIndex = 0;
-            this.lblAboutTitle.Text = "AsBuiltExplorer";
-            // 
-            // lblAboutVersion
-            // 
-            this.lblAboutVersion.AutoSize = true;
-            this.lblAboutVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAboutVersion.Location = new System.Drawing.Point(53, 97);
-            this.lblAboutVersion.Name = "lblAboutVersion";
-            this.lblAboutVersion.Size = new System.Drawing.Size(63, 20);
-            this.lblAboutVersion.TabIndex = 1;
-            this.lblAboutVersion.Text = "Version";
-            // 
-            // lblAboutDev
-            // 
-            this.lblAboutDev.AutoSize = true;
-            this.lblAboutDev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAboutDev.Location = new System.Drawing.Point(53, 140);
-            this.lblAboutDev.Name = "lblAboutDev";
-            this.lblAboutDev.Size = new System.Drawing.Size(193, 20);
-            this.lblAboutDev.TabIndex = 2;
-            this.lblAboutDev.Text = "Developed by Eliminater74";
-            // 
-            // lblAboutCredits
-            // 
-            this.lblAboutCredits.AutoSize = true;
-            this.lblAboutCredits.Location = new System.Drawing.Point(54, 200);
-            this.lblAboutCredits.Name = "lblAboutCredits";
-            this.lblAboutCredits.Size = new System.Drawing.Size(400, 32);
-            this.lblAboutCredits.TabIndex = 3;
-            this.lblAboutCredits.Text = "Based on CompulsiveCode by Jesse Yeager.\r\nBig thanks to the open source community.";
-            // 
-            // lblAboutMoto
-            // 
-            this.lblAboutMoto.AutoSize = true;
-            this.lblAboutMoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAboutMoto.ForeColor = System.Drawing.Color.DarkBlue;
-            this.lblAboutMoto.Location = new System.Drawing.Point(53, 300);
-            this.lblAboutMoto.Name = "lblAboutMoto";
-            this.lblAboutMoto.Size = new System.Drawing.Size(111, 24);
-            this.lblAboutMoto.TabIndex = 4;
-            this.lblAboutMoto.Text = "PureFusion";
-            // 
-            // lnkAboutGithub
-            // 
-            this.lnkAboutGithub.AutoSize = true;
-            this.lnkAboutGithub.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkAboutGithub.Location = new System.Drawing.Point(54, 350);
-            this.lnkAboutGithub.Name = "lnkAboutGithub";
-            this.lnkAboutGithub.Size = new System.Drawing.Size(320, 17);
-            this.lnkAboutGithub.TabIndex = 5;
-            this.lnkAboutGithub.TabStop = true;
-            this.lnkAboutGithub.Text = "https://github.com/Eliminater74/AsBuiltExplorer";
-            this.lnkAboutGithub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAboutGithub_LinkClicked);
+            this.btnBrowseRefresh.Click += new System.EventHandler(this.Button10_Click);
             // 
             // lvwBrowser
             // 
@@ -1952,6 +1752,7 @@ namespace AsBuiltExplorer
             this.lvwBrowser.UseCompatibleStateImageBehavior = false;
             this.lvwBrowser.View = System.Windows.Forms.View.Details;
             this.lvwBrowser.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwBrowser_ColumnClick);
+            this.lvwBrowser.SelectedIndexChanged += new System.EventHandler(this.lvwBrowser_SelectedIndexChanged);
             // 
             // ColumnHeader10
             // 
@@ -2032,13 +1833,207 @@ namespace AsBuiltExplorer
             this.DeleteFileToolStripMenuItem.Text = "Delete File";
             this.DeleteFileToolStripMenuItem.Click += new System.EventHandler(this.DeleteFileToolStripMenuItem_Click);
             // 
+            // TabPage9
+            // 
+            this.TabPage9.Controls.Add(this.lvwDecodeResults);
+            this.TabPage9.Controls.Add(this.btnDecode);
+            this.TabPage9.Controls.Add(this.cmbSavedVehicles);
+            this.TabPage9.Controls.Add(this.lblVinSelect);
+            this.TabPage9.Controls.Add(this.txtVinInput);
+            this.TabPage9.Controls.Add(this.lblVinInput);
+            this.TabPage9.Location = new System.Drawing.Point(184, 4);
+            this.TabPage9.Name = "TabPage9";
+            this.TabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage9.Size = new System.Drawing.Size(932, 583);
+            this.TabPage9.TabIndex = 8;
+            this.TabPage9.Text = "VIN Decoder";
+            this.TabPage9.UseVisualStyleBackColor = true;
+            this.TabPage9.Enter += new System.EventHandler(this.TabPage9_Enter);
+            // 
+            // lvwDecodeResults
+            // 
+            this.lvwDecodeResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvwDecodeResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colPos,
+            this.colVal,
+            this.colMean,
+            this.colNotes});
+            this.lvwDecodeResults.FullRowSelect = true;
+            this.lvwDecodeResults.GridLines = true;
+            this.lvwDecodeResults.HideSelection = false;
+            this.lvwDecodeResults.Location = new System.Drawing.Point(26, 73);
+            this.lvwDecodeResults.Name = "lvwDecodeResults";
+            this.lvwDecodeResults.Size = new System.Drawing.Size(2006, 926);
+            this.lvwDecodeResults.TabIndex = 5;
+            this.lvwDecodeResults.UseCompatibleStateImageBehavior = false;
+            this.lvwDecodeResults.View = System.Windows.Forms.View.Details;
+            this.lvwDecodeResults.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvwDecodeResults_MouseClick);
+            // 
+            // colPos
+            // 
+            this.colPos.Text = "Position";
+            this.colPos.Width = 80;
+            // 
+            // colVal
+            // 
+            this.colVal.Text = "Value";
+            this.colVal.Width = 80;
+            // 
+            // colMean
+            // 
+            this.colMean.Text = "Meaning";
+            this.colMean.Width = 250;
+            // 
+            // colNotes
+            // 
+            this.colNotes.Text = "Notes / How to Decode";
+            this.colNotes.Width = 500;
+            // 
+            // btnDecode
+            // 
+            this.btnDecode.Location = new System.Drawing.Point(760, 25);
+            this.btnDecode.Name = "btnDecode";
+            this.btnDecode.Size = new System.Drawing.Size(100, 27);
+            this.btnDecode.TabIndex = 4;
+            this.btnDecode.Text = "Decode";
+            this.btnDecode.UseVisualStyleBackColor = true;
+            this.btnDecode.Click += new System.EventHandler(this.btnDecode_Click);
+            // 
+            // cmbSavedVehicles
+            // 
+            this.cmbSavedVehicles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSavedVehicles.FormattingEnabled = true;
+            this.cmbSavedVehicles.Location = new System.Drawing.Point(480, 26);
+            this.cmbSavedVehicles.Name = "cmbSavedVehicles";
+            this.cmbSavedVehicles.Size = new System.Drawing.Size(250, 24);
+            this.cmbSavedVehicles.TabIndex = 3;
+            this.cmbSavedVehicles.SelectedIndexChanged += new System.EventHandler(this.cmbSavedVehicles_SelectedIndexChanged);
+            // 
+            // lblVinSelect
+            // 
+            this.lblVinSelect.AutoSize = true;
+            this.lblVinSelect.Location = new System.Drawing.Point(343, 33);
+            this.lblVinSelect.Name = "lblVinSelect";
+            this.lblVinSelect.Size = new System.Drawing.Size(115, 16);
+            this.lblVinSelect.TabIndex = 2;
+            this.lblVinSelect.Text = "Or Saved Vehicle:";
+            // 
+            // txtVinInput
+            // 
+            this.txtVinInput.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtVinInput.Location = new System.Drawing.Point(100, 27);
+            this.txtVinInput.MaxLength = 17;
+            this.txtVinInput.Name = "txtVinInput";
+            this.txtVinInput.Size = new System.Drawing.Size(200, 22);
+            this.txtVinInput.TabIndex = 1;
+            // 
+            // lblVinInput
+            // 
+            this.lblVinInput.AutoSize = true;
+            this.lblVinInput.Location = new System.Drawing.Point(23, 33);
+            this.lblVinInput.Name = "lblVinInput";
+            this.lblVinInput.Size = new System.Drawing.Size(66, 16);
+            this.lblVinInput.TabIndex = 0;
+            this.lblVinInput.Text = "Enter VIN:";
+            // 
+            // TabPage7
+            // 
+            this.TabPage7.BackColor = System.Drawing.SystemColors.Control;
+            this.TabPage7.Location = new System.Drawing.Point(184, 4);
+            this.TabPage7.Name = "TabPage7";
+            this.TabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage7.Size = new System.Drawing.Size(932, 583);
+            this.TabPage7.TabIndex = 6;
+            this.TabPage7.Text = "Help";
+            // 
+            // TabPage8
+            // 
+            this.TabPage8.BackColor = System.Drawing.SystemColors.Control;
+            this.TabPage8.Controls.Add(this.lnkAboutGithub);
+            this.TabPage8.Controls.Add(this.lblAboutMoto);
+            this.TabPage8.Controls.Add(this.lblAboutCredits);
+            this.TabPage8.Controls.Add(this.lblAboutDev);
+            this.TabPage8.Controls.Add(this.lblAboutVersion);
+            this.TabPage8.Controls.Add(this.lblAboutTitle);
+            this.TabPage8.Location = new System.Drawing.Point(184, 4);
+            this.TabPage8.Name = "TabPage8";
+            this.TabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage8.Size = new System.Drawing.Size(932, 583);
+            this.TabPage8.TabIndex = 7;
+            this.TabPage8.Text = "About";
+            // 
+            // lnkAboutGithub
+            // 
+            this.lnkAboutGithub.AutoSize = true;
+            this.lnkAboutGithub.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkAboutGithub.Location = new System.Drawing.Point(54, 350);
+            this.lnkAboutGithub.Name = "lnkAboutGithub";
+            this.lnkAboutGithub.Size = new System.Drawing.Size(301, 17);
+            this.lnkAboutGithub.TabIndex = 5;
+            this.lnkAboutGithub.TabStop = true;
+            this.lnkAboutGithub.Text = "https://github.com/Eliminater74/AsBuiltExplorer";
+            this.lnkAboutGithub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAboutGithub_LinkClicked);
+            // 
+            // lblAboutMoto
+            // 
+            this.lblAboutMoto.AutoSize = true;
+            this.lblAboutMoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAboutMoto.ForeColor = System.Drawing.Color.DarkBlue;
+            this.lblAboutMoto.Location = new System.Drawing.Point(53, 300);
+            this.lblAboutMoto.Name = "lblAboutMoto";
+            this.lblAboutMoto.Size = new System.Drawing.Size(108, 24);
+            this.lblAboutMoto.TabIndex = 4;
+            this.lblAboutMoto.Text = "PureFusion";
+            // 
+            // lblAboutCredits
+            // 
+            this.lblAboutCredits.AutoSize = true;
+            this.lblAboutCredits.Location = new System.Drawing.Point(54, 200);
+            this.lblAboutCredits.Name = "lblAboutCredits";
+            this.lblAboutCredits.Size = new System.Drawing.Size(281, 32);
+            this.lblAboutCredits.TabIndex = 3;
+            this.lblAboutCredits.Text = "Based on CompulsiveCode by Jesse Yeager.\r\nBig thanks to the open source community" +
+    ".";
+            // 
+            // lblAboutDev
+            // 
+            this.lblAboutDev.AutoSize = true;
+            this.lblAboutDev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAboutDev.Location = new System.Drawing.Point(53, 140);
+            this.lblAboutDev.Name = "lblAboutDev";
+            this.lblAboutDev.Size = new System.Drawing.Size(197, 20);
+            this.lblAboutDev.TabIndex = 2;
+            this.lblAboutDev.Text = "Developed by Eliminater74";
+            // 
+            // lblAboutVersion
+            // 
+            this.lblAboutVersion.AutoSize = true;
+            this.lblAboutVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAboutVersion.Location = new System.Drawing.Point(53, 97);
+            this.lblAboutVersion.Name = "lblAboutVersion";
+            this.lblAboutVersion.Size = new System.Drawing.Size(63, 20);
+            this.lblAboutVersion.TabIndex = 1;
+            this.lblAboutVersion.Text = "Version";
+            // 
+            // lblAboutTitle
+            // 
+            this.lblAboutTitle.AutoSize = true;
+            this.lblAboutTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAboutTitle.Location = new System.Drawing.Point(50, 50);
+            this.lblAboutTitle.Name = "lblAboutTitle";
+            this.lblAboutTitle.Size = new System.Drawing.Size(250, 37);
+            this.lblAboutTitle.TabIndex = 0;
+            this.lblAboutTitle.Text = "AsBuiltExplorer";
+            // 
             // Label8
             // 
             this.Label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Label8.AutoSize = true;
             this.Label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Label8.Location = new System.Drawing.Point(269, 622);
+            this.Label8.Location = new System.Drawing.Point(269, 636);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(446, 15);
             this.Label8.TabIndex = 1;
@@ -2050,7 +2045,7 @@ namespace AsBuiltExplorer
             this.PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox1.Image")));
-            this.PictureBox1.Location = new System.Drawing.Point(11, 601);
+            this.PictureBox1.Location = new System.Drawing.Point(11, 615);
             this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(115, 52);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -2063,7 +2058,7 @@ namespace AsBuiltExplorer
             this.pbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbSettings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSettings.ImageLocation = "Resources\\settings_icon.png";
-            this.pbSettings.Location = new System.Drawing.Point(135, 601);
+            this.pbSettings.Location = new System.Drawing.Point(135, 615);
             this.pbSettings.Name = "pbSettings";
             this.pbSettings.Size = new System.Drawing.Size(52, 52);
             this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -2074,7 +2069,7 @@ namespace AsBuiltExplorer
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1150, 650);
+            this.ClientSize = new System.Drawing.Size(1211, 664);
             this.Controls.Add(this.Label8);
             this.Controls.Add(this.TabControl1);
             this.Controls.Add(this.PictureBox1);
@@ -2090,50 +2085,39 @@ namespace AsBuiltExplorer
             this.TabPage1.PerformLayout();
             this.ContextMenuStrip1.ResumeLayout(false);
             this.TabPage2.ResumeLayout(false);
-            this.TabPage2.PerformLayout();
+            this.grpAudio.ResumeLayout(false);
+            this.grpAudio.PerformLayout();
+            this.grpVIN.ResumeLayout(false);
+            this.grpVIN.PerformLayout();
+            this.grpTPMS.ResumeLayout(false);
+            this.grpTPMS.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTPMS_PSI)).EndInit();
+            this.grpConverter.ResumeLayout(false);
+            this.grpConverter.PerformLayout();
+            this.grpChecksum.ResumeLayout(false);
+            this.grpChecksum.PerformLayout();
             this.TabPage3.ResumeLayout(false);
-            this.TabPage3.PerformLayout();
+            this.grpDeduceBrowser.ResumeLayout(false);
+            this.grpDeduceSelection.ResumeLayout(false);
+            this.grpDeduceSelection.PerformLayout();
             this.TabPage4.ResumeLayout(false);
             this.TabPage4.PerformLayout();
+            this.tabMods.ResumeLayout(false);
+            this.tabMods.PerformLayout();
+            this.splitMods.Panel1.ResumeLayout(false);
+            this.splitMods.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitMods)).EndInit();
+            this.splitMods.ResumeLayout(false);
             this.TabPage5.ResumeLayout(false);
             this.TabPage5.PerformLayout();
             this.TabPage6.ResumeLayout(false);
-            this.TabPage7.ResumeLayout(false);
-            this.TabPage8.ResumeLayout(false);
-            this.TabPage8.PerformLayout();
-            this.TabPage9.SuspendLayout();
+            this.ContextMenuStrip2.ResumeLayout(false);
             this.TabPage9.ResumeLayout(false);
             this.TabPage9.PerformLayout();
-            this.ContextMenuStrip2.ResumeLayout(false);
+            this.TabPage8.ResumeLayout(false);
+            this.TabPage8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
-            this.TabPage5.Click += new System.EventHandler(this.TabPage5_Click);
-            this.lvwBrowser.SelectedIndexChanged += new System.EventHandler(this.lvwBrowser_SelectedIndexChanged);
-            this.Button6.Click += new System.EventHandler(this.Button6_Click_1);
-            this.Button5.Click += new System.EventHandler(this.Button5_Click_1);
-            this.btnBrowseRefresh.Click += new System.EventHandler(this.Button10_Click);
-            this.Button10.Click += new System.EventHandler(this.Button10_Click_1);
-            this.Button7.Click += new System.EventHandler(this.Button7_Click);
-            this.Button9.Click += new System.EventHandler(this.Button9_Click);
-            this.Button8.Click += new System.EventHandler(this.Button8_Click);
-            this.Button4.Click += new System.EventHandler(this.Button4_Click);
-
-            this.btnDeduceFigureIt.Click += new System.EventHandler(this.btnDeduceFigureIt_Click);
-            this.btnDeduceLoadOptions.Click += new System.EventHandler(this.btnDeduceLoadOptions_Click);
-            this.TabPage4.Click += new System.EventHandler(this.TabPage4_Click);
-            this.BinaryToolStripMenuItem.Click += new System.EventHandler(this.BinaryToolStripMenuItem_Click);
-            this.Data3hexToolStripMenuItem.Click += new System.EventHandler(this.Data3hexToolStripMenuItem_Click);
-            this.Data2hexToolStripMenuItem.Click += new System.EventHandler(this.Data2hexToolStripMenuItem_Click);
-            this.Data1hexToolStripMenuItem.Click += new System.EventHandler(this.Data1hexToolStripMenuItem_Click);
-            this.Data2hexToolStripMenuItem.Click += new System.EventHandler(this.Data2hexToolStripMenuItem_Click);
-            this.Data3hexToolStripMenuItem.Click += new System.EventHandler(this.Data3hexToolStripMenuItem_Click);
-
-            this.tbxData1hex.TextChanged += new System.EventHandler(this.tbxData1hex_TextChanged);
-            this.tbxData2hex.TextChanged += new System.EventHandler(this.tbxData2hex_TextChanged);
-            this.tbxData3hex.TextChanged += new System.EventHandler(this.tbxData3hex_TextChanged);
-            this.EntireLineToolStripMenuItem.Click += new System.EventHandler(this.EntireLineToolStripMenuItem_Click);
-            this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
-
             this.ResumeLayout(false);
             this.PerformLayout();
 
