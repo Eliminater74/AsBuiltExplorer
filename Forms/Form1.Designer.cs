@@ -1703,6 +1703,7 @@ namespace AsBuiltExplorer
             // tbxDeduceReport2
             // 
             this.tbxDeduceReport2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxDeduceReport2.Location = new System.Drawing.Point(0, 0);
             this.tbxDeduceReport2.MaxLength = 5000000;
             this.tbxDeduceReport2.Multiline = true;
             this.tbxDeduceReport2.Name = "tbxDeduceReport2";
