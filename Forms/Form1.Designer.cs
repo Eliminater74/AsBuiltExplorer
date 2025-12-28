@@ -83,7 +83,6 @@ namespace AsBuiltExplorer
             this.Label6 = new System.Windows.Forms.Label();
             this.TabPage2 = new System.Windows.Forms.TabPage();
 
-            this.TabPage4 = new System.Windows.Forms.TabPage();
             this.Label16 = new System.Windows.Forms.Label();
             this.Label15 = new System.Windows.Forms.Label();
             this.tbxChecksumBin = new System.Windows.Forms.TextBox();
@@ -162,8 +161,7 @@ namespace AsBuiltExplorer
             this.Label18 = new System.Windows.Forms.Label();
             this.grpChecksum = new System.Windows.Forms.GroupBox();
             this.grpConverter = new System.Windows.Forms.GroupBox();
-            this.grpChecksum = new System.Windows.Forms.GroupBox();
-            this.grpConverter = new System.Windows.Forms.GroupBox();
+
             this.tbxDeduceReport2 = new System.Windows.Forms.TextBox();
             this.tabMods = new System.Windows.Forms.TabPage();
             this.splitMods = new System.Windows.Forms.SplitContainer();
@@ -2065,8 +2063,7 @@ namespace AsBuiltExplorer
   private ColumnHeader ColumnHeader12;
   private ColumnHeader ColumnHeader13;
   private ColumnHeader ColumnHeader14;
-    private System.Windows.Forms.GroupBox grpChecksum;
-    private System.Windows.Forms.GroupBox grpConverter;
+
   private ToolStripSeparator ToolStripMenuItem1;
   private Label lblComp4VIN;
   private Label lblComp3VIN;
@@ -2111,6 +2108,8 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.Button btnDeduceGo;
     private System.Windows.Forms.GroupBox grpDeduceBrowser;
     
+
+    
     // TabPage4 Controls (Restored)
     private System.Windows.Forms.TabPage TabPage4;
     private System.Windows.Forms.Button btnDeduceLoadOptions;
@@ -2120,7 +2119,10 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.Label Label10;
     private System.Windows.Forms.Label Label11;
     private System.Windows.Forms.Label Label13;
-    
+
+    private System.Windows.Forms.GroupBox grpChecksum;
+    private System.Windows.Forms.GroupBox grpConverter;
+
     // Mods Tab Controls
     private System.Windows.Forms.TabPage tabMods;
     private System.Windows.Forms.SplitContainer splitMods;
