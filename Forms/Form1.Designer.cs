@@ -172,6 +172,7 @@ namespace AsBuiltExplorer
             this.tbxDeduceReport2 = new System.Windows.Forms.TextBox();
             this.Button4 = new System.Windows.Forms.Button();
             this.TabPage6 = new System.Windows.Forms.TabPage();
+            this.btnDB_Scan = new System.Windows.Forms.Button(); // Added
             this.btnBrowseRefresh = new System.Windows.Forms.Button();
             this.lvwBrowser = new System.Windows.Forms.ListView();
             this.ColumnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -185,6 +186,7 @@ namespace AsBuiltExplorer
             this.SetAsCompare3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SetAsCompare4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.EditFeaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // Added
             this.DeleteFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TabPage9 = new System.Windows.Forms.TabPage();
             this.lvwDecodeResults = new System.Windows.Forms.ListView();
@@ -1417,7 +1419,7 @@ namespace AsBuiltExplorer
             this.btnDeduceLoadOptions.Name = "btnDeduceLoadOptions";
             this.btnDeduceLoadOptions.Size = new System.Drawing.Size(155, 28);
             this.btnDeduceLoadOptions.TabIndex = 1;
-            this.btnDeduceLoadOptions.Text = "Load Stored Data";
+            this.btnDeduceLoadOptions.Text = "Load from Database";
             this.btnDeduceLoadOptions.UseVisualStyleBackColor = true;
             this.btnDeduceLoadOptions.Click += new System.EventHandler(this.btnDeduceLoadOptions_Click);
             // 
@@ -1710,6 +1712,7 @@ namespace AsBuiltExplorer
             // TabPage6
             // 
             this.TabPage6.BackColor = System.Drawing.SystemColors.Control;
+            this.TabPage6.Controls.Add(this.btnDB_Scan);
             this.TabPage6.Controls.Add(this.btnBrowseRefresh);
             this.TabPage6.Controls.Add(this.lvwBrowser);
             this.TabPage6.Location = new System.Drawing.Point(184, 4);
@@ -1729,6 +1732,17 @@ namespace AsBuiltExplorer
             this.btnBrowseRefresh.Text = "Refresh";
             this.btnBrowseRefresh.UseVisualStyleBackColor = true;
             this.btnBrowseRefresh.Click += new System.EventHandler(this.Button10_Click);
+            // 
+            // btnDB_Scan
+            // 
+            this.btnDB_Scan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDB_Scan.Location = new System.Drawing.Point(115, 13);
+            this.btnDB_Scan.Name = "btnDB_Scan";
+            this.btnDB_Scan.Size = new System.Drawing.Size(150, 32);
+            this.btnDB_Scan.TabIndex = 2;
+            this.btnDB_Scan.Text = "Scan Folder...";
+            this.btnDB_Scan.UseVisualStyleBackColor = true;
+            this.btnDB_Scan.Click += new System.EventHandler(this.btnDB_Scan_Click);
             // 
             // lvwBrowser
             // 
@@ -1788,9 +1802,10 @@ namespace AsBuiltExplorer
             this.SetAsCompare3ToolStripMenuItem,
             this.SetAsCompare4ToolStripMenuItem,
             this.ToolStripMenuItem1,
+            this.EditFeaturesToolStripMenuItem, // Added
             this.DeleteFileToolStripMenuItem});
             this.ContextMenuStrip2.Name = "ContextMenuStrip2";
-            this.ContextMenuStrip2.Size = new System.Drawing.Size(176, 120);
+            this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 142); // Increased Height
             this.ContextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip2_Opening);
             // 
             // SetAsCompare1ToolStripMenuItem
@@ -1828,8 +1843,15 @@ namespace AsBuiltExplorer
             // 
             // DeleteFileToolStripMenuItem
             // 
+            this.EditFeaturesToolStripMenuItem.Name = "EditFeaturesToolStripMenuItem";
+            this.EditFeaturesToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.EditFeaturesToolStripMenuItem.Text = "Edit Features...";
+            this.EditFeaturesToolStripMenuItem.Click += new System.EventHandler(this.EditFeaturesToolStripMenuItem_Click);
+            // 
+            // DeleteFileToolStripMenuItem
+            // 
             this.DeleteFileToolStripMenuItem.Name = "DeleteFileToolStripMenuItem";
-            this.DeleteFileToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.DeleteFileToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.DeleteFileToolStripMenuItem.Text = "Delete File";
             this.DeleteFileToolStripMenuItem.Click += new System.EventHandler(this.DeleteFileToolStripMenuItem_Click);
             // 
@@ -2322,8 +2344,9 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.ColumnHeader colModTitle;
 
     private System.Windows.Forms.ColumnHeader colModCat;
-
+    private System.Windows.Forms.ToolStripMenuItem EditFeaturesToolStripMenuItem;
     private System.Windows.Forms.PictureBox pbSettings;
+    private System.Windows.Forms.Button btnDB_Scan; // Added
  }
 }
 

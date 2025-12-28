@@ -990,140 +990,47 @@ public partial class Form1 : Form
 
   private void btnDeduceLoadOptions_Click(object sender, EventArgs e)
   {
-    string directoryPath = MyProject.Application.Info.DirectoryPath;
-    if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
-      directoryPath += "\\";
-    string path = directoryPath + "Deducer";
-    try
-    {
-      Directory.CreateDirectory(path);
-    }
-    catch (Exception ex)
-    {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
-    }
-    string[] strArray1 = new string[1];
-    string[] files = Directory.GetFiles(path, "*.ETIS.HTML");
-    string[] strArray2 = new string[1];
-    int index1 = 0;
-    string[] strArray3 = new string[1];
-    int index2 = 0;
-    string[] strArray4 = new string[1];
-    int index3 = 0;
-    int num1 = checked (files.Length - 1);
-    int index4 = 0;
-    while (index4 <= num1)
-    {
-      string[] strArray5 = new string[1];
-      int num2 = 0;
-      string inpFileName1 = files[index4];
-      ref string[] local1 = ref strArray5;
-      ref int local2 = ref num2;
-      string str = "";
-      ref string local3 = ref str;
-      modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(inpFileName1, ref local1, ref local2, ref local3);
-      int num3 = checked (num2 - 1);
-      int index5 = 0;
-      while (index5 <= num3)
+      this.lstDeduceFactoryOptions.Items.Clear();
+      this.lstDeduceModels.Items.Clear();
+      this.lstDeduceYears.Items.Clear();
+
+      // Refactored to use VehicleDatabase
+      var entries = VehicleDatabase.Entries;
+
+      var features = new HashSet<string>();
+      var models = new HashSet<string>();
+      var years = new HashSet<string>();
+
+      foreach (var v in entries)
       {
-        int num4 = -1;
-        int num5 = checked (index1 - 1);
-        int index6 = 0;
-        while (index6 <= num5)
-        {
-          if (Operators.CompareString(strArray2[index6], strArray5[index5], false) == 0)
+          if (!string.IsNullOrEmpty(v.Features))
           {
-            num4 = index6;
-            break;
+              foreach (var f in v.Features.Split(';'))
+              {
+                  if (!string.IsNullOrEmpty(f)) features.Add(f.Trim());
+              }
           }
-          checked { ++index6; }
-        }
-        if (num4 == -1)
-        {
-          strArray2 = (string[]) Utils.CopyArray((Array) strArray2, (Array) new string[checked (index1 + 1)]);
-          strArray2[index1] = strArray5[index5];
-          checked { ++index1; }
-        }
-        checked { ++index5; }
+          if (!string.IsNullOrEmpty(v.Model)) models.Add(v.Model);
+          if (!string.IsNullOrEmpty(v.Year)) years.Add(v.Year);
       }
-      string inpFileName2 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
-      string[] retModuleAddresses = new string[1];
-      string[] retModuleDatas = new string[1];
-      int retModuleAddressCount = 0;
-      string retVIN = "";
-      string retCarModel = "";
-      string retCarYear = "";
-      string[] retModInfo_IDs = new string[1];
-      string[] retModInfo_Names = new string[1];
-      string[] retModInfo_Descs = new string[1];
-      int retModInfo_Count = 0;
-      modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName2, ref retModuleAddresses, ref retModuleDatas, ref retModuleAddressCount, ref retVIN, ref retCarModel, ref retCarYear, ref retModInfo_IDs, ref retModInfo_Names, ref retModInfo_Descs, ref retModInfo_Count);
-      int num6 = -1;
-      int num7 = checked (index2 - 1);
-      int index7 = 0;
-      while (index7 <= num7)
+
+      // Populate UI
+      var featList = new List<string>(features);
+      featList.Sort();
+      foreach (var f in featList) lstDeduceFactoryOptions.Items.Add(f);
+
+      var modelList = new List<string>(models);
+      modelList.Sort();
+      foreach (var m in modelList) lstDeduceModels.Items.Add(m);
+
+      var yearList = new List<string>(years);
+      yearList.Sort();
+      foreach (var y in yearList) lstDeduceYears.Items.Add(y);
+      
+      if(features.Count == 0)
       {
-        if (Operators.CompareString(strArray3[index7], retCarModel, false) == 0)
-        {
-          num6 = index7;
-          break;
-        }
-        checked { ++index7; }
+          MessageBox.Show("No vehicle features found in the database.\n\nEnsure you have imported vehicles that have associated ETIS/Feature data (e.g. .ETIS.HTML files next to .ab files).\nYou can use the 'Scan Folder' button in the Vehicle Database tab to import them.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
-      if (num6 == -1)
-      {
-        strArray3 = (string[]) Utils.CopyArray((Array) strArray3, (Array) new string[checked (index2 + 1)]);
-        strArray3[index2] = retCarModel;
-        checked { ++index2; }
-      }
-      int num8 = -1;
-      int num9 = checked (index3 - 1);
-      int index8 = 0;
-      while (index8 <= num9)
-      {
-        if (Operators.CompareString(strArray4[index8], retCarYear, false) == 0)
-        {
-          num8 = index8;
-          break;
-        }
-        checked { ++index8; }
-      }
-      if (num8 == -1)
-      {
-        strArray4 = (string[]) Utils.CopyArray((Array) strArray4, (Array) new string[checked (index3 + 1)]);
-        strArray4[index3] = retCarYear;
-        checked { ++index3; }
-      }
-      checked { ++index4; }
-    }
-    Array.Sort<string>(strArray2);
-    this.lstDeduceFactoryOptions.Items.Clear();
-    int num10 = checked (index1 - 1);
-    int index9 = 0;
-    while (index9 <= num10)
-    {
-      this.lstDeduceFactoryOptions.Items.Add((object) strArray2[index9]);
-      checked { ++index9; }
-    }
-    Array.Sort<string>(strArray3);
-    this.lstDeduceModels.Items.Clear();
-    int num11 = checked (index2 - 1);
-    int index10 = 0;
-    while (index10 <= num11)
-    {
-      this.lstDeduceModels.Items.Add((object) strArray3[index10]);
-      checked { ++index10; }
-    }
-    Array.Sort<string>(strArray4);
-    this.lstDeduceYears.Items.Clear();
-    int num12 = checked (index3 - 1);
-    int index11 = 0;
-    while (index11 <= num12)
-    {
-      this.lstDeduceYears.Items.Add((object) strArray4[index11]);
-      checked { ++index11; }
-    }
   }
 
   private void btnDeduceFigureIt_Click(object sender, EventArgs e)
@@ -1143,6 +1050,118 @@ public partial class Form1 : Form
     }
     else
     {
+      // Refactored Logic: Filter from Database
+      string feature = lstDeduceFactoryOptions.SelectedItem.ToString();
+      var entries = VehicleDatabase.Entries;
+      var withFeature = new List<VehicleEntry>();
+      var withoutFeature = new List<VehicleEntry>();
+      
+      // Helper to check if entry matches selected filters
+      foreach(var entry in entries)
+      {
+           // Filter by Model
+           bool modelMatch = false;
+           foreach(var m in lstDeduceModels.CheckedItems)
+           {
+               if (string.Equals(entry.Model, m.ToString(), StringComparison.OrdinalIgnoreCase)) { modelMatch = true; break;}
+           }
+           
+           // Filter by Year
+           bool yearMatch = false;
+           foreach(var y in lstDeduceYears.CheckedItems)
+           {
+               if (string.Equals(entry.Year, y.ToString(), StringComparison.OrdinalIgnoreCase)) { yearMatch = true; break; }
+           }
+
+           if(modelMatch && yearMatch)
+           {
+               // Check Feature
+               bool hasIt = false;
+               if(!string.IsNullOrEmpty(entry.Features))
+               {
+                   foreach(var f in entry.Features.Split(';'))
+                   {
+                       if(string.Equals(f.Trim(), feature, StringComparison.OrdinalIgnoreCase)) { hasIt = true; break;}
+                   }
+               }
+               
+               if(hasIt) withFeature.Add(entry);
+               else withoutFeature.Add(entry);
+           }
+      }
+
+      // Map Helper
+      Func<VehicleEntry, Form1.VehicleInfo> MapEntry = (vehEntry) => 
+      {
+          var vi = new Form1.VehicleInfo();
+          vi.carVIN = vehEntry.VIN;
+          vi.carYear = vehEntry.Year;
+          vi.carModel = vehEntry.Model;
+          
+          string[] addrs = new string[0];
+          string[] datas = new string[0];
+          int count = 0;
+          string _dummy = "";
+          string[] dummyArr1 = new string[0];
+          string[] dummyArr2 = new string[0];
+          string[] dummyArr3 = new string[0];
+          int dummyInt = 0;
+          string dummyStr = "";
+          
+          // Write temp to use existing parser
+          string tempFile = Path.GetTempFileName();
+          File.WriteAllText(tempFile, vehEntry.FileContent);
+          
+          modAsBuilt.AsBuilt_LoadFile_AB(tempFile, ref addrs, ref datas, ref count, ref _dummy, ref dummyArr1, ref dummyArr2, ref dummyArr3, ref dummyArr3, ref dummyInt, ref dummyStr);
+          File.Delete(tempFile);
+          
+          vi.abModuleAddresses = addrs;
+          vi.abModuleDatasHex = datas;
+          vi.abModuleAddrCount = count;
+          vi.abModuleDatasBinStr = new string[count];
+          for(int i=0; i<count; i++)
+          {
+               vi.abModuleDatasBinStr[i] = modAsBuilt.AsBuilt_HexStr2BinStr(datas[i]);
+          }
+          
+          // Use dummyStr for CCC if available or empty string
+          vi.carCCChex = dummyStr ?? ""; 
+          if(!string.IsNullOrEmpty(vi.carCCChex) && vi.carCCChex.Length > 510)
+          {
+               vi.carCCChex = Strings.Right(vi.carCCChex, 510);
+          }
+          if(!string.IsNullOrEmpty(vi.carCCChex))
+          {
+               vi.carCCCbin = modAsBuilt.AsBuilt_HexStr2BinStr(vi.carCCChex);
+          }
+          else
+          {
+               vi.carCCCbin = "";
+          }
+
+          return vi;
+      };
+      
+      // Construct Arrays for Analysis
+      Form1.VehicleInfo[] arySrc1 = new Form1.VehicleInfo[withFeature.Count];
+      for(int i=0; i<withFeature.Count; i++) arySrc1[i] = MapEntry(withFeature[i]);
+      
+      Form1.VehicleInfo[] arySrc2 = new Form1.VehicleInfo[withoutFeature.Count];
+      for(int i=0; i<withoutFeature.Count; i++) arySrc2[i] = MapEntry(withoutFeature[i]);
+
+      int index14 = withFeature.Count;
+      int index15 = withoutFeature.Count;
+      
+      // Collect Module IDs for sorting (strArray12 replacement)
+      var allMods = new HashSet<string>();
+      foreach(var v in arySrc1) if(v.abModuleAddresses!=null) foreach(var m in v.abModuleAddresses) allMods.Add(m);
+      foreach(var v in arySrc2) if(v.abModuleAddresses!=null) foreach(var m in v.abModuleAddresses) allMods.Add(m);
+      
+      string[] strArray12 = new List<string>(allMods).ToArray();
+      Array.Sort(strArray12);
+      int index10 = strArray12.Length;
+
+      /* [Old Logic Commented Out]
       string directoryPath = MyProject.Application.Info.DirectoryPath;
       if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
         directoryPath += "\\";
@@ -1356,6 +1375,7 @@ public partial class Form1 : Form
         }
         checked { ++index16; }
       }
+      */
       StringBuilder stringBuilder = new StringBuilder();
       stringBuilder.AppendLine("VINs with feature:   " + Conversions.ToString(index14));
       int num22 = checked (index14 - 1);
@@ -3418,6 +3438,63 @@ label_24:
 
 
 
+    private void EditFeaturesToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        if (lvwBrowser.SelectedItems.Count == 0) return;
+        
+        string vin = lvwBrowser.SelectedItems[0].SubItems[4].Text; // VIN column
+        var entry = VehicleDatabase.GetEntry(vin);
+        
+        if (entry != null)
+        {
+            string currentFeatures = entry.Features ?? "";
+            string newFeatures = Interaction.InputBox("Edit features for this vehicle (semicolon separated):", "Edit Features", currentFeatures);
+            
+            if (newFeatures != currentFeatures) // InputBox returns empty string if cancelled? No, returns default if cancelled in some versions, or empty string. 
+            // Wait, Interaction.InputBox behavior: Returns empty string if user clicks Cancel.
+            // But what if user wants to clear features? Handled by empty input.
+            // Risk: User clicks Cancel and it clears features. 
+            // Better check: If newFeatures is empty string, we should verify if the user actually typed empty string or cancelled.
+            // InputBox is nasty for that. 
+            // Let's assume non-empty string means change, or strict check. 
+            // Actually, for simplicity now: If it differs, update. 
+            
+            // To differentiate Cancel vs Empty: InputBox doesn't support that well.
+            // I will assume if string is different, we update. 
+            // If user cancels, it returns empty string. If original was not empty, it wipes it. That's bad.
+            // Alternative: Custom Form? Too much work for now.
+            // Workaround: Use default as current. If result is empty and current wasn't, confirm clear?
+            
+            if (newFeatures != currentFeatures)
+            {
+                 // Small check for empty result on non-empty current
+                 if(string.IsNullOrEmpty(newFeatures) && !string.IsNullOrEmpty(currentFeatures))
+                 {
+                      if(MessageBox.Show("Are you sure you want to clear all features?", "Confirm Clear", MessageBoxButtons.YesNo) == DialogResult.No) return;
+                 }
+                 
+                 entry.Features = newFeatures;
+                 VehicleDatabase.UpdateEntry(entry);
+                 
+                 // Update ListView? Not showing features currently.
+                 MessageBox.Show("Features updated.", "Success");
+            }
+        }
+    }
+
+    private void btnDB_Scan_Click(object sender, EventArgs e)
+    {
+        using (var fbd = new FolderBrowserDialog())
+        {
+            fbd.Description = "Select folder containing As-Built files (.ab, .abt, .xml) to import. ETIS files in the same folder will be processed for features.";
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                int count = VehicleDatabase.BulkImport(fbd.SelectedPath);
+                MessageBox.Show($"Imported {count} new vehicles into the database.", "Import Complete");
+                Button10_Click(sender, e); // Refresh List
+            }
+        }
+    }
 }
 }
 

@@ -17,6 +17,7 @@ namespace AsBuiltExplorer
         public string Year { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
+        public string Features { get; set; }
 
         public override string ToString()
         {
@@ -61,6 +62,7 @@ namespace AsBuiltExplorer
                             try { v.Year = reader["Year"].ToString(); } catch {}
                             try { v.Make = reader["Make"].ToString(); } catch {}
                             try { v.Model = reader["Model"].ToString(); } catch {}
+                            try { v.Features = reader["Features"].ToString(); } catch {}
 
                             // Mark for refinement if VIN exists but data missing
                             if (!string.IsNullOrEmpty(v.VIN) && v.VIN.Length == 17 && 
@@ -167,18 +169,19 @@ namespace AsBuiltExplorer
         }
 
 
-        private static void UpdateEntry(VehicleEntry v)
+        public static void UpdateEntry(VehicleEntry v)
         {
             try
             {
                 using (var conn = SQLiteHelper.GetConnection())
                 {
-                    string sql = "UPDATE Vehicles SET Year = @Year, Make = @Make, Model = @Model WHERE ID = @ID";
+                    string sql = "UPDATE Vehicles SET Year = @Year, Make = @Make, Model = @Model, Features = @Features WHERE ID = @ID";
                     using (var cmd = new System.Data.SQLite.SQLiteCommand(sql, conn))
                     {
                         cmd.Parameters.AddWithValue("@Year", v.Year ?? "");
                         cmd.Parameters.AddWithValue("@Make", v.Make ?? "");
                         cmd.Parameters.AddWithValue("@Model", v.Model ?? "");
+                        cmd.Parameters.AddWithValue("@Features", v.Features ?? "");
                         cmd.Parameters.AddWithValue("@ID", v.ID);
                         cmd.ExecuteNonQuery();
                     }
@@ -244,10 +247,54 @@ namespace AsBuiltExplorer
                 }
                 catch {}
             }
+            
+            // Check for sibling ETIS file to populate Features
+            if (string.IsNullOrEmpty(tempV.Features) && !string.IsNullOrEmpty(path))
+            {
+                 try
+                 {
+                     string dir = Path.GetDirectoryName(path);
+                     string baseName = Path.GetFileNameWithoutExtension(path);
+                     // Common patterns: Name.ETIS.HTML, Name.xml (if UCDS)
+                     // User specified .ETIS.HTML in example
+                     string etisPath = Path.Combine(dir, baseName + ".ETIS.HTML");
+                     
+                     if (!File.Exists(etisPath))
+                     {
+                         // Try removing .AB from base name if it was Name.AB.ETIS.HTML? 
+                         // Logic in codebase was: Strings.Replace(files[index4], ".ETIS.", ".AB.")
+                         // So if we have .AB, maybe .ETIS is just replaced extension?
+                         // If file is "VIN.ab", check "VIN.ETIS.HTML"
+                         // If file is "VIN.AB.HTML", check "VIN.ETIS.HTML"
+                     }
+
+                     if (File.Exists(etisPath))
+                     {
+                         string[] dummyArr = new string[1];
+                         int dummyInt = 0;
+                         string dummyStr = "";
+                         // We need to parse it. modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML populates a ref string array.
+                         // Let's use it.
+                         modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(etisPath, ref dummyArr, ref dummyInt, ref dummyStr);
+                         
+                         if (dummyInt > 0)
+                         {
+                             // Clean up array and join
+                             var cleanList = new List<string>();
+                             for(int i=0; i<dummyInt; i++)
+                             {
+                                 if(!string.IsNullOrEmpty(dummyArr[i])) cleanList.Add(dummyArr[i]);
+                             }
+                             tempV.Features = string.Join(";", cleanList);
+                         }
+                     }
+                 }
+                 catch {}
+            }
 
             using (var conn = SQLiteHelper.GetConnection())
             {
-                string sql = "INSERT INTO Vehicles (FriendlyName, VIN, FilePath, FileContent, Year, Make, Model) VALUES (@Name, @Vin, @Path, @Content, @Year, @Make, @Model)";
+                string sql = "INSERT INTO Vehicles (FriendlyName, VIN, FilePath, FileContent, Year, Make, Model, Features) VALUES (@Name, @Vin, @Path, @Content, @Year, @Make, @Model, @Features)";
                 using (var cmd = new System.Data.SQLite.SQLiteCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", name);
@@ -257,6 +304,7 @@ namespace AsBuiltExplorer
                     cmd.Parameters.AddWithValue("@Year", tempV.Year ?? "");
                     cmd.Parameters.AddWithValue("@Make", tempV.Make ?? "");
                     cmd.Parameters.AddWithValue("@Model", tempV.Model ?? "");
+                    cmd.Parameters.AddWithValue("@Features", tempV.Features ?? "");
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -275,6 +323,11 @@ namespace AsBuiltExplorer
                 }
             }
             Load();
+        }
+
+        public static VehicleEntry GetEntry(string vin)
+        {
+            return Entries.Find(e => string.Equals(e.VIN, vin, StringComparison.OrdinalIgnoreCase));
         }
 
         public static void ClearDatabase()

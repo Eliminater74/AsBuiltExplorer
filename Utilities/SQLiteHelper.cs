@@ -36,7 +36,8 @@ namespace AsBuiltExplorer
                         FileContent TEXT,
                         Year TEXT,
                         Make TEXT,
-                        Model TEXT
+                        Model TEXT,
+                        Features TEXT
                     )";
                 using (var cmd = new SQLiteCommand(sql, conn))
                 {
@@ -47,6 +48,7 @@ namespace AsBuiltExplorer
                 try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Year TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
                 try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Make TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
                 try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Model TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Features TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
             }
         }
 
