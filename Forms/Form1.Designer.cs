@@ -172,7 +172,7 @@ namespace AsBuiltExplorer
             this.tbxDeduceReport2 = new System.Windows.Forms.TextBox();
             this.Button4 = new System.Windows.Forms.Button();
             this.TabPage6 = new System.Windows.Forms.TabPage();
-            this.btnDB_Scan = new System.Windows.Forms.Button(); // Added
+            this.btnDB_Scan = new System.Windows.Forms.Button();
             this.btnBrowseRefresh = new System.Windows.Forms.Button();
             this.lvwBrowser = new System.Windows.Forms.ListView();
             this.ColumnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -180,16 +180,16 @@ namespace AsBuiltExplorer
             this.ColumnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colFeatures = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader())); // Added
+            this.colFeatures = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ContextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SetAsCompare1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SetAsCompare2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SetAsCompare3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SetAsCompare4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.EditFeaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // Added
-            this.DecodeNHTSAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // Added
-            this.ScanLibraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // Added
+            this.EditFeaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DecodeNHTSAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ScanLibraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TabPage9 = new System.Windows.Forms.TabPage();
             this.lvwDecodeResults = new System.Windows.Forms.ListView();
@@ -210,7 +210,6 @@ namespace AsBuiltExplorer
             this.lblAboutDev = new System.Windows.Forms.Label();
             this.lblAboutVersion = new System.Windows.Forms.Label();
             this.lblAboutTitle = new System.Windows.Forms.Label();
-            this.Label8 = new System.Windows.Forms.Label();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbSettings = new System.Windows.Forms.PictureBox();
             this.TabControl1.SuspendLayout();
@@ -302,7 +301,7 @@ namespace AsBuiltExplorer
             this.TabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.TabPage1.Name = "TabPage1";
             this.TabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.TabPage1.Size = new System.Drawing.Size(932, 583);
+            this.TabPage1.Size = new System.Drawing.Size(993, 597);
             this.TabPage1.TabIndex = 0;
             this.TabPage1.Text = "Compare As-Built";
             this.TabPage1.Click += new System.EventHandler(this.TabPage1_Click);
@@ -451,7 +450,7 @@ namespace AsBuiltExplorer
             this.Label23.ForeColor = System.Drawing.Color.Maroon;
             this.Label23.Location = new System.Drawing.Point(24, 116);
             this.Label23.Name = "Label23";
-            this.Label23.Size = new System.Drawing.Size(100, 16);
+            this.Label23.Size = new System.Drawing.Size(110, 17);
             this.Label23.TabIndex = 12;
             this.Label23.Text = "As-Built File # 4:";
             // 
@@ -480,7 +479,7 @@ namespace AsBuiltExplorer
             this.Label22.ForeColor = System.Drawing.Color.Indigo;
             this.Label22.Location = new System.Drawing.Point(24, 85);
             this.Label22.Name = "Label22";
-            this.Label22.Size = new System.Drawing.Size(100, 16);
+            this.Label22.Size = new System.Drawing.Size(110, 17);
             this.Label22.TabIndex = 9;
             this.Label22.Text = "As-Built File # 3:";
             // 
@@ -716,7 +715,7 @@ namespace AsBuiltExplorer
             this.Label7.ForeColor = System.Drawing.Color.DarkGreen;
             this.Label7.Location = new System.Drawing.Point(24, 54);
             this.Label7.Name = "Label7";
-            this.Label7.Size = new System.Drawing.Size(100, 16);
+            this.Label7.Size = new System.Drawing.Size(110, 17);
             this.Label7.TabIndex = 1;
             this.Label7.Text = "As-Built File # 2:";
             // 
@@ -727,7 +726,7 @@ namespace AsBuiltExplorer
             this.Label6.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Label6.Location = new System.Drawing.Point(24, 23);
             this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(100, 16);
+            this.Label6.Size = new System.Drawing.Size(110, 17);
             this.Label6.TabIndex = 0;
             this.Label6.Text = "As-Built File # 1:";
             // 
@@ -1196,7 +1195,7 @@ namespace AsBuiltExplorer
             this.TabPage3.Controls.Add(this.grpDeduceSelection);
             this.TabPage3.Location = new System.Drawing.Point(184, 4);
             this.TabPage3.Name = "TabPage3";
-            this.TabPage3.Size = new System.Drawing.Size(932, 583);
+            this.TabPage3.Size = new System.Drawing.Size(993, 597);
             this.TabPage3.TabIndex = 2;
             this.TabPage3.Text = "MotorCraft AsBuilt Data";
             this.TabPage3.Enter += new System.EventHandler(this.TabPage3_Enter);
@@ -1307,7 +1306,7 @@ namespace AsBuiltExplorer
             this.TabPage4.Controls.Add(this.lstDeduceFactoryOptions);
             this.TabPage4.Location = new System.Drawing.Point(184, 4);
             this.TabPage4.Name = "TabPage4";
-            this.TabPage4.Size = new System.Drawing.Size(932, 583);
+            this.TabPage4.Size = new System.Drawing.Size(993, 597);
             this.TabPage4.TabIndex = 3;
             this.TabPage4.Text = "Deducer - Feature by Vehicles";
             this.TabPage4.Click += new System.EventHandler(this.TabPage4_Click);
@@ -1449,7 +1448,7 @@ namespace AsBuiltExplorer
             this.tabMods.Location = new System.Drawing.Point(184, 4);
             this.tabMods.Name = "tabMods";
             this.tabMods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMods.Size = new System.Drawing.Size(932, 583);
+            this.tabMods.Size = new System.Drawing.Size(993, 597);
             this.tabMods.TabIndex = 8;
             this.tabMods.Text = "Vehicle Mods";
             this.tabMods.UseVisualStyleBackColor = true;
@@ -1564,7 +1563,7 @@ namespace AsBuiltExplorer
             this.TabPage5.Location = new System.Drawing.Point(184, 4);
             this.TabPage5.Name = "TabPage5";
             this.TabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage5.Size = new System.Drawing.Size(932, 583);
+            this.TabPage5.Size = new System.Drawing.Size(993, 597);
             this.TabPage5.TabIndex = 4;
             this.TabPage5.Text = "Deducer - Vehicle/Feature by Bit";
             this.TabPage5.Click += new System.EventHandler(this.TabPage5_Click);
@@ -1725,20 +1724,9 @@ namespace AsBuiltExplorer
             this.TabPage6.Location = new System.Drawing.Point(184, 4);
             this.TabPage6.Name = "TabPage6";
             this.TabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage6.Size = new System.Drawing.Size(932, 583);
+            this.TabPage6.Size = new System.Drawing.Size(993, 597);
             this.TabPage6.TabIndex = 5;
             this.TabPage6.Text = "Vehicle Database";
-            // 
-            // btnBrowseRefresh
-            // 
-            this.btnBrowseRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowseRefresh.Location = new System.Drawing.Point(6, 13);
-            this.btnBrowseRefresh.Name = "btnBrowseRefresh";
-            this.btnBrowseRefresh.Size = new System.Drawing.Size(103, 32);
-            this.btnBrowseRefresh.TabIndex = 1;
-            this.btnBrowseRefresh.Text = "Refresh";
-            this.btnBrowseRefresh.UseVisualStyleBackColor = true;
-            this.btnBrowseRefresh.Click += new System.EventHandler(this.Button10_Click);
             // 
             // btnDB_Scan
             // 
@@ -1750,6 +1738,17 @@ namespace AsBuiltExplorer
             this.btnDB_Scan.Text = "Scan Folder...";
             this.btnDB_Scan.UseVisualStyleBackColor = true;
             this.btnDB_Scan.Click += new System.EventHandler(this.btnDB_Scan_Click);
+            // 
+            // btnBrowseRefresh
+            // 
+            this.btnBrowseRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowseRefresh.Location = new System.Drawing.Point(6, 13);
+            this.btnBrowseRefresh.Name = "btnBrowseRefresh";
+            this.btnBrowseRefresh.Size = new System.Drawing.Size(103, 32);
+            this.btnBrowseRefresh.TabIndex = 1;
+            this.btnBrowseRefresh.Text = "Refresh";
+            this.btnBrowseRefresh.UseVisualStyleBackColor = true;
+            this.btnBrowseRefresh.Click += new System.EventHandler(this.Button10_Click);
             // 
             // lvwBrowser
             // 
@@ -1815,73 +1814,72 @@ namespace AsBuiltExplorer
             this.SetAsCompare3ToolStripMenuItem,
             this.SetAsCompare4ToolStripMenuItem,
             this.ToolStripMenuItem1,
-            this.EditFeaturesToolStripMenuItem, // Added
-            this.DecodeNHTSAToolStripMenuItem, // Added
-            this.ScanLibraryToolStripMenuItem, // Added
+            this.EditFeaturesToolStripMenuItem,
+            this.DecodeNHTSAToolStripMenuItem,
+            this.ScanLibraryToolStripMenuItem,
             this.DeleteFileToolStripMenuItem});
             this.ContextMenuStrip2.Name = "ContextMenuStrip2";
-            this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 186); // Increased Height
+            this.ContextMenuStrip2.Size = new System.Drawing.Size(243, 186);
             this.ContextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip2_Opening);
             // 
             // SetAsCompare1ToolStripMenuItem
             // 
             this.SetAsCompare1ToolStripMenuItem.Name = "SetAsCompare1ToolStripMenuItem";
-            this.SetAsCompare1ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.SetAsCompare1ToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.SetAsCompare1ToolStripMenuItem.Text = "Set as Compare # 1";
             this.SetAsCompare1ToolStripMenuItem.Click += new System.EventHandler(this.SetAsCompare1ToolStripMenuItem_Click);
             // 
             // SetAsCompare2ToolStripMenuItem
             // 
             this.SetAsCompare2ToolStripMenuItem.Name = "SetAsCompare2ToolStripMenuItem";
-            this.SetAsCompare2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.SetAsCompare2ToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.SetAsCompare2ToolStripMenuItem.Text = "Set as Compare # 2";
             this.SetAsCompare2ToolStripMenuItem.Click += new System.EventHandler(this.SetAsCompare2ToolStripMenuItem_Click);
             // 
             // SetAsCompare3ToolStripMenuItem
             // 
             this.SetAsCompare3ToolStripMenuItem.Name = "SetAsCompare3ToolStripMenuItem";
-            this.SetAsCompare3ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.SetAsCompare3ToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.SetAsCompare3ToolStripMenuItem.Text = "Set as Compare # 3";
             this.SetAsCompare3ToolStripMenuItem.Click += new System.EventHandler(this.SetAsCompare3ToolStripMenuItem_Click);
             // 
             // SetAsCompare4ToolStripMenuItem
             // 
             this.SetAsCompare4ToolStripMenuItem.Name = "SetAsCompare4ToolStripMenuItem";
-            this.SetAsCompare4ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.SetAsCompare4ToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.SetAsCompare4ToolStripMenuItem.Text = "Set as Compare # 4";
             this.SetAsCompare4ToolStripMenuItem.Click += new System.EventHandler(this.SetAsCompare4ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem1
             // 
             this.ToolStripMenuItem1.Name = "ToolStripMenuItem1";
-            this.ToolStripMenuItem1.Size = new System.Drawing.Size(172, 6);
+            this.ToolStripMenuItem1.Size = new System.Drawing.Size(239, 6);
             // 
-            // DeleteFileToolStripMenuItem
+            // EditFeaturesToolStripMenuItem
             // 
             this.EditFeaturesToolStripMenuItem.Name = "EditFeaturesToolStripMenuItem";
-            this.EditFeaturesToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.EditFeaturesToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.EditFeaturesToolStripMenuItem.Text = "Edit Features...";
             this.EditFeaturesToolStripMenuItem.Click += new System.EventHandler(this.EditFeaturesToolStripMenuItem_Click);
             // 
             // DecodeNHTSAToolStripMenuItem
             // 
             this.DecodeNHTSAToolStripMenuItem.Name = "DecodeNHTSAToolStripMenuItem";
-            this.DecodeNHTSAToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.DecodeNHTSAToolStripMenuItem.Text = "Decode with NHTSA (Online)";
+            this.DecodeNHTSAToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.DecodeNHTSAToolStripMenuItem.Text = "Decode with NHTSA (Online)";
             this.DecodeNHTSAToolStripMenuItem.Click += new System.EventHandler(this.DecodeNHTSAToolStripMenuItem_Click);
             // 
             // ScanLibraryToolStripMenuItem
             // 
             this.ScanLibraryToolStripMenuItem.Name = "ScanLibraryToolStripMenuItem";
-            this.ScanLibraryToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.ScanLibraryToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.ScanLibraryToolStripMenuItem.Text = "Analyze against Library (Offline)";
             this.ScanLibraryToolStripMenuItem.Click += new System.EventHandler(this.ScanLibraryToolStripMenuItem_Click);
             // 
             // DeleteFileToolStripMenuItem
             // 
             this.DeleteFileToolStripMenuItem.Name = "DeleteFileToolStripMenuItem";
-            this.DeleteFileToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.DeleteFileToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.DeleteFileToolStripMenuItem.Text = "Delete File";
             this.DeleteFileToolStripMenuItem.Click += new System.EventHandler(this.DeleteFileToolStripMenuItem_Click);
             // 
@@ -1896,7 +1894,7 @@ namespace AsBuiltExplorer
             this.TabPage9.Location = new System.Drawing.Point(184, 4);
             this.TabPage9.Name = "TabPage9";
             this.TabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage9.Size = new System.Drawing.Size(932, 583);
+            this.TabPage9.Size = new System.Drawing.Size(993, 597);
             this.TabPage9.TabIndex = 8;
             this.TabPage9.Text = "VIN Decoder";
             this.TabPage9.UseVisualStyleBackColor = true;
@@ -1996,7 +1994,7 @@ namespace AsBuiltExplorer
             this.TabPage7.Location = new System.Drawing.Point(184, 4);
             this.TabPage7.Name = "TabPage7";
             this.TabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage7.Size = new System.Drawing.Size(932, 583);
+            this.TabPage7.Size = new System.Drawing.Size(993, 597);
             this.TabPage7.TabIndex = 6;
             this.TabPage7.Text = "Help";
             // 
@@ -2012,7 +2010,7 @@ namespace AsBuiltExplorer
             this.TabPage8.Location = new System.Drawing.Point(184, 4);
             this.TabPage8.Name = "TabPage8";
             this.TabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage8.Size = new System.Drawing.Size(932, 583);
+            this.TabPage8.Size = new System.Drawing.Size(993, 597);
             this.TabPage8.TabIndex = 7;
             this.TabPage8.Text = "About";
             // 
@@ -2079,19 +2077,6 @@ namespace AsBuiltExplorer
             this.lblAboutTitle.TabIndex = 0;
             this.lblAboutTitle.Text = "AsBuiltExplorer";
             // 
-            // Label8
-            // 
-            this.Label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Label8.AutoSize = true;
-            this.Label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Label8.Location = new System.Drawing.Point(269, 636);
-            this.Label8.Name = "Label8";
-            this.Label8.Size = new System.Drawing.Size(446, 15);
-            this.Label8.TabIndex = 1;
-            this.Label8.Text = "Developed By Eliminater74            https://github.com/Eliminater74/AsBuiltExplo" +
-    "rer";
-            // 
             // PictureBox1
             // 
             this.PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -2122,7 +2107,6 @@ namespace AsBuiltExplorer
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1211, 664);
-            this.Controls.Add(this.Label8);
             this.Controls.Add(this.TabControl1);
             this.Controls.Add(this.PictureBox1);
             this.Controls.Add(this.pbSettings);
@@ -2171,7 +2155,6 @@ namespace AsBuiltExplorer
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
     }
 
@@ -2245,7 +2228,6 @@ namespace AsBuiltExplorer
   private ColumnHeader ColumnHeader4;
   private ColumnHeader ColumnHeader5;
   private ColumnHeader ColumnHeader6;
-  private Label Label8;
   private TabPage TabPage3;
 
   private TextBox tbxDeduceReport;
