@@ -15,7 +15,23 @@ namespace AsBuiltExplorer
 
         private void frmDefinitionsDB_Load(object sender, EventArgs e)
         {
+            dgvCodes.CellFormatting += DgvCodes_CellFormatting;
             LoadData();
+        }
+
+        private void DgvCodes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvCodes.Columns[e.ColumnIndex].Name.Contains("Mask") && e.Value != null)
+            {
+                string val = e.Value.ToString();
+                if (val.Contains("*"))
+                {
+                    e.CellStyle.Font = new System.Drawing.Font(dgvCodes.Font, System.Drawing.FontStyle.Bold);
+                    e.CellStyle.ForeColor = System.Drawing.Color.Red;
+                    // Optional: Make text larger?
+                    // e.CellStyle.Font = new System.Drawing.Font(dgvCodes.Font.FontFamily, 11f, System.Drawing.FontStyle.Bold);
+                }
+            }
         }
 
         private void LoadData()
