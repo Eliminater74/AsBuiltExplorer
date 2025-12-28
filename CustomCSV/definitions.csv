@@ -1,0 +1,20 @@
+Module,Address,Hex Mask,Value,Description,Notes
+ACM,727-01-01,0000-000F-0000,0,Subwoofer Disabled,Clean signal for aftermarket amps
+ACM,727-01-01,0000-000F-0000,8,Subwoofer Enabled,Low voltage output for Audiophile factory amp
+ACM,727-01-01,F000-0000-0000,1,Base Audio Config,No Rear Seat Entertainment (DVD)
+ACM,727-01-01,F000-0000-0000,4,RSE Enabled,Factory Roof DVD System Active
+IPC,720-01-01,F00F-0000-0000,9905,Basic Cluster Display,Found in standard XLT
+IPC,720-01-01,F00F-0000-0000,9105,Message Center Display,Found in Limited / King Ranch / Eddie Bauer
+IPC,720-01-01,0000-F000-0000,D,Power Running Board Menu ON,Adds "Auto/Off/Out" to dash screen
+IPC,720-01-01,0000-F000-0000,7,Power Running Board Menu OFF,Hides menu (use if removing boards)
+GEM,726-02-01,0000-FFFF-0000,2323,TPMS 35 PSI,Standard Factory Setting (Front/Rear)
+GEM,726-02-01,0000-FFFF-0000,2626,TPMS 38 PSI,Common setting for 20" wheels
+GEM,726-02-01,0000-FFFF-0000,2D2D,TPMS 45 PSI,For Load Range D Tires
+GEM,726-02-01,0000-FFFF-0000,3232,TPMS 50 PSI,For Load Range E Tires
+GEM,726-02-01,0000-FFFF-0000,3C3C,TPMS 60 PSI,Max Load Setting
+GEM,726-02-01,0000-FFFF-0000,4141,TPMS 65 PSI,Heavy Duty Setting
+PAM,736-01-01,FFFF-FFFF-0000,00000000,Park Aid Disabled,Module missing or sensors deleted
+PAM,736-01-01,FFFF-FFFF-0000,5600AA00,Park Aid Enabled,Standard Reverse Sensing System
+ABS,760-01-01,FFFF-FFFF-FFFF,ASCII,VIN Characters 1-5,Start of VIN (e.g. "1FMFK")
+ABS,760-02-01,FFFF-FFFF-FFFF,ASCII,VIN Characters 6-11,Middle of VIN
+ABS,760-03-01,FFFF-FFFF-FFFF,ASCII,VIN Characters 12-17,End of VIN
