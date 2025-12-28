@@ -1574,7 +1574,7 @@ namespace AsBuiltExplorer
             this.TabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.TabPage5.Size = new System.Drawing.Size(993, 597);
             this.TabPage5.TabIndex = 4;
-            this.TabPage5.Text = "Deducer - Vehicle/Feature by Bit";
+            this.TabPage5.Text = "Deducer - By Bit";
             this.TabPage5.Click += new System.EventHandler(this.TabPage5_Click);
             // 
             // Button10
@@ -1705,12 +1705,12 @@ namespace AsBuiltExplorer
             // tbxDeduceReport2
             // 
             this.tbxDeduceReport2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbxDeduceReport2.Location = new System.Drawing.Point(0, 0);
+            this.tbxDeduceReport2.Location = new System.Drawing.Point(20, 343);
             this.tbxDeduceReport2.MaxLength = 5000000;
             this.tbxDeduceReport2.Multiline = true;
             this.tbxDeduceReport2.Name = "tbxDeduceReport2";
             this.tbxDeduceReport2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbxDeduceReport2.Size = new System.Drawing.Size(588, 119);
+            this.tbxDeduceReport2.Size = new System.Drawing.Size(588, 145);
             this.tbxDeduceReport2.TabIndex = 14;
             // 
             // Button4
