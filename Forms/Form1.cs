@@ -746,9 +746,11 @@ public partial class Form1 : Form
           this.ListView1.Items[index23].BackColor = Color.MistyRose;
           int num34 = checked (this.ListView1.Items[index23].SubItems.Count - 1);
           int index24 = 0;
+          Color currentFore = this.ListView1.Items[index23].ForeColor;
           while (index24 <= num34)
           {
             this.ListView1.Items[index23].SubItems[index24].BackColor = Color.MistyRose;
+            this.ListView1.Items[index23].SubItems[index24].ForeColor = currentFore;
             checked { ++index24; }
           }
         }
@@ -758,9 +760,11 @@ public partial class Form1 : Form
           this.ListView1.Items[index23].BackColor = Color.LightYellow;
           int num35 = checked (this.ListView1.Items[index23].SubItems.Count - 1);
           int index25 = 0;
+          Color currentFore = this.ListView1.Items[index23].ForeColor;
           while (index25 <= num35)
           {
             this.ListView1.Items[index23].SubItems[index25].BackColor = lightYellow;
+            this.ListView1.Items[index23].SubItems[index25].ForeColor = currentFore;
             checked { ++index25; }
           }
         }
