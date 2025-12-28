@@ -238,21 +238,48 @@ namespace AsBuiltExplorer
                      }
                 }
                 
-                // Handle Persistence / Merged Cells (Re-check after clearing indices)
+                
+                // --- 1. Fix Merged Address/Mask (e.g. "7D0-01-02 0xxx") ---
+                if (address.Contains(" "))
+                {
+                    // The address column likely contains "Address Mask"
+                    string[] addrParts = address.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    
+                    if (addrParts.Length > 1 && Regex.IsMatch(addrParts[0], @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}"))
+                    {
+                        address = addrParts[0]; // The clean address
+                        string extractedMask = addrParts[1]; // The mask trapped in the address col
+                        
+                        // If we found a mask here, the "D1" column we parsed earlier was probably actually Notes
+                        // because everything shifted left.
+                        if (!string.IsNullOrEmpty(d1))
+                        {
+                            if (!string.IsNullOrEmpty(notes)) notes = d1 + " " + notes;
+                            else notes = d1;
+                        }
+                        
+                        d1 = extractedMask; // Put extracted mask into D1
+                    }
+                }
+
+                // --- 2. Clean Indices (Pre-Persistence) ---
+                // Clear numeric indices so persistence can fill in the correct parent value
+                if (Regex.IsMatch(module.Trim(), @"^[\d\.]+$")) module = "";
+                if (Regex.IsMatch(name.Trim(), @"^[\d\.]+$")) name = "";
+                
+                // --- 3. Persistence / Merged Cells ---
                 if (string.IsNullOrEmpty(module)) module = lastModule; else lastModule = module;
                 if (string.IsNullOrEmpty(name)) name = lastFeatureName; else lastFeatureName = name;
                 if (!string.IsNullOrEmpty(address)) lastAddr = address;
 
-                // --- Heuristic Cleanup ---
-                // Problem: Some files put "Note: ..." in D2 or D3 columns
+                // --- 4. Heuristic Cleanup (Notes in Mask columns) ---
                 // Do this BEFORE stripping spaces so we preserve note readability
                 
                 // Check if D2 looks like a note
                 if (!string.IsNullOrEmpty(d2) && (d2.ToLower().Contains("note:") || d2.Contains("(") || d2.Length > 12))
                 {
-                    // If D2 is a note, D3 is probably part of it too
                     string append = d2;
-                    if (!string.IsNullOrEmpty(d3)) append += " " + d3;
+                    if (!string.IsNullOrEmpty(d3)) append += " " + d3; // D3 is likely part of the note too
                     
                     if (!string.IsNullOrEmpty(notes)) notes = append + " " + notes;
                     else notes = append;
@@ -269,19 +296,7 @@ namespace AsBuiltExplorer
                      d3 = "";
                 }
 
-                // Problem: Some files have an Index number in the Module or Name column
-                if (Regex.IsMatch(module.Trim(), @"^[\d\.]+$")) module = "";
-                if (Regex.IsMatch(name.Trim(), @"^[\d\.]+$")) name = "";
-                
-                // Re-persistence check in case we wiped it
-                if (string.IsNullOrEmpty(module)) module = lastModule; // Fallback to last valid
-                else lastModule = module; // Update last valid (if not empty)
-
-                if (string.IsNullOrEmpty(name)) name = lastFeatureName; // Fallback
-                else lastFeatureName = name; 
-
                 // Cleanup Masks (Wildcards) - PRESERVE *
-                // Now it is safe to strip spaces from the actual masks
                 d1 = d1.Replace(" ", "");
                 d2 = d2.Replace(" ", "");
                 d3 = d3.Replace(" ", "");
@@ -289,7 +304,7 @@ namespace AsBuiltExplorer
                 // Only insert if we have at least one mask
                 if (string.IsNullOrEmpty(d1) && string.IsNullOrEmpty(d2) && string.IsNullOrEmpty(d3)) continue;
                 
-                // Skip Header-like lines that slipped through
+                // Skip Header-like lines
                 if (name.ToLower() == "feature name" || module.ToLower() == "module") continue;
 
                 DefinitionsDBHelper.AddEntry(name, module, address, d1, d2, d3, notes);
