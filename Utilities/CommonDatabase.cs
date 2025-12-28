@@ -132,96 +132,94 @@ namespace AsBuiltExplorer
         {
             var lines = File.ReadAllLines(path);
             
-            // State for "ditto" fields (empty cells meaning "same as above")
+            // State for "ditto" fields
             string lastFeatureName = "";
             string lastModule = "";
             string lastAddr = "";
-            
-            int detectedFormat = 0; // 0=Unknown, 1=AddrCol0, 2=AddrCol1, 3=AddrCol2
+            int detectedFormat = -1; // 0=Addr@0, 1=Addr@1, 2=Addr@2
 
             foreach (var line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line)) continue;
-                if (line.Trim().StartsWith("#")) continue;
-
                 var parts = SplitCsvLine(line);
-                if (parts.Count < 2) continue;
+                
+                // Find Address Anchor
+                int addrIdx = -1;
+                for(int i=0; i<parts.Count; i++)
+                {
+                    if (Regex.IsMatch(parts[i].Trim(), @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}"))
+                    {
+                        addrIdx = i;
+                        break;
+                    }
+                }
 
-                string col0 = parts[0].Trim();
-                string col1 = parts.Count > 1 ? parts[1].Trim() : "";
-                string col2 = parts.Count > 2 ? parts[2].Trim() : "";
-
-                // Attempt to detect format if explicit address is present
-                if (Regex.IsMatch(col0, @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}")) detectedFormat = 1;
-                else if (Regex.IsMatch(col1, @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}")) detectedFormat = 2;
-                else if (Regex.IsMatch(col2, @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}")) detectedFormat = 3;
-
-                if (detectedFormat == 0) continue;
+                if (addrIdx != -1) detectedFormat = addrIdx; // Latch format once found
+                
+                // If we haven't found a format yet and this line has no address, skip (likely header)
+                if (detectedFormat == -1 && addrIdx == -1) continue;
 
                 string name = "", module = "", address = "", d1 = "", d2 = "", d3 = "", notes = "";
+                
+                // Use explicit address if found, otherwise lastAddr (Ditto)
+                if (addrIdx != -1) address = parts[addrIdx].Trim();
+                else address = lastAddr; // Reuse last known address for blank lines (implied ditto)
 
-                if (detectedFormat == 1)
+                // Skip if still no address
+                if (string.IsNullOrEmpty(address)) continue;
+
+                // Apply Format Logic based on Anchor (detectedFormat)
+                if (detectedFormat == 0) // Format 1 (My Export): Addr | D1 | D2 | D3 | Name
                 {
-                    // Format: Address | D1 | D2 | D3 | Name
-                    address = col0;
-                    d1 = col1;
-                    d2 = col2;
+                    d1 = parts.Count > 1 ? parts[1].Trim() : "";
+                    d2 = parts.Count > 2 ? parts[2].Trim() : "";
                     d3 = parts.Count > 3 ? parts[3].Trim() : "";
                     name = parts.Count > 4 ? parts[4].Trim() : "";
                 }
-                else if (detectedFormat == 2)
+                else if (detectedFormat == 1) // Format 2 (CommonCodes2): Mod | Addr | D1 | D2 | D3 | Name | Notes
                 {
-                    // Format: Module | Address | D1 | D2 | D3 | Name
-                    module = col0;
-                    address = col1;
-                    d1 = col2;
+                    module = parts.Count > 0 ? parts[0].Trim() : "";
+                    d1 = parts.Count > 2 ? parts[2].Trim() : "";
                     d2 = parts.Count > 3 ? parts[3].Trim() : "";
                     d3 = parts.Count > 4 ? parts[4].Trim() : "";
                     name = parts.Count > 5 ? parts[5].Trim() : "";
+                    notes = parts.Count > 6 ? parts[6].Trim() : "";
                 }
-                else if (detectedFormat == 3)
+                else if (detectedFormat == 2) // Format 3 (Livnitup): Name | Mod | Addr | D1 | D2 | D3 | Notes
                 {
-                    // Format: Feature Name | Module | Address | D1 | D2 | D3 | Notes
-                    name = col0;
-                    module = col1;
-                    address = col2;
-
-                    // Skip Header Row if detected
-                    if (name.ToLower().Contains("feature") && address.ToLower().Contains("address")) continue;
-                    
+                    name = parts.Count > 0 ? parts[0].Trim() : "";
+                    module = parts.Count > 1 ? parts[1].Trim() : "";
                     d1 = parts.Count > 3 ? parts[3].Trim() : "";
                     d2 = parts.Count > 4 ? parts[4].Trim() : "";
                     d3 = parts.Count > 5 ? parts[5].Trim() : "";
-                    
-                    // If D1 contains spaces, it might be a single column "D1 D2 D3" format
-                    // But usually Livnitup spreadsheets use separate columns: Value, D2, D3
-                    // Let's check for spaces just in case
-                    if (d1.Contains(" "))
-                    {
+                    notes = parts.Count > 6 ? parts[6].Trim() : "";
+
+                     // Fix: Some files have "D1 D2 D3" in a single column? 
+                     // If d1 has spaces and d2 is empty, try split
+                     if (d1.Contains(" ") && string.IsNullOrEmpty(d2))
+                     {
                          var masks = d1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                          if (masks.Length > 0) d1 = masks[0];
                          if (masks.Length > 1) d2 = masks[1];
                          if (masks.Length > 2) d3 = masks[2];
-                    }
-
-                    notes = parts.Count > 6 ? parts[6].Trim() : "";
+                     }
                 }
-
-                // Handle Persistence / Merged Cells
-                if (string.IsNullOrEmpty(address)) address = lastAddr; else lastAddr = address;
+                
+                // Handle Dittos / Merged Cells persistence
                 if (string.IsNullOrEmpty(module)) module = lastModule; else lastModule = module;
-                if (string.IsNullOrEmpty(name)) name = lastFeatureName; else lastFeatureName = name; // If name is empty, assume same feature (e.g. multiple options)
+                if (string.IsNullOrEmpty(name)) name = lastFeatureName; else lastFeatureName = name;
+                if (!string.IsNullOrEmpty(address)) lastAddr = address;
 
-                if (string.IsNullOrEmpty(address)) continue;
-
-                // Cleanup Masks (Wildcards)
-                // Cleanup Masks (Wildcards)
+                // Cleanup Masks (Wildcards) - PRESERVE *
                 d1 = d1.Replace(" ", "");
                 d2 = d2.Replace(" ", "");
                 d3 = d3.Replace(" ", "");
 
                 // Only insert if we have at least one mask
                 if (string.IsNullOrEmpty(d1) && string.IsNullOrEmpty(d2) && string.IsNullOrEmpty(d3)) continue;
+                
+                // Skip Header-like lines that slipped through (e.g. "Address" as name?)
+                if (name.ToLower() == "feature name" || module.ToLower() == "module") continue;
 
                 DefinitionsDBHelper.AddEntry(name, module, address, d1, d2, d3, notes);
             }
