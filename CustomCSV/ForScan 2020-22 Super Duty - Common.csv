@@ -1,0 +1,145 @@
+2020-22 Ford Super Duty ForScan Info,,,,,,
+Updated 11/15/2023,,,,,,
+,,,,,,
+Hill Descent ,ABS,760-03-01,*xxx,xxxx,,"If D, Change to F (or add 2 to your value)"
+,,,,,,
+Remove XM/Sirius Radio from Source,APIM,7D0-01-01,*xxx,xxxx,xx--,"If * is A change to 8, if 2 change to 0. (Back 2)"
+Heated/Vented Seats-HSW Icons on Home Screen  Does not work on Sync 4,APIM,7D0-01-01,xxxx,xxxx,x*--,"1 = Cooled seats option on screen, no heated seats or heated wheel option.
+2 = Heated/cooled seats option on screen with no heated wheel option.
+3 = Heated seats on screen, no cooled seats and no heated wheel option.
+4 = No on screen heated/cooled seats on any screen, heated wheel is in top left.
+5 = Unknown
+6 = Heated/Cooled seats and heated wheel options on screen.
+7 = Heated seats and heated wheel, no cooled seats.
+8 = Rear Climate Control panel, no heated/cooled options for front."
+Navigation in Motion Sync 3,APIM,7D0-02-01,5753,xxxx,xx--,Will change speed signs and voice  - *** 911 Assist will be disabled with this enabled***
+Navigation in Motion Sync 4,APIM,7D0-03-01,5753,xxxx,xx--,May display KIP programing option screen
+Boot animation                                          2022,APIM,7D0-02-01  7D0-03-01,xxxx,0Bxx,xx--,ST Ford Performance
+,,,xxxx,0Cxx,xx--,RS Ford Performance
+,,,xxxx,0Dxx,xx--,GT Ford Performance
+,,,xxxx,0Exx,xx--,Continental
+,,,xxxx,0Fxx,xx--,Navigator
+,,,xxxx,03xx  04xx,xx--,Lincoln Black Label
+,,,xxxx,04xx  05xx,xx--,Lincoln Presidential
+,,,xxxx,05xx  03xx,xx--,Raptor Ford Performance
+,,,xxxx,06xx,xx--,Mustang
+,,,xxxx,07xx,xx--,GT350
+,,,xxxx,08xx,xx--,Vignale
+,,,xxxx,09xx,xx--,GT350
+,,,xxxx,10xx,xx--,Ford Performance * Sync 3.2+ *
+,,,xxxx,11xx  10xx,xx--,Aviator * Sync 3.2+ *
+,,,xxxx,12xx,xx--,Explorer * Sync 3.2+ *
+,,,xxxx,13xx,xx--,Corsair * Sync 3.2+ *
+,,,xxxx,14xx,xx--,Nautilus * Sync 3.2+ *
+,,,xxxx,17xx  14xx,xx--,Bronco * Sync 3.2+ *
+Blackbox in Camera display disable (Sync 4),APIM,7D0-02-02,xxx*,xxxx,xx--,Add 1 to current value - Sync version must be 23151 rev 902 or higher
+Sync 3 Theme,APIM,7D0-03-01,xxxx,x*xx,xx--,"0=Ford Classic, 1=Ford Timeless, 2=Lincoln Timeless, 3=Lincoln Next"
+,,,xxxx,x2xx,xx--,Lincoln Black Theme -- must also set 7D0-01-02 8xxx xxxx xxxx
+Bluetooth Name,APIM,7D0-04-01,xxxx,xx**,xx--,2D=Raptor  0E=F150  0F=F250  10=F350  11=F450
+,,,,,,
+Heated Wheel Steering Wheel Temp  **Adaptive Steering Use 7C5**,HSWM SECM,714-02-01   7C5-03-01,****,****,xx--,"025A 5A5A xx - 90ºF (32.2ºC)
+025B 5B5B xx - 91ºF (32.8ºC)
+025C 5C5C xx - 92ºF (33.3ºC)
+025D 5D5D xx - 93ºF (33.9ºC)
+025E 5A5E xx - 94ºF (34.4ºC)
+025F 5F5F xx - 95ºF (35.0ºC)
+0260 6060 xx - 96ºF (35.6ºC)
+0261 6161 xx - 97ºF (36.1ºC)
+0262 6262 xx - 98ºF (36.7ºC)
+0263 6363 xx - 99ºF (37.2ºC)
+
+0264 6464 xx - 100ºF (37.8ºC)
+0265 6565 xx - 101ºF (38.3ºC)
+0266 6666 xx - 102ºF (38.9ºC)
+0267 6767 xx - 103ºF (39.4ºC)
+0268 6868 xx - 104ºF (40.0ºC)
+0269 6969 xx - 105ºF (40.6ºC)
+026A 6A6A xx - 106ºF (41.1ºC)
+026B 6B6B xx - 107ºF (41.7ºC)
+026C 6C6C xx - 108ºF (42.2ºC)
+026D 6D6D xx - 109ºF (42.8ºC)"
+,,,,,,
+TMPS (20-22),BdyCm-BCM,726-10-01 ,xxx*,xxxx,xx--,TPMS 0=Disabled  1=Enabled
+,,726-10-01 ,xxxx,xxxx,**--,TPMS  Front Tire pressure converted to hex
+,,726-10-02,**xx,xxxx,xx--,TPMS  Rear Tire pressure converted to hex
+TPMS  (23),BdyCm-BCM,726-10-01,xxxx,xx**,**--,TPMS  Front/Rear Tire pressure converted to hex
+Axle Ratio,BdyCm-BCM,726-15-01,xxxx,****,xx--,Ratio in Hexadecimal w/o decimal point...ie 01AE=430 is 4.30 Gear ratio (converter)
+Tire Size,BdyCm-BCM,726-15-01,xxxx,xxxx,**--,Tire Size Calculator
+,,726-15-02,**xx,xxxx,xx--,
+Double Horn on Lock key fob in truck (20-21),BdyCm-BCM,726-18-02,xxxx,xxxx,x*--,0=Disable  1=Enable
+Auto Relock / Auto Relock Time Duration,BdyCm-BCM,726-20-01,0101,0101,01--,These values enable all persons (key) to have the ability to use feature
+,,726-27-01,xxxx,xxxx,x*--,0=Disable  1=Enable  2=InOp
+,,726-58-02,xxx*,xxxx,xx--,0=Null  1=30 sec  2=45 sec
+Remote Start,BdyCm-BCM,726-30-01,xxxx,xxx*,xx--,0=Disable  1=Enable
+Door Keypad Enable,BdyCm-BCM,726-31-01,xxxx,xxx*,xx--,0=Disable  1=Enable
+Dark Mode (Police),BdyCm-BCM,726-33-02,xxx*,xxxx,xx--,0=Normal  1=Dark
+Secure Idle (Police),BdyCm-BCM,726-33-02,xxxx,x*xx,xx--,0=Disabled  1 Enabled
+Running Lights w/DRL (20-22),BdyCm-BCM,726-38-01,xxxx,xx*x,xx--,0=Disabled  1 Enabled
+Running Lights w/DRL (23),BdyCm-BCM,726-38-01,xxxx,xxxx,x*--,0=Disabled  1 Enabled
+DRL w/Turn Signal (Switchback),BdyCm-BCM,726-38-02,xxx*,xxxx,xx--,0=On  1=Dim  2=Off
+Fog Light as DRL,BdyCm-BCM,726-39-01,x*xx,xxxx,xx--,1=Fog-DRL 3=Fog
+Bambi Mode (High Beams / Fogs),BdyCm-BCM,726-39-02,xxx*,xxxx,xx--,0=Enabled  1=Disabled
+Fog Light Remember,BdyCm-BCM,726-39-02,xxxx,x*xx,xx--,0=No Cancel  1=Cancel
+DRL Full Brightness w/Headlights,BdyCm-BCM,726-42-01,x2x2,xxxx,xx--,
+PowerPoint Max Timeout,BdyCm-BCM,726-57-01,****,xxxx,xx--,Seconds converted to Hex (Stock is 1194-75 minutes)
+Double Honk w/o Key in Truck (22),BdyCm-BCM,726-63-02,xxx*,xxxx,xx--,0=Disable  1=Enable
+Secure Idle,BdyCm-BCM,726-64-01,x*xx,xxxx,xx--,0=Disable  1=Enable
+Bed Lamp Install,BdyCm-BCM,726-46-01,xxx*,xxxx,xx--,0=Disable  1=Enable
+,,726-71-01,x*xx,xxxx,xx--,0=Not Used 1=Used
+,,726-81-01,x*xx,xxxx,xx--,0-Null  1-Ext CourtesyLamp Sw  2-Man Puddle
+,,,xxx*,xxxx,xx--,0-Null  1-BedLight  2-DownLight  3-FloodLight
+Global Open/Close,BdyCm-BCM,726-11-01,xxxx,xxxx,x1--,
+,,726-11-02,x0xx,xxxx,xx--,
+,,726-22-01,0101,0101,01--,These values enable all persons (key) to have the ability to use feature
+,,726-27-02,xxxx,x1xx,xx--,
+,DDM,740-05-01,Dxxx,xxxx,xx--,
+,PDM,741-05-01,Dxxx,xxxx,xx--,
+,IPC,720-02-01,7xxx,xxxx,xx--,Enables both Close and Open 
+,,,,,,
+Automatic Engine Idle Shutdown - Disable (20-22),IPC,720-01-01,x*xx,xxxx,xx--,"Subtract 8 from stock number. Remember that A=10, B=11, C=12, D=13, E=14, F=15."
+Disables Drivers Seatbelt Chime (20-22),IPC,720-01-01,xxxx,xx2x,xx--,
+Disables All Seatbelt Chimes (20-22),IPC,720-01-01,xxxx,xx0x,xx--,
+Adds Average Speed to Trip/Fuel Menu,IPC,720-01-01,xxxx,x4xx,xx--,
+Disables Door Ajar Chimes,IPC,720-01-02,xx0x,xxxx,,
+Disables Triple Ding at Start Up (20-22),IPC,720-01-02,xxxx,x2--,,
+Fuel Tank Size (20-22),IPC,720-03-01,xxx*,,xx--,30 Gal=4 4A
+,,,,,,34 Gal=5 07
+,,,,,,40 Gal=5 EA
+,,,,,,48 Gal=7 19
+,,,,,,50 Gal=7 65
+,,,,,,55 Gal=8 22
+,,,,**xx,,60 Gal=8 DF
+,,,,,,65 Gal=9 9D
+,,,,,,68 Gal=A 0E
+,,,,,,70 Gal=A 5A
+,,,,,,This parameter is in Liters in this format XXX.x
+,,,,,,55gal equals 208.198L so round to 208.2 and drop the decimal to get 2082
+,,,,,,Convert decimal value 2082 to HEX equals 822 or 8 22
+,,720-09-01,xx*x,xxxx,xx--,Current value=4 change to 0  value=6 change to 2
+,,,,,,
+Turn by Turn NAV,IPC,720-05-01,xxxx,x1xx,xx--,
+Temps on Gauges,IPC,720-07-01,xxxx,x**x,xx--,E5-Brake Controller
+,,,,,,65-No Brake Controller
+,,,,,,A5-Adds Temp w/o Boost and menus
+DPF% on screen,IPC,720-07-02,x*xx,xx--,,"Some trucks will report a camera error after making this modification. To avoid this, update according to the following: If original default value is 0, change to 8; if 1, change to 9; if 2 then A; if 3 then B; if 4 then C; if 5 then D; if 6 then E, if 7 then F."
+Trailer TPMS Enable,IPC,720-09-01,xx*x,xxxx,xx--,If 4 change to 6
+Auto Regen Checkbox,IPC,720-07-02,xxx*,xx,,Add 8 to current value
+,PCM,Plain English,,,,Select option 3 under manual regen
+,,,,,,
+,,,,,,
+,,,,,,
+Autofold Mirror Factory,DDM,740-03-01,x8xx,xx,,Factory Folding Mirror Enabled 
+,PDM,741-03-01,x8xx,xx,,
+Autofold Mirror Lincoln Style,DDM,740-03-01,x84x,xx,,Folding Mirror at Key On/Door Close.  Does not open at unlock.
+,PDM,741-03-01,x84x,xx,,
+,,,,,,
+Turn Signal Flash Count,SCCM,724-01-01 ,xxxx,x*xx,xx--,"Replace * with one of the following:
+0=1 Flash OUC False 1=1 Flash OUC True
+2=1 Flash OUC False 3=1 Flash OUC True
+4=2 Flashes OUC False 5=2 Flashes OUC True
+6=3 Flashes OUC False 7=3 Flashes OUC True (Stock)
+8=4 Flashes OUC False 9=4 Flashes OUC True
+A=5 Flashes OUC False B=5 Flashes OUC True
+C=6 Flashes OUC False D=6 Flashes OUC True
+E=7 Flashes OUC False F=7 Flashes OUC True
+On Until Cancelled (OUC) means manually moving the turn signal arm in opposite direction or manually cancelling the turn signal. Two flashes are added automatically when trailer is attached."
