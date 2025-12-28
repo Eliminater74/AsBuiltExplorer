@@ -7,8 +7,8 @@ namespace AsBuiltExplorer
 {
     public static class SQLiteHelper
     {
-        private static string _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vehicles.db");
-        private static string _connectionString = $"Data Source={_dbPath};Version=3;";
+        static string _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vehicles.db");
+        static string _connectionString = $"Data Source={_dbPath};Version=3;";
 
         public static void Initialize()
         {
@@ -27,7 +27,7 @@ namespace AsBuiltExplorer
             using (var conn = new SQLiteConnection(_connectionString))
             {
                 conn.Open();
-                string sql = @"
+                var sql = @"
                     CREATE TABLE IF NOT EXISTS Vehicles (
                         ID INTEGER PRIMARY KEY AUTOINCREMENT,
                         FriendlyName TEXT,
@@ -39,16 +39,23 @@ namespace AsBuiltExplorer
                         Model TEXT,
                         Features TEXT
                     )";
+
                 using (var cmd = new SQLiteCommand(sql, conn))
-                {
                     cmd.ExecuteNonQuery();
-                }
+                
 
                 // Migration: Add columns if they don't exist (for existing DBs)
-                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Year TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
-                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Make TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
-                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Model TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
-                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Features TEXT", conn)) { cmd.ExecuteNonQuery(); } } catch {}
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Year TEXT", conn)) cmd.ExecuteNonQuery();
+ } catch { }
+
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Make TEXT", conn)) cmd.ExecuteNonQuery();
+ } catch { }
+
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Model TEXT", conn)) cmd.ExecuteNonQuery();
+ } catch { }
+
+                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Features TEXT", conn)) cmd.ExecuteNonQuery();
+ } catch { }
             }
         }
 

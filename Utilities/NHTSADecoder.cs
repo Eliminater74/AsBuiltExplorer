@@ -23,13 +23,12 @@ namespace AsBuiltExplorer
         {
             try
             {
-                string url = $"https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/{vin}?format=json";
-                string json = "";
+                var url = $"https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/{vin}?format=json";
+                var json = "";
 
                 using (var client = new WebClient())
-                {
                     json = client.DownloadString(url);
-                }
+                
 
                 if (string.IsNullOrEmpty(json)) return null;
 
@@ -39,18 +38,18 @@ namespace AsBuiltExplorer
                 // Structure: { "Value": "Something", ... "Variable": "Make" ... }
                 // We will look for "Variable": "X" and then find the corresponding "Value": "Y" 
                 // Since the JSON is a list of objects, we can split by objects.
-                
+
                 // Matches objects: { ... }
                 // This rough regex finds objects inside the Results array
                 var objectMatches = Regex.Matches(json, @"\{[^{}]*\}");
 
                 foreach (Match m in objectMatches)
                 {
-                    string content = m.Value;
-                    
+                    var content = m.Value;
+
                     // Extract Variable
-                    string variable = ExtractField(content, "Variable");
-                    string value = ExtractField(content, "Value");
+                    var variable = ExtractField(content, "Variable");
+                    var value = ExtractField(content, "Value");
 
                     if (!string.IsNullOrEmpty(variable) && !string.IsNullOrEmpty(value) && value != "null")
                     {
@@ -77,13 +76,13 @@ namespace AsBuiltExplorer
             }
         }
 
-        private static string ExtractField(string jsonObject, string key)
+        static string ExtractField(string jsonObject, string key)
         {
             // "key": "value" or "key": value
             // Look for "key"\s*:\s*"([^"]*)"
             var match = Regex.Match(jsonObject, $"\"{key}\"\\s*:\\s*\"([^\"]*)\"");
             if (match.Success) return match.Groups[1].Value;
-            
+
             // Try formatting without quotes if value is number (though API usually returns strings)
             match = Regex.Match(jsonObject, $"\"{key}\"\\s*:\\s*([0-9]+)");
             if (match.Success) return match.Groups[1].Value;

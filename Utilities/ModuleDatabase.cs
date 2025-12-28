@@ -7,11 +7,11 @@ namespace AsBuiltExplorer
 {
     public static class ModuleDatabase
     {
-        private static Dictionary<string, string> _moduleNames = new Dictionary<string, string>();
-        private static bool _isLoaded = false;
+        static Dictionary<string, string> _moduleNames = new Dictionary<string, string>();
+        static bool _isLoaded;
 
         // Hardcoded database content to avoid external file dependencies
-        private static readonly string _dbContent = @"(Audio) Digital Signal Processing Module (DSP)|DSP|783
+        static readonly string _dbContent = @"(Audio) Digital Signal Processing Module (DSP)|DSP|783
 4 Wheel Steering (WS4)|WS4|
 4X4 Control Module (4X4M)|4X4M|761
 Accessory Protocol Interface Module (APIM)|APIM|7D0
@@ -199,28 +199,31 @@ Virtual Image Cluster (VIC)|VIC|060";
                 using (StringReader reader = new StringReader(_dbContent))
                 {
                     string line;
+
                     while ((line = reader.ReadLine()) != null)
                     {
                         if (string.IsNullOrWhiteSpace(line)) continue;
 
                         var parts = line.Split('|');
+
                         if (parts.Length >= 3)
                         {
-                            string fullName = parts[0].Trim();
-                            string abbr = parts[1].Trim();
-                            string address = parts[2].Trim();
+                            var fullName = parts[0].Trim();
+                            var abbr = parts[1].Trim();
+                            var address = parts[2].Trim();
 
                             if (!string.IsNullOrEmpty(address))
                             {
                                 if (!_moduleNames.ContainsKey(address))
                                 {
-                                    string displayName = !string.IsNullOrEmpty(fullName) ? fullName : abbr;
+                                    var displayName = !string.IsNullOrEmpty(fullName) ? fullName : abbr;
                                     _moduleNames[address] = displayName;
                                 }
                             }
                         }
                     }
                 }
+
                 _isLoaded = true;
             }
             catch (Exception ex)
@@ -238,7 +241,7 @@ Virtual Image Cluster (VIC)|VIC|060";
 
             if (address.Length >= 3)
             {
-                string prefix = address.Substring(0, 3);
+                var prefix = address.Substring(0, 3);
                 if (_moduleNames.ContainsKey(prefix)) return _moduleNames[prefix];
             }
 

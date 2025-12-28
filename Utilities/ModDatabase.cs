@@ -11,25 +11,19 @@ namespace AsBuiltExplorer
         public string Description { get; set; }
         public string Instructions { get; set; }
 
-        public override string ToString()
-        {
-            return Title;
-        }
+        public override string ToString() => Title;
     }
 
     public static class ModDatabase
     {
         public static List<ModEntry> Mods { get; private set; } = new List<ModEntry>();
 
-        static ModDatabase()
-        {
-            InitializeData();
-        }
+        static ModDatabase() => InitializeData();
 
-        private static void InitializeData()
+        static void InitializeData()
         {
             // 2008 Ford Expedition / GEM / SJB Mods
-            string platformExp = "Expedition 2007-2014 (GEM)";
+            var platformExp = "Expedition 2007-2014 (GEM)";
 
             Mods.Add(new ModEntry
             {

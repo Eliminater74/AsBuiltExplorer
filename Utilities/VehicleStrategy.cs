@@ -35,7 +35,7 @@ namespace AsBuiltExplorer.Utilities
         public string GetModuleName(string address)
         {
             if (string.IsNullOrEmpty(address) || address.Length < 3) return "";
-            string prefix = address.Substring(0, 3);
+            var prefix = address.Substring(0, 3);
 
             switch (prefix)
             {
@@ -45,9 +45,9 @@ namespace AsBuiltExplorer.Utilities
                 case "737": return "HVAC"; // Heating Ventilation Air Conditioning
                 case "760": return "ABS"; // Anti-Lock Brake System
                 case "7E0": return "PCM"; // Powertrain Control Module
-                default: 
+                default:
                     // Fallback to generic database
-                    string dbName = ModuleDatabase.GetModuleName(address);
+                    var dbName = ModuleDatabase.GetModuleName(address);
                     return string.IsNullOrEmpty(dbName) ? "Unknown" : dbName;
             }
         }
@@ -66,7 +66,7 @@ namespace AsBuiltExplorer.Utilities
         public string GetModuleName(string address)
         {
             if (string.IsNullOrEmpty(address) || address.Length < 3) return "";
-            string prefix = address.Substring(0, 3);
+            var prefix = address.Substring(0, 3);
 
             switch (prefix)
             {
@@ -78,9 +78,9 @@ namespace AsBuiltExplorer.Utilities
                 case "760": return "ABS"; // Anti-Lock Brake System
                 case "754": return "TCU"; // Telematics Control Module (Modem)
                 case "706": return "IPMA"; // Image Processing Module A (Camera)
-                default: 
-                     // Fallback to generic database
-                    string dbName = ModuleDatabase.GetModuleName(address);
+                default:
+                    // Fallback to generic database
+                    var dbName = ModuleDatabase.GetModuleName(address);
                     return string.IsNullOrEmpty(dbName) ? "Unknown" : dbName;
             }
         }
@@ -89,7 +89,7 @@ namespace AsBuiltExplorer.Utilities
         {
             // Mix of Summation and CRC-8/16
             // For now, return Generic, will implement specific logic later
-            return "Modern"; 
+            return "Modern";
         }
     }
 }

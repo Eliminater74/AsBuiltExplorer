@@ -12,12 +12,13 @@ namespace AsBuiltExplorer
             InitializeComponent();
             txtPath.Text = currentPath;
             txtVIN.Text = currentVIN;
-            
+
             // Auto-suggest name from VIN
             if (!string.IsNullOrEmpty(currentVIN))
             {
-                VehicleEntry temp = new VehicleEntry { VIN = currentVIN };
+                var temp = new VehicleEntry { VIN = currentVIN };
                 VehicleDatabase.UpdateVehicleDataFromVIN(temp);
+
                 if (!string.IsNullOrEmpty(temp.Model))
                 {
                     // "2008 Ford Expedition EL XLT (1FMFK...)"
@@ -26,29 +27,31 @@ namespace AsBuiltExplorer
             }
         }
 
-        private void frmVehicleDB_Load(object sender, EventArgs e)
+        void frmVehicleDB_Load(object sender, EventArgs e)
         {
             VehicleDatabase.Load();
             RefreshList();
         }
 
-        private void RefreshList()
+        void RefreshList()
         {
             lstVehicles.Items.Clear();
+
             foreach (var v in VehicleDatabase.Entries)
-            {
                 lstVehicles.Items.Add(v);
-            }
+            
+
             // Sort?
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        void btnAdd_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtName.Text))
             {
                 MessageBox.Show("Please enter a name for this vehicle.", "Missing Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             if (string.IsNullOrEmpty(txtPath.Text))
             {
                 MessageBox.Show("No file path to save.", "Missing Path", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -60,7 +63,7 @@ namespace AsBuiltExplorer
             RefreshList();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        void btnDelete_Click(object sender, EventArgs e)
         {
             if (lstVehicles.SelectedItem is VehicleEntry entry)
             {
@@ -72,35 +75,35 @@ namespace AsBuiltExplorer
             }
         }
 
-        private void btnUse_Click(object sender, EventArgs e)
+        void btnUse_Click(object sender, EventArgs e)
         {
             if (lstVehicles.SelectedItem is VehicleEntry entry)
             {
                 // Logic: If original path exists, use it.
                 // If not, but we have Content, write to Cache and use that.
-                string finalPath = entry.FilePath;
-                
+                var finalPath = entry.FilePath;
+
                 if (!System.IO.File.Exists(finalPath))
                 {
                     if (!string.IsNullOrEmpty(entry.FileContent))
                     {
                         // Create cache dir
-                        string cacheDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Cache");
+                        var cacheDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Cache");
                         System.IO.Directory.CreateDirectory(cacheDir);
-                        
+
                         // Sanitize filename from VIN or Name
-                        string safeName = entry.VIN;
-                        if(string.IsNullOrEmpty(safeName)) safeName = "Unknown_" + Guid.NewGuid().ToString().Substring(0,8);
-                        
-                        string cacheFile = System.IO.Path.Combine(cacheDir, safeName + ".ab");
+                        var safeName = entry.VIN;
+                        if (string.IsNullOrEmpty(safeName)) safeName = "Unknown_" + Guid.NewGuid().ToString().Substring(0, 8);
+
+                        var cacheFile = System.IO.Path.Combine(cacheDir, safeName + ".ab");
                         System.IO.File.WriteAllText(cacheFile, entry.FileContent);
                         finalPath = cacheFile;
                     }
                 }
 
                 SelectedFilePath = finalPath;
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                DialogResult = DialogResult.OK;
+                Close();
             }
             else
             {
@@ -108,14 +111,11 @@ namespace AsBuiltExplorer
             }
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        void btnClose_Click(object sender, EventArgs e) => Close();
 
-        private void lstVehicles_SelectedIndexChanged(object sender, EventArgs e)
+        void lstVehicles_SelectedIndexChanged(object sender, EventArgs e)
         {
-             // Optional: Display details in groupbox if we wanted edit mode
+            // Optional: Display details in groupbox if we wanted edit mode
         }
     }
 }

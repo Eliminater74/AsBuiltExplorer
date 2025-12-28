@@ -14,10 +14,10 @@ namespace AsBuiltExplorer.Forms
         public frmSettings()
         {
             InitializeComponent();
-            this.Load += FrmSettings_Load;
+            Load += FrmSettings_Load;
         }
 
-        private void FrmSettings_Load(object sender, EventArgs e)
+        void FrmSettings_Load(object sender, EventArgs e)
         {
             // Load DB Stats
             UpdateDBStats();
@@ -33,28 +33,30 @@ namespace AsBuiltExplorer.Forms
             }
         }
 
-        private void UpdateDBStats()
+        void UpdateDBStats()
         {
-            int count = VehicleDatabase.Entries.Count;
+            var count = VehicleDatabase.Entries.Count;
             lblDatabaseStats.Text = $"Stored Vehicles: {count}";
-            
+
             long size = 0;
+
             try
             {
-                string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vehicles.db");
+                var dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vehicles.db");
+
                 if (File.Exists(dbPath))
                 {
                     size = new FileInfo(dbPath).Length / 1024;
                 }
             }
             catch { }
-            
+
             lblDatabaseStats.Text += $"  ({size} KB)";
         }
 
-        private void btnClearDatabase_Click(object sender, EventArgs e)
+        void btnClearDatabase_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to COMPLETELY WIPE the vehicle database?\nThis cannot be undone.", 
+            if (MessageBox.Show("Are you sure you want to COMPLETELY WIPE the vehicle database?\nThis cannot be undone.",
                 "Confirm Wipe", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 VehicleDatabase.ClearDatabase();
@@ -63,11 +65,11 @@ namespace AsBuiltExplorer.Forms
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        void btnSave_Click(object sender, EventArgs e)
         {
             // Save settings
-            string newTheme = radThemeDark.Checked ? "Dark" : "Light";
-            
+            var newTheme = radThemeDark.Checked ? "Dark" : "Light";
+
             if (My.MySettings.Default.AppTheme != newTheme)
             {
                 My.MySettings.Default.AppTheme = newTheme;
@@ -76,14 +78,14 @@ namespace AsBuiltExplorer.Forms
                 SelectedTheme = newTheme;
             }
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

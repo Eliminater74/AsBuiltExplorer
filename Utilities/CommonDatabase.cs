@@ -21,16 +21,13 @@ namespace AsBuiltExplorer
         public string Data3Mask { get; set; }
         public string Notes { get; set; }
 
-        public override string ToString()
-        {
-            return $"{Name} ({Module})";
-        }
+        public override string ToString() => $"{Name} ({Module})";
     }
 
     public static class CommonDatabase
     {
         public static List<CommonFeature> Features = new List<CommonFeature>();
-        private static bool _loaded = false;
+        static bool _loaded;
 
         public static void Load()
         {
@@ -53,15 +50,17 @@ namespace AsBuiltExplorer
             _loaded = true;
         }
 
-        private static Dictionary<string, List<CommonFeature>> _lookup = new Dictionary<string, List<CommonFeature>>();
+        static Dictionary<string, List<CommonFeature>> _lookup = new Dictionary<string, List<CommonFeature>>();
 
-        private static void LoadFromSQL()
+        static void LoadFromSQL()
         {
             Features.Clear();
             _lookup.Clear();
+
             using (var conn = DefinitionsDBHelper.GetConnection())
             {
-                string sql = "SELECT * FROM CommonCodes";
+                var sql = "SELECT * FROM CommonCodes";
+
                 using (var cmd = new SQLiteCommand(sql, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -80,6 +79,7 @@ namespace AsBuiltExplorer
                             Data3Mask = reader["Data3Mask"].ToString(),
                             Notes = reader["Notes"].ToString()
                         };
+
                         Features.Add(f);
 
                         if (!_lookup.ContainsKey(f.Address)) _lookup[f.Address] = new List<CommonFeature>();
@@ -99,10 +99,10 @@ namespace AsBuiltExplorer
         public static List<string> GetMatchingFeatures(string address, string d1, string d2, string d3, int year)
         {
             var candidates = GetFeaturesForAddress(address);
-            List<string> matches = new List<string>();
+            var matches = new List<string>();
 
             // Determine Era
-            string targetEra = (year > 0 && year < 2011) ? "Legacy" : "Modern"; // Default to Modern if unknown
+            var targetEra = (year > 0 && year < 2011) ? "Legacy" : "Modern"; // Default to Modern if unknown
 
             // 1. Try Strict Era Match
             foreach (var f in candidates)
@@ -110,13 +110,13 @@ namespace AsBuiltExplorer
                 // Filter by Era if specified in DB
                 if (!string.IsNullOrEmpty(f.Era))
                 {
-                    if (!f.Era.Equals("All", StringComparison.OrdinalIgnoreCase) && 
+                    if (!f.Era.Equals("All", StringComparison.OrdinalIgnoreCase) &&
                         !f.Era.Equals(targetEra, StringComparison.OrdinalIgnoreCase))
                     {
                         continue; // Era Mismatch
                     }
                 }
-                
+
                 if (IsFeatureMatch(f, d1, d2, d3))
                 {
                     matches.Add(f.Name);
@@ -128,33 +128,33 @@ namespace AsBuiltExplorer
             {
                 foreach (var f in candidates)
                 {
-                     // Skip if we already checked it (meaning it was filtered by Era)
-                     // Actually, just check if it matches data.
-                     if (IsFeatureMatch(f, d1, d2, d3))
-                     {
-                         string suffix = (!string.IsNullOrEmpty(f.Era) && !f.Era.Equals("All", StringComparison.OrdinalIgnoreCase)) ? $" ({f.Era}?)" : "";
-                         matches.Add(f.Name + suffix);
-                     }
+                    // Skip if we already checked it (meaning it was filtered by Era)
+                    // Actually, just check if it matches data.
+                    if (IsFeatureMatch(f, d1, d2, d3))
+                    {
+                        var suffix = (!string.IsNullOrEmpty(f.Era) && !f.Era.Equals("All", StringComparison.OrdinalIgnoreCase)) ? $" ({f.Era}?)" : "";
+                        matches.Add(f.Name + suffix);
+                    }
                 }
             }
 
             return matches.Distinct().ToList();
         }
 
-        private static bool IsFeatureMatch(CommonFeature f, string d1, string d2, string d3)
+        static bool IsFeatureMatch(CommonFeature f, string d1, string d2, string d3)
         {
-            bool match = true;
+            var match = true;
             if (!IsHexMatch(d1, f.Data1Mask)) match = false;
             if (match && !IsHexMatch(d2, f.Data2Mask)) match = false;
             if (match && !IsHexMatch(d3, f.Data3Mask)) match = false;
             return match;
         }
 
-        private static bool IsHexMatch(string data, string mask)
+        static bool IsHexMatch(string data, string mask)
         {
             if (string.IsNullOrWhiteSpace(mask)) return true; // Empty mask = match anything (or ignore?) -> Usually ignore if not specified
             // If data is missing but mask interacts, fail? 
-            if (string.IsNullOrWhiteSpace(data)) return false; 
+            if (string.IsNullOrWhiteSpace(data)) return false;
 
             // Standardize
             data = data.Trim().ToUpper().Replace(" ", "");
@@ -162,46 +162,48 @@ namespace AsBuiltExplorer
 
             // Length check? Masks might be shorter or longer.
             // Usually we compare minimal length.
-            int len = Math.Min(data.Length, mask.Length);
-            
+            var len = Math.Min(data.Length, mask.Length);
+
             for (int i = 0; i < len; i++)
             {
-                char m = mask[i];
-                char d = data[i];
+                var m = mask[i];
+                var d = data[i];
 
                 // 'X' or '?' matches any nibble
                 if (m == 'X' || m == '?') continue;
-                
+
                 // Otherwise must match exactly
                 if (m != d) return false;
             }
+
             return true;
         }
 
-        private static void ImportFromCSV()
+        static void ImportFromCSV()
         {
             try
             {
                 // Look in CustomCSV directory
-                string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-                string customCsvDir = Path.Combine(baseDir, "CustomCSV");
+                var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                var customCsvDir = Path.Combine(baseDir, "CustomCSV");
 
                 if (!Directory.Exists(customCsvDir)) return;
 
                 // Load ALL .csv files
-                string[] files = Directory.GetFiles(customCsvDir, "*.csv");
+                var files = Directory.GetFiles(customCsvDir, "*.csv");
 
                 if (files.Length == 0) return;
 
-                int count = 0;
+                var count = 0;
+
                 foreach (var path in files)
                 {
                     ParseAndInsertCSV(path);
-                    
+
                     // User Request: Rename old CSV to .bak
                     try
                     {
-                        string backupPath = path + ".bak";
+                        var backupPath = path + ".bak";
                         if (File.Exists(backupPath)) File.Delete(backupPath);
                         File.Move(path, backupPath);
                         count++;
@@ -221,24 +223,25 @@ namespace AsBuiltExplorer
             }
         }
 
-        private static void ParseAndInsertCSV(string path)
+        static void ParseAndInsertCSV(string path)
         {
             var lines = File.ReadAllLines(path);
-            
+
             // State for "ditto" fields
-            string lastFeatureName = "";
-            string lastModule = "";
-            string lastAddr = "";
-            int detectedFormat = -1; // 0=Addr@0, 1=Addr@1, 2=Addr@2
+            var lastFeatureName = "";
+            var lastModule = "";
+            var lastAddr = "";
+            var detectedFormat = -1; // 0=Addr@0, 1=Addr@1, 2=Addr@2
 
             foreach (var line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line)) continue;
                 var parts = SplitCsvLine(line);
-                
+
                 // Find Address Anchor
-                int addrIdx = -1;
-                for(int i=0; i<parts.Count; i++)
+                var addrIdx = -1;
+
+                for (int i = 0; i < parts.Count; i++)
                 {
                     if (Regex.IsMatch(parts[i].Trim(), @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}"))
                     {
@@ -248,12 +251,12 @@ namespace AsBuiltExplorer
                 }
 
                 if (addrIdx != -1) detectedFormat = addrIdx; // Latch format once found
-                
+
                 // If we haven't found a format yet and this line has no address, skip (likely header)
                 if (detectedFormat == -1 && addrIdx == -1) continue;
 
                 string name = "", module = "", address = "", d1 = "", d2 = "", d3 = "", notes = "";
-                
+
                 // Use explicit address if found, otherwise lastAddr (Ditto)
                 if (addrIdx != -1) address = parts[addrIdx].Trim();
                 else address = lastAddr; // Reuse last known address for blank lines (implied ditto)
@@ -272,48 +275,49 @@ namespace AsBuiltExplorer
                 }
                 else if (detectedFormat == 3) // Format 3: Master CSV (Era, Model, Module, Address, HexMask, Value, Desc, Notes)
                 {
-                     // Era=0, Model=1, Module=2, Address=3, HexMask=4, Value=5, Desc=6, Notes=7
-                     string era = parts.Count > 0 ? parts[0].Trim() : "";
-                     string model = parts.Count > 1 ? parts[1].Trim() : "";
-                     module = parts.Count > 2 ? parts[2].Trim() : "";
-                     address = parts.Count > 3 ? parts[3].Trim() : "";
-                     string hexMask = parts.Count > 4 ? parts[4].Trim() : ""; // 0000-FFFF-0000
-                     string valHex = parts.Count > 5 ? parts[5].Trim() : ""; // 2323
-                     name = parts.Count > 6 ? parts[6].Trim() : "";
-                     notes = parts.Count > 7 ? parts[7].Trim() : "";
-                     
-                     // Parse HexMask to distribute Value
-                      // Expecting "XXXX-XXXX-XXXX" or similar.
-                      // Logic: If segment is non-zero (F or other), apply Value to it?
-                      // User said: "Hex Mask: 0000-FFFF-0000, Value: 2323". This implies Value goes to the middle block.
-                      // Robust Logic: Split Mask. Count significant blocks. If 1 significant block, put value there.
-                      
-                      var maskParts = hexMask.Split('-');
-                      if (maskParts.Length == 3)
-                      {
-                          // Simple heuristic: If mask part contains 'F', put value there.
-                          // Limitation: Assumes value is exactly for ONE block.
-                          if (maskParts[0].Contains("F")) d1 = valHex;
-                          else if (maskParts[1].Contains("F")) d2 = valHex;
-                          else if (maskParts[2].Contains("F")) d3 = valHex;
-                      }
-                      
-                      DefinitionsDBHelper.AddEntry(era, model, name, module, address, d1, d2, d3, notes);
-                      continue; // Special insert, skip standard insert below
+                    // Era=0, Model=1, Module=2, Address=3, HexMask=4, Value=5, Desc=6, Notes=7
+                    var era = parts.Count > 0 ? parts[0].Trim() : "";
+                    var model = parts.Count > 1 ? parts[1].Trim() : "";
+                    module = parts.Count > 2 ? parts[2].Trim() : "";
+                    address = parts.Count > 3 ? parts[3].Trim() : "";
+                    var hexMask = parts.Count > 4 ? parts[4].Trim() : ""; // 0000-FFFF-0000
+                    var valHex = parts.Count > 5 ? parts[5].Trim() : ""; // 2323
+                    name = parts.Count > 6 ? parts[6].Trim() : "";
+                    notes = parts.Count > 7 ? parts[7].Trim() : "";
+
+                    // Parse HexMask to distribute Value
+                    // Expecting "XXXX-XXXX-XXXX" or similar.
+                    // Logic: If segment is non-zero (F or other), apply Value to it?
+                    // User said: "Hex Mask: 0000-FFFF-0000, Value: 2323". This implies Value goes to the middle block.
+                    // Robust Logic: Split Mask. Count significant blocks. If 1 significant block, put value there.
+
+                    var maskParts = hexMask.Split('-');
+
+                    if (maskParts.Length == 3)
+                    {
+                        // Simple heuristic: If mask part contains 'F', put value there.
+                        // Limitation: Assumes value is exactly for ONE block.
+                        if (maskParts[0].Contains("F")) d1 = valHex;
+                        else if (maskParts[1].Contains("F")) d2 = valHex;
+                        else if (maskParts[2].Contains("F")) d3 = valHex;
+                    }
+
+                    DefinitionsDBHelper.AddEntry(era, model, name, module, address, d1, d2, d3, notes);
+                    continue; // Special insert, skip standard insert below
                 }
                 else if (detectedFormat == 1) // Format 2 (2GFusions/CommonCodes2): Index | Polyglot(Addr/Mod/Name) | D1 | D2?
                 {
                     // This format is tricky. Col 0 is Index. Col 1 is "Key".
-                    string key = parts.Count > 1 ? parts[1].Trim() : "";
-                    
+                    var key = parts.Count > 1 ? parts[1].Trim() : "";
+
                     if (Regex.IsMatch(key, @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}.*")) // Allow suffix text
                     {
                         address = key;
                     }
-                    else if (key.StartsWith("(") || (key.Length < 10 && key.Any(char.IsLetterOrDigit))) 
+                    else if (key.StartsWith("(") || (key.Length < 10 && key.Any(char.IsLetterOrDigit)))
                     {
-                         // Likely a Module name like "(IPC)" or "APIM"
-                         module = key;
+                        // Likely a Module name like "(IPC)" or "APIM"
+                        module = key;
                     }
                     else if (key.Length > 0)
                     {
@@ -323,19 +327,20 @@ namespace AsBuiltExplorer
 
                     // D1 is Column 2
                     d1 = parts.Count > 2 ? parts[2].Trim() : "";
-                    
+
                     // Col 3 usually D2?
                     d2 = parts.Count > 3 ? parts[3].Trim() : "";
-                    
+
                     // Note: Format 2 (CommonCodes2) had: Mod(0)|Addr(1)|D1(2)... 
                     // But 2GFusions has Index(0)|Addr(1)|D1(2)...
                     // Both have Address in Col 1.
                     // My Polyglot logic sees key="760..." -> Addr.
                     // But it ignores Col 0 "ABS". 
                     // Fix: Check Col 0 too!
-                    
-                    string col0 = parts.Count > 0 ? parts[0].Trim() : "";
-                    if (!string.IsNullOrEmpty(col0) && !Regex.IsMatch(col0, @"^\d+$") && col0.Length < 10) 
+
+                    var col0 = parts.Count > 0 ? parts[0].Trim() : "";
+
+                    if (!string.IsNullOrEmpty(col0) && !Regex.IsMatch(col0, @"^\d+$") && col0.Length < 10)
                     {
                         // Col 0 is NOT an index, so it might be Module (CommonCodes2 style)
                         module = col0;
@@ -352,32 +357,31 @@ namespace AsBuiltExplorer
                     d3 = parts.Count > 5 ? parts[5].Trim() : "";
                     notes = parts.Count > 6 ? parts[6].Trim() : "";
 
-                     // Fix: Some files have "D1 D2 D3" in a single column
-                     if (d1.Contains(" ") && string.IsNullOrEmpty(d2))
-                     {
-                         var masks = d1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                         if (masks.Length > 0) d1 = masks[0];
-                         if (masks.Length > 1) d2 = masks[1];
-                         if (masks.Length > 2) d3 = masks[2];
-                     }
+                    // Fix: Some files have "D1 D2 D3" in a single column
+                    if (d1.Contains(" ") && string.IsNullOrEmpty(d2))
+                    {
+                        var masks = d1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (masks.Length > 0) d1 = masks[0];
+                        if (masks.Length > 1) d2 = masks[1];
+                        if (masks.Length > 2) d3 = masks[2];
+                    }
                 }
-                
-                
+
                 // --- 1. Fix Merged Address/Mask (e.g. "7D0-01-02 0xxx") ---
                 if (address.Contains(" "))
                 {
                     // The address column likely contains "Address Mask" OR "Address (Year)"
-                    string[] addrParts = address.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    
+                    var addrParts = address.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
                     if (addrParts.Length > 1 && Regex.IsMatch(addrParts[0], @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}"))
                     {
                         address = addrParts[0]; // The clean address
-                        string suffix = addrParts[1]; 
+                        var suffix = addrParts[1];
 
                         // Determine if the suffix is a Mask or just Info (Year, etc)
                         // Masks usually contain 'x', '*', or are purely hex/numeric.
                         // Info usually starts with '('.
-                        bool looksLikeMask = Regex.IsMatch(suffix, @"[*xX]") || (Regex.IsMatch(suffix, @"^[0-9A-F]+$") && !suffix.StartsWith("("));
+                        var looksLikeMask = Regex.IsMatch(suffix, @"[*xX]") || (Regex.IsMatch(suffix, @"^[0-9A-F]+$") && !suffix.StartsWith("("));
 
                         if (looksLikeMask)
                         {
@@ -388,6 +392,7 @@ namespace AsBuiltExplorer
                                 if (!string.IsNullOrEmpty(notes)) notes = d1 + " " + notes;
                                 else notes = d1;
                             }
+
                             d1 = suffix; // Put extracted mask into D1
                         }
                         else
@@ -404,7 +409,7 @@ namespace AsBuiltExplorer
                 // Clear numeric indices so persistence can fill in the correct parent value
                 if (Regex.IsMatch(module.Trim(), @"^[\d\.]+$")) module = "";
                 if (Regex.IsMatch(name.Trim(), @"^[\d\.]+$")) name = "";
-                
+
                 // --- 3. Persistence / Merged Cells ---
                 if (string.IsNullOrEmpty(module)) module = lastModule; else lastModule = module;
                 if (string.IsNullOrEmpty(name)) name = lastFeatureName; else lastFeatureName = name;
@@ -412,39 +417,41 @@ namespace AsBuiltExplorer
 
                 // --- 4. Heuristic Cleanup (Notes in Mask columns) ---
                 // Do this BEFORE stripping spaces so we preserve note readability
-                
+
                 // Check if D2 looks like a note
                 if (!string.IsNullOrEmpty(d2) && (d2.ToLower().Contains("note:") || d2.Contains("(") || d2.Length > 12))
                 {
-                    string append = d2;
+                    var append = d2;
                     if (!string.IsNullOrEmpty(d3)) append += " " + d3; // D3 is likely part of the note too
-                    
+
                     if (!string.IsNullOrEmpty(notes)) notes = append + " " + notes;
                     else notes = append;
-                    
+
                     d2 = "";
                     d3 = "";
                 }
-                
+
                 // Check if D3 looks like a note
                 if (!string.IsNullOrEmpty(d3) && (d3.ToLower().Contains("note:") || d3.Contains("(") || d3.Length > 12))
                 {
-                     if (!string.IsNullOrEmpty(notes)) notes = d3 + " " + notes;
-                     else notes = d3;
-                     d3 = "";
+                    if (!string.IsNullOrEmpty(notes)) notes = d3 + " " + notes;
+                    else notes = d3;
+
+                    d3 = "";
                 }
 
                 // --- 5. Heuristic: Extract Mask from Notes (e.g. "xxxx xBxx xxxx - Description") ---
                 // Some files put the specific value in the Notes column
                 var maskInNotesMatch = Regex.Match(notes.Trim(), @"^([xX0-9A-Fa-f]{4}[\s\-]+[xX0-9A-Fa-f]{4}[\s\-]+[xX0-9A-Fa-f]{4})");
+
                 if (maskInNotesMatch.Success)
                 {
-                    string extractedMask = maskInNotesMatch.Groups[1].Value;
-                    
+                    var extractedMask = maskInNotesMatch.Groups[1].Value;
+
                     // If D1 is garbage (length mismatch) or we trust the note more?
                     // Usually if the note has a full mask, it's the specific setting for this row.
                     d1 = extractedMask;
-                    
+
                     // Remove mask from notes
                     notes = notes.Substring(maskInNotesMatch.Length).Trim();
                     // Clean up leading " - " or similar
@@ -457,61 +464,65 @@ namespace AsBuiltExplorer
                 d3 = d3.Replace(" ", "").Replace("-", "");
                 // Only insert if we have at least one mask
                 if (string.IsNullOrEmpty(d1) && string.IsNullOrEmpty(d2) && string.IsNullOrEmpty(d3)) continue;
-                
-                if (String.IsNullOrEmpty(address)) continue;
+
+                if (string.IsNullOrEmpty(address)) continue;
 
                 if (detectedFormat != 3) // Standard Add (no Era/Model)
                     DefinitionsDBHelper.AddEntry("", "", name, module, address, d1, d2, d3, notes);
             }
         }
 
-        private static List<string> SplitCsvLine(string line)
+        static List<string> SplitCsvLine(string line)
         {
             var result = new List<string>();
-            bool inQuotes = false;
-            string currentValue = "";
+            var inQuotes = false;
+            var currentValue = "";
+
             for (int i = 0; i < line.Length; i++)
             {
-                char c = line[i];
+                var c = line[i];
+
                 if (c == '"') inQuotes = !inQuotes;
                 else if (c == ',' && !inQuotes) { result.Add(currentValue); currentValue = ""; }
                 else currentValue += c;
             }
+
             result.Add(currentValue);
             return result;
         }
 
         public static CommonFeature FindMatch(string address, string d1, string d2, string d3)
         {
-             if (!_loaded) Load();
+            if (!_loaded) Load();
 
-             foreach(var f in Features)
-             {
-                 if (f.Address == address)
-                 {
-                     if (MatchMask(d1, f.Data1Mask) && 
-                         MatchMask(d2, f.Data2Mask) && 
-                         MatchMask(d3, f.Data3Mask))
-                     {
-                         return f;
-                     }
-                 }
-             }
-             return null;
+            foreach (var f in Features)
+            {
+                if (f.Address == address)
+                {
+                    if (MatchMask(d1, f.Data1Mask) &&
+                        MatchMask(d2, f.Data2Mask) &&
+                        MatchMask(d3, f.Data3Mask))
+                    {
+                        return f;
+                    }
+                }
+            }
+
+            return null;
         }
 
-        private static bool MatchMask(string value, string mask)
+        static bool MatchMask(string value, string mask)
         {
             value = value?.Replace(" ", "").Trim() ?? "";
             mask = mask?.Replace(" ", "").Trim() ?? "";
 
             if (string.IsNullOrEmpty(mask) || mask.ToLower() == "xxxx") return true;
-            
+
             if (value.Length != mask.Length) return false;
 
             for (int i = 0; i < mask.Length; i++)
             {
-                char m = char.ToLower(mask[i]);
+                var m = char.ToLower(mask[i]);
                 if (m == 'x' || m == '*') continue;
                 if (char.ToLower(value[i]) != m) return false;
             }
@@ -523,6 +534,7 @@ namespace AsBuiltExplorer
         {
             DefinitionsDBHelper.UpdateEntry(f.ID, f.Name, f.Module, f.Address, f.Data1Mask, f.Data2Mask, f.Data3Mask, f.Notes);
             var existing = Features.FirstOrDefault(x => x.ID == f.ID);
+
             if (existing != null)
             {
                 existing.Name = f.Name;
@@ -538,39 +550,43 @@ namespace AsBuiltExplorer
         public static void ExportToCSV(string filename, List<CommonFeature> exportList = null)
         {
             var list = exportList ?? Features;
+
             using (var sw = new StreamWriter(filename))
             {
                 sw.WriteLine("FeatureName,Module,Address,Data1Mask,Data2Mask,Data3Mask,Notes");
-                foreach(var f in list)
+
+                foreach (var f in list)
                 {
-                    string line = $"{EscapeCsv(f.Name)},{EscapeCsv(f.Module)},{EscapeCsv(f.Address)},{EscapeCsv(f.Data1Mask)},{EscapeCsv(f.Data2Mask)},{EscapeCsv(f.Data3Mask)},{EscapeCsv(f.Notes)}";
+                    var line = $"{EscapeCsv(f.Name)},{EscapeCsv(f.Module)},{EscapeCsv(f.Address)},{EscapeCsv(f.Data1Mask)},{EscapeCsv(f.Data2Mask)},{EscapeCsv(f.Data3Mask)},{EscapeCsv(f.Notes)}";
                     sw.WriteLine(line);
                 }
             }
         }
 
-        private static string EscapeCsv(string val)
+        static string EscapeCsv(string val)
         {
             if (string.IsNullOrEmpty(val)) return "";
+
             if (val.Contains(",") || val.Contains("\"") || val.Contains("\n"))
             {
                 val = val.Replace("\"", "\"\"");
                 return $"\"{val}\"";
             }
+
             return val;
         }
 
         public static void ImportCSV(string filepath)
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string customCsvDir = Path.Combine(baseDir, "CustomCSV");
+            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            var customCsvDir = Path.Combine(baseDir, "CustomCSV");
             if (!Directory.Exists(customCsvDir)) Directory.CreateDirectory(customCsvDir);
 
-            string dest = Path.Combine(customCsvDir, Path.GetFileName(filepath));
+            var dest = Path.Combine(customCsvDir, Path.GetFileName(filepath));
             File.Copy(filepath, dest, true);
 
-            _loaded = false; 
-            Load(); 
+            _loaded = false;
+            Load();
         }
     }
 }

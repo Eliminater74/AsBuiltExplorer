@@ -8,24 +8,22 @@ namespace AsBuiltExplorer
 {
     public partial class frmDefinitionsDB : Form
     {
-        private DataTable _masterTable;
+        DataTable _masterTable;
 
-        public frmDefinitionsDB()
-        {
-            InitializeComponent();
-        }
+        public frmDefinitionsDB() => InitializeComponent();
 
-        private void frmDefinitionsDB_Load(object sender, EventArgs e)
+        void frmDefinitionsDB_Load(object sender, EventArgs e)
         {
             dgvCodes.CellFormatting += DgvCodes_CellFormatting;
             LoadData();
         }
 
-        private void DgvCodes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        void DgvCodes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dgvCodes.Columns[e.ColumnIndex].Name.Contains("Mask") && e.Value != null)
             {
-                string val = e.Value.ToString();
+                var val = e.Value.ToString();
+
                 if (val.Contains("*"))
                 {
                     e.CellStyle.Font = new System.Drawing.Font(dgvCodes.Font, System.Drawing.FontStyle.Bold);
@@ -36,13 +34,13 @@ namespace AsBuiltExplorer
             }
         }
 
-        private void LoadData()
+        void LoadData()
         {
             try
             {
                 _masterTable = DefinitionsDBHelper.GetAllCodes();
                 dgvCodes.DataSource = _masterTable;
-                
+
                 // Format Columns
                 if (dgvCodes.Columns["ID"] != null) dgvCodes.Columns["ID"].Visible = false;
                 if (dgvCodes.Columns["FeatureName"] != null) dgvCodes.Columns["FeatureName"].Width = 200;
@@ -54,11 +52,12 @@ namespace AsBuiltExplorer
             }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if (_masterTable == null) return;
-            
-            string filter = txtSearch.Text.Trim().Replace("'", "''");
+
+            var filter = txtSearch.Text.Trim().Replace("'", "''");
+
             if (string.IsNullOrEmpty(filter))
             {
                 _masterTable.DefaultView.RowFilter = "";
@@ -69,11 +68,9 @@ namespace AsBuiltExplorer
             }
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void btnEdit_Click(object sender, EventArgs e)
+        void btnClose_Click(object sender, EventArgs e) => Close();
+
+        void btnEdit_Click(object sender, EventArgs e)
         {
             if (dgvCodes.SelectedRows.Count == 0)
             {
@@ -85,7 +82,7 @@ namespace AsBuiltExplorer
             // The DataSource is a DataTable, so BoundItem is DataRowView
             var row = dgvCodes.SelectedRows[0];
             var dataRow = (row.DataBoundItem as System.Data.DataRowView)?.Row;
-            
+
             if (dataRow == null) return;
 
             // Map DataRow to CommonFeature
@@ -109,7 +106,7 @@ namespace AsBuiltExplorer
                     try
                     {
                         CommonDatabase.UpdateEntry(frm.Result);
-                        
+
                         // Update UI Grid directly (faster than reload)
                         dataRow["FeatureName"] = frm.Result.Name;
                         dataRow["Module"] = frm.Result.Module;
@@ -118,7 +115,7 @@ namespace AsBuiltExplorer
                         dataRow["Data2Mask"] = frm.Result.Data2Mask;
                         dataRow["Data3Mask"] = frm.Result.Data3Mask;
                         dataRow["Notes"] = frm.Result.Notes;
-                        
+
                         // Also update memory cache if needed, but LoadData() pulls from DB usually.
                         // CommonDatabase.Features mismatch now? 
                         // CommonDatabase.ForceReload() might be safer but slower.
@@ -132,12 +129,13 @@ namespace AsBuiltExplorer
             }
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
+        void btnExport_Click(object sender, EventArgs e)
         {
             using (var sfd = new SaveFileDialog())
             {
                 sfd.Filter = "CSV Files (*.csv)|*.csv";
                 sfd.FileName = "AsBuilt_Export.csv";
+
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     try
@@ -146,15 +144,15 @@ namespace AsBuiltExplorer
                         // If User filtered via Search, maybe export only visible?
                         // For now, let's export ALL (CommonDatabase.Features).
                         // Or better: Export what is in the Grid (DataTable DefaultView)
-                        
+
                         // Map DataTable to List<CommonFeature> for Export
                         var dt = dgvCodes.DataSource as System.Data.DataTable;
                         var list = new List<CommonFeature>();
-                        
+
                         foreach (System.Data.DataRow dr in dt.DefaultView.ToTable().Rows)
                         {
-                             list.Add(new CommonFeature
-                             {
+                            list.Add(new CommonFeature
+                            {
                                 Name = dr["FeatureName"].ToString(),
                                 Module = dr["Module"].ToString(),
                                 Address = dr["Address"].ToString(),
@@ -162,9 +160,9 @@ namespace AsBuiltExplorer
                                 Data2Mask = dr["Data2Mask"].ToString(),
                                 Data3Mask = dr["Data3Mask"].ToString(),
                                 Notes = dr["Notes"].ToString()
-                             });
+                            });
                         }
-                        
+
                         CommonDatabase.ExportToCSV(sfd.FileName, list);
                         MessageBox.Show("Export Successful!");
                     }
@@ -176,11 +174,12 @@ namespace AsBuiltExplorer
             }
         }
 
-        private void btnImport_Click(object sender, EventArgs e)
+        void btnImport_Click(object sender, EventArgs e)
         {
             using (var ofd = new OpenFileDialog())
             {
                 ofd.Filter = "CSV Files (*.csv)|*.csv";
+
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     try

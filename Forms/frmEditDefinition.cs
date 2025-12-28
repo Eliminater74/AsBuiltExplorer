@@ -7,8 +7,8 @@ namespace AsBuiltExplorer
     {
         public CommonFeature Result { get; private set; }
 
-        private TextBox txtName, txtModule, txtAddress, txtD1, txtD2, txtD3, txtNotes;
-        private Button btnSave, btnCancel;
+        TextBox txtName, txtModule, txtAddress, txtD1, txtD2, txtD3, txtNotes;
+        Button btnSave, btnCancel;
 
         public frmEditDefinition(CommonFeature feature)
         {
@@ -16,7 +16,7 @@ namespace AsBuiltExplorer
             LoadFeature(feature);
         }
 
-        private void LoadFeature(CommonFeature f)
+        void LoadFeature(CommonFeature f)
         {
             txtName.Text = f.Name;
             txtModule.Text = f.Module;
@@ -40,33 +40,33 @@ namespace AsBuiltExplorer
             };
         }
 
-        private void InitializeComponent()
+        void InitializeComponent()
         {
-            this.Text = "Edit Feature Definition";
-            this.Size = new System.Drawing.Size(400, 350);
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.StartPosition = FormStartPosition.CenterParent;
+            Text = "Edit Feature Definition";
+            Size = new System.Drawing.Size(400, 350);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            StartPosition = FormStartPosition.CenterParent;
 
             var lblName = new Label { Text = "Feature Name:", Top = 10, Left = 10, Width = 100 };
             txtName = new TextBox { Top = 10, Left = 120, Width = 250 };
-            
+
             var lblModule = new Label { Text = "Module:", Top = 40, Left = 10, Width = 100 };
             txtModule = new TextBox { Top = 40, Left = 120, Width = 250 };
-            
+
             var lblAddress = new Label { Text = "Address:", Top = 70, Left = 10, Width = 100 };
             txtAddress = new TextBox { Top = 70, Left = 120, Width = 250 };
-            
+
             var lblD1 = new Label { Text = "Data 1 Mask:", Top = 100, Left = 10, Width = 100 };
             txtD1 = new TextBox { Top = 100, Left = 120, Width = 250 };
-            
+
             var lblD2 = new Label { Text = "Data 2 Mask:", Top = 130, Left = 10, Width = 100 };
             txtD2 = new TextBox { Top = 130, Left = 120, Width = 250 };
-            
+
             var lblD3 = new Label { Text = "Data 3 Mask:", Top = 160, Left = 10, Width = 100 };
             txtD3 = new TextBox { Top = 160, Left = 120, Width = 250 };
-            
+
             var lblNotes = new Label { Text = "Notes:", Top = 190, Left = 10, Width = 100 };
             txtNotes = new TextBox { Top = 190, Left = 120, Width = 250, Height = 60, Multiline = true };
 
@@ -75,14 +75,15 @@ namespace AsBuiltExplorer
 
             btnCancel = new Button { Text = "Cancel", Top = 270, Left = 295, DialogResult = DialogResult.Cancel };
 
-            this.Controls.AddRange(new Control[] { lblName, txtName, lblModule, txtModule, lblAddress, txtAddress, 
+            Controls.AddRange(new Control[] { lblName, txtName, lblModule, txtModule, lblAddress, txtAddress,
                                                  lblD1, txtD1, lblD2, txtD2, lblD3, txtD3, lblNotes, txtNotes,
                                                  btnSave, btnCancel });
-            this.AcceptButton = btnSave;
-            this.CancelButton = btnCancel;
+
+            AcceptButton = btnSave;
+            CancelButton = btnCancel;
         }
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        void BtnSave_Click(object sender, EventArgs e)
         {
             Result.Name = txtName.Text;
             Result.Module = txtModule.Text;
@@ -91,7 +92,7 @@ namespace AsBuiltExplorer
             Result.Data2Mask = txtD2.Text;
             Result.Data3Mask = txtD3.Text;
             Result.Notes = txtNotes.Text;
-            this.Close();
+            Close();
         }
     }
 }

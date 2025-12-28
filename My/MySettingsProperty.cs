@@ -1,4 +1,3 @@
-
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 using System.ComponentModel.Design;
@@ -7,23 +6,20 @@ using System.Runtime.CompilerServices;
 
 namespace AsBuiltExplorer.My
 {
-
-[StandardModule]
-[HideModuleName]
-[DebuggerNonUserCode]
-[CompilerGenerated]
-internal sealed class MySettingsProperty
-{
-  [HelpKeyword("My.Settings")]
-  internal static MySettings Settings
-  {
-    get
+    [StandardModule]
+    [HideModuleName]
+    [DebuggerNonUserCode]
+    [CompilerGenerated]
+    internal sealed class MySettingsProperty
     {
-      MySettings settings = MySettings.Default;
-      return settings;
+        [HelpKeyword("My.Settings")]
+        internal static MySettings Settings
+        {
+            get
+            {
+                var settings = MySettings.Default;
+                return settings;
+            }
+        }
     }
-  }
-}
-
-
 }

@@ -21,26 +21,26 @@ namespace AsBuiltExplorer
 // [DesignerGenerated] removed
 public partial class Form1 : Form
 {
-  private ColumnHeader lvwBrowser_SortingColumn;
+  ColumnHeader lvwBrowser_SortingColumn;
   public int abDownloadTriggered;
 
   public Form1()
   {
-    this.Load += new EventHandler(this.Form1_Load);
-    this.MaximumSizeChanged += new EventHandler(this.Form1_MaximumSizeChanged);
-    this.Shown += new EventHandler(this.Form1_Shown);
-    this.abDownloadTriggered = 0;
-    this.InitializeComponent();
+    Load += new EventHandler(Form1_Load);
+    MaximumSizeChanged += new EventHandler(Form1_MaximumSizeChanged);
+    Shown += new EventHandler(Form1_Shown);
+    abDownloadTriggered = 0;
+    InitializeComponent();
   }
 
-  private string VehicleInfo_GetModuleDataByID_Binary(
+  string VehicleInfo_GetModuleDataByID_Binary(
     string moduleID,
     Form1.VehicleInfo vhclInfo,
     ref string modulePartNum)
   {
     modulePartNum = "";
-    int num = checked (vhclInfo.abModuleAddrCount - 1);
-    int index = 0;
+    var num = checked (vhclInfo.abModuleAddrCount - 1);
+    var index = 0;
     while (index <= num)
     {
       if (moduleID.Length == vhclInfo.abModuleAddresses[index].Length)
@@ -61,12 +61,12 @@ public partial class Form1 : Form
     return "";
   }
 
-  private string VehicleInfo_GetModuleDataByIDandPart_Binary(
+  string VehicleInfo_GetModuleDataByIDandPart_Binary(
     string moduleID,
     Form1.VehicleInfo vhclInfo)
   {
-    int num = checked (vhclInfo.abModuleAddrCount - 1);
-    int index = 0;
+    var num = checked (vhclInfo.abModuleAddrCount - 1);
+    var index = 0;
     while (index <= num)
     {
       if (moduleID.StartsWith(vhclInfo.abModuleAddresses[index]) && !Information.IsNothing((object) vhclInfo.abModuleInfo_PartNums[index]) && moduleID.EndsWith(vhclInfo.abModuleInfo_PartNums[index]))
@@ -76,63 +76,63 @@ public partial class Form1 : Form
     return "";
   }
 
-  private void TextBox3_TextChanged(object sender, EventArgs e)
+  void TextBox3_TextChanged(object sender, EventArgs e)
   {
-    string str1 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData1hex.Text);
-    this.tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
-    this.tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
-    string str2 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData2hex.Text);
-    this.tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
-    this.tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
-    string str3 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData3hex.Text);
-    this.tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
-    this.tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+    var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
+    tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
+    tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
+    var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
+    tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
+    tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
+    var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
+    tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
+    tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
   }
 
-  private void Label3_Click(object sender, EventArgs e)
+  void Label3_Click(object sender, EventArgs e)
   {
   }
 
-  private void Button1_Click(object sender, EventArgs e)
+  void Button1_Click(object sender, EventArgs e)
   {
-    this.tbxChecksumHex.Text = modAsBuilt.AsBuilt_CalculateChecksum(this.tbxModIDhex.Text, this.tbxData1hex.Text + this.tbxData2hex.Text + this.tbxData3hex.Text);
-    this.tbxChecksumBin.Text = Strings.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxChecksumHex.Text), 1, 8);
-    string str1 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData1hex.Text);
-    this.tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
-    this.tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
-    string str2 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData2hex.Text);
-    this.tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
-    this.tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
-    string str3 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData3hex.Text);
-    this.tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
-    this.tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+    tbxChecksumHex.Text = modAsBuilt.AsBuilt_CalculateChecksum(tbxModIDhex.Text, tbxData1hex.Text + tbxData2hex.Text + tbxData3hex.Text);
+    tbxChecksumBin.Text = Strings.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(tbxChecksumHex.Text), 1, 8);
+    var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
+    tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
+    tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
+    var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
+    tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
+    tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
+    var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
+    tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
+    tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
   }
 
-  private void Form1_Load(object sender, EventArgs e)
+  void Form1_Load(object sender, EventArgs e)
   {
       ModuleDatabase.LoadDatabase();
       ModuleDatabase.LoadDatabase();
       CommonDatabase.Load();
 
       // Initialize Help Screen (TabPage7)
-      if (this.TabPage7.Controls.Count == 0) 
+      if (TabPage7.Controls.Count == 0) 
       {
-          WebBrowser helpBrowser = new WebBrowser();
+          var helpBrowser = new WebBrowser();
           helpBrowser.Dock = DockStyle.Fill;
           helpBrowser.IsWebBrowserContextMenuEnabled = false; 
           helpBrowser.AllowWebBrowserDrop = false;
           helpBrowser.ScriptErrorsSuppressed = true;
-          this.TabPage7.Controls.Add(helpBrowser);
+          TabPage7.Controls.Add(helpBrowser);
           
-          string helpPath = Path.Combine(Application.StartupPath, "Help", "index.html");
+          var helpPath = Path.Combine(Application.StartupPath, "Help", "index.html");
           if (File.Exists(helpPath))
           {
               helpBrowser.Navigate(helpPath);
           }
           else
           {
-               Label errLbl = new Label() { Text = "Help file not found: " + helpPath, Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter };
-               this.TabPage7.Controls.Add(errLbl);
+               var errLbl = new Label() { Text = "Help file not found: " + helpPath, Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter };
+               TabPage7.Controls.Add(errLbl);
           }
       }
       VehicleDatabase.Load(); // Load existing vehicles
@@ -140,10 +140,10 @@ public partial class Form1 : Form
       // Auto-Import from AsBuiltData folder
       try
       {
-         string asBuiltDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AsBuiltData");
+         var asBuiltDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AsBuiltData");
          if (Directory.Exists(asBuiltDir))
          {
-             int count = VehicleDatabase.BulkImport(asBuiltDir);
+             var count = VehicleDatabase.BulkImport(asBuiltDir);
              if (count > 0)
              {
                  // Optional: Notify user or just show in list (if list UI existed)
@@ -160,29 +160,29 @@ public partial class Form1 : Form
 
       // Set Version from Assembly
       var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-      this.Text = $"AsBuiltExplorer Toolkit v{version}";
-      this.lblAboutVersion.Text = $"Version {version}";
+      Text = $"AsBuiltExplorer Toolkit v{version}";
+      lblAboutVersion.Text = $"Version {version}";
 
       // Update About Screen Branding (Fancy "Toolkit")
       // Shift items down to make room
-      int shiftY = 40;
-      this.lblAboutVersion.Top += shiftY;
-      this.lblAboutDev.Top += shiftY;
-      this.lblAboutCredits.Top += shiftY;
-      this.lblAboutMoto.Top += shiftY;
-      this.lnkAboutGithub.Top += shiftY;
+      var shiftY = 40;
+      lblAboutVersion.Top += shiftY;
+      lblAboutDev.Top += shiftY;
+      lblAboutCredits.Top += shiftY;
+      lblAboutMoto.Top += shiftY;
+      lnkAboutGithub.Top += shiftY;
 
-      Label lblToolkit = new Label();
+      var lblToolkit = new Label();
       lblToolkit.Text = "Toolkit";
-      lblToolkit.Font = new Font(this.lblAboutTitle.Font.FontFamily, 22, FontStyle.Bold); // Match title font, slightly smaller
+      lblToolkit.Font = new Font(lblAboutTitle.Font.FontFamily, 22, FontStyle.Bold); // Match title font, slightly smaller
       // lblToolkit.ForeColor = Color.Gray; // Remove custom color to match title
       lblToolkit.AutoSize = true;
-      lblToolkit.Location = new Point(this.lblAboutTitle.Left + 5, this.lblAboutTitle.Bottom - 5); // Tweak position
-      this.TabPage8.Controls.Add(lblToolkit);
+      lblToolkit.Location = new Point(lblAboutTitle.Left + 5, lblAboutTitle.Bottom - 5); // Tweak position
+      TabPage8.Controls.Add(lblToolkit);
       lblToolkit.BringToFront();
   }
 
-  private void pbSettings_Click(object sender, EventArgs e)
+  void pbSettings_Click(object sender, EventArgs e)
   {
       using (var frm = new AsBuiltExplorer.Forms.frmSettings())
       {
@@ -193,27 +193,27 @@ public partial class Form1 : Form
       }
   }
 
-  private void ApplyTheme()
+  void ApplyTheme()
   {
-      bool isDark = ("Dark" == My.MySettings.Default.AppTheme);
-      Color backColor = isDark ? Color.FromArgb(45, 45, 48) : SystemColors.Control;
-      Color foreColor = isDark ? Color.White : SystemColors.ControlText;
+      var isDark = ("Dark" == My.MySettings.Default.AppTheme);
+      var backColor = isDark ? Color.FromArgb(45, 45, 48) : SystemColors.Control;
+      var foreColor = isDark ? Color.White : SystemColors.ControlText;
       
-      this.BackColor = backColor;
-      this.ForeColor = foreColor;
+      BackColor = backColor;
+      ForeColor = foreColor;
       
       
       
       // Always use OwnerDraw to ensure horizontal text and consistent styling
       TabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
       
-      foreach (Control c in this.Controls)
+      foreach (Control c in Controls)
       {
           UpdateControlTheme(c, backColor, foreColor);
       }
   }
 
-  private void UpdateControlTheme(Control c, Color back, Color fore)
+  void UpdateControlTheme(Control c, Color back, Color fore)
   {
        // Skip controls that have custom color coding we want to preserve
        if (c.Name != null && (
@@ -254,160 +254,160 @@ public partial class Form1 : Form
        }
   }
 
-  private void Button2_Click(object sender, EventArgs e)
+  void Button2_Click(object sender, EventArgs e)
   {
       CommonDatabase.ForceReload(); // Reload DB to pick up CSV changes
-      string[] retModuleNames = new string[1];
-    string[] retModuleShortNames = new string[1];
-    string[] retModuleAddresses = new string[1];
+      var retModuleNames = new string[1];
+    var retModuleShortNames = new string[1];
+    var retModuleAddresses = new string[1];
 
-    string directoryPath = MyProject.Application.Info.DirectoryPath;
+    var directoryPath = MyProject.Application.Info.DirectoryPath;
     if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
       directoryPath += "\\";
-    if (this.chkCompareShowNames.Checked)
+    if (chkCompareShowNames.Checked)
     {
        // Legacy file loading removed in favor of ModuleDatabase
     }
-    string[] strArray1 = new string[1];
-    string[] retModuleDatas1 = new string[1];
-    int num1 = 0;
-    string[] retModInfo_IDs1 = new string[1];
-    string[] retModInfo_PartNumbers1 = new string[1];
-    string[] retModInfo_Strategies1 = new string[1];
-    string[] retModInfo_Calibrations1 = new string[1];
-    int retModInfo_Count1 = 0;
-    string retCCCdata1 = "";
-    string[] strArray2 = new string[1];
-    string[] retModuleDatas2 = new string[1];
-    int num2 = 0;
-    string[] retModInfo_IDs2 = new string[1];
-    string[] retModInfo_PartNumbers2 = new string[1];
-    string[] retModInfo_Strategies2 = new string[1];
-    string[] retModInfo_Calibrations2 = new string[1];
-    int retModInfo_Count2 = 0;
-    string retCCCdata2 = "";
-    string[] strArray3 = new string[1];
-    string[] retModuleDatas3 = new string[1];
-    int num3 = 0;
-    string[] retModInfo_IDs3 = new string[1];
-    string[] retModInfo_PartNumbers3 = new string[1];
-    string[] retModInfo_Strategies3 = new string[1];
-    string[] retModInfo_Calibrations3 = new string[1];
-    int retModInfo_Count3 = 0;
-    string retCCCdata3 = "";
-    string[] strArray4 = new string[1];
-    string[] retModuleDatas4 = new string[1];
-    int num4 = 0;
-    string[] retModInfo_IDs4 = new string[1];
-    string[] retModInfo_PartNumbers4 = new string[1];
-    string[] retModInfo_Strategies4 = new string[1];
-    string[] retModInfo_Calibrations4 = new string[1];
-    int retModInfo_Count4 = 0;
-    string retCCCdata4 = "";
-    string text1 = this.tbxCompFile1.Text.Trim();
-    bool flag1 = false;
-    string[] strArray5 = new string[1];
-    string retVIN1 = "";
-    string fileType1 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text1);
-    string[] inpFileArray1 = Strings.Split(text1, "|");
+    var strArray1 = new string[1];
+    var retModuleDatas1 = new string[1];
+    var num1 = 0;
+    var retModInfo_IDs1 = new string[1];
+    var retModInfo_PartNumbers1 = new string[1];
+    var retModInfo_Strategies1 = new string[1];
+    var retModInfo_Calibrations1 = new string[1];
+    var retModInfo_Count1 = 0;
+    var retCCCdata1 = "";
+    var strArray2 = new string[1];
+    var retModuleDatas2 = new string[1];
+    var num2 = 0;
+    var retModInfo_IDs2 = new string[1];
+    var retModInfo_PartNumbers2 = new string[1];
+    var retModInfo_Strategies2 = new string[1];
+    var retModInfo_Calibrations2 = new string[1];
+    var retModInfo_Count2 = 0;
+    var retCCCdata2 = "";
+    var strArray3 = new string[1];
+    var retModuleDatas3 = new string[1];
+    var num3 = 0;
+    var retModInfo_IDs3 = new string[1];
+    var retModInfo_PartNumbers3 = new string[1];
+    var retModInfo_Strategies3 = new string[1];
+    var retModInfo_Calibrations3 = new string[1];
+    var retModInfo_Count3 = 0;
+    var retCCCdata3 = "";
+    var strArray4 = new string[1];
+    var retModuleDatas4 = new string[1];
+    var num4 = 0;
+    var retModInfo_IDs4 = new string[1];
+    var retModInfo_PartNumbers4 = new string[1];
+    var retModInfo_Strategies4 = new string[1];
+    var retModInfo_Calibrations4 = new string[1];
+    var retModInfo_Count4 = 0;
+    var retCCCdata4 = "";
+    var text1 = tbxCompFile1.Text.Trim();
+    var flag1 = false;
+    var strArray5 = new string[1];
+    var retVIN1 = "";
+    var fileType1 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text1);
+    var inpFileArray1 = Strings.Split(text1, "|");
     if (Operators.CompareString(fileType1, "ABT", false) == 0)
     {
       flag1 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray1, inpFileArray1.Length, ref strArray1, ref retModuleDatas1, ref num1);
-      this.lblComp1VIN.Text = "No VIN (ABT)";
+      lblComp1VIN.Text = "No VIN (ABT)";
     }
     else if (Operators.CompareString(fileType1, "AB", false) == 0)
     {
       flag1 = modAsBuilt.AsBuilt_LoadFile_AB(text1, ref strArray1, ref retModuleDatas1, ref num1, ref retVIN1, ref retModInfo_IDs1, ref retModInfo_PartNumbers1, ref retModInfo_Strategies1, ref retModInfo_Calibrations1, ref retModInfo_Count1, ref retCCCdata1);
-      this.lblComp1VIN.Text = retVIN1;
+      lblComp1VIN.Text = retVIN1;
     }
     else if (Operators.CompareString(fileType1, "UCDS", false) == 0)
     {
       flag1 = modAsBuilt.AsBuilt_LoadFile_UCDS(text1, ref strArray1, ref retModuleDatas1, ref num1);
-      this.lblComp1VIN.Text = "No VIN (UCDS)";
+      lblComp1VIN.Text = "No VIN (UCDS)";
     }
     else if (!string.IsNullOrWhiteSpace(text1))
     {
         MessageBox.Show("Could not load File 1: " + text1 + "\r\nFile not found or unknown format.\r\n(Check if file was moved or deleted)", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
-    string text2 = this.tbxCompFile2.Text.Trim();
-    bool flag2 = false;
-    string[] strArray6 = new string[1];
-    string retVIN2 = "";
-    string fileType2 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text2);
-    string[] inpFileArray2 = Strings.Split(text2, "|");
+    var text2 = tbxCompFile2.Text.Trim();
+    var flag2 = false;
+    var strArray6 = new string[1];
+    var retVIN2 = "";
+    var fileType2 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text2);
+    var inpFileArray2 = Strings.Split(text2, "|");
     if (Operators.CompareString(fileType2, "ABT", false) == 0)
     {
       flag2 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray2, inpFileArray2.Length, ref strArray2, ref retModuleDatas2, ref num2);
-      this.lblComp2VIN.Text = "No VIN (ABT)";
+      lblComp2VIN.Text = "No VIN (ABT)";
     }
     else if (Operators.CompareString(fileType2, "AB", false) == 0)
     {
       flag2 = modAsBuilt.AsBuilt_LoadFile_AB(text2, ref strArray2, ref retModuleDatas2, ref num2, ref retVIN2, ref retModInfo_IDs2, ref retModInfo_PartNumbers2, ref retModInfo_Strategies2, ref retModInfo_Calibrations2, ref retModInfo_Count2, ref retCCCdata2);
-      this.lblComp2VIN.Text = retVIN2;
+      lblComp2VIN.Text = retVIN2;
     }
     else if (Operators.CompareString(fileType2, "UCDS", false) == 0)
     {
       flag2 = modAsBuilt.AsBuilt_LoadFile_UCDS(text2, ref strArray2, ref retModuleDatas2, ref num2);
-      this.lblComp2VIN.Text = "No VIN (UCDS)";
+      lblComp2VIN.Text = "No VIN (UCDS)";
     }
     else if (!string.IsNullOrWhiteSpace(text2))
     {
         MessageBox.Show("Could not load File 2: " + text2 + "\r\nFile not found or unknown format.\r\n(Check if file was moved or deleted)", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
-    string text3 = this.tbxCompFile3.Text.Trim();
-    bool flag3 = false;
-    string[] strArray7 = new string[1];
-    string retVIN3 = "";
-    string fileType3 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text3);
-    string[] inpFileArray3 = Strings.Split(text3, "|");
+    var text3 = tbxCompFile3.Text.Trim();
+    var flag3 = false;
+    var strArray7 = new string[1];
+    var retVIN3 = "";
+    var fileType3 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text3);
+    var inpFileArray3 = Strings.Split(text3, "|");
     if (Operators.CompareString(fileType3, "ABT", false) == 0)
     {
       flag3 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray3, inpFileArray3.Length, ref strArray3, ref retModuleDatas3, ref num3);
-      this.lblComp3VIN.Text = "No VIN (ABT)";
+      lblComp3VIN.Text = "No VIN (ABT)";
     }
     else if (Operators.CompareString(fileType3, "AB", false) == 0)
     {
       flag3 = modAsBuilt.AsBuilt_LoadFile_AB(text3, ref strArray3, ref retModuleDatas3, ref num3, ref retVIN3, ref retModInfo_IDs3, ref retModInfo_PartNumbers3, ref retModInfo_Strategies3, ref retModInfo_Calibrations3, ref retModInfo_Count3, ref retCCCdata3);
-      this.lblComp3VIN.Text = retVIN3;
+      lblComp3VIN.Text = retVIN3;
     }
     else if (Operators.CompareString(fileType3, "UCDS", false) == 0)
     {
       flag3 = modAsBuilt.AsBuilt_LoadFile_UCDS(text3, ref strArray3, ref retModuleDatas3, ref num3);
-      this.lblComp3VIN.Text = "No VIN (UCDS)";
+      lblComp3VIN.Text = "No VIN (UCDS)";
     }
-    string text4 = this.tbxCompFile4.Text.Trim();
-    bool flag4 = false;
-    string[] strArray8 = new string[1];
-    string retVIN4 = "";
-    string fileType4 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text4);
-    string[] inpFileArray4 = Strings.Split(this.tbxCompFile4.Text, "|");
+    var text4 = tbxCompFile4.Text.Trim();
+    var flag4 = false;
+    var strArray8 = new string[1];
+    var retVIN4 = "";
+    var fileType4 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text4);
+    var inpFileArray4 = Strings.Split(tbxCompFile4.Text, "|");
     if (Operators.CompareString(fileType4, "ABT", false) == 0)
     {
       flag4 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray4, inpFileArray4.Length, ref strArray4, ref retModuleDatas4, ref num4);
-      this.lblComp4VIN.Text = "No VIN (ABT)";
+      lblComp4VIN.Text = "No VIN (ABT)";
     }
     else if (Operators.CompareString(fileType4, "AB", false) == 0)
     {
       flag4 = modAsBuilt.AsBuilt_LoadFile_AB(text4, ref strArray4, ref retModuleDatas4, ref num4, ref retVIN4, ref retModInfo_IDs4, ref retModInfo_PartNumbers4, ref retModInfo_Strategies4, ref retModInfo_Calibrations4, ref retModInfo_Count4, ref retCCCdata4);
-      this.lblComp4VIN.Text = retVIN4;
+      lblComp4VIN.Text = retVIN4;
     }
     else if (Operators.CompareString(fileType4, "UCDS", false) == 0)
     {
       flag4 = modAsBuilt.AsBuilt_LoadFile_UCDS(text4, ref strArray4, ref retModuleDatas4, ref num4);
-      this.lblComp4VIN.Text = "No VIN (UCDS)";
+      lblComp4VIN.Text = "No VIN (UCDS)";
     }
-    this.ListView1.Items.Clear();
-    System.Drawing.Font listBoldFont = new System.Drawing.Font(this.ListView1.Font, System.Drawing.FontStyle.Bold);
-    string retData1_1 = "";
-    string retData2_1 = "";
-    string retData3_1 = "";
-    ListViewItem listViewItem1 = (ListViewItem) null;
-    ListViewItem.ListViewSubItem listViewSubItem = (ListViewItem.ListViewSubItem) null;
+    ListView1.Items.Clear();
+    var listBoldFont = new System.Drawing.Font(ListView1.Font, System.Drawing.FontStyle.Bold);
+    var retData1_1 = "";
+    var retData2_1 = "";
+    var retData3_1 = "";
+    var listViewItem1 = (ListViewItem) null;
+    var listViewSubItem = (ListViewItem.ListViewSubItem) null;
 
-    string str3 = modAsBuilt.AsBuilt_Ascii2Hex(retVIN1);
-    string Right1 = "";
-    int num5 = checked (num1 - 1);
-    int index1 = 0;
+    var str3 = modAsBuilt.AsBuilt_Ascii2Hex(retVIN1);
+    var Right1 = "";
+    var num5 = checked (num1 - 1);
+    var index1 = 0;
     // Variables reused from above loop logic or just remove re-declaration
     // int num5 and int index1 were already declared above.
     // Resetting them is fine, redeclaring is not.
@@ -415,27 +415,27 @@ public partial class Form1 : Form
     index1 = 0;
     while (index1 <= num5)
     {
-      if (!this.chkCompareShowChecksum.Checked)
+      if (!chkCompareShowChecksum.Checked)
         retModuleDatas1[index1] = Strings.Left(retModuleDatas1[index1], checked (Strings.Len(retModuleDatas1[index1]) - 2));
-      string str4 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray1[index1]);
+      var str4 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray1[index1]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas1[index1], ref retData1_1, ref retData2_1, ref retData3_1);
-      string text5 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
-      string str5 = Strings.Left(str4, 3);
-      string Right2 = Strings.Left(str4, 6);
+      var text5 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
+      var str5 = Strings.Left(str4, 3);
+      var Right2 = Strings.Left(str4, 6);
       if (Operators.CompareString(str5, Right1, false) != 0)
       {
-        string str6 = "";
-        int num7 = index1;
-        int num8 = checked (num1 - 1);
-        int index2 = num7;
+        var str6 = "";
+        var num7 = index1;
+        var num8 = checked (num1 - 1);
+        var index2 = num7;
         while (index2 <= num8)
         {
-          string retData1_2 = "";
-          string retData2_2 = "";
-          string retData3_2 = "";
+          var retData1_2 = "";
+          var retData2_2 = "";
+          var retData3_2 = "";
           modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas1[index2], ref retData1_2, ref retData2_2, ref retData3_2);
-          string str7 = Strings.Left(modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray1[index2]), 3);
-          string Left2 = Strings.Left(str7, 6);
+          var str7 = Strings.Left(modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray1[index2]), 3);
+          var Left2 = Strings.Left(str7, 6);
           if (Operators.CompareString(str7, str5, false) == 0)
           {
             if (Operators.CompareString(Left2, "7E1", false) == 0)
@@ -452,17 +452,17 @@ public partial class Form1 : Form
           else
             break;
         }
-        int num9 = Strings.InStr(1, str6, str3);
-        int num10 = 0;
+        var num9 = Strings.InStr(1, str6, str3);
+        var num10 = 0;
         if (num9 != 0)
           num10 = checked (num9 + Strings.Len(str3));
         Right1 = str5;
       }
-      string text6 = "";
-      string text7 = "";
-      string text8 = "";
-      int num11 = checked (retModInfo_Count1 - 1);
-      int index3 = 0;
+      var text6 = "";
+      var text7 = "";
+      var text8 = "";
+      var num11 = checked (retModInfo_Count1 - 1);
+      var index3 = 0;
       while (index3 <= num11)
       {
         if (Operators.CompareString(Strings.Left(strArray1[index1], Strings.Len(retModInfo_IDs1[index3])), retModInfo_IDs1[index3], false) == 0)
@@ -474,16 +474,16 @@ public partial class Form1 : Form
         }
         checked { ++index3; }
       }
-      string modName = "";
-      if (this.chkCompareShowNames.Checked)
+      var modName = "";
+      if (chkCompareShowNames.Checked)
       {
-        int vinYear = VINDecoder.GetModelYear(retVIN1);
+        var vinYear = VINDecoder.GetModelYear(retVIN1);
         var strategy = Utilities.VehicleStrategyFactory.GetStrategy(vinYear);
         modName = strategy.GetModuleName(str4);
       }
-      ListViewItem listViewItem2 = this.ListView1.Items.Add(str4);
+      var listViewItem2 = ListView1.Items.Add(str4);
       listViewItem2.SubItems.Add(modName);
-      listViewItem2.ForeColor = this.tbxCompFile1.ForeColor;
+      listViewItem2.ForeColor = tbxCompFile1.ForeColor;
       listViewItem2.UseItemStyleForSubItems = false;
       listViewItem2.Tag = (object) text1;
       listViewSubItem = listViewItem2.SubItems.Add(retData1_1);
@@ -493,7 +493,7 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem2.SubItems.Add(text5);
       
       // Feature Translation
-      int vinYear1 = VINDecoder.GetModelYear(retVIN1);
+      var vinYear1 = VINDecoder.GetModelYear(retVIN1);
       var feats1 = CommonDatabase.GetMatchingFeatures(str4, retData1_1, retData2_1, retData3_1, vinYear1);
       listViewSubItem = listViewItem2.SubItems.Add(string.Join(", ", feats1));
 
@@ -502,51 +502,51 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem2.SubItems.Add(text8);
       foreach (ListViewItem.ListViewSubItem sub in listViewItem2.SubItems)
       {
-          sub.ForeColor = this.tbxCompFile1.ForeColor;
+          sub.ForeColor = tbxCompFile1.ForeColor;
           sub.Font = listBoldFont;
       }
-      listViewItem1 = this.ListView1.Items.Add("");
+      listViewItem1 = ListView1.Items.Add("");
       checked { ++index1; }
     }
-    int num12 = checked (num2 - 1);
-    int index4 = 0;
+    var num12 = checked (num2 - 1);
+    var index4 = 0;
     while (index4 <= num12)
     {
-      if (!this.chkCompareShowChecksum.Checked)
+      if (!chkCompareShowChecksum.Checked)
         retModuleDatas2[index4] = Strings.Left(retModuleDatas2[index4], checked (Strings.Len(retModuleDatas2[index4]) - 2));
-      string str8 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray2[index4]);
+      var str8 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray2[index4]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas2[index4], ref retData1_1, ref retData2_1, ref retData3_1);
-      string modName = "";
-      if (this.chkCompareShowNames.Checked)
+      var modName = "";
+      if (chkCompareShowNames.Checked)
       {
-        int vinYear = VINDecoder.GetModelYear(retVIN2);
+        var vinYear = VINDecoder.GetModelYear(retVIN2);
         var strategy = Utilities.VehicleStrategyFactory.GetStrategy(vinYear);
         modName = strategy.GetModuleName(str8);
       }
-      int index5 = -1;
-      int num13 = checked (this.ListView1.Items.Count - 1);
-      int index6 = 0;
+      var index5 = -1;
+      var num13 = checked (ListView1.Items.Count - 1);
+      var index6 = 0;
       while (index6 <= num13)
       {
-        if (Operators.CompareString(this.ListView1.Items[index6].Text, str8, false) == 0)
+        if (Operators.CompareString(ListView1.Items[index6].Text, str8, false) == 0)
           index5 = index6;
         checked { ++index6; }
       }
-      ListViewItem listViewItem3 = new ListViewItem(str8);
+      var listViewItem3 = new ListViewItem(str8);
       listViewItem3.SubItems.Add(modName);
       if (index5 != -1)
-        this.ListView1.Items.Insert(checked (index5 + 1), listViewItem3);
+        ListView1.Items.Insert(checked (index5 + 1), listViewItem3);
       else
-        listViewItem3 = this.ListView1.Items.Add(str8);
-      listViewItem3.ForeColor = this.tbxCompFile2.ForeColor;
+        listViewItem3 = ListView1.Items.Add(str8);
+      listViewItem3.ForeColor = tbxCompFile2.ForeColor;
       listViewItem3.UseItemStyleForSubItems = false;
       listViewItem3.Tag = (object) text2;
-      string text9 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
-      string text10 = "";
-      string text11 = "";
-      string text12 = "";
-      int num14 = checked (retModInfo_Count2 - 1);
-      int index7 = 0;
+      var text9 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
+      var text10 = "";
+      var text11 = "";
+      var text12 = "";
+      var num14 = checked (retModInfo_Count2 - 1);
+      var index7 = 0;
       while (index7 <= num14)
       {
         if (Operators.CompareString(Strings.Left(strArray2[index4], Strings.Len(retModInfo_IDs2[index7])), retModInfo_IDs2[index7], false) == 0)
@@ -561,14 +561,14 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem3.SubItems.Add(retData1_1);
       listViewSubItem = listViewItem3.SubItems.Add(retData2_1);
       listViewSubItem = listViewItem3.SubItems.Add(retData3_1);
-      bool flag6 = true;
+      var flag6 = true;
       if (index5 != -1)
       {
-        int num15 = checked (listViewItem3.SubItems.Count - 1);
-        int index8 = 0;
+        var num15 = checked (listViewItem3.SubItems.Count - 1);
+        var index8 = 0;
         while (index8 <= num15)
         {
-          if (Operators.CompareString(listViewItem3.SubItems[index8].Text, this.ListView1.Items[index5].SubItems[index8].Text, false) != 0)
+          if (Operators.CompareString(listViewItem3.SubItems[index8].Text, ListView1.Items[index5].SubItems[index8].Text, false) != 0)
           {
             flag6 = false;
             break;
@@ -580,7 +580,7 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem3.SubItems.Add(text9);
       
       // Feature Translation
-      int vinYear2 = VINDecoder.GetModelYear(retVIN2);
+      var vinYear2 = VINDecoder.GetModelYear(retVIN2);
       var feats2 = CommonDatabase.GetMatchingFeatures(str8, retData1_1, retData2_1, retData3_1, vinYear2);
       listViewSubItem = listViewItem3.SubItems.Add(string.Join(", ", feats2));
 
@@ -588,52 +588,52 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem3.SubItems.Add(text11);
       listViewSubItem = listViewItem3.SubItems.Add(text12);
       if (index5 == -1)
-        listViewItem1 = this.ListView1.Items.Add("");
+        listViewItem1 = ListView1.Items.Add("");
       foreach (ListViewItem.ListViewSubItem sub in listViewItem3.SubItems)
       {
-          sub.ForeColor = this.tbxCompFile2.ForeColor;
+          sub.ForeColor = tbxCompFile2.ForeColor;
           sub.Font = listBoldFont;
       }
       checked { ++index4; }
     }
-    int num16 = checked (num3 - 1);
-    int index9 = 0;
+    var num16 = checked (num3 - 1);
+    var index9 = 0;
     while (index9 <= num16)
     {
-      if (!this.chkCompareShowChecksum.Checked)
+      if (!chkCompareShowChecksum.Checked)
         retModuleDatas3[index9] = Strings.Left(retModuleDatas3[index9], checked (Strings.Len(retModuleDatas3[index9]) - 2));
-      string str9 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray3[index9]);
+      var str9 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray3[index9]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas3[index9], ref retData1_1, ref retData2_1, ref retData3_1);
-      string modName = "";
-      if (this.chkCompareShowNames.Checked)
+      var modName = "";
+      if (chkCompareShowNames.Checked)
       {
-        int vinYear = VINDecoder.GetModelYear(retVIN3);
+        var vinYear = VINDecoder.GetModelYear(retVIN3);
         var strategy = Utilities.VehicleStrategyFactory.GetStrategy(vinYear);
         modName = strategy.GetModuleName(str9);
       }
-      int index10 = -1;
-      int num17 = checked (this.ListView1.Items.Count - 1);
-      int index11 = 0;
+      var index10 = -1;
+      var num17 = checked (ListView1.Items.Count - 1);
+      var index11 = 0;
       while (index11 <= num17)
       {
-        if (Operators.CompareString(this.ListView1.Items[index11].Text, str9, false) == 0)
+        if (Operators.CompareString(ListView1.Items[index11].Text, str9, false) == 0)
           index10 = index11;
         checked { ++index11; }
       }
-      ListViewItem listViewItem4 = new ListViewItem(str9);
+      var listViewItem4 = new ListViewItem(str9);
       listViewItem4.SubItems.Add(modName);
       if (index10 != -1)
-        this.ListView1.Items.Insert(checked (index10 + 1), listViewItem4);
+        ListView1.Items.Insert(checked (index10 + 1), listViewItem4);
       else
-        listViewItem4 = this.ListView1.Items.Add(str9);
-      listViewItem4.ForeColor = this.tbxCompFile3.ForeColor;
+        listViewItem4 = ListView1.Items.Add(str9);
+      listViewItem4.ForeColor = tbxCompFile3.ForeColor;
       listViewItem4.UseItemStyleForSubItems = false;
-      string text13 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
-      string text14 = "";
-      string text15 = "";
-      string text16 = "";
-      int num18 = checked (retModInfo_Count3 - 1);
-      int index12 = 0;
+      var text13 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
+      var text14 = "";
+      var text15 = "";
+      var text16 = "";
+      var num18 = checked (retModInfo_Count3 - 1);
+      var index12 = 0;
       while (index12 <= num18)
       {
         if (Operators.CompareString(Strings.Left(strArray3[index9], Strings.Len(retModInfo_IDs3[index12])), retModInfo_IDs3[index12], false) == 0)
@@ -648,14 +648,14 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem4.SubItems.Add(retData1_1);
       listViewSubItem = listViewItem4.SubItems.Add(retData2_1);
       listViewSubItem = listViewItem4.SubItems.Add(retData3_1);
-      bool flag7 = true;
+      var flag7 = true;
       if (index10 != -1)
       {
-        int num19 = checked (listViewItem4.SubItems.Count - 1);
-        int index13 = 0;
+        var num19 = checked (listViewItem4.SubItems.Count - 1);
+        var index13 = 0;
         while (index13 <= num19)
         {
-          if (Operators.CompareString(listViewItem4.SubItems[index13].Text, this.ListView1.Items[index10].SubItems[index13].Text, false) != 0)
+          if (Operators.CompareString(listViewItem4.SubItems[index13].Text, ListView1.Items[index10].SubItems[index13].Text, false) != 0)
           {
             flag7 = false;
             break;
@@ -667,7 +667,7 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem4.SubItems.Add(text13);
       
       // Feature Translation
-      int vinYear3 = VINDecoder.GetModelYear(retVIN3);
+      var vinYear3 = VINDecoder.GetModelYear(retVIN3);
       var feats3 = CommonDatabase.GetMatchingFeatures(str9, retData1_1, retData2_1, retData3_1, vinYear3);
       listViewSubItem = listViewItem4.SubItems.Add(string.Join(", ", feats3));
 
@@ -675,55 +675,55 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem4.SubItems.Add(text15);
       listViewSubItem = listViewItem4.SubItems.Add(text16);
       if (index10 == -1)
-        listViewItem1 = this.ListView1.Items.Add("");
+        listViewItem1 = ListView1.Items.Add("");
       foreach (ListViewItem.ListViewSubItem sub in listViewItem4.SubItems)
       {
-          sub.ForeColor = this.tbxCompFile3.ForeColor;
+          sub.ForeColor = tbxCompFile3.ForeColor;
           sub.Font = listBoldFont;
       }
       checked { ++index9; }
     }
-    int num20 = checked (num4 - 1);
-    int index14 = 0;
+    var num20 = checked (num4 - 1);
+    var index14 = 0;
     while (index14 <= num20)
     {
-      if (!this.chkCompareShowChecksum.Checked)
+      if (!chkCompareShowChecksum.Checked)
         retModuleDatas4[index14] = Strings.Left(retModuleDatas4[index14], checked (Strings.Len(retModuleDatas4[index14]) - 2));
-      string str10 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray4[index14]);
+      var str10 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray4[index14]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas4[index14], ref retData1_1, ref retData2_1, ref retData3_1);
-      string modName = "";
-      if (this.chkCompareShowNames.Checked)
+      var modName = "";
+      if (chkCompareShowNames.Checked)
       {
-        int vinYear = VINDecoder.GetModelYear(retVIN4);
+        var vinYear = VINDecoder.GetModelYear(retVIN4);
         var strategy = Utilities.VehicleStrategyFactory.GetStrategy(vinYear);
         modName = strategy.GetModuleName(str10);
       }
-      int index15 = -1;
-      int num21 = checked (this.ListView1.Items.Count - 1);
-      int index16 = 0;
+      var index15 = -1;
+      var num21 = checked (ListView1.Items.Count - 1);
+      var index16 = 0;
       while (index16 <= num21)
       {
-        if (Operators.CompareString(this.ListView1.Items[index16].Text, str10, false) == 0)
+        if (Operators.CompareString(ListView1.Items[index16].Text, str10, false) == 0)
           index15 = index16;
         checked { ++index16; }
       }
-      ListViewItem listViewItem5 = new ListViewItem(str10);
+      var listViewItem5 = new ListViewItem(str10);
       listViewItem5.SubItems.Add(modName);
       if (index15 != -1)
-        this.ListView1.Items.Insert(checked (index15 + 1), listViewItem5);
+        ListView1.Items.Insert(checked (index15 + 1), listViewItem5);
       else
-        listViewItem5 = this.ListView1.Items.Add(str10);
-      listViewItem5.ForeColor = this.tbxCompFile4.ForeColor;
+        listViewItem5 = ListView1.Items.Add(str10);
+      listViewItem5.ForeColor = tbxCompFile4.ForeColor;
       listViewItem5.UseItemStyleForSubItems = false;
       listViewItem5.Tag = (object) text4;
       // Fix CS0103: str2 was removed but this line remained.
       // str2 = ""; // Removed unused assignment
-      string text17 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
-      string text18 = "";
-      string text19 = "";
-      string text20 = "";
-      int num22 = checked (retModInfo_Count4 - 1);
-      int index17 = 0;
+      var text17 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
+      var text18 = "";
+      var text19 = "";
+      var text20 = "";
+      var num22 = checked (retModInfo_Count4 - 1);
+      var index17 = 0;
       while (index17 <= num22)
       {
         if (Operators.CompareString(Strings.Left(strArray4[index14], Strings.Len(retModInfo_IDs4[index17])), retModInfo_IDs4[index17], false) == 0)
@@ -738,14 +738,14 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem5.SubItems.Add(retData1_1);
       listViewSubItem = listViewItem5.SubItems.Add(retData2_1);
       listViewSubItem = listViewItem5.SubItems.Add(retData3_1);
-      bool flag8 = true;
+      var flag8 = true;
       if (index15 != -1)
       {
-        int num23 = checked (listViewItem5.SubItems.Count - 1);
-        int index18 = 0;
+        var num23 = checked (listViewItem5.SubItems.Count - 1);
+        var index18 = 0;
         while (index18 <= num23)
         {
-          if (Operators.CompareString(listViewItem5.SubItems[index18].Text, this.ListView1.Items[index15].SubItems[index18].Text, false) != 0)
+          if (Operators.CompareString(listViewItem5.SubItems[index18].Text, ListView1.Items[index15].SubItems[index18].Text, false) != 0)
           {
             flag8 = false;
             break;
@@ -757,7 +757,7 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem5.SubItems.Add(text17);
 
       // Feature Translation
-      int vinYear4 = VINDecoder.GetModelYear(retVIN4);
+      var vinYear4 = VINDecoder.GetModelYear(retVIN4);
       var feats4 = CommonDatabase.GetMatchingFeatures(str10, retData1_1, retData2_1, retData3_1, vinYear4);
       listViewSubItem = listViewItem5.SubItems.Add(string.Join(", ", feats4));
 
@@ -765,29 +765,29 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem5.SubItems.Add(text19);
       listViewSubItem = listViewItem5.SubItems.Add(text20);
       if (index15 == -1)
-        listViewItem1 = this.ListView1.Items.Add("");
+        listViewItem1 = ListView1.Items.Add("");
       foreach (ListViewItem.ListViewSubItem sub in listViewItem5.SubItems)
       {
-          sub.ForeColor = this.tbxCompFile4.ForeColor;
+          sub.ForeColor = tbxCompFile4.ForeColor;
           sub.Font = listBoldFont;
       }
       checked { ++index14; }
     }
     if (!flag1 & !flag2 & !flag3 & !flag4)
       return;
-    Color color = Color.FromArgb((int) byte.MaxValue, (int) byte.MaxValue, 230, 230);
-    Color lightYellow = Color.LightYellow;
-    int index19 = 0;
+    var color = Color.FromArgb((int) byte.MaxValue, (int) byte.MaxValue, 230, 230);
+    var lightYellow = Color.LightYellow;
+    var index19 = 0;
     do
     {
-      int num24 = index19;
-      int num25 = checked (index19 + 1);
-      int num26 = checked (this.ListView1.Items.Count - 1);
-      int index20 = num25;
+      var num24 = index19;
+      var num25 = checked (index19 + 1);
+      var num26 = checked (ListView1.Items.Count - 1);
+      var index20 = num25;
       while (index20 <= num26)
       {
-        this.ListView1.Items[index20].Tag = (object) "";
-        if (Operators.CompareString(this.ListView1.Items[index20].Text, "", false) != 0)
+        ListView1.Items[index20].Tag = (object) "";
+        if (Operators.CompareString(ListView1.Items[index20].Text, "", false) != 0)
         {
           num24 = index20;
           checked { ++index20; }
@@ -795,60 +795,60 @@ public partial class Form1 : Form
         else
           break;
       }
-      int num27 = 1;
-      int num28 = index19;
-      int num29 = num24;
-      int index21 = num28;
+      var num27 = 1;
+      var num28 = index19;
+      var num29 = num24;
+      var index21 = num28;
       while (index21 <= num29)
       {
-        this.ListView1.Items[index21].Tag = (object) Conversions.ToString(num27);
+        ListView1.Items[index21].Tag = (object) Conversions.ToString(num27);
         checked { ++num27; }
         checked { ++index21; }
       }
-      string text21 = this.ListView1.Items[index19].SubItems[6].Text;
-      bool flag9 = true;
-      int num30 = checked (index19 + 1);
-      int num31 = num24;
-      int index22 = num30;
+      var text21 = ListView1.Items[index19].SubItems[6].Text;
+      var flag9 = true;
+      var num30 = checked (index19 + 1);
+      var num31 = num24;
+      var index22 = num30;
       while (index22 <= num31)
       {
-        if (Operators.CompareString(this.ListView1.Items[index22].SubItems[6].Text, text21, false) != 0)
+        if (Operators.CompareString(ListView1.Items[index22].SubItems[6].Text, text21, false) != 0)
         {
           flag9 = false;
           break;
         }
         checked { ++index22; }
       }
-      int num32 = index19;
-      int num33 = num24;
-      int index23 = num32;
+      var num32 = index19;
+      var num33 = num24;
+      var index23 = num32;
       while (index23 <= num33)
       {
         if (!flag9)
         {
-          this.ListView1.Items[index23].SubItems[5].Text = "No";
-          this.ListView1.Items[index23].BackColor = Color.MistyRose;
-          int num34 = checked (this.ListView1.Items[index23].SubItems.Count - 1);
-          int index24 = 0;
-          Color currentFore = this.ListView1.Items[index23].ForeColor;
+          ListView1.Items[index23].SubItems[5].Text = "No";
+          ListView1.Items[index23].BackColor = Color.MistyRose;
+          var num34 = checked (ListView1.Items[index23].SubItems.Count - 1);
+          var index24 = 0;
+          var currentFore = ListView1.Items[index23].ForeColor;
           while (index24 <= num34)
           {
-            this.ListView1.Items[index23].SubItems[index24].BackColor = Color.MistyRose;
-            this.ListView1.Items[index23].SubItems[index24].ForeColor = currentFore;
+            ListView1.Items[index23].SubItems[index24].BackColor = Color.MistyRose;
+            ListView1.Items[index23].SubItems[index24].ForeColor = currentFore;
             checked { ++index24; }
           }
         }
         else
         {
-          this.ListView1.Items[index23].SubItems[5].Text = "Yes";
-          this.ListView1.Items[index23].BackColor = Color.LightYellow;
-          int num35 = checked (this.ListView1.Items[index23].SubItems.Count - 1);
-          int index25 = 0;
-          Color currentFore = this.ListView1.Items[index23].ForeColor;
+          ListView1.Items[index23].SubItems[5].Text = "Yes";
+          ListView1.Items[index23].BackColor = Color.LightYellow;
+          var num35 = checked (ListView1.Items[index23].SubItems.Count - 1);
+          var index25 = 0;
+          var currentFore = ListView1.Items[index23].ForeColor;
           while (index25 <= num35)
           {
-            this.ListView1.Items[index23].SubItems[index25].BackColor = lightYellow;
-            this.ListView1.Items[index23].SubItems[index25].ForeColor = currentFore;
+            ListView1.Items[index23].SubItems[index25].BackColor = lightYellow;
+            ListView1.Items[index23].SubItems[index25].ForeColor = currentFore;
             checked { ++index25; }
           }
         }
@@ -856,145 +856,133 @@ public partial class Form1 : Form
       }
       index19 = checked (num24 + 2);
     }
-    while (index19 <= checked (this.ListView1.Items.Count - 2));
-    int num36 = 0;
-    if (Operators.CompareString(this.tbxCompFile1.Text, "", false) != 0)
+    while (index19 <= checked (ListView1.Items.Count - 2));
+    var num36 = 0;
+    if (Operators.CompareString(tbxCompFile1.Text, "", false) != 0)
       checked { ++num36; }
-    if (Operators.CompareString(this.tbxCompFile2.Text, "", false) != 0)
+    if (Operators.CompareString(tbxCompFile2.Text, "", false) != 0)
       checked { ++num36; }
-    if (Operators.CompareString(this.tbxCompFile3.Text, "", false) != 0)
+    if (Operators.CompareString(tbxCompFile3.Text, "", false) != 0)
       checked { ++num36; }
-    if (Operators.CompareString(this.tbxCompFile4.Text, "", false) != 0)
+    if (Operators.CompareString(tbxCompFile4.Text, "", false) != 0)
       checked { ++num36; }
-    if (this.chkShowOnlyMismatches.Checked && num36 > 1)
+    if (chkShowOnlyMismatches.Checked && num36 > 1)
     {
-      int index26 = checked (this.ListView1.Items.Count - 1);
+      var index26 = checked (ListView1.Items.Count - 1);
       while (index26 >= 0)
       {
-        if (this.ListView1.Items[index26].BackColor == lightYellow)
-          this.ListView1.Items.RemoveAt(index26);
+        if (ListView1.Items[index26].BackColor == lightYellow)
+          ListView1.Items.RemoveAt(index26);
         checked { index26 += -1; }
       }
-      int index27 = checked (this.ListView1.Items.Count - 1);
+      var index27 = checked (ListView1.Items.Count - 1);
       while (index27 >= 1)
       {
-        if (Operators.CompareString(this.ListView1.Items[index27].Text, "", false) == 0 && Operators.CompareString(this.ListView1.Items[checked (index27 - 1)].Text, "", false) == 0)
-          this.ListView1.Items.RemoveAt(index27);
+        if (Operators.CompareString(ListView1.Items[index27].Text, "", false) == 0 && Operators.CompareString(ListView1.Items[checked (index27 - 1)].Text, "", false) == 0)
+          ListView1.Items.RemoveAt(index27);
         checked { index27 += -1; }
       }
     }
-    this.ListView1.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
-    this.ListView1.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent);
+    ListView1.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
+    ListView1.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent);
   }
 
-  private void btnCompBrowse1_Click(object sender, EventArgs e)
+  void btnCompBrowse1_Click(object sender, EventArgs e)
   {
-    string str = "";
-    string[] strArray1 = new string[1];
-    int num1 = 0;
-    string[] strArray2 = new string[1]
+    var str = "";
+    var strArray1 = new string[1];
+    var num1 = 0;
+    var strArray2 = new string[1]
     {
       "*.ABT; *.AB; *.XML"
     };
-    string[] strArray3 = new string[1]
+    var strArray3 = new string[1]
     {
       "AB, ABT, and UCDS formats"
     };
-    ref string[] local1 = ref strArray3;
-    ref string[] local2 = ref strArray2;
-    Form form = (Form) this;
-    ref Form local3 = ref form;
-    ref string local4 = ref str;
-    ref string[] local5 = ref strArray1;
-    ref int local6 = ref num1;
-    modAsBuilt.CmDlgDLL_ShowOpenEx(ref local1, ref local2, ref local3, ref local4, ref local5, ref local6, true, "");
+    var form = (Form) this;
+    modAsBuilt.CmDlgDLL_ShowOpenEx(ref strArray3, ref strArray2, ref form, ref str, ref strArray1, ref num1, true, "");
     if (Operators.CompareString(str, "", false) == 0)
       return;
     if (Operators.CompareString(Strings.Right(str, 1), "\\", false) != 0)
       str += "\\";
-    this.tbxCompFile1.Text = "";
-    int num2 = checked (num1 - 1);
-    int index = 0;
+    tbxCompFile1.Text = "";
+    var num2 = checked (num1 - 1);
+    var index = 0;
     while (index <= num2)
     {
       strArray1[index] = str + strArray1[index];
-      this.tbxCompFile1.Text = $"{this.tbxCompFile1.Text}{strArray1[index]}|";
+      tbxCompFile1.Text = $"{tbxCompFile1.Text}{strArray1[index]}|";
       checked { ++index; }
     }
-    if (Operators.CompareString(Strings.Right(this.tbxCompFile1.Text, 1), "|", false) == 0)
-      this.tbxCompFile1.Text = Strings.Left(this.tbxCompFile1.Text, checked (Strings.Len(this.tbxCompFile1.Text) - 1));
-    this.lblComp1VIN.Text = "";
+    if (Operators.CompareString(Strings.Right(tbxCompFile1.Text, 1), "|", false) == 0)
+      tbxCompFile1.Text = Strings.Left(tbxCompFile1.Text, checked (Strings.Len(tbxCompFile1.Text) - 1));
+    lblComp1VIN.Text = "";
   }
 
-  private void btnCompBrowse2_Click(object sender, EventArgs e)
+  void btnCompBrowse2_Click(object sender, EventArgs e)
   {
-    string str = "";
-    string[] strArray1 = new string[1];
-    int num1 = 0;
-    string[] strArray2 = new string[1]
+    var str = "";
+    var strArray1 = new string[1];
+    var num1 = 0;
+    var strArray2 = new string[1]
     {
       "*.ABT; *.AB; *.XML"
     };
-    string[] strArray3 = new string[1]
+    var strArray3 = new string[1]
     {
       "AB, ABT, and UCDS formats"
     };
-    ref string[] local1 = ref strArray3;
-    ref string[] local2 = ref strArray2;
-    Form form = (Form) this;
-    ref Form local3 = ref form;
-    ref string local4 = ref str;
-    ref string[] local5 = ref strArray1;
-    ref int local6 = ref num1;
-    modAsBuilt.CmDlgDLL_ShowOpenEx(ref local1, ref local2, ref local3, ref local4, ref local5, ref local6, true, "");
+    var form = (Form) this;
+    modAsBuilt.CmDlgDLL_ShowOpenEx(ref strArray3, ref strArray2, ref form, ref str, ref strArray1, ref num1, true, "");
     if (Operators.CompareString(str, "", false) == 0)
       return;
     if (Operators.CompareString(Strings.Right(str, 1), "\\", false) != 0)
       str += "\\";
-    this.tbxCompFile2.Text = "";
-    int num2 = checked (num1 - 1);
-    int index = 0;
+    tbxCompFile2.Text = "";
+    var num2 = checked (num1 - 1);
+    var index = 0;
     while (index <= num2)
     {
       strArray1[index] = str + strArray1[index];
-      this.tbxCompFile2.Text = $"{this.tbxCompFile2.Text}{strArray1[index]}|";
+      tbxCompFile2.Text = $"{tbxCompFile2.Text}{strArray1[index]}|";
       checked { ++index; }
     }
-    if (Operators.CompareString(Strings.Right(this.tbxCompFile2.Text, 1), "|", false) == 0)
-      this.tbxCompFile2.Text = Strings.Left(this.tbxCompFile2.Text, checked (Strings.Len(this.tbxCompFile2.Text) - 1));
-    this.lblComp2VIN.Text = "";
+    if (Operators.CompareString(Strings.Right(tbxCompFile2.Text, 1), "|", false) == 0)
+      tbxCompFile2.Text = Strings.Left(tbxCompFile2.Text, checked (Strings.Len(tbxCompFile2.Text) - 1));
+    lblComp2VIN.Text = "";
   }
 
-  private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
+  void ListView1_SelectedIndexChanged(object sender, EventArgs e)
   {
   }
 
-  private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+  void CopyToolStripMenuItem_Click(object sender, EventArgs e)
   {
   }
 
-  private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
+  void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
   {
-    if (this.ListView1.Items.Count >= 1)
+    if (ListView1.Items.Count >= 1)
       return;
     e.Cancel = true;
   }
 
-  private void btnDeduceGo_Click(object sender, EventArgs e)
+  void btnDeduceGo_Click(object sender, EventArgs e)
   {
-      string vin = txtDeduceVIN.Text.Trim();
+      var vin = txtDeduceVIN.Text.Trim();
       wbDeducer.ScriptErrorsSuppressed = true;
       wbDeducer.Navigate("https://www.motorcraftservice.com/AsBuilt");
   }
 
-  private void wbDeducer_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+  void wbDeducer_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
   {
-      string vin = txtDeduceVIN.Text.Trim();
+      var vin = txtDeduceVIN.Text.Trim();
       if (string.IsNullOrEmpty(vin)) return;
 
       if (wbDeducer.Url.ToString().ToLower().Contains("motorcraftservice.com"))
       {
-          HtmlElement vinBox = wbDeducer.Document.GetElementById("VIN");
+          var vinBox = wbDeducer.Document.GetElementById("VIN");
           if (vinBox == null) vinBox = wbDeducer.Document.GetElementById("vin");
           
           if (vinBox != null)
@@ -1006,12 +994,9 @@ public partial class Form1 : Form
 
 
   
-  private void btnBrowseRefresh_Click(object sender, EventArgs e)
-  {
-      PopulateVehicleList();
-  }
+  void btnBrowseRefresh_Click(object sender, EventArgs e) => PopulateVehicleList();
 
-  private void PopulateVehicleList()
+  void PopulateVehicleList()
   {
       VehicleDatabase.Load();
       lvwBrowser.Items.Clear();
@@ -1022,7 +1007,7 @@ public partial class Form1 : Form
           {
               var item = new ListViewItem(v.FriendlyName);
               // Date
-              string dateStr = "--";
+              var dateStr = "--";
               try {
                   if (!string.IsNullOrEmpty(v.FilePath) && File.Exists(v.FilePath))
                       dateStr = File.GetLastWriteTime(v.FilePath).ToString("g"); // Short Date + Time
@@ -1034,7 +1019,7 @@ public partial class Form1 : Form
               item.SubItems.Add(v.Year ?? "");
               
               // Model (Make + Model)
-              string fullModel = (v.Make + " " + v.Model).Trim();
+              var fullModel = (v.Make + " " + v.Model).Trim();
               item.SubItems.Add(fullModel);
               
               item.SubItems.Add(v.VIN);
@@ -1052,7 +1037,7 @@ public partial class Form1 : Form
       }
   }
 
-  private void cmbDeduceSavedVehicles_SelectedIndexChanged(object sender, EventArgs e)
+  void cmbDeduceSavedVehicles_SelectedIndexChanged(object sender, EventArgs e)
   {
        if (cmbDeduceSavedVehicles.SelectedItem is VehicleEntry v)
        {
@@ -1060,7 +1045,7 @@ public partial class Form1 : Form
        }
   }
 
-  private void TabPage3_Enter(object sender, EventArgs e)
+  void TabPage3_Enter(object sender, EventArgs e)
   {
       VehicleDatabase.Load();
       cmbDeduceSavedVehicles.Items.Clear();
@@ -1074,13 +1059,13 @@ public partial class Form1 : Form
 
 
 
-  private void wbDeducer_FileDownload(object sender, EventArgs e) => ++this.abDownloadTriggered;
+  void wbDeducer_FileDownload(object sender, EventArgs e) => ++abDownloadTriggered;
 
-  private void btnDeduceLoadOptions_Click(object sender, EventArgs e)
+  void btnDeduceLoadOptions_Click(object sender, EventArgs e)
   {
-      this.lstDeduceFactoryOptions.Items.Clear();
-      this.lstDeduceModels.Items.Clear();
-      this.lstDeduceYears.Items.Clear();
+      lstDeduceFactoryOptions.Items.Clear();
+      lstDeduceModels.Items.Clear();
+      lstDeduceYears.Items.Clear();
 
       // Refactored to use VehicleDatabase
       var entries = VehicleDatabase.Entries;
@@ -1121,25 +1106,25 @@ public partial class Form1 : Form
       }
   }
 
-  private void btnDeduceFigureIt_Click(object sender, EventArgs e)
+  void btnDeduceFigureIt_Click(object sender, EventArgs e)
   {
-    this.tbxDeduceReport.Text = "";
-    if (Information.IsNothing(RuntimeHelpers.GetObjectValue(this.lstDeduceFactoryOptions.SelectedItem)))
+    tbxDeduceReport.Text = "";
+    if (Information.IsNothing(RuntimeHelpers.GetObjectValue(lstDeduceFactoryOptions.SelectedItem)))
     {
-      int num1 = (int) Interaction.MsgBox((object) "Select a feature to deduce.");
+      var num1 = (int) Interaction.MsgBox((object) "Select a feature to deduce.");
     }
-    else if (Information.IsNothing((object) this.lstDeduceModels.SelectedItems) || this.lstDeduceModels.SelectedItems.Count < 1)
+    else if (Information.IsNothing((object) lstDeduceModels.SelectedItems) || lstDeduceModels.SelectedItems.Count < 1)
     {
-      int num2 = (int) Interaction.MsgBox((object) "Select at least one vehicle model.");
+      var num2 = (int) Interaction.MsgBox((object) "Select at least one vehicle model.");
     }
-    else if (Information.IsNothing((object) this.lstDeduceYears.SelectedItems) || this.lstDeduceYears.SelectedItems.Count < 1)
+    else if (Information.IsNothing((object) lstDeduceYears.SelectedItems) || lstDeduceYears.SelectedItems.Count < 1)
     {
-      int num3 = (int) Interaction.MsgBox((object) "Select at least one vehicle year.");
+      var num3 = (int) Interaction.MsgBox((object) "Select at least one vehicle year.");
     }
     else
     {
       // Refactored Logic: Filter from Database
-      string feature = lstDeduceFactoryOptions.SelectedItem.ToString();
+      var feature = lstDeduceFactoryOptions.SelectedItem.ToString();
       var entries = VehicleDatabase.Entries;
       var withFeature = new List<VehicleEntry>();
       var withoutFeature = new List<VehicleEntry>();
@@ -1148,14 +1133,14 @@ public partial class Form1 : Form
       foreach(var entry in entries)
       {
            // Filter by Model
-           bool modelMatch = false;
+           var modelMatch = false;
            foreach(var m in lstDeduceModels.CheckedItems)
            {
                if (string.Equals(entry.Model, m.ToString(), StringComparison.OrdinalIgnoreCase)) { modelMatch = true; break;}
            }
            
            // Filter by Year
-           bool yearMatch = false;
+           var yearMatch = false;
            foreach(var y in lstDeduceYears.CheckedItems)
            {
                if (string.Equals(entry.Year, y.ToString(), StringComparison.OrdinalIgnoreCase)) { yearMatch = true; break; }
@@ -1164,7 +1149,7 @@ public partial class Form1 : Form
            if(modelMatch && yearMatch)
            {
                // Check Feature
-               bool hasIt = false;
+               var hasIt = false;
                if(!string.IsNullOrEmpty(entry.Features))
                {
                    foreach(var f in entry.Features.Split(';'))
@@ -1186,18 +1171,18 @@ public partial class Form1 : Form
           vi.carYear = vehEntry.Year;
           vi.carModel = vehEntry.Model;
           
-          string[] addrs = new string[0];
-          string[] datas = new string[0];
-          int count = 0;
-          string _dummy = "";
-          string[] dummyArr1 = new string[0];
-          string[] dummyArr2 = new string[0];
-          string[] dummyArr3 = new string[0];
-          int dummyInt = 0;
-          string dummyStr = "";
+          var addrs = new string[0];
+          var datas = new string[0];
+          var count = 0;
+          var _dummy = "";
+          var dummyArr1 = new string[0];
+          var dummyArr2 = new string[0];
+          var dummyArr3 = new string[0];
+          var dummyInt = 0;
+          var dummyStr = "";
           
           // Write temp to use existing parser
-          string tempFile = Path.GetTempFileName();
+          var tempFile = Path.GetTempFileName();
           File.WriteAllText(tempFile, vehEntry.FileContent);
           
           modAsBuilt.AsBuilt_LoadFile_AB(tempFile, ref addrs, ref datas, ref count, ref _dummy, ref dummyArr1, ref dummyArr2, ref dummyArr3, ref dummyArr3, ref dummyInt, ref dummyStr);
@@ -1231,23 +1216,23 @@ public partial class Form1 : Form
       };
       
       // Construct Arrays for Analysis
-      Form1.VehicleInfo[] arySrc1 = new Form1.VehicleInfo[withFeature.Count];
+      var arySrc1 = new Form1.VehicleInfo[withFeature.Count];
       for(int i=0; i<withFeature.Count; i++) arySrc1[i] = MapEntry(withFeature[i]);
       
-      Form1.VehicleInfo[] arySrc2 = new Form1.VehicleInfo[withoutFeature.Count];
+      var arySrc2 = new Form1.VehicleInfo[withoutFeature.Count];
       for(int i=0; i<withoutFeature.Count; i++) arySrc2[i] = MapEntry(withoutFeature[i]);
 
-      int index14 = withFeature.Count;
-      int index15 = withoutFeature.Count;
+      var index14 = withFeature.Count;
+      var index15 = withoutFeature.Count;
       
       // Collect Module IDs for sorting (strArray12 replacement)
       var allMods = new HashSet<string>();
       foreach(var v in arySrc1) if(v.abModuleAddresses!=null) foreach(var m in v.abModuleAddresses) allMods.Add(m);
       foreach(var v in arySrc2) if(v.abModuleAddresses!=null) foreach(var m in v.abModuleAddresses) allMods.Add(m);
       
-      string[] strArray12 = new List<string>(allMods).ToArray();
+      var strArray12 = new List<string>(allMods).ToArray();
       Array.Sort(strArray12);
-      int index10 = strArray12.Length;
+      var index10 = strArray12.Length;
 
       /* [Old Logic Commented Out]
       string directoryPath = MyProject.Application.Info.DirectoryPath;
@@ -1464,10 +1449,10 @@ public partial class Form1 : Form
         checked { ++index16; }
       }
       */
-      StringBuilder stringBuilder = new StringBuilder();
+      var stringBuilder = new StringBuilder();
       stringBuilder.AppendLine("VINs with feature:   " + Conversions.ToString(index14));
-      int num22 = checked (index14 - 1);
-      int index18 = 0;
+      var num22 = checked (index14 - 1);
+      var index18 = 0;
       while (index18 <= num22)
       {
         stringBuilder.AppendLine("  " + arySrc1[index18].carVIN);
@@ -1475,36 +1460,35 @@ public partial class Form1 : Form
       }
       stringBuilder.AppendLine();
       stringBuilder.AppendLine("VINs without feature: " + Conversions.ToString(index15));
-      int num23 = checked (index15 - 1);
-      int index19 = 0;
+      var num23 = checked (index15 - 1);
+      var index19 = 0;
       while (index19 <= num23)
       {
         stringBuilder.AppendLine("  " + arySrc2[index19].carVIN);
         checked { ++index19; }
       }
       stringBuilder.AppendLine();
-      string[] arySrc3 = new string[1];
-      int[] arySrc4 = new int[1];
-      int[] arySrc5 = new int[1];
-      int index20 = 0;
-      int num24 = checked (index10 - 1);
-      int index21 = 0;
+      var arySrc3 = new string[1];
+      var arySrc4 = new int[1];
+      var arySrc5 = new int[1];
+      var index20 = 0;
+      var num24 = checked (index10 - 1);
+      var index21 = 0;
       while (index21 <= num24)
       {
-        int[] numArray1 = new int[40];
-        int[] numArray2 = new int[40];
-        int Start = 1;
+        var numArray1 = new int[40];
+        var numArray2 = new int[40];
+        var Start = 1;
         do
         {
-          int num25 = checked (index14 - 1);
-          int index22 = 0;
+          var num25 = checked (index14 - 1);
+          var index22 = 0;
           while (index22 <= num25)
           {
-            string moduleID = strArray12[index21];
-            Form1.VehicleInfo vhclInfo = arySrc1[index22];
-            string str9 = "";
-            ref string local = ref str9;
-            if (Operators.CompareString(Strings.Mid(this.VehicleInfo_GetModuleDataByID_Binary(moduleID, vhclInfo, ref local), Start, 1), "1", false) == 0)
+            var moduleID = strArray12[index21];
+            var vhclInfo = arySrc1[index22];
+            var str9 = "";
+            if (Operators.CompareString(Strings.Mid(VehicleInfo_GetModuleDataByID_Binary(moduleID, vhclInfo, ref str9), Start, 1), "1", false) == 0)
               numArray1[checked (Start - 1)] = checked (numArray1[Start - 1] + 1);
             else
               numArray2[checked (Start - 1)] = checked (numArray2[Start - 1] + 1);
@@ -1514,7 +1498,7 @@ public partial class Form1 : Form
         }
         while (Start <= 40);
         stringBuilder.AppendLine("\r\n" + strArray12[index21]);
-        int index23 = 0;
+        var index23 = 0;
         do
         {
           stringBuilder.AppendLine($"bit {Conversions.ToString(index23)}   {Conversions.ToString(numArray1[index23])}");
@@ -1533,12 +1517,12 @@ public partial class Form1 : Form
         while (index23 <= 39);
         checked { ++index21; }
       }
-      int[] numArray3 = new int[2040];
-      int Start1 = 1;
+      var numArray3 = new int[2040];
+      var Start1 = 1;
       do
       {
-        int num26 = checked (index14 - 1);
-        int index24 = 0;
+        var num26 = checked (index14 - 1);
+        var index24 = 0;
         while (index24 <= num26)
         {
           if (Operators.CompareString(Strings.Mid(arySrc1[index24].carCCCbin, Start1, 1), "1", false) == 0)
@@ -1548,27 +1532,26 @@ public partial class Form1 : Form
         checked { ++Start1; }
       }
       while (Start1 <= 2040);
-      string[] arySrc6 = new string[1];
-      int[] arySrc7 = new int[1];
-      int[] arySrc8 = new int[1];
-      int index25 = 0;
-      int num27 = checked (index10 - 1);
-      int index26 = 0;
+      var arySrc6 = new string[1];
+      var arySrc7 = new int[1];
+      var arySrc8 = new int[1];
+      var index25 = 0;
+      var num27 = checked (index10 - 1);
+      var index26 = 0;
       while (index26 <= num27)
       {
-        int[] numArray4 = new int[40];
-        int Start2 = 1;
+        var numArray4 = new int[40];
+        var Start2 = 1;
         do
         {
-          int num28 = checked (index15 - 1);
-          int index27 = 0;
+          var num28 = checked (index15 - 1);
+          var index27 = 0;
           while (index27 <= num28)
           {
-            string moduleID = strArray12[index26];
-            Form1.VehicleInfo vhclInfo = arySrc2[index27];
-            string str10 = "";
-            ref string local = ref str10;
-            if (Operators.CompareString(Strings.Mid(this.VehicleInfo_GetModuleDataByID_Binary(moduleID, vhclInfo, ref local), Start2, 1), "1", false) == 0)
+            var moduleID = strArray12[index26];
+            var vhclInfo = arySrc2[index27];
+            var str10 = "";
+            if (Operators.CompareString(Strings.Mid(VehicleInfo_GetModuleDataByID_Binary(moduleID, vhclInfo, ref str10), Start2, 1), "1", false) == 0)
               numArray4[checked (Start2 - 1)] = checked (numArray4[Start2 - 1] + 1);
             checked { ++index27; }
           }
@@ -1576,7 +1559,7 @@ public partial class Form1 : Form
         }
         while (Start2 <= 40);
         stringBuilder.AppendLine("\r\n" + strArray12[index26]);
-        int index28 = 0;
+        var index28 = 0;
         do
         {
           stringBuilder.AppendLine($"bit {Conversions.ToString(index28)}   {Conversions.ToString(numArray4[index28])}");
@@ -1595,12 +1578,12 @@ public partial class Form1 : Form
         while (index28 <= 39);
         checked { ++index26; }
       }
-      int[] numArray5 = new int[2040];
-      int Start3 = 1;
+      var numArray5 = new int[2040];
+      var Start3 = 1;
       do
       {
-        int num29 = checked (index15 - 1);
-        int index29 = 0;
+        var num29 = checked (index15 - 1);
+        var index29 = 0;
         while (index29 <= num29)
         {
           if (Operators.CompareString(Strings.Mid(arySrc2[index29].carCCCbin, Start3, 1), "1", false) == 0)
@@ -1610,18 +1593,18 @@ public partial class Form1 : Form
         checked { ++Start3; }
       }
       while (Start3 <= 2040);
-      string[] arySrc9 = new string[1];
-      int[] arySrc10 = new int[1];
-      int index30 = 0;
-      int[] arySrc11 = new int[1];
+      var arySrc9 = new string[1];
+      var arySrc10 = new int[1];
+      var index30 = 0;
+      var arySrc11 = new int[1];
       stringBuilder.AppendLine();
       stringBuilder.AppendLine("Perfect Bits:");
-      int num30 = checked (index20 - 1);
-      int index31 = 0;
+      var num30 = checked (index20 - 1);
+      var index31 = 0;
       while (index31 <= num30)
       {
-        int num31 = checked (index25 - 1);
-        int index32 = 0;
+        var num31 = checked (index25 - 1);
+        var index32 = 0;
         while (index32 <= num31)
         {
           if (Operators.CompareString(arySrc6[index32], arySrc3[index31], false) == 0 && arySrc7[index32] == arySrc4[index31] && arySrc8[index32] != arySrc5[index31] & checked (arySrc8[index32] * arySrc5[index31]) == 0 & checked (arySrc8[index32] + arySrc5[index31]) == index14)
@@ -1654,90 +1637,90 @@ public partial class Form1 : Form
         }
         checked { ++index31; }
       }
-      if (this.chkDeduceDoCCC.Checked)
+      if (chkDeduceDoCCC.Checked)
       {
         stringBuilder.AppendLine();
         stringBuilder.AppendLine();
         stringBuilder.AppendLine("Perfect CCC Bits:");
-        int index33 = 0;
+        var index33 = 0;
         do
         {
-          int num32 = index33 % 4;
+          var num32 = index33 % 4;
           if (numArray3[index33] == index14 && numArray5[index33] == 0)
             stringBuilder.AppendLine($"bit {Conversions.ToString(index33)} - hex position {Conversions.ToString(checked (index33 - num32) / 4)} bit {Conversions.ToString(num32)}");
           checked { ++index33; }
         }
         while (index33 <= 2039);
       }
-      this.tbxDeduceReport.Text = stringBuilder.ToString();
+      tbxDeduceReport.Text = stringBuilder.ToString();
       if (index14 == 0)
       {
-        int num33 = (int) Interaction.MsgBox((object) "The analysis is useless because there were no vehicles with this feature");
+        var num33 = (int) Interaction.MsgBox((object) "The analysis is useless because there were no vehicles with this feature");
       }
       else if (index15 == 0)
       {
-        int num34 = (int) Interaction.MsgBox((object) "The analysis is useless because there were no vehicles missing this feature");
+        var num34 = (int) Interaction.MsgBox((object) "The analysis is useless because there were no vehicles missing this feature");
       }
       else
       {
-        int num35 = (int) Interaction.MsgBox((object) "The analysis is complete.");
+        var num35 = (int) Interaction.MsgBox((object) "The analysis is complete.");
       }
     }
   }
 
-  private void TabPage4_Click(object sender, EventArgs e)
+  void TabPage4_Click(object sender, EventArgs e)
   {
   }
 
-  private void tbxData1hex_TextChanged(object sender, EventArgs e)
+  void tbxData1hex_TextChanged(object sender, EventArgs e)
   {
-    string str1 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData1hex.Text);
-    this.tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
-    this.tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
-    string str2 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData2hex.Text);
-    this.tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
-    this.tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
-    string str3 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData3hex.Text);
-    this.tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
-    this.tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+    var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
+    tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
+    tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
+    var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
+    tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
+    tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
+    var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
+    tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
+    tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
     ValidateChecksum();
   }
 
   // Added missing handler for Data2
-  private void tbxData2hex_TextChanged(object sender, EventArgs e)
+  void tbxData2hex_TextChanged(object sender, EventArgs e)
   {
       // Re-run logic if needed, or just validate
       ValidateChecksum();
   }
 
-  private void tbxData3hex_TextChanged(object sender, EventArgs e)
+  void tbxData3hex_TextChanged(object sender, EventArgs e)
   {
-    string str1 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData1hex.Text);
-    this.tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
-    this.tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
-    string str2 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData2hex.Text);
-    this.tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
-    this.tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
-    string str3 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData3hex.Text);
-    this.tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
-    this.tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+    var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
+    tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
+    tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
+    var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
+    tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
+    tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
+    var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
+    tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
+    tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
     ValidateChecksum();
   }
 
-  private void tbxChecksumHex_TextChanged(object sender, EventArgs e)
+  void tbxChecksumHex_TextChanged(object sender, EventArgs e)
   {
-    this.tbxChecksumBin.Text = Strings.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxChecksumHex.Text), 1, 8);
+    tbxChecksumBin.Text = Strings.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(tbxChecksumHex.Text), 1, 8);
     ValidateChecksum();
   }
 
-  private void ValidateChecksum()
+  void ValidateChecksum()
   {
       if (string.IsNullOrEmpty(tbxModIDhex.Text) || 
           string.IsNullOrEmpty(tbxData1hex.Text) || 
           string.IsNullOrEmpty(tbxData2hex.Text) || 
           string.IsNullOrEmpty(tbxData3hex.Text)) return;
 
-      string calculated = modAsBuilt.AsBuilt_CalculateChecksum(
+      var calculated = modAsBuilt.AsBuilt_CalculateChecksum(
           tbxModIDhex.Text, 
           tbxData1hex.Text + tbxData2hex.Text + tbxData3hex.Text);
       
@@ -1751,62 +1734,62 @@ public partial class Form1 : Form
       }
   }
 
-  private void chkAudio_CheckedChanged(object sender, EventArgs e)
+  void chkAudio_CheckedChanged(object sender, EventArgs e)
   {
       // Byte 1: 1=Base, 4=DVD
-      string d1 = chkAudio_DVD.Checked ? "4" : "1";
+      var d1 = chkAudio_DVD.Checked ? "4" : "1";
       // Byte 2: 0=Std, 8=Sat
-      string d2 = chkAudio_Sat.Checked ? "8" : "0";
+      var d2 = chkAudio_Sat.Checked ? "8" : "0";
       // Byte 3: 4 (seems constant in user example 1040 vs 4848)
-      string d3 = "4";
+      var d3 = "4";
       // Byte 4: 0=Base, 8=Sub
-      string d4 = chkAudio_Sub.Checked ? "8" : "0";
+      var d4 = chkAudio_Sub.Checked ? "8" : "0";
       
       tbxAudio_Hex.Text = d1 + d2 + d3 + d4;
   }
 
-  private void Button2_Click_2(object sender, EventArgs e)
+  void Button2_Click_2(object sender, EventArgs e)
   {
-    this.tbxConvertBin.Text = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxConvertHex.Text);
+    tbxConvertBin.Text = modAsBuilt.AsBuilt_HexStr2BinStr(tbxConvertHex.Text);
   }
 
-  private void Button3_Click_1(object sender, EventArgs e)
+  void Button3_Click_1(object sender, EventArgs e)
   {
-    string Expression = Conversion.Hex(modAsBuilt.AsBuilt_BinStr2UINT64(this.tbxConvertBin.Text));
+    var Expression = Conversion.Hex(modAsBuilt.AsBuilt_BinStr2UINT64(tbxConvertBin.Text));
     if (Strings.Len(Expression) % 2 == 1)
       Expression = "0" + Expression;
-    this.tbxConvertHex.Text = Expression;
+    tbxConvertHex.Text = Expression;
   }
 
-  private void TabPage2_Click(object sender, EventArgs e)
+  void TabPage2_Click(object sender, EventArgs e)
   {
   }
 
-  private void TabPage1_Click(object sender, EventArgs e)
+  void TabPage1_Click(object sender, EventArgs e)
   {
   }
 
-  private void Button4_Click(object sender, EventArgs e)
+  void Button4_Click(object sender, EventArgs e)
   {
-    this.tbxDeduceReport2.Text = "";
-    if (Information.IsNothing(RuntimeHelpers.GetObjectValue(this.lstBit_Modules.SelectedItem)) || this.lstBit_Modules.SelectedItems.Count < 1)
+    tbxDeduceReport2.Text = "";
+    if (Information.IsNothing(RuntimeHelpers.GetObjectValue(lstBit_Modules.SelectedItem)) || lstBit_Modules.SelectedItems.Count < 1)
     {
-      int num1 = (int) Interaction.MsgBox((object) "Select a module bit to deduce.");
+      var num1 = (int) Interaction.MsgBox((object) "Select a module bit to deduce.");
     }
-    else if (Information.IsNothing((object) this.lstBit_Models.SelectedItems) || this.lstBit_Models.SelectedItems.Count < 1)
+    else if (Information.IsNothing((object) lstBit_Models.SelectedItems) || lstBit_Models.SelectedItems.Count < 1)
     {
-      int num2 = (int) Interaction.MsgBox((object) "Select at least one vehicle model.");
+      var num2 = (int) Interaction.MsgBox((object) "Select at least one vehicle model.");
     }
-    else if (Information.IsNothing((object) this.lstBit_Years.SelectedItems) || this.lstBit_Years.SelectedItems.Count < 1)
+    else if (Information.IsNothing((object) lstBit_Years.SelectedItems) || lstBit_Years.SelectedItems.Count < 1)
     {
-      int num3 = (int) Interaction.MsgBox((object) "Select at least one vehicle year.");
+      var num3 = (int) Interaction.MsgBox((object) "Select at least one vehicle year.");
     }
     else
     {
-      string directoryPath = MyProject.Application.Info.DirectoryPath;
+      var directoryPath = MyProject.Application.Info.DirectoryPath;
       if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
         directoryPath += "\\";
-      string path = directoryPath + "Deducer";
+      var path = directoryPath + "Deducer";
       try
       {
         Directory.CreateDirectory(path);
@@ -1816,86 +1799,66 @@ public partial class Form1 : Form
         ProjectData.SetProjectError(ex);
         ProjectData.ClearProjectError();
       }
-      int num4 = -1;
-      string[] strArray1 = new string[1];
-      string[] files = Directory.GetFiles(path, "*.ETIS.HTML");
-      Form1.VehicleInfo[] vehicleInfoArray = new Form1.VehicleInfo[checked (files.Length + 1)];
-      int index1 = 0;
-      string retVIN = "";
-      string str1 = "";
-      string str2 = "";
-      string String1_1 = ";";
-      int num5 = checked (this.lstBit_Years.CheckedItems.Count - 1);
-      int index2 = 0;
+      var num4 = -1;
+      var strArray1 = new string[1];
+      var files = Directory.GetFiles(path, "*.ETIS.HTML");
+      var vehicleInfoArray = new Form1.VehicleInfo[checked (files.Length + 1)];
+      var index1 = 0;
+      var retVIN = "";
+      var str1 = "";
+      var str2 = "";
+      var String1_1 = ";";
+      var num5 = checked (lstBit_Years.CheckedItems.Count - 1);
+      var index2 = 0;
       while (index2 <= num5)
       {
-        String1_1 = $"{String1_1}{this.lstBit_Years.CheckedItems[index2].ToString()};";
+        String1_1 = $"{String1_1}{lstBit_Years.CheckedItems[index2].ToString()};";
         checked { ++index2; }
       }
-      string String1_2 = ";";
-      int num6 = checked (this.lstBit_Models.CheckedItems.Count - 1);
-      int index3 = 0;
+      var String1_2 = ";";
+      var num6 = checked (lstBit_Models.CheckedItems.Count - 1);
+      var index3 = 0;
       while (index3 <= num6)
       {
-        String1_2 = $"{String1_2}{this.lstBit_Models.CheckedItems[index3].ToString()};";
+        String1_2 = $"{String1_2}{lstBit_Models.CheckedItems[index3].ToString()};";
         checked { ++index3; }
       }
-      string Right = this.lstBit_Modules.SelectedItem.ToString();
-      int num7 = checked ((int) Math.Round(Conversion.Val(this.TextBox4.Text)));
-      int num8 = checked (files.Length - 1);
-      int index4 = 0;
+      var Right = lstBit_Modules.SelectedItem.ToString();
+      var num7 = checked ((int) Math.Round(Conversion.Val(TextBox4.Text)));
+      var num8 = checked (files.Length - 1);
+      var index4 = 0;
       while (index4 <= num8)
       {
-        string str3 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
-        string[] strArray2 = new string[1];
-        string[] strArray3 = new string[1];
-        int num9 = 0;
-        string[] strArray4 = new string[1];
-        string[] strArray5 = new string[1];
-        string[] strArray6 = new string[1];
-        int num10 = 0;
-        string inpFileName1 = str3;
-        ref string[] local1 = ref strArray2;
-        ref string[] local2 = ref strArray3;
-        ref int local3 = ref num9;
-        string str4 = "";
-        ref string local4 = ref str4;
-        ref string local5 = ref str1;
-        ref string local6 = ref str2;
-        ref string[] local7 = ref strArray4;
-        ref string[] local8 = ref strArray5;
-        ref string[] local9 = ref strArray6;
-        ref int local10 = ref num10;
-        modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName1, ref local1, ref local2, ref local3, ref local4, ref local5, ref local6, ref local7, ref local8, ref local9, ref local10);
+        var str3 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
+        var strArray2 = new string[1];
+        var strArray3 = new string[1];
+        var num9 = 0;
+        var strArray4 = new string[1];
+        var strArray5 = new string[1];
+        var strArray6 = new string[1];
+        var num10 = 0;
+        var inpFileName1 = str3;
+        var str4 = "";
+        modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName1, ref strArray2, ref strArray3, ref num9, ref str4, ref str1, ref str2, ref strArray4, ref strArray5, ref strArray6, ref num10);
         if (Strings.InStr(1, String1_2, $";{str1};") != 0 & Strings.InStr(1, String1_1, $";{str2};") != 0)
         {
           vehicleInfoArray[index1].carModel = str1;
           vehicleInfoArray[index1].carYear = str2;
-          string str5 = files[index4];
+          var str5 = files[index4];
           modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(str5, ref vehicleInfoArray[index1].etisFeatures, ref vehicleInfoArray[index1].etisFeatureCount, ref retVIN);
-          string str6 = Strings.Replace(str5, ".ETIS.HTML", "") + ".AB";
-          string[] strArray7 = new string[1];
-          string[] strArray8 = new string[1];
-          string[] strArray9 = new string[1];
-          string[] strArray10 = new string[1];
-          string[] strArray11 = new string[1];
-          int num11 = 0;
-          string inpFileName2 = str6;
-          ref string[] local11 = ref vehicleInfoArray[index1].abModuleAddresses;
-          ref string[] local12 = ref vehicleInfoArray[index1].abModuleDatasHex;
-          ref int local13 = ref vehicleInfoArray[index1].abModuleAddrCount;
+          var str6 = Strings.Replace(str5, ".ETIS.HTML", "") + ".AB";
+          var strArray7 = new string[1];
+          var strArray8 = new string[1];
+          var strArray9 = new string[1];
+          var strArray10 = new string[1];
+          var strArray11 = new string[1];
+          var num11 = 0;
+          var inpFileName2 = str6;
           str4 = "";
-          ref string local14 = ref str4;
-          ref string[] local15 = ref strArray7;
-          ref string[] local16 = ref strArray9;
-          ref string[] local17 = ref strArray10;
-          ref string[] local18 = ref strArray11;
-          ref int local19 = ref num11;
-          ref string local20 = ref vehicleInfoArray[index1].carCCChex;
-          modAsBuilt.AsBuilt_LoadFile_AB(inpFileName2, ref local11, ref local12, ref local13, ref local14, ref local15, ref local16, ref local17, ref local18, ref local19, ref local20);
-          bool flag = false;
-          int num12 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-          int index5 = 0;
+          modAsBuilt.AsBuilt_LoadFile_AB(inpFileName2, ref vehicleInfoArray[index1].abModuleAddresses, ref vehicleInfoArray[index1].abModuleDatasHex, ref vehicleInfoArray[index1].abModuleAddrCount, ref str4, ref strArray7, ref strArray9, ref strArray10, ref strArray11, ref num11, ref vehicleInfoArray[index1].carCCChex);
+          var flag = false;
+          var num12 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
+          var index5 = 0;
           while (index5 <= num12)
           {
             if (Operators.CompareString(vehicleInfoArray[index1].abModuleAddresses[index5], Right, false) == 0 && checked (vehicleInfoArray[index1].abModuleDatasHex[index5].Length - 2 * 4) > num7)
@@ -1911,12 +1874,12 @@ public partial class Form1 : Form
             vehicleInfoArray[index1].abModuleInfo_PartNums = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
             vehicleInfoArray[index1].abModuleInfo_Strategies = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
             vehicleInfoArray[index1].abModuleInfo_Calibrations = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-            int num13 = checked (num11 - 1);
-            int index6 = 0;
+            var num13 = checked (num11 - 1);
+            var index6 = 0;
             while (index6 <= num13)
             {
-              int num14 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-              int index7 = 0;
+              var num14 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
+              var index7 = 0;
               while (index7 <= num14)
               {
                 if (Operators.CompareString(Strings.Left(vehicleInfoArray[index1].abModuleAddresses[index7], Strings.Len(strArray7[index6])), strArray7[index6], false) == 0)
@@ -1929,8 +1892,8 @@ public partial class Form1 : Form
               }
               checked { ++index6; }
             }
-            int num15 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-            int index8 = 0;
+            var num15 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
+            var index8 = 0;
             while (index8 <= num15)
             {
               vehicleInfoArray[index1].abModuleDatasHex[index8] = Strings.Left(vehicleInfoArray[index1].abModuleDatasHex[index8], checked (Strings.Len(vehicleInfoArray[index1].abModuleDatasHex[index8]) - 2));
@@ -1940,8 +1903,8 @@ public partial class Form1 : Form
             vehicleInfoArray[index1].carCCCbin = modAsBuilt.AsBuilt_HexStr2BinStr(vehicleInfoArray[index1].carCCChex);
             vehicleInfoArray[index1].abModuleDatasBinStr = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
             vehicleInfoArray[index1].abModuleDatasLONG = new ulong[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-            int num16 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-            int index9 = 0;
+            var num16 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
+            var index9 = 0;
             while (index9 <= num16)
             {
               vehicleInfoArray[index1].abModuleDatasBinStr[index9] = modAsBuilt.AsBuilt_HexStr2BinStr(vehicleInfoArray[index1].abModuleDatasHex[index9]);
@@ -1953,17 +1916,17 @@ public partial class Form1 : Form
         }
         checked { ++index4; }
       }
-      Form1.VehicleInfo[] arySrc1 = new Form1.VehicleInfo[1];
-      int index10 = 0;
-      Form1.VehicleInfo[] arySrc2 = new Form1.VehicleInfo[1];
-      int index11 = 0;
-      int num17 = checked (index1 - 1);
-      int index12 = 0;
+      var arySrc1 = new Form1.VehicleInfo[1];
+      var index10 = 0;
+      var arySrc2 = new Form1.VehicleInfo[1];
+      var index11 = 0;
+      var num17 = checked (index1 - 1);
+      var index12 = 0;
       while (index12 <= num17)
       {
         num4 = -1;
-        int num18 = checked (vehicleInfoArray[index12].abModuleAddrCount - 1);
-        int index13 = 0;
+        var num18 = checked (vehicleInfoArray[index12].abModuleAddrCount - 1);
+        var index13 = 0;
         while (index13 <= num18)
         {
           if (Operators.CompareString(vehicleInfoArray[index12].abModuleAddresses[index13], Right, false) == 0)
@@ -1991,15 +1954,15 @@ public partial class Form1 : Form
         }
         checked { ++index12; }
       }
-      string[] dstArray = new string[1];
-      int dstItemCount = 0;
-      int num19 = checked (index1 - 1);
-      int index14 = 0;
+      var dstArray = new string[1];
+      var dstItemCount = 0;
+      var num19 = checked (index1 - 1);
+      var index14 = 0;
       while (index14 <= num19)
       {
         Array.Sort<string>(vehicleInfoArray[index14].etisFeatures);
-        int num20 = checked (vehicleInfoArray[index14].etisFeatureCount - 1);
-        int index15 = 0;
+        var num20 = checked (vehicleInfoArray[index14].etisFeatureCount - 1);
+        var index15 = 0;
         while (index15 <= num20)
         {
           if (!string.IsNullOrEmpty(vehicleInfoArray[index14].etisFeatures[index15]))
@@ -2009,17 +1972,17 @@ public partial class Form1 : Form
         checked { ++index14; }
       }
       dstArray = (string[]) Utils.CopyArray((Array) dstArray, (Array) new string[checked (dstItemCount - 1 + 1)]);
-      string[] strArray12 = new string[checked (dstItemCount - 1 + 1)];
+      var strArray12 = new string[checked (dstItemCount - 1 + 1)];
       Array.Copy((Array) dstArray, (Array) strArray12, dstItemCount);
-      int num21 = checked (dstItemCount - 1);
-      int index16 = 0;
+      var num21 = checked (dstItemCount - 1);
+      var index16 = 0;
       while (index16 <= num21)
       {
-        bool flag1 = false;
-        bool flag2 = false;
+        var flag1 = false;
+        var flag2 = false;
         // if (Strings.InStr(1, dstArray[index16], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
-        int num22 = checked (index11 - 1);
-        int index17 = 0;
+        var num22 = checked (index11 - 1);
+        var index17 = 0;
         while (index17 <= num22)
         {
           num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc2[index17].etisFeatures, arySrc2[index17].etisFeatureCount, dstArray[index16], CompareMethod.Text);
@@ -2030,8 +1993,8 @@ public partial class Form1 : Form
           }
           checked { ++index17; }
         }
-        int num23 = checked (index10 - 1);
-        int index18 = 0;
+        var num23 = checked (index10 - 1);
+        var index18 = 0;
         while (index18 <= num23)
         {
           num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc1[index18].etisFeatures, arySrc1[index18].etisFeatureCount, dstArray[index16], CompareMethod.Text);
@@ -2050,15 +2013,15 @@ public partial class Form1 : Form
         checked { ++index16; }
       }
       Array.Sort<string>(dstArray);
-      int num24 = checked (dstItemCount - 1);
-      int index19 = 0;
+      var num24 = checked (dstItemCount - 1);
+      var index19 = 0;
       while (index19 <= num24)
       {
-        bool flag3 = false;
-        bool flag4 = false;
+        var flag3 = false;
+        var flag4 = false;
         // if (Strings.InStr(1, strArray12[index19], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
-        int num25 = checked (index11 - 1);
-        int index20 = 0;
+        var num25 = checked (index11 - 1);
+        var index20 = 0;
         while (index20 <= num25)
         {
           num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc2[index20].etisFeatures, arySrc2[index20].etisFeatureCount, strArray12[index19], CompareMethod.Text);
@@ -2069,8 +2032,8 @@ public partial class Form1 : Form
           }
           checked { ++index20; }
         }
-        int num26 = checked (index10 - 1);
-        int index21 = 0;
+        var num26 = checked (index10 - 1);
+        var index21 = 0;
         while (index21 <= num26)
         {
           num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc1[index21].etisFeatures, arySrc1[index21].etisFeatureCount, strArray12[index19], CompareMethod.Text);
@@ -2089,10 +2052,10 @@ public partial class Form1 : Form
         checked { ++index19; }
       }
       Array.Sort<string>(strArray12);
-      StringBuilder stringBuilder = new StringBuilder();
+      var stringBuilder = new StringBuilder();
       stringBuilder.AppendLine("VINs with bit set:   " + Conversions.ToString(index10));
-      int num27 = checked (index10 - 1);
-      int index22 = 0;
+      var num27 = checked (index10 - 1);
+      var index22 = 0;
       while (index22 <= num27)
       {
         stringBuilder.AppendLine("  " + arySrc1[index22].carVIN);
@@ -2100,17 +2063,17 @@ public partial class Form1 : Form
       }
       stringBuilder.AppendLine();
       stringBuilder.AppendLine("VINs without bit set: " + Conversions.ToString(index11));
-      int num28 = checked (index11 - 1);
-      int index23 = 0;
+      var num28 = checked (index11 - 1);
+      var index23 = 0;
       while (index23 <= num28)
       {
         stringBuilder.AppendLine("  " + arySrc2[index23].carVIN);
         checked { ++index23; }
       }
       stringBuilder.AppendLine();
-      int num29 = 0;
-      int num30 = checked (dstItemCount - 1);
-      int index24 = 0;
+      var num29 = 0;
+      var num30 = checked (dstItemCount - 1);
+      var index24 = 0;
       while (index24 <= num30)
       {
         if (Operators.CompareString(dstArray[index24], "", false) != 0)
@@ -2118,17 +2081,17 @@ public partial class Form1 : Form
         checked { ++index24; }
       }
       stringBuilder.AppendLine($"Possible Features ({Conversions.ToString(num29)}) for {Right} bit {Conversions.ToString(num7)} on:");
-      int num31 = checked (dstItemCount - 1);
-      int index25 = 0;
+      var num31 = checked (dstItemCount - 1);
+      var index25 = 0;
       while (index25 <= num31)
       {
         if (Operators.CompareString(dstArray[index25], "", false) != 0)
           stringBuilder.AppendLine("  " + dstArray[index25]);
         checked { ++index25; }
       }
-      int num32 = 0;
-      int num33 = checked (dstItemCount - 1);
-      int index26 = 0;
+      var num32 = 0;
+      var num33 = checked (dstItemCount - 1);
+      var index26 = 0;
       while (index26 <= num33)
       {
         if (Operators.CompareString(strArray12[index26], "", false) != 0)
@@ -2136,50 +2099,50 @@ public partial class Form1 : Form
         checked { ++index26; }
       }
       stringBuilder.AppendLine($"\r\nPossible Features ({Conversions.ToString(num32)}) for {Right} bit {Conversions.ToString(num7)} off:");
-      int num34 = checked (dstItemCount - 1);
-      int index27 = 0;
+      var num34 = checked (dstItemCount - 1);
+      var index27 = 0;
       while (index27 <= num34)
       {
         if (Operators.CompareString(strArray12[index27], "", false) != 0)
           stringBuilder.AppendLine("  " + strArray12[index27]);
         checked { ++index27; }
       }
-      this.TextBox4.Focus();
-      this.TextBox4.SelectAll();
-      this.tbxDeduceReport2.Text = stringBuilder.ToString();
+      TextBox4.Focus();
+      TextBox4.SelectAll();
+      tbxDeduceReport2.Text = stringBuilder.ToString();
     }
   }
 
-  private void lstDeduceFactoryOptions2_SelectedIndexChanged(object sender, EventArgs e)
+  void lstDeduceFactoryOptions2_SelectedIndexChanged(object sender, EventArgs e)
   {
   }
 
-  private void TabPage5_Click(object sender, EventArgs e)
+  void TabPage5_Click(object sender, EventArgs e)
   {
   }
 
-  private void Button8_Click(object sender, EventArgs e)
+  void Button8_Click(object sender, EventArgs e)
   {
-    string contents = "";
-    int num1 = checked (this.lstDeduceFactoryOptions.Items.Count - 1);
-    int index1 = 0;
+    var contents = "";
+    var num1 = checked (lstDeduceFactoryOptions.Items.Count - 1);
+    var index1 = 0;
     while (index1 <= num1)
     {
-      this.lstDeduceFactoryOptions.SelectedIndices.Clear();
-      this.lstDeduceFactoryOptions.SelectedIndices.Add(index1);
-      contents = $"{contents}\r\nFeature:  {this.lstDeduceFactoryOptions.Items[index1].ToString()}\r\n";
-      this.btnDeduceFigureIt.PerformClick();
-      string text = this.tbxDeduceReport.Text;
-      int Start = Strings.InStrRev(text, "Perfect Bits:", Compare: CompareMethod.Text);
+      lstDeduceFactoryOptions.SelectedIndices.Clear();
+      lstDeduceFactoryOptions.SelectedIndices.Add(index1);
+      contents = $"{contents}\r\nFeature:  {lstDeduceFactoryOptions.Items[index1].ToString()}\r\n";
+      btnDeduceFigureIt.PerformClick();
+      var text = tbxDeduceReport.Text;
+      var Start = Strings.InStrRev(text, "Perfect Bits:", Compare: CompareMethod.Text);
       if (string.IsNullOrEmpty(text))
         Start = 0;
       if (Start > 0)
       {
-        string Expression = Strings.Mid(text, Start);
-        string[] strArray1 = new string[1];
-        string[] strArray2 = Strings.Split(Expression, "\r\n");
-        int num2 = checked (strArray2.Length - 1);
-        int index2 = 1;
+        var Expression = Strings.Mid(text, Start);
+        var strArray1 = new string[1];
+        var strArray2 = Strings.Split(Expression, "\r\n");
+        var num2 = checked (strArray2.Length - 1);
+        var index2 = 1;
         while (index2 <= num2)
         {
           strArray2[index2] = Strings.Trim(strArray2[index2]);
@@ -2207,12 +2170,12 @@ public partial class Form1 : Form
     System.IO.File.WriteAllText("C:\\PerfectList.txt", contents);
   }
 
-  private void Button5_Click_1(object sender, EventArgs e)
+  void Button5_Click_1(object sender, EventArgs e)
   {
-    string directoryPath = MyProject.Application.Info.DirectoryPath;
+    var directoryPath = MyProject.Application.Info.DirectoryPath;
     if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
       directoryPath += "\\";
-    string path = directoryPath + "Deducer";
+    var path = directoryPath + "Deducer";
     try
     {
       Directory.CreateDirectory(path);
@@ -2222,33 +2185,30 @@ public partial class Form1 : Form
       ProjectData.SetProjectError(ex);
       ProjectData.ClearProjectError();
     }
-    string[] strArray1 = new string[1];
-    string[] files = Directory.GetFiles(path, "*.ETIS.HTML");
-    string[] arySrc = new string[1];
-    int index1 = 0;
-    string[] strArray2 = new string[1];
-    int index2 = 0;
-    string[] strArray3 = new string[1];
-    int index3 = 0;
-    int num1 = checked (files.Length - 1);
-    int index4 = 0;
+    var strArray1 = new string[1];
+    var files = Directory.GetFiles(path, "*.ETIS.HTML");
+    var arySrc = new string[1];
+    var index1 = 0;
+    var strArray2 = new string[1];
+    var index2 = 0;
+    var strArray3 = new string[1];
+    var index3 = 0;
+    var num1 = checked (files.Length - 1);
+    var index4 = 0;
     while (index4 <= num1)
     {
-      string[] strArray4 = new string[1];
-      int num2 = 0;
-      string inpFileName1 = files[index4];
-      ref string[] local1 = ref strArray4;
-      ref int local2 = ref num2;
-      string str = "";
-      ref string local3 = ref str;
-      modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(inpFileName1, ref local1, ref local2, ref local3);
-      int num3 = checked (num2 - 1);
-      int index5 = 0;
+      var strArray4 = new string[1];
+      var num2 = 0;
+      var inpFileName1 = files[index4];
+      var str = "";
+      modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(inpFileName1, ref strArray4, ref num2, ref str);
+      var num3 = checked (num2 - 1);
+      var index5 = 0;
       while (index5 <= num3)
       {
-        int num4 = -1;
-        int num5 = checked (index1 - 1);
-        int index6 = 0;
+        var num4 = -1;
+        var num5 = checked (index1 - 1);
+        var index6 = 0;
         while (index6 <= num5)
         {
           if (Operators.CompareString(arySrc[index6], strArray4[index5], false) == 0)
@@ -2266,21 +2226,21 @@ public partial class Form1 : Form
         }
         checked { ++index5; }
       }
-      string inpFileName2 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
-      string[] retModuleAddresses = new string[1];
-      string[] retModuleDatas = new string[1];
-      int retModuleAddressCount = 0;
-      string retVIN = "";
-      string retCarModel = "";
-      string retCarYear = "";
-      string[] retModInfo_IDs = new string[1];
-      string[] retModInfo_Names = new string[1];
-      string[] retModInfo_Descs = new string[1];
-      int retModInfo_Count = 0;
+      var inpFileName2 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
+      var retModuleAddresses = new string[1];
+      var retModuleDatas = new string[1];
+      var retModuleAddressCount = 0;
+      var retVIN = "";
+      var retCarModel = "";
+      var retCarYear = "";
+      var retModInfo_IDs = new string[1];
+      var retModInfo_Names = new string[1];
+      var retModInfo_Descs = new string[1];
+      var retModInfo_Count = 0;
       modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName2, ref retModuleAddresses, ref retModuleDatas, ref retModuleAddressCount, ref retVIN, ref retCarModel, ref retCarYear, ref retModInfo_IDs, ref retModInfo_Names, ref retModInfo_Descs, ref retModInfo_Count);
-      int num6 = -1;
-      int num7 = checked (index2 - 1);
-      int index7 = 0;
+      var num6 = -1;
+      var num7 = checked (index2 - 1);
+      var index7 = 0;
       while (index7 <= num7)
       {
         if (Operators.CompareString(strArray2[index7], retCarModel, false) == 0)
@@ -2296,9 +2256,9 @@ public partial class Form1 : Form
         strArray2[index2] = retCarModel;
         checked { ++index2; }
       }
-      int num8 = -1;
-      int num9 = checked (index3 - 1);
-      int index8 = 0;
+      var num8 = -1;
+      var num9 = checked (index3 - 1);
+      var index8 = 0;
       while (index8 <= num9)
       {
         if (Operators.CompareString(strArray3[index8], retCarYear, false) == 0)
@@ -2317,43 +2277,43 @@ public partial class Form1 : Form
       checked { ++index4; }
     }
     Array.Sort<string>(strArray2);
-    this.lstBit_Models.Items.Clear();
-    int num10 = checked (index2 - 1);
-    int index9 = 0;
+    lstBit_Models.Items.Clear();
+    var num10 = checked (index2 - 1);
+    var index9 = 0;
     while (index9 <= num10)
     {
       if (Operators.CompareString(Strings.Trim(strArray2[index9]), "", false) != 0)
-        this.lstBit_Models.Items.Add((object) strArray2[index9]);
+        lstBit_Models.Items.Add((object) strArray2[index9]);
       checked { ++index9; }
     }
     Array.Sort<string>(strArray3);
-    this.lstBit_Years.Items.Clear();
-    int num11 = checked (index3 - 1);
-    int index10 = 0;
+    lstBit_Years.Items.Clear();
+    var num11 = checked (index3 - 1);
+    var index10 = 0;
     while (index10 <= num11)
     {
       if (Operators.CompareString(Strings.Trim(strArray3[index10]), "", false) != 0)
-        this.lstBit_Years.Items.Add((object) strArray3[index10]);
+        lstBit_Years.Items.Add((object) strArray3[index10]);
       checked { ++index10; }
     }
   }
 
-  private void Button6_Click_1(object sender, EventArgs e)
+  void Button6_Click_1(object sender, EventArgs e)
   {
-    if (Information.IsNothing((object) this.lstBit_Models.SelectedItems) || this.lstBit_Models.SelectedItems.Count < 1)
+    if (Information.IsNothing((object) lstBit_Models.SelectedItems) || lstBit_Models.SelectedItems.Count < 1)
     {
-      int num1 = (int) Interaction.MsgBox((object) "Select at least one vehicle model.");
+      var num1 = (int) Interaction.MsgBox((object) "Select at least one vehicle model.");
     }
-    else if (Information.IsNothing((object) this.lstBit_Years.SelectedItems) || this.lstBit_Years.SelectedItems.Count < 1)
+    else if (Information.IsNothing((object) lstBit_Years.SelectedItems) || lstBit_Years.SelectedItems.Count < 1)
     {
-      int num2 = (int) Interaction.MsgBox((object) "Select at least one vehicle year.");
+      var num2 = (int) Interaction.MsgBox((object) "Select at least one vehicle year.");
     }
     else
     {
-      string directoryPath = MyProject.Application.Info.DirectoryPath;
+      var directoryPath = MyProject.Application.Info.DirectoryPath;
       if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
         directoryPath += "\\";
-      string path = directoryPath + "Deducer";
+      var path = directoryPath + "Deducer";
       try
       {
         Directory.CreateDirectory(path);
@@ -2363,91 +2323,71 @@ public partial class Form1 : Form
         ProjectData.SetProjectError(ex);
         ProjectData.ClearProjectError();
       }
-      string[] strArray1 = new string[1];
-      string[] files = Directory.GetFiles(path, "*.ETIS.HTML");
-      Form1.VehicleInfo[] vehicleInfoArray = new Form1.VehicleInfo[checked (files.Length + 1)];
-      int index1 = 0;
-      string retVIN = "";
-      string str1 = "";
-      string str2 = "";
-      string String1_1 = ";";
-      int num3 = checked (this.lstBit_Years.CheckedItems.Count - 1);
-      int index2 = 0;
+      var strArray1 = new string[1];
+      var files = Directory.GetFiles(path, "*.ETIS.HTML");
+      var vehicleInfoArray = new Form1.VehicleInfo[checked (files.Length + 1)];
+      var index1 = 0;
+      var retVIN = "";
+      var str1 = "";
+      var str2 = "";
+      var String1_1 = ";";
+      var num3 = checked (lstBit_Years.CheckedItems.Count - 1);
+      var index2 = 0;
       while (index2 <= num3)
       {
-        String1_1 = $"{String1_1}{this.lstBit_Years.CheckedItems[index2].ToString()};";
+        String1_1 = $"{String1_1}{lstBit_Years.CheckedItems[index2].ToString()};";
         checked { ++index2; }
       }
-      string String1_2 = ";";
-      int num4 = checked (this.lstBit_Models.CheckedItems.Count - 1);
-      int index3 = 0;
+      var String1_2 = ";";
+      var num4 = checked (lstBit_Models.CheckedItems.Count - 1);
+      var index3 = 0;
       while (index3 <= num4)
       {
-        String1_2 = $"{String1_2}{this.lstBit_Models.CheckedItems[index3].ToString()};";
+        String1_2 = $"{String1_2}{lstBit_Models.CheckedItems[index3].ToString()};";
         checked { ++index3; }
       }
-      int num5 = checked (files.Length - 1);
-      int index4 = 0;
+      var num5 = checked (files.Length - 1);
+      var index4 = 0;
       while (index4 <= num5)
       {
-        string str3 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
-        string[] strArray2 = new string[1];
-        string[] strArray3 = new string[1];
+        var str3 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
+        var strArray2 = new string[1];
+        var strArray3 = new string[1];
     
-        string[] strArray4 = new string[1];
-        string[] strArray5 = new string[1];
-        string[] strArray6 = new string[1];
-        int num6 = 0;
-        int num7 = 0;
-        string inpFileName1 = str3;
-        ref string[] local1 = ref strArray2;
-        ref string[] local2 = ref strArray3;
-        ref int local3 = ref num6;
-        string str4 = "";
-        ref string local4 = ref str4;
-        ref string local5 = ref str1;
-        ref string local6 = ref str2;
-        ref string[] local7 = ref strArray4;
-        ref string[] local8 = ref strArray5;
-        ref string[] local9 = ref strArray6;
-        ref int local10 = ref num7;
-        modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName1, ref local1, ref local2, ref local3, ref local4, ref local5, ref local6, ref local7, ref local8, ref local9, ref local10);
+        var strArray4 = new string[1];
+        var strArray5 = new string[1];
+        var strArray6 = new string[1];
+        var num6 = 0;
+        var num7 = 0;
+        var inpFileName1 = str3;
+        var str4 = "";
+        modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName1, ref strArray2, ref strArray3, ref num6, ref str4, ref str1, ref str2, ref strArray4, ref strArray5, ref strArray6, ref num7);
         if (Strings.InStr(1, String1_2, $";{str1};") != 0 & Strings.InStr(1, String1_1, $";{str2};") != 0)
         {
           vehicleInfoArray[index1].carModel = str1;
           vehicleInfoArray[index1].carYear = str2;
-          string str5 = files[index4];
+          var str5 = files[index4];
           modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(str5, ref vehicleInfoArray[index1].etisFeatures, ref vehicleInfoArray[index1].etisFeatureCount, ref retVIN);
-          string str6 = Strings.Replace(str5, ".ETIS.HTML", "") + ".AB";
-          string[] strArray7 = new string[1];
-          string[] strArray8 = new string[1];
-          string[] strArray9 = new string[1];
-          string[] strArray10 = new string[1];
-          string[] strArray11 = new string[1];
-          int num8 = 0;
-          string inpFileName2 = str6;
-          ref string[] local11 = ref vehicleInfoArray[index1].abModuleAddresses;
-          ref string[] local12 = ref vehicleInfoArray[index1].abModuleDatasHex;
-          ref int local13 = ref vehicleInfoArray[index1].abModuleAddrCount;
+          var str6 = Strings.Replace(str5, ".ETIS.HTML", "") + ".AB";
+          var strArray7 = new string[1];
+          var strArray8 = new string[1];
+          var strArray9 = new string[1];
+          var strArray10 = new string[1];
+          var strArray11 = new string[1];
+          var num8 = 0;
+          var inpFileName2 = str6;
           str4 = "";
-          ref string local14 = ref str4;
-          ref string[] local15 = ref strArray7;
-          ref string[] local16 = ref strArray9;
-          ref string[] local17 = ref strArray10;
-          ref string[] local18 = ref strArray11;
-          ref int local19 = ref num8;
-          ref string local20 = ref vehicleInfoArray[index1].carCCChex;
-          modAsBuilt.AsBuilt_LoadFile_AB(inpFileName2, ref local11, ref local12, ref local13, ref local14, ref local15, ref local16, ref local17, ref local18, ref local19, ref local20);
+          modAsBuilt.AsBuilt_LoadFile_AB(inpFileName2, ref vehicleInfoArray[index1].abModuleAddresses, ref vehicleInfoArray[index1].abModuleDatasHex, ref vehicleInfoArray[index1].abModuleAddrCount, ref str4, ref strArray7, ref strArray9, ref strArray10, ref strArray11, ref num8, ref vehicleInfoArray[index1].carCCChex);
           vehicleInfoArray[index1].carVIN = retVIN;
           vehicleInfoArray[index1].abModuleInfo_PartNums = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
           vehicleInfoArray[index1].abModuleInfo_Strategies = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
           vehicleInfoArray[index1].abModuleInfo_Calibrations = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-          int num9 = checked (num8 - 1);
-          int index5 = 0;
+          var num9 = checked (num8 - 1);
+          var index5 = 0;
           while (index5 <= num9)
           {
-            int num10 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-            int index6 = 0;
+            var num10 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
+            var index6 = 0;
             while (index6 <= num10)
             {
               if (Operators.CompareString(Strings.Left(vehicleInfoArray[index1].abModuleAddresses[index6], Strings.Len(strArray7[index5])), strArray7[index5], false) == 0)
@@ -2460,8 +2400,8 @@ public partial class Form1 : Form
             }
             checked { ++index5; }
           }
-          int num11 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-          int index7 = 0;
+          var num11 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
+          var index7 = 0;
           while (index7 <= num11)
           {
             vehicleInfoArray[index1].abModuleDatasHex[index7] = Strings.Left(vehicleInfoArray[index1].abModuleDatasHex[index7], checked (Strings.Len(vehicleInfoArray[index1].abModuleDatasHex[index7]) - 2));
@@ -2471,8 +2411,8 @@ public partial class Form1 : Form
           vehicleInfoArray[index1].carCCCbin = modAsBuilt.AsBuilt_HexStr2BinStr(vehicleInfoArray[index1].carCCChex);
           vehicleInfoArray[index1].abModuleDatasBinStr = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
           vehicleInfoArray[index1].abModuleDatasLONG = new ulong[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-          int num12 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-          int index8 = 0;
+          var num12 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
+          var index8 = 0;
           while (index8 <= num12)
           {
             vehicleInfoArray[index1].abModuleDatasBinStr[index8] = modAsBuilt.AsBuilt_HexStr2BinStr(vehicleInfoArray[index1].abModuleDatasHex[index8]);
@@ -2483,19 +2423,19 @@ public partial class Form1 : Form
         }
         checked { ++index4; }
       }
-      string[] strArray12 = new string[1];
-      int index9 = 0;
-      int num13 = checked (index1 - 1);
-      int index10 = 0;
+      var strArray12 = new string[1];
+      var index9 = 0;
+      var num13 = checked (index1 - 1);
+      var index10 = 0;
       while (index10 <= num13)
       {
-        int num14 = checked (vehicleInfoArray[index10].abModuleAddrCount - 1);
-        int index11 = 0;
+        var num14 = checked (vehicleInfoArray[index10].abModuleAddrCount - 1);
+        var index11 = 0;
         while (index11 <= num14)
         {
-          int num15 = -1;
-          int num16 = checked (index9 - 1);
-          int index12 = 0;
+          var num15 = -1;
+          var num16 = checked (index9 - 1);
+          var index12 = 0;
           while (index12 <= num16)
           {
             if (Operators.CompareString(strArray12[index12], vehicleInfoArray[index10].abModuleAddresses[index11], false) == 0)
@@ -2516,12 +2456,12 @@ public partial class Form1 : Form
         checked { ++index10; }
       }
       Array.Sort<string>(strArray12);
-      this.lstBit_Modules.Items.Clear();
-      int num17 = checked (index9 - 1);
-      int index13 = 0;
+      lstBit_Modules.Items.Clear();
+      var num17 = checked (index9 - 1);
+      var index13 = 0;
       while (index13 <= num17)
       {
-        this.lstBit_Modules.Items.Add((object) strArray12[index13]);
+        lstBit_Modules.Items.Add((object) strArray12[index13]);
         checked { ++index13; }
       }
     }
@@ -2529,115 +2469,103 @@ public partial class Form1 : Form
 
 
 
-  private void Button7_Click(object sender, EventArgs e)
+  void Button7_Click(object sender, EventArgs e)
   {
-    string str = "";
-    string[] strArray1 = new string[1];
-    int num1 = 0;
-    string[] strArray2 = new string[1]
+    var str = "";
+    var strArray1 = new string[1];
+    var num1 = 0;
+    var strArray2 = new string[1]
     {
       "*.ABT; *.AB; *.XML"
     };
-    string[] strArray3 = new string[1]
+    var strArray3 = new string[1]
     {
       "AB, ABT, and UCDS formats"
     };
-    ref string[] local1 = ref strArray3;
-    ref string[] local2 = ref strArray2;
-    Form form = (Form) this;
-    ref Form local3 = ref form;
-    ref string local4 = ref str;
-    ref string[] local5 = ref strArray1;
-    ref int local6 = ref num1;
-    modAsBuilt.CmDlgDLL_ShowOpenEx(ref local1, ref local2, ref local3, ref local4, ref local5, ref local6, true, "");
+    var form = (Form) this;
+    modAsBuilt.CmDlgDLL_ShowOpenEx(ref strArray3, ref strArray2, ref form, ref str, ref strArray1, ref num1, true, "");
     if (Operators.CompareString(str, "", false) == 0)
       return;
     if (Operators.CompareString(Strings.Right(str, 1), "\\", false) != 0)
       str += "\\";
-    this.tbxCompFile3.Text = "";
-    int num2 = checked (num1 - 1);
-    int index = 0;
+    tbxCompFile3.Text = "";
+    var num2 = checked (num1 - 1);
+    var index = 0;
     while (index <= num2)
     {
       strArray1[index] = str + strArray1[index];
-      this.tbxCompFile3.Text = $"{this.tbxCompFile3.Text}{strArray1[index]}|";
+      tbxCompFile3.Text = $"{tbxCompFile3.Text}{strArray1[index]}|";
       checked { ++index; }
     }
-    if (Operators.CompareString(Strings.Right(this.tbxCompFile3.Text, 1), "|", false) == 0)
-      this.tbxCompFile3.Text = Strings.Left(this.tbxCompFile3.Text, checked (Strings.Len(this.tbxCompFile3.Text) - 1));
-    this.lblComp3VIN.Text = "";
+    if (Operators.CompareString(Strings.Right(tbxCompFile3.Text, 1), "|", false) == 0)
+      tbxCompFile3.Text = Strings.Left(tbxCompFile3.Text, checked (Strings.Len(tbxCompFile3.Text) - 1));
+    lblComp3VIN.Text = "";
   }
 
-  private void Button9_Click(object sender, EventArgs e)
+  void Button9_Click(object sender, EventArgs e)
   {
-    string str = "";
-    string[] strArray1 = new string[1];
-    int num1 = 0;
-    string[] strArray2 = new string[1]
+    var str = "";
+    var strArray1 = new string[1];
+    var num1 = 0;
+    var strArray2 = new string[1]
     {
       "*.ABT; *.AB; *.XML"
     };
-    string[] strArray3 = new string[1]
+    var strArray3 = new string[1]
     {
       "AB, ABT, and UCDS formats"
     };
-    ref string[] local1 = ref strArray3;
-    ref string[] local2 = ref strArray2;
-    Form form = (Form) this;
-    ref Form local3 = ref form;
-    ref string local4 = ref str;
-    ref string[] local5 = ref strArray1;
-    ref int local6 = ref num1;
-    modAsBuilt.CmDlgDLL_ShowOpenEx(ref local1, ref local2, ref local3, ref local4, ref local5, ref local6, true, "");
+    var form = (Form) this;
+    modAsBuilt.CmDlgDLL_ShowOpenEx(ref strArray3, ref strArray2, ref form, ref str, ref strArray1, ref num1, true, "");
     if (Operators.CompareString(str, "", false) == 0)
       return;
     if (Operators.CompareString(Strings.Right(str, 1), "\\", false) != 0)
       str += "\\";
-    this.tbxCompFile4.Text = "";
-    int num2 = checked (num1 - 1);
-    int index = 0;
+    tbxCompFile4.Text = "";
+    var num2 = checked (num1 - 1);
+    var index = 0;
     while (index <= num2)
     {
       strArray1[index] = str + strArray1[index];
-      this.tbxCompFile4.Text = $"{this.tbxCompFile4.Text}{strArray1[index]}|";
+      tbxCompFile4.Text = $"{tbxCompFile4.Text}{strArray1[index]}|";
       checked { ++index; }
     }
-    if (Operators.CompareString(Strings.Right(this.tbxCompFile4.Text, 1), "|", false) == 0)
-      this.tbxCompFile4.Text = Strings.Left(this.tbxCompFile4.Text, checked (Strings.Len(this.tbxCompFile4.Text) - 1));
-    this.lblComp4VIN.Text = "";
+    if (Operators.CompareString(Strings.Right(tbxCompFile4.Text, 1), "|", false) == 0)
+      tbxCompFile4.Text = Strings.Left(tbxCompFile4.Text, checked (Strings.Len(tbxCompFile4.Text) - 1));
+    lblComp4VIN.Text = "";
   }
 
-  private void EntireLineToolStripMenuItem_Click(object sender, EventArgs e)
+  void EntireLineToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    string str1 = "Vehicle Num, ";
-    int num1 = checked (this.ListView1.Columns.Count - 1);
-    int index1 = 0;
+    var str1 = "Vehicle Num, ";
+    var num1 = checked (ListView1.Columns.Count - 1);
+    var index1 = 0;
     while (index1 <= num1)
     {
-      str1 = $"{str1}{this.ListView1.Columns[index1].Text}, ";
+      str1 = $"{str1}{ListView1.Columns[index1].Text}, ";
       checked { ++index1; }
     }
-    string str2 = Strings.Trim(str1);
+    var str2 = Strings.Trim(str1);
     if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
       str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
-    string text = str2 + "\r\n";
-    int num2 = checked (this.ListView1.Items.Count - 1);
-    int index2 = 0;
+    var text = str2 + "\r\n";
+    var num2 = checked (ListView1.Items.Count - 1);
+    var index2 = 0;
     while (index2 <= num2)
     {
-      if (this.ListView1.Items[index2].Selected)
+      if (ListView1.Items[index2].Selected)
       {
-        if (this.ListView1.Items[index2].SubItems.Count == this.ListView1.Columns.Count)
+        if (ListView1.Items[index2].SubItems.Count == ListView1.Columns.Count)
         {
-          string str3 = $"{text}{Conversions.ToString(this.ListView1.Items[index2].Tag)}, ";
-          int num3 = checked (this.ListView1.Items[index2].SubItems.Count - 1);
-          int index3 = 0;
+          var str3 = $"{text}{Conversions.ToString(ListView1.Items[index2].Tag)}, ";
+          var num3 = checked (ListView1.Items[index2].SubItems.Count - 1);
+          var index3 = 0;
           while (index3 <= num3)
           {
-            str3 = $"{str3}{this.ListView1.Items[index2].SubItems[index3].Text}, ";
+            str3 = $"{str3}{ListView1.Items[index2].SubItems[index3].Text}, ";
             checked { ++index3; }
           }
-          string str4 = Strings.Trim(str3);
+          var str4 = Strings.Trim(str3);
           if (Operators.CompareString(Strings.Right(str4, 1), ",", false) == 0)
             str4 = Strings.Trim(Strings.Left(str4, checked (Strings.Len(str4) - 1)));
           if (Operators.CompareString(Strings.Trim(str4), ",", false) == 0)
@@ -2656,35 +2584,35 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      int num4 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num4 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
 
-  private void Data1hexToolStripMenuItem_Click(object sender, EventArgs e)
+  void Data1hexToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    int index1 = 1;
-    string str1 = "Vehicle Num, ";
-    int num1 = checked (this.ListView1.Columns.Count - 1);
-    int index2 = 0;
+    var index1 = 1;
+    var str1 = "Vehicle Num, ";
+    var num1 = checked (ListView1.Columns.Count - 1);
+    var index2 = 0;
     while (index2 <= num1)
     {
-      str1 = $"{str1}{this.ListView1.Columns[index2].Text}, ";
+      str1 = $"{str1}{ListView1.Columns[index2].Text}, ";
       checked { ++index2; }
     }
-    string str2 = Strings.Trim(str1);
+    var str2 = Strings.Trim(str1);
     if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
       str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
-    string text = str2 + "\r\n";
-    int num2 = checked (this.ListView1.Items.Count - 1);
-    int index3 = 0;
+    var text = str2 + "\r\n";
+    var num2 = checked (ListView1.Items.Count - 1);
+    var index3 = 0;
     while (index3 <= num2)
     {
-      if (this.ListView1.Items[index3].Selected)
+      if (ListView1.Items[index3].Selected)
       {
-        if (this.ListView1.Items[index3].SubItems.Count == this.ListView1.Columns.Count)
+        if (ListView1.Items[index3].SubItems.Count == ListView1.Columns.Count)
         {
-          string str3 = Strings.Trim($"{$"{text}{Conversions.ToString(this.ListView1.Items[index3].Tag)}, "}{this.ListView1.Items[index3].SubItems[index1].Text}, ");
+          var str3 = Strings.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
           if (Operators.CompareString(Strings.Right(str3, 1), ",", false) == 0)
             str3 = Strings.Trim(Strings.Left(str3, checked (Strings.Len(str3) - 1)));
           if (Operators.CompareString(Strings.Trim(str3), ",", false) == 0)
@@ -2703,35 +2631,35 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      int num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
 
-  private void Data2hexToolStripMenuItem_Click(object sender, EventArgs e)
+  void Data2hexToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    int index1 = 2;
-    string str1 = "Vehicle Num, ";
-    int num1 = checked (this.ListView1.Columns.Count - 1);
-    int index2 = 0;
+    var index1 = 2;
+    var str1 = "Vehicle Num, ";
+    var num1 = checked (ListView1.Columns.Count - 1);
+    var index2 = 0;
     while (index2 <= num1)
     {
-      str1 = $"{str1}{this.ListView1.Columns[index2].Text}, ";
+      str1 = $"{str1}{ListView1.Columns[index2].Text}, ";
       checked { ++index2; }
     }
-    string str2 = Strings.Trim(str1);
+    var str2 = Strings.Trim(str1);
     if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
       str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
-    string text = str2 + "\r\n";
-    int num2 = checked (this.ListView1.Items.Count - 1);
-    int index3 = 0;
+    var text = str2 + "\r\n";
+    var num2 = checked (ListView1.Items.Count - 1);
+    var index3 = 0;
     while (index3 <= num2)
     {
-      if (this.ListView1.Items[index3].Selected)
+      if (ListView1.Items[index3].Selected)
       {
-        if (this.ListView1.Items[index3].SubItems.Count == this.ListView1.Columns.Count)
+        if (ListView1.Items[index3].SubItems.Count == ListView1.Columns.Count)
         {
-          string str3 = Strings.Trim($"{$"{text}{Conversions.ToString(this.ListView1.Items[index3].Tag)}, "}{this.ListView1.Items[index3].SubItems[index1].Text}, ");
+          var str3 = Strings.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
           if (Operators.CompareString(Strings.Right(str3, 1), ",", false) == 0)
             str3 = Strings.Trim(Strings.Left(str3, checked (Strings.Len(str3) - 1)));
           if (Operators.CompareString(Strings.Trim(str3), ",", false) == 0)
@@ -2750,35 +2678,35 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      int num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
 
-  private void Data3hexToolStripMenuItem_Click(object sender, EventArgs e)
+  void Data3hexToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    int index1 = 3;
-    string str1 = "Vehicle Num, ";
-    int num1 = checked (this.ListView1.Columns.Count - 1);
-    int index2 = 0;
+    var index1 = 3;
+    var str1 = "Vehicle Num, ";
+    var num1 = checked (ListView1.Columns.Count - 1);
+    var index2 = 0;
     while (index2 <= num1)
     {
-      str1 = $"{str1}{this.ListView1.Columns[index2].Text}, ";
+      str1 = $"{str1}{ListView1.Columns[index2].Text}, ";
       checked { ++index2; }
     }
-    string str2 = Strings.Trim(str1);
+    var str2 = Strings.Trim(str1);
     if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
       str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
-    string text = str2 + "\r\n";
-    int num2 = checked (this.ListView1.Items.Count - 1);
-    int index3 = 0;
+    var text = str2 + "\r\n";
+    var num2 = checked (ListView1.Items.Count - 1);
+    var index3 = 0;
     while (index3 <= num2)
     {
-      if (this.ListView1.Items[index3].Selected)
+      if (ListView1.Items[index3].Selected)
       {
-        if (this.ListView1.Items[index3].SubItems.Count == this.ListView1.Columns.Count)
+        if (ListView1.Items[index3].SubItems.Count == ListView1.Columns.Count)
         {
-          string str3 = Strings.Trim($"{$"{text}{Conversions.ToString(this.ListView1.Items[index3].Tag)}, "}{this.ListView1.Items[index3].SubItems[index1].Text}, ");
+          var str3 = Strings.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
           if (Operators.CompareString(Strings.Right(str3, 1), ",", false) == 0)
             str3 = Strings.Trim(Strings.Left(str3, checked (Strings.Len(str3) - 1)));
           if (Operators.CompareString(Strings.Trim(str3), ",", false) == 0)
@@ -2797,35 +2725,35 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      int num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
 
-  private void BinaryToolStripMenuItem_Click(object sender, EventArgs e)
+  void BinaryToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    int index1 = 5;
-    string str1 = "Vehicle Num, ";
-    int num1 = checked (this.ListView1.Columns.Count - 1);
-    int index2 = 0;
+    var index1 = 5;
+    var str1 = "Vehicle Num, ";
+    var num1 = checked (ListView1.Columns.Count - 1);
+    var index2 = 0;
     while (index2 <= num1)
     {
-      str1 = $"{str1}{this.ListView1.Columns[index2].Text}, ";
+      str1 = $"{str1}{ListView1.Columns[index2].Text}, ";
       checked { ++index2; }
     }
-    string str2 = Strings.Trim(str1);
+    var str2 = Strings.Trim(str1);
     if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
       str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
-    string text = str2 + "\r\n";
-    int num2 = checked (this.ListView1.Items.Count - 1);
-    int index3 = 0;
+    var text = str2 + "\r\n";
+    var num2 = checked (ListView1.Items.Count - 1);
+    var index3 = 0;
     while (index3 <= num2)
     {
-      if (this.ListView1.Items[index3].Selected)
+      if (ListView1.Items[index3].Selected)
       {
-        if (this.ListView1.Items[index3].SubItems.Count == this.ListView1.Columns.Count)
+        if (ListView1.Items[index3].SubItems.Count == ListView1.Columns.Count)
         {
-          string str3 = Strings.Trim($"{$"{text}{Conversions.ToString(this.ListView1.Items[index3].Tag)}, "}{this.ListView1.Items[index3].SubItems[index1].Text}, ");
+          var str3 = Strings.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
           if (Operators.CompareString(Strings.Right(str3, 1), ",", false) == 0)
             str3 = Strings.Trim(Strings.Left(str3, checked (Strings.Len(str3) - 1)));
           if (Operators.CompareString(Strings.Trim(str3), ",", false) == 0)
@@ -2844,94 +2772,91 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      int num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
 
-  private void Button10_Click(object sender, EventArgs e)
+  void Button10_Click(object sender, EventArgs e)
   {
       // Legacy "Deducer" folder scraper - Disabled in favor of VehicleDatabase
   }
 
-  private void Form1_MaximumSizeChanged(object sender, EventArgs e)
+  void Form1_MaximumSizeChanged(object sender, EventArgs e)
   {
   }
 
-  private void Form1_Shown(object sender, EventArgs e)
-  {
-      PopulateVehicleList();
-  }
+  void Form1_Shown(object sender, EventArgs e) => PopulateVehicleList();
 
-  private void lvwBrowser_SelectedIndexChanged(object sender, EventArgs e)
+  void lvwBrowser_SelectedIndexChanged(object sender, EventArgs e)
   {
   }
 
-  private void lvwBrowser_ColumnClick(object sender, ColumnClickEventArgs e)
+  void lvwBrowser_ColumnClick(object sender, ColumnClickEventArgs e)
   {
-    ColumnHeader column = this.lvwBrowser.Columns[e.Column];
+    var column = lvwBrowser.Columns[e.Column];
     SortOrder sort_order;
-    if (this.lvwBrowser_SortingColumn == null)
+    if (lvwBrowser_SortingColumn == null)
     {
       sort_order = SortOrder.Ascending;
     }
     else
     {
-      sort_order = !column.Equals((object) this.lvwBrowser_SortingColumn) ? SortOrder.Ascending : (!this.lvwBrowser_SortingColumn.Text.StartsWith("> ") ? SortOrder.Ascending : SortOrder.Descending);
-      this.lvwBrowser_SortingColumn.Text = this.lvwBrowser_SortingColumn.Text.Substring(2);
+      sort_order = !column.Equals((object) lvwBrowser_SortingColumn) ? SortOrder.Ascending : (!lvwBrowser_SortingColumn.Text.StartsWith("> ") ? SortOrder.Ascending : SortOrder.Descending);
+      lvwBrowser_SortingColumn.Text = lvwBrowser_SortingColumn.Text.Substring(2);
     }
-    this.lvwBrowser_SortingColumn = column;
-    this.lvwBrowser_SortingColumn.Text = sort_order != SortOrder.Ascending ? "< " + this.lvwBrowser_SortingColumn.Text : "> " + this.lvwBrowser_SortingColumn.Text;
-    this.lvwBrowser.ListViewItemSorter = (IComparer) new clsListviewSorter(e.Column, sort_order);
-    this.lvwBrowser.Sort();
+    lvwBrowser_SortingColumn = column;
+    lvwBrowser_SortingColumn.Text = sort_order != SortOrder.Ascending ? "< " + lvwBrowser_SortingColumn.Text : "> " + lvwBrowser_SortingColumn.Text;
+    lvwBrowser.ListViewItemSorter = (IComparer) new clsListviewSorter(e.Column, sort_order);
+    lvwBrowser.Sort();
   }
 
-  private void ContextMenuStrip2_Opening(object sender, CancelEventArgs e)
+  void ContextMenuStrip2_Opening(object sender, CancelEventArgs e)
   {
-    if (this.lvwBrowser.Items.Count >= 1)
+    if (lvwBrowser.Items.Count >= 1)
       return;
     e.Cancel = true;
   }
 
-  private void SetAsCompare1ToolStripMenuItem_Click(object sender, EventArgs e)
+  void SetAsCompare1ToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    if (this.lvwBrowser.SelectedItems.Count < 1)
+    if (lvwBrowser.SelectedItems.Count < 1)
       return;
-    this.tbxCompFile1.Text = this.lvwBrowser.SelectedItems[0].Name;
-    this.ListView1.Items.Clear();
+    tbxCompFile1.Text = lvwBrowser.SelectedItems[0].Name;
+    ListView1.Items.Clear();
   }
 
-  private void SetAsCompare2ToolStripMenuItem_Click(object sender, EventArgs e)
+  void SetAsCompare2ToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    if (this.lvwBrowser.SelectedItems.Count < 1)
+    if (lvwBrowser.SelectedItems.Count < 1)
       return;
-    this.tbxCompFile2.Text = this.lvwBrowser.SelectedItems[0].Name;
-    this.ListView1.Items.Clear();
+    tbxCompFile2.Text = lvwBrowser.SelectedItems[0].Name;
+    ListView1.Items.Clear();
   }
 
-  private void SetAsCompare3ToolStripMenuItem_Click(object sender, EventArgs e)
+  void SetAsCompare3ToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    if (this.lvwBrowser.SelectedItems.Count < 1)
+    if (lvwBrowser.SelectedItems.Count < 1)
       return;
-    this.tbxCompFile3.Text = this.lvwBrowser.SelectedItems[0].Name;
-    this.ListView1.Items.Clear();
+    tbxCompFile3.Text = lvwBrowser.SelectedItems[0].Name;
+    ListView1.Items.Clear();
   }
 
-  private void SetAsCompare4ToolStripMenuItem_Click(object sender, EventArgs e)
+  void SetAsCompare4ToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    if (this.lvwBrowser.SelectedItems.Count < 1)
+    if (lvwBrowser.SelectedItems.Count < 1)
       return;
-    this.tbxCompFile4.Text = this.lvwBrowser.SelectedItems[0].Name;
-    this.ListView1.Items.Clear();
+    tbxCompFile4.Text = lvwBrowser.SelectedItems[0].Name;
+    ListView1.Items.Clear();
   }
 
-  private void DeleteFileToolStripMenuItem_Click(object sender, EventArgs e)
+  void DeleteFileToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    if (this.lvwBrowser.SelectedItems.Count < 1)
+    if (lvwBrowser.SelectedItems.Count < 1)
       return;
-    ListViewItem selectedItem = this.lvwBrowser.SelectedItems[0];
-    string name = selectedItem.Name;
-    this.tbxCompFile4.Text = name;
+    var selectedItem = lvwBrowser.SelectedItems[0];
+    var name = selectedItem.Name;
+    tbxCompFile4.Text = name;
     try
     {
       try
@@ -2963,7 +2888,7 @@ public partial class Form1 : Form
       }
       try
       {
-        this.lvwBrowser.Items.Remove(selectedItem);
+        lvwBrowser.Items.Remove(selectedItem);
       }
       catch (Exception ex)
       {
@@ -2978,71 +2903,67 @@ public partial class Form1 : Form
     }
   }
 
-  private void PictureBox1_Click(object sender, EventArgs e)
+  void PictureBox1_Click(object sender, EventArgs e)
   {
     Process.Start("https://www.paypal.com/donate/?business=X76ZW4RHA6T9C&no_recurring=0&item_name=I+build+and+maintain+open-source+projects+for+the+community.+Any+support+helps+me+keep+improving+and+maintaining+them.&currency_code=USD");
   }
 
-  private void ToUCDSToolStripMenuItem_Click(object sender, EventArgs e)
+  void ToUCDSToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    if (this.ListView1.SelectedItems.Count < 1 || Information.IsNothing(RuntimeHelpers.GetObjectValue(this.ListView1.SelectedItems[0].Tag)) || Operators.CompareString(this.ListView1.SelectedItems[0].Text, "", false) == 0)
+    if (ListView1.SelectedItems.Count < 1 || Information.IsNothing(RuntimeHelpers.GetObjectValue(ListView1.SelectedItems[0].Tag)) || Operators.CompareString(ListView1.SelectedItems[0].Text, "", false) == 0)
       return;
-    ListViewItem selectedItem = this.ListView1.SelectedItems[0];
-    string text = selectedItem.Text;
-    string str1 = "";
-    string str2 = "";
-    string str3 = Strings.Left(text, 3);
-    string[] retModuleNames = new string[1];
-    string[] retModuleShortNames = new string[1];
-    string[] retModuleAddresses = new string[1];
-    int retModuleCount = 0;
-    string directoryPath = MyProject.Application.Info.DirectoryPath;
+    var selectedItem = ListView1.SelectedItems[0];
+    var text = selectedItem.Text;
+    var str1 = "";
+    var str2 = "";
+    var str3 = Strings.Left(text, 3);
+    var retModuleNames = new string[1];
+    var retModuleShortNames = new string[1];
+    var retModuleAddresses = new string[1];
+    var retModuleCount = 0;
+    var directoryPath = MyProject.Application.Info.DirectoryPath;
     if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
       directoryPath += "\\";
-    string inpFileName = directoryPath + "ModuleList.txt";
-    if (this.chkCompareShowNames.Checked)
+    var inpFileName = directoryPath + "ModuleList.txt";
+    if (chkCompareShowNames.Checked)
       modAsBuilt.AsBuilt_LoadFile_ModuleList(inpFileName, ref retModuleNames, ref retModuleShortNames, ref retModuleAddresses, ref retModuleCount);
-    ref string[] local1 = ref retModuleNames;
-    string[] modlistShortNames = retModuleShortNames;
-    string[] modlistAddress = retModuleAddresses;
-    int modlistCount = retModuleCount;
-    string addrToFind = str3;
-    int num1 = -1;
-    ref int local2 = ref num1;
-    ref string local3 = ref str1;
-    ref string local4 = ref str2;
-    modAsBuilt.AsBuilt_ModuleList_FindAddressInfo(ref local1, modlistShortNames, modlistAddress, modlistCount, addrToFind, ref local2, ref local3, ref local4);
+    var modlistShortNames = retModuleShortNames;
+    var modlistAddress = retModuleAddresses;
+    var modlistCount = retModuleCount;
+    var addrToFind = str3;
+    var num1 = -1;
+    modAsBuilt.AsBuilt_ModuleList_FindAddressInfo(ref retModuleNames, modlistShortNames, modlistAddress, modlistCount, addrToFind, ref num1, ref str1, ref str2);
     str2 = Interaction.InputBox("UCDS - Enter Module Type:", "UCDS - Enter Module Type", str2);
     if (Operators.CompareString(str2, "", false) == 0)
       return;
-    string Left1 = Interaction.InputBox("UCDS - Enter Vehicle ID  (like 'U375'):", "UCDS - Enter Vehicle ID", "NONE");
+    var Left1 = Interaction.InputBox("UCDS - Enter Vehicle ID  (like 'U375'):", "UCDS - Enter Vehicle ID", "NONE");
     if (Operators.CompareString(Left1, "", false) == 0)
       return;
-    string Left2 = Interaction.InputBox("UCDS - Enter Vehicle Year (like 'MY15'):", "UCDS - Enter Vehicle Year", "NONE");
+    var Left2 = Interaction.InputBox("UCDS - Enter Vehicle Year (like 'MY15'):", "UCDS - Enter Vehicle Year", "NONE");
     if (Operators.CompareString(Left2, "", false) == 0)
       return;
-    Color foreColor = selectedItem.ForeColor;
-    string[] strArray1 = new string[1000];
-    int num2 = checked (this.ListView1.Items.Count - 1);
-    int index = 0;
+    var foreColor = selectedItem.ForeColor;
+    var strArray1 = new string[1000];
+    var num2 = checked (ListView1.Items.Count - 1);
+    var index = 0;
     while (index <= num2)
     {
-      if (this.ListView1.Items[index].ForeColor == foreColor && Operators.CompareString(Strings.Left(this.ListView1.Items[index].Text, 3), Strings.Left(str3, 3), false) == 0)
+      if (ListView1.Items[index].ForeColor == foreColor && Operators.CompareString(Strings.Left(ListView1.Items[index].Text, 3), Strings.Left(str3, 3), false) == 0)
       {
-        int num3 = Strings.InStr(this.ListView1.Items[index].Text, " ");
+        var num3 = Strings.InStr(ListView1.Items[index].Text, " ");
         if (num3 == 0)
-          num3 = checked (Strings.Len(this.ListView1.Items[index].Text) + 1);
-        string[] strArray2 = new string[1];
-        int num4 = checked ((int) Math.Round(Conversion.Val(Strings.Split(Strings.Left(this.ListView1.Items[index].Text, num3 - 1), "-")[1])));
-        string str4 = this.ListView1.Items[index].SubItems[1].Text + this.ListView1.Items[index].SubItems[2].Text + this.ListView1.Items[index].SubItems[3].Text;
-        if (this.chkCompareShowChecksum.Checked)
+          num3 = checked (Strings.Len(ListView1.Items[index].Text) + 1);
+        var strArray2 = new string[1];
+        var num4 = checked ((int) Math.Round(Conversion.Val(Strings.Split(Strings.Left(ListView1.Items[index].Text, num3 - 1), "-")[1])));
+        var str4 = ListView1.Items[index].SubItems[1].Text + ListView1.Items[index].SubItems[2].Text + ListView1.Items[index].SubItems[3].Text;
+        if (chkCompareShowChecksum.Checked)
           str4 = Strings.Left(str4, checked (Strings.Len(str4) - 2));
         strArray1[checked (num4 - 1)] = strArray1[checked (num4 - 1)] + str4;
       }
       checked { ++index; }
     }
-    string str5 = $"{"" + "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + "<DirectConfiguration><!--UCDS Direct Configuration XML FILE from AsBuilt Explorer-->\r\n"}<VEHICLE MODULE=\"{str2}\" VIN=\"NONE\" VEHICLE_ID=\"{Left1}\" VEHICLE_YEAR=\"{Left2}\">\r\n";
-    int Number = 0;
+    var str5 = $"{"" + "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + "<DirectConfiguration><!--UCDS Direct Configuration XML FILE from AsBuilt Explorer-->\r\n"}<VEHICLE MODULE=\"{str2}\" VIN=\"NONE\" VEHICLE_ID=\"{Left1}\" VEHICLE_YEAR=\"{Left2}\">\r\n";
+    var Number = 0;
     do
     {
       if (Operators.CompareString(strArray1[Number], "", false) != 0)
@@ -3050,8 +2971,8 @@ public partial class Form1 : Form
       checked { ++Number; }
     }
     while (Number <= 999);
-    string contents = str5 + "</VEHICLE>\r\n" + "</DirectConfiguration>";
-    string str6 = modAsBuilt.CmDlgDLL_ShowSaveFile((Form) this, "All Files|*.*", "Export to UCDS...", $"Direct_{str2}_{Strings.Format((object) DateAndTime.Now.Day, "00")}{Strings.Format((object) DateAndTime.Now.Month, "00")}{Strings.Format((object) (DateAndTime.Now.Year % 100), "00")}_.XML");
+    var contents = str5 + "</VEHICLE>\r\n" + "</DirectConfiguration>";
+    var str6 = modAsBuilt.CmDlgDLL_ShowSaveFile((Form) this, "All Files|*.*", "Export to UCDS...", $"Direct_{str2}_{Strings.Format((object) DateAndTime.Now.Day, "00")}{Strings.Format((object) DateAndTime.Now.Month, "00")}{Strings.Format((object) (DateAndTime.Now.Year % 100), "00")}_.XML");
     if (Operators.CompareString(str6, "", false) == 0)
       return;
     try
@@ -3067,63 +2988,59 @@ public partial class Form1 : Form
     }
   }
 
-  private void ToABTToolStripMenuItem_Click(object sender, EventArgs e)
+  void ToABTToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    if (this.ListView1.SelectedItems.Count < 1 || Information.IsNothing(RuntimeHelpers.GetObjectValue(this.ListView1.SelectedItems[0].Tag)) || Operators.CompareString(this.ListView1.SelectedItems[0].Text, "", false) == 0)
+    if (ListView1.SelectedItems.Count < 1 || Information.IsNothing(RuntimeHelpers.GetObjectValue(ListView1.SelectedItems[0].Tag)) || Operators.CompareString(ListView1.SelectedItems[0].Text, "", false) == 0)
       return;
-    ListViewItem selectedItem = this.ListView1.SelectedItems[0];
-    string str1 = Strings.Left(selectedItem.Text, 3);
-    string[] retModuleNames = new string[1];
-    string[] retModuleShortNames = new string[1];
-    string[] retModuleAddresses = new string[1];
-    int retModuleCount = 0;
-    string directoryPath = MyProject.Application.Info.DirectoryPath;
+    var selectedItem = ListView1.SelectedItems[0];
+    var str1 = Strings.Left(selectedItem.Text, 3);
+    var retModuleNames = new string[1];
+    var retModuleShortNames = new string[1];
+    var retModuleAddresses = new string[1];
+    var retModuleCount = 0;
+    var directoryPath = MyProject.Application.Info.DirectoryPath;
     if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
       directoryPath += "\\";
-    string inpFileName = directoryPath + "ModuleList.txt";
-    if (this.chkCompareShowNames.Checked)
+    var inpFileName = directoryPath + "ModuleList.txt";
+    if (chkCompareShowNames.Checked)
       modAsBuilt.AsBuilt_LoadFile_ModuleList(inpFileName, ref retModuleNames, ref retModuleShortNames, ref retModuleAddresses, ref retModuleCount);
-    string str2 = "";
-    string Left = "";
-    ref string[] local1 = ref retModuleNames;
-    string[] modlistShortNames = retModuleShortNames;
-    string[] modlistAddress = retModuleAddresses;
-    int modlistCount = retModuleCount;
-    string addrToFind = str1;
-    int num1 = -1;
-    ref int local2 = ref num1;
-    ref string local3 = ref str2;
-    ref string local4 = ref Left;
-    modAsBuilt.AsBuilt_ModuleList_FindAddressInfo(ref local1, modlistShortNames, modlistAddress, modlistCount, addrToFind, ref local2, ref local3, ref local4);
-    Color foreColor = selectedItem.ForeColor;
-    string[] strArray1 = new string[1000];
-    int num2 = checked (this.ListView1.Items.Count - 1);
-    int index1 = 0;
+    var str2 = "";
+    var Left = "";
+    var modlistShortNames = retModuleShortNames;
+    var modlistAddress = retModuleAddresses;
+    var modlistCount = retModuleCount;
+    var addrToFind = str1;
+    var num1 = -1;
+    modAsBuilt.AsBuilt_ModuleList_FindAddressInfo(ref retModuleNames, modlistShortNames, modlistAddress, modlistCount, addrToFind, ref num1, ref str2, ref Left);
+    var foreColor = selectedItem.ForeColor;
+    var strArray1 = new string[1000];
+    var num2 = checked (ListView1.Items.Count - 1);
+    var index1 = 0;
     while (index1 <= num2)
     {
-      if (this.ListView1.Items[index1].ForeColor == foreColor && Operators.CompareString(Strings.Left(this.ListView1.Items[index1].Text, 3), Strings.Left(str1, 3), false) == 0)
+      if (ListView1.Items[index1].ForeColor == foreColor && Operators.CompareString(Strings.Left(ListView1.Items[index1].Text, 3), Strings.Left(str1, 3), false) == 0)
       {
-        int num3 = Strings.InStr(this.ListView1.Items[index1].Text, " ");
+        var num3 = Strings.InStr(ListView1.Items[index1].Text, " ");
         if (num3 == 0)
-          num3 = checked (Strings.Len(this.ListView1.Items[index1].Text) + 1);
-        string[] strArray2 = new string[1];
-        int num4 = checked ((int) Math.Round(Conversion.Val(Strings.Split(Strings.Left(this.ListView1.Items[index1].Text, num3 - 1), "-")[1])));
-        string str3 = this.ListView1.Items[index1].SubItems[1].Text + this.ListView1.Items[index1].SubItems[2].Text + this.ListView1.Items[index1].SubItems[3].Text;
-        if (!this.chkCompareShowChecksum.Checked)
-          str3 += modAsBuilt.AsBuilt_CalculateChecksum($"{str1}-{Strings.Mid(this.ListView1.Items[index1].Text, 5, 2)}-{Strings.Mid(this.ListView1.Items[index1].Text, 8, 2)}", str3 + "00");
+          num3 = checked (Strings.Len(ListView1.Items[index1].Text) + 1);
+        var strArray2 = new string[1];
+        var num4 = checked ((int) Math.Round(Conversion.Val(Strings.Split(Strings.Left(ListView1.Items[index1].Text, num3 - 1), "-")[1])));
+        var str3 = ListView1.Items[index1].SubItems[1].Text + ListView1.Items[index1].SubItems[2].Text + ListView1.Items[index1].SubItems[3].Text;
+        if (!chkCompareShowChecksum.Checked)
+          str3 += modAsBuilt.AsBuilt_CalculateChecksum($"{str1}-{Strings.Mid(ListView1.Items[index1].Text, 5, 2)}-{Strings.Mid(ListView1.Items[index1].Text, 8, 2)}", str3 + "00");
         strArray1[checked (num4 - 1)] = strArray1[checked (num4 - 1)] + str3;
       }
       checked { ++index1; }
     }
-    bool flag = false;
-    int num5 = 1;
-    int index2 = 0;
+    var flag = false;
+    var num5 = 1;
+    var index2 = 0;
     do
     {
       if (Operators.CompareString(strArray1[index2], "", false) != 0)
       {
-        int num6 = 1;
-        int Start = 1;
+        var num6 = 1;
+        var Start = 1;
         while (Operators.CompareString(Strings.Mid(strArray1[index2], Start, 12), "", false) != 0)
         {
           if (num6 > 99 | index2 > 99)
@@ -3140,23 +3057,23 @@ public partial class Form1 : Form
     }
     while (index2 <= 999);
 label_24:
-    MsgBoxResult msgBoxResult = MsgBoxResult.Yes;
+    var msgBoxResult = MsgBoxResult.Yes;
     if (flag)
     {
-      int num7 = (int) Interaction.MsgBox((object) "The module data contains sections / blocks with an ID greater than '99', and therefore requires the ABT file to be written out in the 'new' 2019-08 ABT format.", MsgBoxStyle.Information);
+      var num7 = (int) Interaction.MsgBox((object) "The module data contains sections / blocks with an ID greater than '99', and therefore requires the ABT file to be written out in the 'new' 2019-08 ABT format.", MsgBoxStyle.Information);
     }
     else
       msgBoxResult = Interaction.MsgBox((object) "Would you like the ABT file written out in the 'new' 2019-08 ABT format (YES), or the 'old' format (NO)?", MsgBoxStyle.YesNo | MsgBoxStyle.Question);
-    string contents = "";
-    int num8 = 1;
-    int index3 = 0;
+    var contents = "";
+    var num8 = 1;
+    var index3 = 0;
     do
     {
       if (Operators.CompareString(strArray1[index3], "", false) != 0)
       {
         contents = $"{contents};Block {Conversions.ToString(num8)}\r\n";
-        int num9 = 1;
-        int Start = 1;
+        var num9 = 1;
+        var Start = 1;
         while (Operators.CompareString(Strings.Mid(strArray1[index3], Start, 12), "", false) != 0)
         {
           if (msgBoxResult == MsgBoxResult.Yes)
@@ -3173,7 +3090,7 @@ label_24:
     while (index3 <= 999);
     if (Operators.CompareString(Left, "", false) == 0)
       Left = "Module" + str1;
-    string path = modAsBuilt.CmDlgDLL_ShowSaveFile((Form) this, "All Files|*.*", "Export to ABT...", Left + ".ABT");
+    var path = modAsBuilt.CmDlgDLL_ShowSaveFile((Form) this, "All Files|*.*", "Export to ABT...", Left + ".ABT");
     try
     {
       if (System.IO.File.Exists(path))
@@ -3187,27 +3104,27 @@ label_24:
     }
   }
 
-  private void Button10_Click_1(object sender, EventArgs e)
+  void Button10_Click_1(object sender, EventArgs e)
   {
-    StringBuilder stringBuilder = new StringBuilder();
-    int num1 = checked (this.lstBit_Modules.Items.Count - 1);
-    int num2 = 0;
+    var stringBuilder = new StringBuilder();
+    var num1 = checked (lstBit_Modules.Items.Count - 1);
+    var num2 = 0;
     while (num2 <= num1)
     {
-      this.lstBit_Modules.SelectedIndex = num2;
-      int num3 = 0;
+      lstBit_Modules.SelectedIndex = num2;
+      var num3 = 0;
       do
       {
-        this.TextBox4.Text = Conversions.ToString(num3);
-        this.Button4.PerformClick();
-        string text = this.tbxDeduceReport2.Text;
+        TextBox4.Text = Conversions.ToString(num3);
+        Button4.PerformClick();
+        var text = tbxDeduceReport2.Text;
         if (Strings.InStr(1, text, "VINs without bit set: 0", CompareMethod.Text) == 0 && Strings.InStr(1, text, "VINs with bit set: 0", CompareMethod.Text) == 0)
         {
-          int Start = Strings.InStr(1, text, "Possible Features (1)", CompareMethod.Text);
+          var Start = Strings.InStr(1, text, "Possible Features (1)", CompareMethod.Text);
           if (Start > 0)
           {
-            string str1 = Strings.Mid(text, Start);
-            string str2 = $"{this.lstBit_Modules.SelectedItem.ToString()} bit # {Conversions.ToString(num3)}\r\n{str1}";
+            var str1 = Strings.Mid(text, Start);
+            var str2 = $"{lstBit_Modules.SelectedItem.ToString()} bit # {Conversions.ToString(num3)}\r\n{str1}";
             stringBuilder.Append(str2 + "\r\n\r\n");
           }
         }
@@ -3217,23 +3134,23 @@ label_24:
       while (num3 <= 39);
       checked { ++num2; }
     }
-    this.tbxDeduceReport2.Text = stringBuilder.ToString();
+    tbxDeduceReport2.Text = stringBuilder.ToString();
   }
 
-  private void IdentifyToolStripMenuItem_Click(object sender, EventArgs e)
+  void IdentifyToolStripMenuItem_Click(object sender, EventArgs e)
   {
-      if (this.ListView1.SelectedItems.Count == 0) return;
+      if (ListView1.SelectedItems.Count == 0) return;
       
-      ListViewItem lvi = this.ListView1.SelectedItems[0];
-      string addr = lvi.Text; 
+      var lvi = ListView1.SelectedItems[0];
+      var addr = lvi.Text; 
       
       if (lvi.SubItems.Count < 5) return;
 
-      string d1 = lvi.SubItems[2].Text;
-      string d2 = lvi.SubItems[3].Text;
-      string d3 = lvi.SubItems[4].Text;
+      var d1 = lvi.SubItems[2].Text;
+      var d2 = lvi.SubItems[3].Text;
+      var d3 = lvi.SubItems[4].Text;
 
-      CommonFeature f = CommonDatabase.FindMatch(addr, d1, d2, d3);
+      var f = CommonDatabase.FindMatch(addr, d1, d2, d3);
       if (f != null)
       {
           MessageBox.Show($"Found Feature:\nName: {f.Name}\nModule: {f.Module}\nNotes: {f.Notes}", "Feature Identified", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -3244,58 +3161,46 @@ label_24:
       }
   }
 
-  private void chkCompareShowNames_CheckedChanged(object sender, EventArgs e)
+  void chkCompareShowNames_CheckedChanged(object sender, EventArgs e)
   {
       Button2_Click(sender, e);
   }
 
-  private void chkShowOnlyMismatches_CheckedChanged(object sender, EventArgs e)
+  void chkShowOnlyMismatches_CheckedChanged(object sender, EventArgs e)
   {
       Button2_Click(sender, e);
   }
 
-  private void ExportModuleToolStripMenuItem_Click(object sender, EventArgs e)
+  void ExportModuleToolStripMenuItem_Click(object sender, EventArgs e)
   {
   }
 
-  private void ExportModuleToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+  void ExportModuleToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
   {
-    if (this.chkShowOnlyMismatches.Checked)
+    if (chkShowOnlyMismatches.Checked)
     {
-      this.ToUCDSToolStripMenuItem.Enabled = false;
-      this.ToABTToolStripMenuItem.Enabled = false;
+      ToUCDSToolStripMenuItem.Enabled = false;
+      ToABTToolStripMenuItem.Enabled = false;
     }
     else
     {
-      this.ToUCDSToolStripMenuItem.Enabled = true;
-      this.ToABTToolStripMenuItem.Enabled = true;
+      ToUCDSToolStripMenuItem.Enabled = true;
+      ToABTToolStripMenuItem.Enabled = true;
     }
   }
 
 
 
 
-  private void btnDB1_Click(object sender, EventArgs e)
-  {
-      ShowVehicleDB(this.tbxCompFile1, this.lblComp1VIN);
-  }
+  void btnDB1_Click(object sender, EventArgs e) => ShowVehicleDB(tbxCompFile1, lblComp1VIN);
 
-  private void btnDB2_Click(object sender, EventArgs e)
-  {
-      ShowVehicleDB(this.tbxCompFile2, this.lblComp2VIN);
-  }
+  void btnDB2_Click(object sender, EventArgs e) => ShowVehicleDB(tbxCompFile2, lblComp2VIN);
 
-  private void btnDB3_Click(object sender, EventArgs e)
-  {
-      ShowVehicleDB(this.tbxCompFile3, this.lblComp3VIN);
-  }
+  void btnDB3_Click(object sender, EventArgs e) => ShowVehicleDB(tbxCompFile3, lblComp3VIN);
 
-  private void btnDB4_Click(object sender, EventArgs e)
-  {
-      ShowVehicleDB(this.tbxCompFile4, this.lblComp4VIN);
-  }
+  void btnDB4_Click(object sender, EventArgs e) => ShowVehicleDB(tbxCompFile4, lblComp4VIN);
 
-  private void btnViewDefs_Click(object sender, EventArgs e)
+  void btnViewDefs_Click(object sender, EventArgs e)
   {
       using (frmDefinitionsDB frm = new frmDefinitionsDB())
       {
@@ -3303,10 +3208,10 @@ label_24:
       }
   }
 
-  private void ShowVehicleDB(TextBox tbxFile, Label lblVIN)
+  void ShowVehicleDB(TextBox tbxFile, Label lblVIN)
   {
-      string currentPath = tbxFile.Text;
-      string currentVIN = lblVIN.Text;
+      var currentPath = tbxFile.Text;
+      var currentVIN = lblVIN.Text;
       if (currentVIN.ToLower().Contains("no vin")) currentVIN = "";
       
       using (frmVehicleDB frm = new frmVehicleDB(currentPath, currentVIN))
@@ -3342,21 +3247,21 @@ label_24:
   }
 
 
-  private void lnkAboutGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+  void lnkAboutGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
   {
       Process.Start("https://github.com/Eliminater74/AsBuiltExplorer");
   }
 
-  private void btnDecode_Click(object sender, EventArgs e)
+  void btnDecode_Click(object sender, EventArgs e)
   {
-      string vin = txtVinInput.Text.Trim();
+      var vin = txtVinInput.Text.Trim();
       lvwDecodeResults.Items.Clear();
 
       var results = VINDecoder.Decode(vin);
       
       foreach (var r in results)
       {
-          ListViewItem lvi = new ListViewItem(r.Position);
+          var lvi = new ListViewItem(r.Position);
           lvi.SubItems.Add(r.Value);
           lvi.SubItems.Add(r.Meaning);
           lvi.SubItems.Add(r.Notes);
@@ -3364,14 +3269,14 @@ label_24:
       }
   }
 
-  private void lvwDecodeResults_MouseClick(object sender, MouseEventArgs e)
+  void lvwDecodeResults_MouseClick(object sender, MouseEventArgs e)
   {
-      ListViewHitTestInfo hit = lvwDecodeResults.HitTest(e.Location);
+      var hit = lvwDecodeResults.HitTest(e.Location);
       if (hit.Item != null)
       {
           if (hit.Item.Text == "URL")
           {
-              string url = hit.Item.SubItems[3].Text; // Notes column has the URL
+              var url = hit.Item.SubItems[3].Text; // Notes column has the URL
               if (url.StartsWith("http"))
               {
                   Process.Start(url);
@@ -3380,7 +3285,7 @@ label_24:
       }
   }
 
-  private void cmbSavedVehicles_SelectedIndexChanged(object sender, EventArgs e)
+  void cmbSavedVehicles_SelectedIndexChanged(object sender, EventArgs e)
   {
       if (cmbSavedVehicles.SelectedItem is VehicleEntry v)
       {
@@ -3392,7 +3297,7 @@ label_24:
       }
   }
 
-  private void TabPage9_Enter(object sender, EventArgs e)
+  void TabPage9_Enter(object sender, EventArgs e)
   {
       VehicleDatabase.Load(); // Ensure latest
       cmbSavedVehicles.Items.Clear();
@@ -3404,22 +3309,22 @@ label_24:
       if (cmbSavedVehicles.Items.Count > 0) cmbSavedVehicles.SelectedIndex = 0;
   }
 
-  private void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
+  void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
   {
-      Graphics g = e.Graphics;
+      var g = e.Graphics;
       Brush _textBrush;
 
       // Get the item from the collection.
-      TabPage _tabPage = TabControl1.TabPages[e.Index];
+      var _tabPage = TabControl1.TabPages[e.Index];
 
       // Get the real bounds for the tab rectangle.
-      Rectangle _tabBounds = TabControl1.GetTabRect(e.Index);
+      var _tabBounds = TabControl1.GetTabRect(e.Index);
 
-      bool isDark = ("Dark" == My.MySettings.Default.AppTheme);
-      Color backColor = isDark ? Color.FromArgb(45, 45, 48) : SystemColors.Control;
-      Color foreColor = isDark ? Color.White : SystemColors.ControlText;
-      Color selectedBack = isDark ? Color.FromArgb(60, 60, 60) : Color.White;
-      Color selectedFore = isDark ? Color.Cyan : Color.Black; 
+      var isDark = ("Dark" == My.MySettings.Default.AppTheme);
+      var backColor = isDark ? Color.FromArgb(45, 45, 48) : SystemColors.Control;
+      var foreColor = isDark ? Color.White : SystemColors.ControlText;
+      var selectedBack = isDark ? Color.FromArgb(60, 60, 60) : Color.White;
+      var selectedFore = isDark ? Color.Cyan : Color.Black; 
 
       if (e.State == DrawItemState.Selected)
       {
@@ -3439,10 +3344,10 @@ label_24:
       }
 
       // Use our own font properties
-      Font _tabFont = new Font("Microsoft Sans Serif", 9.0f, FontStyle.Regular, GraphicsUnit.Point);
+      var _tabFont = new Font("Microsoft Sans Serif", 9.0f, FontStyle.Regular, GraphicsUnit.Point);
 
       // Draw string. Center the text.
-      StringFormat _stringFlags = new StringFormat();
+      var _stringFlags = new StringFormat();
       _stringFlags.Alignment = StringAlignment.Center;
       _stringFlags.LineAlignment = StringAlignment.Center;
       
@@ -3451,13 +3356,13 @@ label_24:
 
 
 
-  private void tabMods_Enter(object sender, EventArgs e)
+  void tabMods_Enter(object sender, EventArgs e)
   {
       // Populate Platform Combo if empty
       if (cmbModPlatform.Items.Count == 0)
       {
           // Get unique platforms
-          HashSet<string> platforms = new HashSet<string>();
+          var platforms = new HashSet<string>();
           foreach (var m in ModDatabase.Mods)
           {
               platforms.Add(m.Platform);
@@ -3470,11 +3375,11 @@ label_24:
       }
   }
 
-  private void cmbModPlatform_SelectedIndexChanged(object sender, EventArgs e)
+  void cmbModPlatform_SelectedIndexChanged(object sender, EventArgs e)
   {
       lvwMods.Items.Clear();
       rtbModDetails.Clear();
-      string selectedPlatform = cmbModPlatform.SelectedItem?.ToString();
+      var selectedPlatform = cmbModPlatform.SelectedItem?.ToString();
 
       if (string.IsNullOrEmpty(selectedPlatform)) return;
 
@@ -3482,7 +3387,7 @@ label_24:
       {
           if (m.Platform == selectedPlatform)
           {
-              ListViewItem lvi = new ListViewItem(m.Title);
+              var lvi = new ListViewItem(m.Title);
               lvi.SubItems.Add(m.Category);
               lvi.Tag = m; // Store reference
               lvwMods.Items.Add(lvi);
@@ -3490,7 +3395,7 @@ label_24:
       }
   }
 
-  private void lvwMods_SelectedIndexChanged(object sender, EventArgs e)
+  void lvwMods_SelectedIndexChanged(object sender, EventArgs e)
   {
       if (lvwMods.SelectedItems.Count > 0)
       {
@@ -3517,18 +3422,18 @@ label_24:
       }
 
 }
-  private void numTPMS_PSI_ValueChanged(object sender, EventArgs e)
+  void numTPMS_PSI_ValueChanged(object sender, EventArgs e)
   {
-      int psi = (int)numTPMS_PSI.Value;
+      var psi = (int)numTPMS_PSI.Value;
       tbxTPMS_Hex.Text = psi.ToString("X2");
   }
 
-  private void btnVIN_Convert_Click(object sender, EventArgs e)
+  void btnVIN_Convert_Click(object sender, EventArgs e)
   {
-      string vin = txtVIN_Input.Text;
+      var vin = txtVIN_Input.Text;
       if (string.IsNullOrWhiteSpace(vin)) return;
 
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       foreach (char c in vin)
       {
           sb.Append(((int)c).ToString("X2") + " ");
@@ -3540,26 +3445,26 @@ label_24:
 
 
 
-    private void EditFeaturesToolStripMenuItem_Click(object sender, EventArgs e)
+    void EditFeaturesToolStripMenuItem_Click(object sender, EventArgs e)
     {
         if (lvwBrowser.SelectedItems.Count == 0) return;
         
         // BATCH MODE
         if (lvwBrowser.SelectedItems.Count > 1)
         {
-            string newTag = Interaction.InputBox($"Enter feature tag to ADD to {lvwBrowser.SelectedItems.Count} selected vehicles:", "Batch Add Feature");
+            var newTag = Interaction.InputBox($"Enter feature tag to ADD to {lvwBrowser.SelectedItems.Count} selected vehicles:", "Batch Add Feature");
             if (!string.IsNullOrWhiteSpace(newTag))
             {
-                 int count = 0;
+                 var count = 0;
                  foreach(ListViewItem item in lvwBrowser.SelectedItems)
                  {
-                      string vin = item.SubItems[4].Text;
+                      var vin = item.SubItems[4].Text;
                       var entry = VehicleDatabase.GetEntry(vin);
                       if (entry != null)
                       {
                            // Add unique
                            var parts = new List<string>((entry.Features ?? "").Split(';'));
-                           bool exists = false;
+                           var exists = false;
                            foreach(var p in parts) if(string.Equals(p.Trim(), newTag.Trim(), StringComparison.OrdinalIgnoreCase)) exists = true;
                            
                            if(!exists)
@@ -3578,13 +3483,13 @@ label_24:
         }
 
         // SINGLE MODE (Full Edit)
-        string vinSingle = lvwBrowser.SelectedItems[0].SubItems[4].Text; // VIN column
+        var vinSingle = lvwBrowser.SelectedItems[0].SubItems[4].Text; // VIN column
         var entrySingle = VehicleDatabase.GetEntry(vinSingle);
         
         if (entrySingle != null)
         {
-            string currentFeatures = entrySingle.Features ?? "";
-            string newFeatures = Interaction.InputBox("Edit features for this vehicle (semicolon separated):", "Edit Features", currentFeatures);
+            var currentFeatures = entrySingle.Features ?? "";
+            var newFeatures = Interaction.InputBox("Edit features for this vehicle (semicolon separated):", "Edit Features", currentFeatures);
             
             if (newFeatures != currentFeatures) 
             {
@@ -3601,7 +3506,7 @@ label_24:
         }
     }
 
-    private void DecodeNHTSAToolStripMenuItem_Click(object sender, EventArgs e)
+    void DecodeNHTSAToolStripMenuItem_Click(object sender, EventArgs e)
     {
         System.Collections.IList itemsToProcess = lvwBrowser.SelectedItems;
 
@@ -3628,14 +3533,14 @@ label_24:
              if (MessageBox.Show($"Are you sure you want to attempt online decoding for {itemsToProcess.Count} vehicles? This may take a moment.", "Confirm Batch Decode", MessageBoxButtons.YesNo) == DialogResult.No) return;
         }
 
-        int successCount = 0;
+        var successCount = 0;
         Cursor = Cursors.WaitCursor;
         
         try
         {
             foreach (ListViewItem item in itemsToProcess)
             {
-                string vin = item.SubItems[4].Text;
+                var vin = item.SubItems[4].Text;
                 var entry = VehicleDatabase.GetEntry(vin);
                 if (entry != null)
                 {
@@ -3646,7 +3551,7 @@ label_24:
                         if(!string.IsNullOrEmpty(result.Make)) entry.Make = result.Make;
                         if(!string.IsNullOrEmpty(result.Year)) entry.Year = result.Year;
                         
-                        string model = result.Model;
+                        var model = result.Model;
                         if (!string.IsNullOrEmpty(result.Trim)) model += " " + result.Trim;
                         if(!string.IsNullOrEmpty(model)) entry.Model = model;
 
@@ -3660,10 +3565,10 @@ label_24:
 
                         // Merge Features
                         var current = new List<string>((entry.Features ?? "").Split(';'));
-                        bool changed = false;
+                        var changed = false;
                         foreach (var tag in newTags)
                         {
-                             bool exists = false;
+                             var exists = false;
                              foreach(var c in current) if(c.Trim().Equals(tag, StringComparison.OrdinalIgnoreCase)) exists = true;
                              if (!exists)
                              {
@@ -3698,7 +3603,7 @@ label_24:
         }
     }
 
-    private void ScanLibraryToolStripMenuItem_Click(object sender, EventArgs e)
+    void ScanLibraryToolStripMenuItem_Click(object sender, EventArgs e)
     {
         System.Collections.IList itemsToProcess = lvwBrowser.SelectedItems;
 
@@ -3715,10 +3620,10 @@ label_24:
              else return;
         }
 
-        int successCount = 0;
-        int featureCount = 0;
+        var successCount = 0;
+        var featureCount = 0;
         Cursor = Cursors.WaitCursor;
-        string tempFile = Path.GetTempFileName();
+        var tempFile = Path.GetTempFileName();
         
         try
         {
@@ -3727,7 +3632,7 @@ label_24:
 
             foreach (ListViewItem item in itemsToProcess)
             {
-                string vin = item.SubItems[4].Text;
+                var vin = item.SubItems[4].Text;
                 var entry = VehicleDatabase.GetEntry(vin);
                 if (entry != null && !string.IsNullOrEmpty(entry.FileContent))
                 {
@@ -3738,12 +3643,12 @@ label_24:
                     var vInfo = new VehicleInfo(); 
                     if (LoadVehicleInfo(tempFile, ref vInfo))
                     {
-                         List<string> foundFeatures = new List<string>();
+                         var foundFeatures = new List<string>();
                          // Iterate modules in vehicle
                          for(int i = 0; i < vInfo.abModuleAddrCount; i++)
                          {
-                             string addr = vInfo.abModuleAddresses[i]; // e.g. 720-01-01
-                             string data = vInfo.abModuleDatasHex[i];    // e.g. 01020304
+                             var addr = vInfo.abModuleAddresses[i]; // e.g. 720-01-01
+                             var data = vInfo.abModuleDatasHex[i];    // e.g. 01020304
                             
                              // Look up in CommonDB
                              var candidates = CommonDatabase.GetFeaturesForAddress(addr);
@@ -3754,10 +3659,10 @@ label_24:
                                  // The loader puts all data in 'abModuleDatasHex'
                                  // We need to split into blocks.
                                  
-                                 string[] blocks = SplitHexUnk(data); // "AABB", "CCDD"...
-                                 string d1 = blocks.Length > 0 ? blocks[0] : "";
-                                 string d2 = blocks.Length > 1 ? blocks[1] : "";
-                                 string d3 = blocks.Length > 2 ? blocks[2] : "";
+                                 var blocks = SplitHexUnk(data); // "AABB", "CCDD"...
+                                 var d1 = blocks.Length > 0 ? blocks[0] : "";
+                                 var d2 = blocks.Length > 1 ? blocks[1] : "";
+                                 var d3 = blocks.Length > 2 ? blocks[2] : "";
 
                                  if (CommonDatabase.FindMatch(addr, d1, d2, d3) != null) // Reuse FindMatch
                                  {
@@ -3771,15 +3676,15 @@ label_24:
 
                          // Update Entry
                          var current = new List<string>((entry.Features ?? "").Split(';'));
-                         bool changed = false;
+                         var changed = false;
                          foreach(var newF in foundFeatures)
                          {
                               // Normalize name to be tag-like (remove spaces? or keep readable?)
                               // User used "Trim:XLT". CommonDB has "DRL - Enable".
                               // Let's keep it readable but maybe sanitize semicolons.
-                              string tag = newF.Replace(";", ",");
+                              var tag = newF.Replace(";", ",");
                               
-                              bool exists = false;
+                              var exists = false;
                               foreach(var c in current) if(c.Trim().Equals(tag, StringComparison.OrdinalIgnoreCase)) exists = true;
                               if (!exists) 
                               {
@@ -3820,22 +3725,22 @@ label_24:
         }
     }
 
-    private bool LoadVehicleInfo(string tempFile, ref VehicleInfo vInfo)
+    bool LoadVehicleInfo(string tempFile, ref VehicleInfo vInfo)
     {
         // Wrapper for legacy modAsBuilt call
-        string[] retModuleAddresses = new string[0];
-        string[] retModuleDatas = new string[0];
-        int retModuleAddressCount = 0;
-        string retVIN = "";
-        string[] retModInfo_IDs = new string[0];
-        string[] retModInfo_PartNumbers = new string[0];
-        string[] retModInfo_Strategies = new string[0];
-        string[] retModInfo_Calibrations = new string[0];
-        int retModInfo_Count = 0;
-        string retCCCdata = "";
+        var retModuleAddresses = new string[0];
+        var retModuleDatas = new string[0];
+        var retModuleAddressCount = 0;
+        var retVIN = "";
+        var retModInfo_IDs = new string[0];
+        var retModInfo_PartNumbers = new string[0];
+        var retModInfo_Strategies = new string[0];
+        var retModInfo_Calibrations = new string[0];
+        var retModInfo_Count = 0;
+        var retCCCdata = "";
 
         // Default to AB format assumption for Library Scan
-        bool success = modAsBuilt.AsBuilt_LoadFile_AB(tempFile, 
+        var success = modAsBuilt.AsBuilt_LoadFile_AB(tempFile, 
             ref retModuleAddresses, 
             ref retModuleDatas, 
             ref retModuleAddressCount, 
@@ -3863,7 +3768,7 @@ label_24:
         return success;
     }
 
-    private string[] SplitHexUnk(string hex)
+    string[] SplitHexUnk(string hex)
     {
          // Simple splitter assuming 4-byte (8-char) blocks?
          // CommonDB format is usually 720-01-01 xxxx xxxx xxxx
@@ -3880,14 +3785,14 @@ label_24:
          return list.ToArray();
     }
 
-    private void btnDB_Scan_Click(object sender, EventArgs e)
+    void btnDB_Scan_Click(object sender, EventArgs e)
     {
         using (var fbd = new FolderBrowserDialog())
         {
             fbd.Description = "Select folder containing As-Built files (.ab, .abt, .xml) to import. ETIS files in the same folder will be processed for features.";
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                int count = VehicleDatabase.BulkImport(fbd.SelectedPath);
+                var count = VehicleDatabase.BulkImport(fbd.SelectedPath);
                 MessageBox.Show($"Imported {count} new vehicles into the database.", "Import Complete");
                 Button10_Click(sender, e); // Refresh List
             }

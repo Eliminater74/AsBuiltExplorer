@@ -1,4 +1,3 @@
-
 using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
@@ -11,68 +10,70 @@ using System.Threading;
 
 namespace AsBuiltExplorer.My
 {
-
-[CompilerGenerated]
-[GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-[EditorBrowsable(EditorBrowsableState.Advanced)]
-internal sealed class MySettings : ApplicationSettingsBase
-{
-  private static MySettings defaultInstance = (MySettings) SettingsBase.Synchronized((SettingsBase) new MySettings());
-  private static bool addedHandler;
-  private static object addedHandlerLockObject = RuntimeHelpers.GetObjectValue(new object());
-
-  [DebuggerNonUserCode]
-  [EditorBrowsable(EditorBrowsableState.Advanced)]
-  private static void AutoSaveSettings(object sender, EventArgs e)
-  {
-    if (!MyProject.Application.SaveMySettingsOnExit)
-      return;
-    MySettingsProperty.Settings.Save();
-  }
-
-  public static MySettings Default
-  {
-    get
+    [CompilerGenerated]
+    [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    internal sealed class MySettings : ApplicationSettingsBase
     {
-      if (!MySettings.addedHandler)
-      {
-        object handlerLockObject = MySettings.addedHandlerLockObject;
-        ObjectFlowControl.CheckForSyncLockOnValueType(handlerLockObject);
-        bool lockTaken = false;
-        try
+        static MySettings defaultInstance = (MySettings)SettingsBase.Synchronized((SettingsBase)new MySettings());
+        static bool addedHandler;
+        static object addedHandlerLockObject = RuntimeHelpers.GetObjectValue(new object());
+
+        [DebuggerNonUserCode]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        static void AutoSaveSettings(object sender, EventArgs e)
         {
-          Monitor.Enter(handlerLockObject, ref lockTaken);
-          if (!MySettings.addedHandler)
-          {
-             MyProject.Application.Shutdown += (ShutdownEventHandler) ((sender, e) =>
-            {
-              if (!MyProject.Application.SaveMySettingsOnExit)
+            if (!MyProject.Application.SaveMySettingsOnExit)
                 return;
-              MySettingsProperty.Settings.Save();
-            });
-            MySettings.addedHandler = true;
-          }
+
+            MySettingsProperty.Settings.Save();
         }
-        finally
+
+        public static MySettings Default
         {
-          if (lockTaken)
-            Monitor.Exit(handlerLockObject);
+            get
+            {
+                if (!MySettings.addedHandler)
+                {
+                    var handlerLockObject = MySettings.addedHandlerLockObject;
+                    ObjectFlowControl.CheckForSyncLockOnValueType(handlerLockObject);
+                    var lockTaken = false;
+
+                    try
+                    {
+                        Monitor.Enter(handlerLockObject, ref lockTaken);
+
+                        if (!MySettings.addedHandler)
+                        {
+                            MyProject.Application.Shutdown += (ShutdownEventHandler)((sender, e) =>
+                           {
+                               if (!MyProject.Application.SaveMySettingsOnExit)
+                                   return;
+
+                               MySettingsProperty.Settings.Save();
+                           });
+
+                            MySettings.addedHandler = true;
+                        }
+                    }
+                    finally
+                    {
+                        if (lockTaken)
+                            Monitor.Exit(handlerLockObject);
+                    }
+                }
+
+                var defaultInstance = MySettings.defaultInstance;
+                return defaultInstance;
+            }
         }
-      }
-      MySettings defaultInstance = MySettings.defaultInstance;
-      return defaultInstance;
-    }
-    }
 
-    [UserScopedSettingAttribute()]
-    [DefaultSettingValueAttribute("Light")]
-    public string AppTheme
-    {
-        get { return ((string)(this["AppTheme"])); }
-        set { this["AppTheme"] = value; }
+        [UserScopedSetting()]
+        [DefaultSettingValue("Light")]
+        public string AppTheme
+        {
+            get { return ((string)(this["AppTheme"])); }
+            set { this["AppTheme"] = value; }
+        }
     }
-  }
 }
-
-
-

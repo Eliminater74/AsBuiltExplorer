@@ -7,8 +7,8 @@ namespace AsBuiltExplorer
 {
     public static class DefinitionsDBHelper
     {
-        private static string _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "definitions.db");
-        private static string _connectionString = $"Data Source={_dbPath};Version=3;";
+        static string _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "definitions.db");
+        static string _connectionString = $"Data Source={_dbPath};Version=3;";
 
         public static void Initialize()
         {
@@ -22,7 +22,7 @@ namespace AsBuiltExplorer
             using (var conn = new SQLiteConnection(_connectionString))
             {
                 conn.Open();
-                string sql = @"
+                var sql = @"
                     CREATE TABLE IF NOT EXISTS CommonCodes (
                         ID INTEGER PRIMARY KEY AUTOINCREMENT,
                         Era TEXT,
@@ -35,10 +35,10 @@ namespace AsBuiltExplorer
                         Data3Mask TEXT,
                         Notes TEXT
                     )";
+
                 using (var cmd = new SQLiteCommand(sql, conn))
-                {
                     cmd.ExecuteNonQuery();
-                }
+                
             }
 
             // Migration: Add columns if missing (Simple check)
@@ -62,18 +62,20 @@ namespace AsBuiltExplorer
             using (var conn = GetConnection())
             {
                 // Check for duplicate before finding
-                string checkSql = "SELECT COUNT(*) FROM CommonCodes WHERE Address=@addr AND Data1Mask=@d1 AND Data2Mask=@d2 AND Data3Mask=@d3";
+                var checkSql = "SELECT COUNT(*) FROM CommonCodes WHERE Address=@addr AND Data1Mask=@d1 AND Data2Mask=@d2 AND Data3Mask=@d3";
+
                 using (var cmd = new SQLiteCommand(checkSql, conn))
                 {
                     cmd.Parameters.AddWithValue("@addr", address);
                     cmd.Parameters.AddWithValue("@d1", d1);
                     cmd.Parameters.AddWithValue("@d2", d2);
                     cmd.Parameters.AddWithValue("@d3", d3);
-                    long count = (long)cmd.ExecuteScalar();
+                    var count = (long)cmd.ExecuteScalar();
                     if (count > 0) return; // Skip duplicate
                 }
 
-                string query = "INSERT INTO CommonCodes (Era, Model, FeatureName, Module, Address, Data1Mask, Data2Mask, Data3Mask, Notes) VALUES (@era, @model, @name, @mod, @addr, @d1, @d2, @d3, @notes)";
+                var query = "INSERT INTO CommonCodes (Era, Model, FeatureName, Module, Address, Data1Mask, Data2Mask, Data3Mask, Notes) VALUES (@era, @model, @name, @mod, @addr, @d1, @d2, @d3, @notes)";
+
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@era", era);
@@ -89,17 +91,17 @@ namespace AsBuiltExplorer
                 }
             }
         }
-        
+
         // Helper to check if DB is empty (candidate for migration)
         public static bool IsEmpty()
         {
             using (var conn = GetConnection())
             {
-                 using (var cmd = new SQLiteCommand("SELECT COUNT(*) FROM CommonCodes", conn))
-                 {
-                     long count = (long)cmd.ExecuteScalar();
-                     return count == 0;
-                 }
+                using (var cmd = new SQLiteCommand("SELECT COUNT(*) FROM CommonCodes", conn))
+                {
+                    var count = (long)cmd.ExecuteScalar();
+                    return count == 0;
+                }
             }
         }
 
@@ -107,7 +109,8 @@ namespace AsBuiltExplorer
         {
             using (var conn = GetConnection())
             {
-                string query = "UPDATE CommonCodes SET FeatureName=@name, Module=@mod, Address=@addr, Data1Mask=@d1, Data2Mask=@d2, Data3Mask=@d3, Notes=@notes WHERE ID=@id";
+                var query = "UPDATE CommonCodes SET FeatureName=@name, Module=@mod, Address=@addr, Data1Mask=@d1, Data2Mask=@d2, Data3Mask=@d3, Notes=@notes WHERE ID=@id";
+
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
@@ -126,16 +129,17 @@ namespace AsBuiltExplorer
         public static System.Data.DataTable GetAllCodes()
         {
             var dt = new System.Data.DataTable();
+
             using (var conn = GetConnection())
             {
                 using (var cmd = new SQLiteCommand("SELECT * FROM CommonCodes ORDER BY Module, Address", conn))
                 {
                     using (var da = new SQLiteDataAdapter(cmd))
-                    {
                         da.Fill(dt);
-                    }
+                    
                 }
             }
+
             return dt;
         }
     }
