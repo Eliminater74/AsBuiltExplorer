@@ -389,7 +389,7 @@ namespace AsBuiltExplorer
             // lblComp4VIN
             // 
             this.lblComp4VIN.AutoSize = true;
-            this.lblComp4VIN.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.lblComp4VIN.ForeColor = System.Drawing.Color.Maroon;
             this.lblComp4VIN.Location = new System.Drawing.Point(700, 116);
             this.lblComp4VIN.Name = "lblComp4VIN";
             this.lblComp4VIN.Size = new System.Drawing.Size(50, 16);
@@ -399,7 +399,7 @@ namespace AsBuiltExplorer
             // lblComp3VIN
             // 
             this.lblComp3VIN.AutoSize = true;
-            this.lblComp3VIN.ForeColor = System.Drawing.Color.BlueViolet;
+            this.lblComp3VIN.ForeColor = System.Drawing.Color.Indigo;
             this.lblComp3VIN.Location = new System.Drawing.Point(700, 85);
             this.lblComp3VIN.Name = "lblComp3VIN";
             this.lblComp3VIN.Size = new System.Drawing.Size(50, 16);
@@ -419,7 +419,7 @@ namespace AsBuiltExplorer
             // lblComp1VIN
             // 
             this.lblComp1VIN.AutoSize = true;
-            this.lblComp1VIN.ForeColor = System.Drawing.Color.Blue;
+            this.lblComp1VIN.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblComp1VIN.Location = new System.Drawing.Point(700, 23);
             this.lblComp1VIN.Name = "lblComp1VIN";
             this.lblComp1VIN.Size = new System.Drawing.Size(50, 16);
@@ -438,7 +438,7 @@ namespace AsBuiltExplorer
             // 
             // tbxCompFile4
             // 
-            this.tbxCompFile4.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.tbxCompFile4.ForeColor = System.Drawing.Color.Maroon;
             this.tbxCompFile4.Location = new System.Drawing.Point(167, 113);
             this.tbxCompFile4.Name = "tbxCompFile4";
             this.tbxCompFile4.Size = new System.Drawing.Size(343, 22);
@@ -447,7 +447,8 @@ namespace AsBuiltExplorer
             // Label23
             // 
             this.Label23.AutoSize = true;
-            this.Label23.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.Label23.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label23.ForeColor = System.Drawing.Color.Maroon;
             this.Label23.Location = new System.Drawing.Point(24, 116);
             this.Label23.Name = "Label23";
             this.Label23.Size = new System.Drawing.Size(100, 16);
@@ -466,7 +467,7 @@ namespace AsBuiltExplorer
             // 
             // tbxCompFile3
             // 
-            this.tbxCompFile3.ForeColor = System.Drawing.Color.BlueViolet;
+            this.tbxCompFile3.ForeColor = System.Drawing.Color.Indigo;
             this.tbxCompFile3.Location = new System.Drawing.Point(167, 82);
             this.tbxCompFile3.Name = "tbxCompFile3";
             this.tbxCompFile3.Size = new System.Drawing.Size(343, 22);
@@ -475,7 +476,8 @@ namespace AsBuiltExplorer
             // Label22
             // 
             this.Label22.AutoSize = true;
-            this.Label22.ForeColor = System.Drawing.Color.BlueViolet;
+            this.Label22.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label22.ForeColor = System.Drawing.Color.Indigo;
             this.Label22.Location = new System.Drawing.Point(24, 85);
             this.Label22.Name = "Label22";
             this.Label22.Size = new System.Drawing.Size(100, 16);
@@ -533,7 +535,7 @@ namespace AsBuiltExplorer
             // 
             // tbxCompFile1
             // 
-            this.tbxCompFile1.ForeColor = System.Drawing.Color.Blue;
+            this.tbxCompFile1.ForeColor = System.Drawing.Color.MidnightBlue;
             this.tbxCompFile1.Location = new System.Drawing.Point(167, 20);
             this.tbxCompFile1.Name = "tbxCompFile1";
             this.tbxCompFile1.Size = new System.Drawing.Size(343, 22);
@@ -710,6 +712,7 @@ namespace AsBuiltExplorer
             // Label7
             // 
             this.Label7.AutoSize = true;
+            this.Label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label7.ForeColor = System.Drawing.Color.DarkGreen;
             this.Label7.Location = new System.Drawing.Point(24, 54);
             this.Label7.Name = "Label7";
@@ -720,7 +723,8 @@ namespace AsBuiltExplorer
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.ForeColor = System.Drawing.Color.Blue;
+            this.Label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label6.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Label6.Location = new System.Drawing.Point(24, 23);
             this.Label6.Name = "Label6";
             this.Label6.Size = new System.Drawing.Size(100, 16);

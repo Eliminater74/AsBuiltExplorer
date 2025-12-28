@@ -51,6 +51,18 @@ namespace AsBuiltExplorer
         {
             using (var conn = GetConnection())
             {
+                // Check for duplicate before finding
+                string checkSql = "SELECT COUNT(*) FROM CommonCodes WHERE Address=@addr AND Data1Mask=@d1 AND Data2Mask=@d2 AND Data3Mask=@d3";
+                using (var cmd = new SQLiteCommand(checkSql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@addr", address);
+                    cmd.Parameters.AddWithValue("@d1", d1);
+                    cmd.Parameters.AddWithValue("@d2", d2);
+                    cmd.Parameters.AddWithValue("@d3", d3);
+                    long count = (long)cmd.ExecuteScalar();
+                    if (count > 0) return; // Skip duplicate
+                }
+
                 string query = "INSERT INTO CommonCodes (FeatureName, Module, Address, Data1Mask, Data2Mask, Data3Mask, Notes) VALUES (@name, @mod, @addr, @d1, @d2, @d3, @notes)";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {

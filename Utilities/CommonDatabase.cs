@@ -125,7 +125,8 @@ namespace AsBuiltExplorer
 
                 if (count > 0)
                 {
-                    MessageBox.Show($"Successfully imported {count} new definition files into the Common Database!", "Library Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // MessageBox.Show($"Successfully imported {count} new definition files into the Common Database!", "Library Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    System.Diagnostics.Debug.WriteLine($"Successfully imported {count} new definition files.");
                 }
             }
             catch (Exception ex)
