@@ -162,6 +162,24 @@ public partial class Form1 : Form
       var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
       this.Text = $"AsBuiltExplorer Toolkit v{version}";
       this.lblAboutVersion.Text = $"Version {version}";
+
+      // Update About Screen Branding (Fancy "Toolkit")
+      // Shift items down to make room
+      int shiftY = 40;
+      this.lblAboutVersion.Top += shiftY;
+      this.lblAboutDev.Top += shiftY;
+      this.lblAboutCredits.Top += shiftY;
+      this.lblAboutMoto.Top += shiftY;
+      this.lnkAboutGithub.Top += shiftY;
+
+      Label lblToolkit = new Label();
+      lblToolkit.Text = "Toolkit";
+      lblToolkit.Font = new Font(this.lblAboutTitle.Font.FontFamily, 22, FontStyle.Bold); // Match title font, slightly smaller
+      // lblToolkit.ForeColor = Color.Gray; // Remove custom color to match title
+      lblToolkit.AutoSize = true;
+      lblToolkit.Location = new Point(this.lblAboutTitle.Left + 5, this.lblAboutTitle.Bottom - 5); // Tweak position
+      this.TabPage8.Controls.Add(lblToolkit);
+      lblToolkit.BringToFront();
   }
 
   private void pbSettings_Click(object sender, EventArgs e)
