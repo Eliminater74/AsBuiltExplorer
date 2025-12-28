@@ -1771,346 +1771,23 @@ public partial class Form1 : Form
 
   void Button4_Click(object sender, EventArgs e)
   {
-    tbxDeduceReport2.Text = "";
-    if (Information.IsNothing(RuntimeHelpers.GetObjectValue(lstBit_Modules.SelectedItem)) || lstBit_Modules.SelectedItems.Count < 1)
-    {
-      var num1 = (int) Interaction.MsgBox((object) "Select a module bit to deduce.");
-    }
-    else if (Information.IsNothing((object) lstBit_Models.SelectedItems) || lstBit_Models.SelectedItems.Count < 1)
-    {
-      var num2 = (int) Interaction.MsgBox((object) "Select at least one vehicle model.");
-    }
-    else if (Information.IsNothing((object) lstBit_Years.SelectedItems) || lstBit_Years.SelectedItems.Count < 1)
-    {
-      var num3 = (int) Interaction.MsgBox((object) "Select at least one vehicle year.");
-    }
-    else
-    {
-      var directoryPath = MyProject.Application.Info.DirectoryPath;
-      if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
-        directoryPath += "\\";
-      var path = directoryPath + "Deducer";
-      try
+      if (lstBit_Modules.SelectedItems.Count < 1)
       {
-        Directory.CreateDirectory(path);
+          Interaction.MsgBox("Select a module bit to deduce.");
+          return;
       }
-      catch (Exception ex)
+      if (lstBit_Models.SelectedItems.Count < 1 || lstBit_Years.SelectedItems.Count < 1)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+          Interaction.MsgBox("Select at least one vehicle year and model.");
+          return;
       }
-      var num4 = -1;
-      var strArray1 = new string[1];
-      var files = Directory.GetFiles(path, "*.ETIS.HTML");
-      var vehicleInfoArray = new Form1.VehicleInfo[checked (files.Length + 1)];
-      var index1 = 0;
-      var retVIN = "";
-      var str1 = "";
-      var str2 = "";
-      var String1_1 = ";";
-      var num5 = checked (lstBit_Years.CheckedItems.Count - 1);
-      var index2 = 0;
-      while (index2 <= num5)
-      {
-        String1_1 = $"{String1_1}{lstBit_Years.CheckedItems[index2].ToString()};";
-        checked { ++index2; }
-      }
-      var String1_2 = ";";
-      var num6 = checked (lstBit_Models.CheckedItems.Count - 1);
-      var index3 = 0;
-      while (index3 <= num6)
-      {
-        String1_2 = $"{String1_2}{lstBit_Models.CheckedItems[index3].ToString()};";
-        checked { ++index3; }
-      }
-      var Right = lstBit_Modules.SelectedItem.ToString();
-      var num7 = checked ((int) Math.Round(Conversion.Val(TextBox4.Text)));
-      var num8 = checked (files.Length - 1);
-      var index4 = 0;
-      while (index4 <= num8)
-      {
-        var str3 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
-        var strArray2 = new string[1];
-        var strArray3 = new string[1];
-        var num9 = 0;
-        var strArray4 = new string[1];
-        var strArray5 = new string[1];
-        var strArray6 = new string[1];
-        var num10 = 0;
-        var inpFileName1 = str3;
-        var str4 = "";
-        modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName1, ref strArray2, ref strArray3, ref num9, ref str4, ref str1, ref str2, ref strArray4, ref strArray5, ref strArray6, ref num10);
-        if (Strings.InStr(1, String1_2, $";{str1};") != 0 & Strings.InStr(1, String1_1, $";{str2};") != 0)
-        {
-          vehicleInfoArray[index1].carModel = str1;
-          vehicleInfoArray[index1].carYear = str2;
-          var str5 = files[index4];
-          modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(str5, ref vehicleInfoArray[index1].etisFeatures, ref vehicleInfoArray[index1].etisFeatureCount, ref retVIN);
-          var str6 = Strings.Replace(str5, ".ETIS.HTML", "") + ".AB";
-          var strArray7 = new string[1];
-          var strArray8 = new string[1];
-          var strArray9 = new string[1];
-          var strArray10 = new string[1];
-          var strArray11 = new string[1];
-          var num11 = 0;
-          var inpFileName2 = str6;
-          str4 = "";
-          modAsBuilt.AsBuilt_LoadFile_AB(inpFileName2, ref vehicleInfoArray[index1].abModuleAddresses, ref vehicleInfoArray[index1].abModuleDatasHex, ref vehicleInfoArray[index1].abModuleAddrCount, ref str4, ref strArray7, ref strArray9, ref strArray10, ref strArray11, ref num11, ref vehicleInfoArray[index1].carCCChex);
-          var flag = false;
-          var num12 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-          var index5 = 0;
-          while (index5 <= num12)
-          {
-            if (Operators.CompareString(vehicleInfoArray[index1].abModuleAddresses[index5], Right, false) == 0 && checked (vehicleInfoArray[index1].abModuleDatasHex[index5].Length - 2 * 4) > num7)
-            {
-              flag = true;
-              break;
-            }
-            checked { ++index5; }
-          }
-          if (flag)
-          {
-            vehicleInfoArray[index1].carVIN = retVIN;
-            vehicleInfoArray[index1].abModuleInfo_PartNums = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-            vehicleInfoArray[index1].abModuleInfo_Strategies = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-            vehicleInfoArray[index1].abModuleInfo_Calibrations = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-            var num13 = checked (num11 - 1);
-            var index6 = 0;
-            while (index6 <= num13)
-            {
-              var num14 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-              var index7 = 0;
-              while (index7 <= num14)
-              {
-                if (Operators.CompareString(Strings.Left(vehicleInfoArray[index1].abModuleAddresses[index7], Strings.Len(strArray7[index6])), strArray7[index6], false) == 0)
-                {
-                  vehicleInfoArray[index1].abModuleInfo_PartNums[index7] = strArray9[index6];
-                  vehicleInfoArray[index1].abModuleInfo_Strategies[index7] = strArray10[index6];
-                  vehicleInfoArray[index1].abModuleInfo_Calibrations[index7] = strArray11[index6];
-                }
-                checked { ++index7; }
-              }
-              checked { ++index6; }
-            }
-            var num15 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-            var index8 = 0;
-            while (index8 <= num15)
-            {
-              vehicleInfoArray[index1].abModuleDatasHex[index8] = Strings.Left(vehicleInfoArray[index1].abModuleDatasHex[index8], checked (Strings.Len(vehicleInfoArray[index1].abModuleDatasHex[index8]) - 2));
-              checked { ++index8; }
-            }
-            vehicleInfoArray[index1].carCCChex = Strings.Right(vehicleInfoArray[index1].carCCChex, 510);
-            vehicleInfoArray[index1].carCCCbin = modAsBuilt.AsBuilt_HexStr2BinStr(vehicleInfoArray[index1].carCCChex);
-            vehicleInfoArray[index1].abModuleDatasBinStr = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-            vehicleInfoArray[index1].abModuleDatasLONG = new ulong[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-            var num16 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-            var index9 = 0;
-            while (index9 <= num16)
-            {
-              vehicleInfoArray[index1].abModuleDatasBinStr[index9] = modAsBuilt.AsBuilt_HexStr2BinStr(vehicleInfoArray[index1].abModuleDatasHex[index9]);
-              vehicleInfoArray[index1].abModuleDatasLONG[index9] = modAsBuilt.AsBuilt_HexStr2UINT64(vehicleInfoArray[index1].abModuleDatasHex[index9]);
-              checked { ++index9; }
-            }
-            checked { ++index1; }
-          }
-        }
-        checked { ++index4; }
-      }
-      var arySrc1 = new Form1.VehicleInfo[1];
-      var index10 = 0;
-      var arySrc2 = new Form1.VehicleInfo[1];
-      var index11 = 0;
-      var num17 = checked (index1 - 1);
-      var index12 = 0;
-      while (index12 <= num17)
-      {
-        num4 = -1;
-        var num18 = checked (vehicleInfoArray[index12].abModuleAddrCount - 1);
-        var index13 = 0;
-        while (index13 <= num18)
-        {
-          if (Operators.CompareString(vehicleInfoArray[index12].abModuleAddresses[index13], Right, false) == 0)
-          {
-            if (Operators.CompareString(Strings.Mid(vehicleInfoArray[index12].abModuleDatasBinStr[index13], checked (num7 + 1), 1), "1", false) == 0)
-            {
-              num4 = index13;
-              break;
-            }
-            break;
-          }
-          checked { ++index13; }
-        }
-        if (num4 == -1)
-        {
-          arySrc2 = (Form1.VehicleInfo[]) Utils.CopyArray((Array) arySrc2, (Array) new Form1.VehicleInfo[checked (index11 + 1)]);
-          arySrc2[index11] = vehicleInfoArray[index12];
-          checked { ++index11; }
-        }
-        else
-        {
-          arySrc1 = (Form1.VehicleInfo[]) Utils.CopyArray((Array) arySrc1, (Array) new Form1.VehicleInfo[checked (index10 + 1)]);
-          arySrc1[index10] = vehicleInfoArray[index12];
-          checked { ++index10; }
-        }
-        checked { ++index12; }
-      }
-      var dstArray = new string[1];
-      var dstItemCount = 0;
-      var num19 = checked (index1 - 1);
-      var index14 = 0;
-      while (index14 <= num19)
-      {
-        Array.Sort<string>(vehicleInfoArray[index14].etisFeatures);
-        var num20 = checked (vehicleInfoArray[index14].etisFeatureCount - 1);
-        var index15 = 0;
-        while (index15 <= num20)
-        {
-          if (!string.IsNullOrEmpty(vehicleInfoArray[index14].etisFeatures[index15]))
-            modAsBuilt.ArraySsorted_AddItem(ref dstArray, ref dstItemCount, vehicleInfoArray[index14].etisFeatures[index15], true);
-          checked { ++index15; }
-        }
-        checked { ++index14; }
-      }
-      dstArray = (string[]) Utils.CopyArray((Array) dstArray, (Array) new string[checked (dstItemCount - 1 + 1)]);
-      var strArray12 = new string[checked (dstItemCount - 1 + 1)];
-      Array.Copy((Array) dstArray, (Array) strArray12, dstItemCount);
-      var num21 = checked (dstItemCount - 1);
-      var index16 = 0;
-      while (index16 <= num21)
-      {
-        var flag1 = false;
-        var flag2 = false;
-        // if (Strings.InStr(1, dstArray[index16], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
-        var num22 = checked (index11 - 1);
-        var index17 = 0;
-        while (index17 <= num22)
-        {
-          num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc2[index17].etisFeatures, arySrc2[index17].etisFeatureCount, dstArray[index16], CompareMethod.Text);
-          if (num4 != -1)
-          {
-            flag2 = true;
-            break;
-          }
-          checked { ++index17; }
-        }
-        var num23 = checked (index10 - 1);
-        var index18 = 0;
-        while (index18 <= num23)
-        {
-          num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc1[index18].etisFeatures, arySrc1[index18].etisFeatureCount, dstArray[index16], CompareMethod.Text);
-          if (num4 == -1)
-          {
-            // if (Strings.InStr(1, dstArray[index16], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
-            flag1 = true;
-            break;
-          }
-          checked { ++index18; }
-        }
-        if (flag2)
-          dstArray[index16] = "";
-        if (flag1)
-          dstArray[index16] = "";
-        checked { ++index16; }
-      }
-      Array.Sort<string>(dstArray);
-      var num24 = checked (dstItemCount - 1);
-      var index19 = 0;
-      while (index19 <= num24)
-      {
-        var flag3 = false;
-        var flag4 = false;
-        // if (Strings.InStr(1, strArray12[index19], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
-        var num25 = checked (index11 - 1);
-        var index20 = 0;
-        while (index20 <= num25)
-        {
-          num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc2[index20].etisFeatures, arySrc2[index20].etisFeatureCount, strArray12[index19], CompareMethod.Text);
-          if (num4 == -1)
-          {
-            flag4 = true;
-            break;
-          }
-          checked { ++index20; }
-        }
-        var num26 = checked (index10 - 1);
-        var index21 = 0;
-        while (index21 <= num26)
-        {
-          num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc1[index21].etisFeatures, arySrc1[index21].etisFeatureCount, strArray12[index19], CompareMethod.Text);
-          if (num4 != -1)
-          {
-            // if (Strings.InStr(1, strArray12[index19], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
-            flag3 = true;
-            break;
-          }
-          checked { ++index21; }
-        }
-        if (flag4)
-          strArray12[index19] = "";
-        if (flag3)
-          strArray12[index19] = "";
-        checked { ++index19; }
-      }
-      Array.Sort<string>(strArray12);
-      var stringBuilder = new StringBuilder();
-      stringBuilder.AppendLine("VINs with bit set:   " + Conversions.ToString(index10));
-      var num27 = checked (index10 - 1);
-      var index22 = 0;
-      while (index22 <= num27)
-      {
-        stringBuilder.AppendLine("  " + arySrc1[index22].carVIN);
-        checked { ++index22; }
-      }
-      stringBuilder.AppendLine();
-      stringBuilder.AppendLine("VINs without bit set: " + Conversions.ToString(index11));
-      var num28 = checked (index11 - 1);
-      var index23 = 0;
-      while (index23 <= num28)
-      {
-        stringBuilder.AppendLine("  " + arySrc2[index23].carVIN);
-        checked { ++index23; }
-      }
-      stringBuilder.AppendLine();
-      var num29 = 0;
-      var num30 = checked (dstItemCount - 1);
-      var index24 = 0;
-      while (index24 <= num30)
-      {
-        if (Operators.CompareString(dstArray[index24], "", false) != 0)
-          checked { ++num29; }
-        checked { ++index24; }
-      }
-      stringBuilder.AppendLine($"Possible Features ({Conversions.ToString(num29)}) for {Right} bit {Conversions.ToString(num7)} on:");
-      var num31 = checked (dstItemCount - 1);
-      var index25 = 0;
-      while (index25 <= num31)
-      {
-        if (Operators.CompareString(dstArray[index25], "", false) != 0)
-          stringBuilder.AppendLine("  " + dstArray[index25]);
-        checked { ++index25; }
-      }
-      var num32 = 0;
-      var num33 = checked (dstItemCount - 1);
-      var index26 = 0;
-      while (index26 <= num33)
-      {
-        if (Operators.CompareString(strArray12[index26], "", false) != 0)
-          checked { ++num32; }
-        checked { ++index26; }
-      }
-      stringBuilder.AppendLine($"\r\nPossible Features ({Conversions.ToString(num32)}) for {Right} bit {Conversions.ToString(num7)} off:");
-      var num34 = checked (dstItemCount - 1);
-      var index27 = 0;
-      while (index27 <= num34)
-      {
-        if (Operators.CompareString(strArray12[index27], "", false) != 0)
-          stringBuilder.AppendLine("  " + strArray12[index27]);
-        checked { ++index27; }
-      }
-      TextBox4.Focus();
-      TextBox4.SelectAll();
-      tbxDeduceReport2.Text = stringBuilder.ToString();
-    }
+
+      var moduleAddr = lstBit_Modules.SelectedItem.ToString();
+      int bitIndex = 0;
+      try { bitIndex = Convert.ToInt32(TextBox4.Text); } catch { }
+
+      var report = AnalyzeBit(moduleAddr, bitIndex);
+      tbxDeduceReport2.Text = report;
   }
 
   void lstDeduceFactoryOptions2_SelectedIndexChanged(object sender, EventArgs e)
@@ -2172,299 +1849,106 @@ public partial class Form1 : Form
 
   void Button5_Click_1(object sender, EventArgs e)
   {
-    var directoryPath = MyProject.Application.Info.DirectoryPath;
-    if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
-      directoryPath += "\\";
-    var path = directoryPath + "Deducer";
-    try
-    {
-      Directory.CreateDirectory(path);
-    }
-    catch (Exception ex)
-    {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
-    }
-    var strArray1 = new string[1];
-    var files = Directory.GetFiles(path, "*.ETIS.HTML");
-    var arySrc = new string[1];
-    var index1 = 0;
-    var strArray2 = new string[1];
-    var index2 = 0;
-    var strArray3 = new string[1];
-    var index3 = 0;
-    var num1 = checked (files.Length - 1);
-    var index4 = 0;
-    while (index4 <= num1)
-    {
-      var strArray4 = new string[1];
-      var num2 = 0;
-      var inpFileName1 = files[index4];
-      var str = "";
-      modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(inpFileName1, ref strArray4, ref num2, ref str);
-      var num3 = checked (num2 - 1);
-      var index5 = 0;
-      while (index5 <= num3)
+      VehicleDatabase.Load();
+      lstBit_Years.Items.Clear();
+      lstBit_Models.Items.Clear();
+
+      var years = new List<string>();
+      var models = new List<string>();
+
+      foreach (var v in VehicleDatabase.Entries)
       {
-        var num4 = -1;
-        var num5 = checked (index1 - 1);
-        var index6 = 0;
-        while (index6 <= num5)
-        {
-          if (Operators.CompareString(arySrc[index6], strArray4[index5], false) == 0)
-          {
-            num4 = index6;
-            break;
-          }
-          checked { ++index6; }
-        }
-        if (num4 == -1)
-        {
-          arySrc = (string[]) Utils.CopyArray((Array) arySrc, (Array) new string[checked (index1 + 1)]);
-          arySrc[index1] = strArray4[index5];
-          checked { ++index1; }
-        }
-        checked { ++index5; }
+          if (!string.IsNullOrWhiteSpace(v.Year) && !years.Contains(v.Year))
+              years.Add(v.Year);
+
+          if (!string.IsNullOrWhiteSpace(v.Model) && !models.Contains(v.Model))
+              models.Add(v.Model);
       }
-      var inpFileName2 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
-      var retModuleAddresses = new string[1];
-      var retModuleDatas = new string[1];
-      var retModuleAddressCount = 0;
-      var retVIN = "";
-      var retCarModel = "";
-      var retCarYear = "";
-      var retModInfo_IDs = new string[1];
-      var retModInfo_Names = new string[1];
-      var retModInfo_Descs = new string[1];
-      var retModInfo_Count = 0;
-      modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName2, ref retModuleAddresses, ref retModuleDatas, ref retModuleAddressCount, ref retVIN, ref retCarModel, ref retCarYear, ref retModInfo_IDs, ref retModInfo_Names, ref retModInfo_Descs, ref retModInfo_Count);
-      var num6 = -1;
-      var num7 = checked (index2 - 1);
-      var index7 = 0;
-      while (index7 <= num7)
-      {
-        if (Operators.CompareString(strArray2[index7], retCarModel, false) == 0)
-        {
-          num6 = index7;
-          break;
-        }
-        checked { ++index7; }
-      }
-      if (num6 == -1)
-      {
-        strArray2 = (string[]) Utils.CopyArray((Array) strArray2, (Array) new string[checked (index2 + 1)]);
-        strArray2[index2] = retCarModel;
-        checked { ++index2; }
-      }
-      var num8 = -1;
-      var num9 = checked (index3 - 1);
-      var index8 = 0;
-      while (index8 <= num9)
-      {
-        if (Operators.CompareString(strArray3[index8], retCarYear, false) == 0)
-        {
-          num8 = index8;
-          break;
-        }
-        checked { ++index8; }
-      }
-      if (num8 == -1)
-      {
-        strArray3 = (string[]) Utils.CopyArray((Array) strArray3, (Array) new string[checked (index3 + 1)]);
-        strArray3[index3] = retCarYear;
-        checked { ++index3; }
-      }
-      checked { ++index4; }
-    }
-    Array.Sort<string>(strArray2);
-    lstBit_Models.Items.Clear();
-    var num10 = checked (index2 - 1);
-    var index9 = 0;
-    while (index9 <= num10)
-    {
-      if (Operators.CompareString(Strings.Trim(strArray2[index9]), "", false) != 0)
-        lstBit_Models.Items.Add((object) strArray2[index9]);
-      checked { ++index9; }
-    }
-    Array.Sort<string>(strArray3);
-    lstBit_Years.Items.Clear();
-    var num11 = checked (index3 - 1);
-    var index10 = 0;
-    while (index10 <= num11)
-    {
-      if (Operators.CompareString(Strings.Trim(strArray3[index10]), "", false) != 0)
-        lstBit_Years.Items.Add((object) strArray3[index10]);
-      checked { ++index10; }
-    }
+
+      years.Sort();
+      models.Sort();
+
+      foreach (var y in years) lstBit_Years.Items.Add(y);
+      foreach (var m in models) lstBit_Models.Items.Add(m);
+
+      Interaction.MsgBox($"Loaded {VehicleDatabase.Entries.Count} vehicles from database.");
   }
 
   void Button6_Click_1(object sender, EventArgs e)
   {
-    if (Information.IsNothing((object) lstBit_Models.SelectedItems) || lstBit_Models.SelectedItems.Count < 1)
-    {
-      var num1 = (int) Interaction.MsgBox((object) "Select at least one vehicle model.");
-    }
-    else if (Information.IsNothing((object) lstBit_Years.SelectedItems) || lstBit_Years.SelectedItems.Count < 1)
-    {
-      var num2 = (int) Interaction.MsgBox((object) "Select at least one vehicle year.");
-    }
-    else
-    {
-      var directoryPath = MyProject.Application.Info.DirectoryPath;
-      if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
-        directoryPath += "\\";
-      var path = directoryPath + "Deducer";
+      if (lstBit_Models.SelectedItems.Count < 1 || lstBit_Years.SelectedItems.Count < 1)
+      {
+          Interaction.MsgBox("Select at least one vehicle year and model.");
+          return;
+      }
+
+      var selectedYears = new List<string>();
+      foreach (var item in lstBit_Years.CheckedItems) selectedYears.Add(item.ToString());
+
+      var selectedModels = new List<string>();
+      foreach (var item in lstBit_Models.CheckedItems) selectedModels.Add(item.ToString());
+
+      var modules = new HashSet<string>();
+
+      // Use a temp file for parsing
+      var tempFile = Path.GetTempFileName();
+
       try
       {
-        Directory.CreateDirectory(path);
-      }
-      catch (Exception ex)
-      {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
-      }
-      var strArray1 = new string[1];
-      var files = Directory.GetFiles(path, "*.ETIS.HTML");
-      var vehicleInfoArray = new Form1.VehicleInfo[checked (files.Length + 1)];
-      var index1 = 0;
-      var retVIN = "";
-      var str1 = "";
-      var str2 = "";
-      var String1_1 = ";";
-      var num3 = checked (lstBit_Years.CheckedItems.Count - 1);
-      var index2 = 0;
-      while (index2 <= num3)
-      {
-        String1_1 = $"{String1_1}{lstBit_Years.CheckedItems[index2].ToString()};";
-        checked { ++index2; }
-      }
-      var String1_2 = ";";
-      var num4 = checked (lstBit_Models.CheckedItems.Count - 1);
-      var index3 = 0;
-      while (index3 <= num4)
-      {
-        String1_2 = $"{String1_2}{lstBit_Models.CheckedItems[index3].ToString()};";
-        checked { ++index3; }
-      }
-      var num5 = checked (files.Length - 1);
-      var index4 = 0;
-      while (index4 <= num5)
-      {
-        var str3 = Strings.Replace(files[index4], ".ETIS.", ".AB.");
-        var strArray2 = new string[1];
-        var strArray3 = new string[1];
-    
-        var strArray4 = new string[1];
-        var strArray5 = new string[1];
-        var strArray6 = new string[1];
-        var num6 = 0;
-        var num7 = 0;
-        var inpFileName1 = str3;
-        var str4 = "";
-        modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName1, ref strArray2, ref strArray3, ref num6, ref str4, ref str1, ref str2, ref strArray4, ref strArray5, ref strArray6, ref num7);
-        if (Strings.InStr(1, String1_2, $";{str1};") != 0 & Strings.InStr(1, String1_1, $";{str2};") != 0)
-        {
-          vehicleInfoArray[index1].carModel = str1;
-          vehicleInfoArray[index1].carYear = str2;
-          var str5 = files[index4];
-          modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(str5, ref vehicleInfoArray[index1].etisFeatures, ref vehicleInfoArray[index1].etisFeatureCount, ref retVIN);
-          var str6 = Strings.Replace(str5, ".ETIS.HTML", "") + ".AB";
-          var strArray7 = new string[1];
-          var strArray8 = new string[1];
-          var strArray9 = new string[1];
-          var strArray10 = new string[1];
-          var strArray11 = new string[1];
-          var num8 = 0;
-          var inpFileName2 = str6;
-          str4 = "";
-          modAsBuilt.AsBuilt_LoadFile_AB(inpFileName2, ref vehicleInfoArray[index1].abModuleAddresses, ref vehicleInfoArray[index1].abModuleDatasHex, ref vehicleInfoArray[index1].abModuleAddrCount, ref str4, ref strArray7, ref strArray9, ref strArray10, ref strArray11, ref num8, ref vehicleInfoArray[index1].carCCChex);
-          vehicleInfoArray[index1].carVIN = retVIN;
-          vehicleInfoArray[index1].abModuleInfo_PartNums = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-          vehicleInfoArray[index1].abModuleInfo_Strategies = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-          vehicleInfoArray[index1].abModuleInfo_Calibrations = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-          var num9 = checked (num8 - 1);
-          var index5 = 0;
-          while (index5 <= num9)
+          foreach (var v in VehicleDatabase.Entries)
           {
-            var num10 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-            var index6 = 0;
-            while (index6 <= num10)
-            {
-              if (Operators.CompareString(Strings.Left(vehicleInfoArray[index1].abModuleAddresses[index6], Strings.Len(strArray7[index5])), strArray7[index5], false) == 0)
+              if (selectedYears.Contains(v.Year) && selectedModels.Contains(v.Model))
               {
-                vehicleInfoArray[index1].abModuleInfo_PartNums[index6] = strArray9[index5];
-                vehicleInfoArray[index1].abModuleInfo_Strategies[index6] = strArray10[index5];
-                vehicleInfoArray[index1].abModuleInfo_Calibrations[index6] = strArray11[index5];
+                  // Get Content
+                  var content = v.FileContent;
+                  if (string.IsNullOrWhiteSpace(content) && File.Exists(v.FilePath))
+                  {
+                      try { content = File.ReadAllText(v.FilePath); } catch { }
+                  }
+
+                  if (string.IsNullOrWhiteSpace(content)) continue;
+
+                  // Write to temp file for the legacy parser
+                  File.WriteAllText(tempFile, content);
+
+                  // Setup Ref variables
+                  var retModuleAddresses = new string[1];
+                  var retModuleDatas = new string[1];
+                  var retModuleAddressCount = 0;
+                  var retVIN = "";
+                  var retModInfo_IDs = new string[1];
+                  var retModInfo_PartNumbers = new string[1];
+                  var retModInfo_Strategies = new string[1];
+                  var retModInfo_Calibrations = new string[1];
+                  var retModInfo_Count = 0;
+                  var retCCCdata = "";
+
+                  modAsBuilt.AsBuilt_LoadFile_AB(tempFile, ref retModuleAddresses, ref retModuleDatas, ref retModuleAddressCount, ref retVIN, ref retModInfo_IDs, ref retModInfo_PartNumbers, ref retModInfo_Strategies, ref retModInfo_Calibrations, ref retModInfo_Count, ref retCCCdata);
+
+                  // Collect Modules
+                  for (int i = 0; i < retModuleAddressCount; i++)
+                  {
+                      if (!string.IsNullOrEmpty(retModuleAddresses[i]))
+                          modules.Add(retModuleAddresses[i]);
+                  }
               }
-              checked { ++index6; }
-            }
-            checked { ++index5; }
           }
-          var num11 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-          var index7 = 0;
-          while (index7 <= num11)
-          {
-            vehicleInfoArray[index1].abModuleDatasHex[index7] = Strings.Left(vehicleInfoArray[index1].abModuleDatasHex[index7], checked (Strings.Len(vehicleInfoArray[index1].abModuleDatasHex[index7]) - 2));
-            checked { ++index7; }
-          }
-          vehicleInfoArray[index1].carCCChex = Strings.Right(vehicleInfoArray[index1].carCCChex, 510);
-          vehicleInfoArray[index1].carCCCbin = modAsBuilt.AsBuilt_HexStr2BinStr(vehicleInfoArray[index1].carCCChex);
-          vehicleInfoArray[index1].abModuleDatasBinStr = new string[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-          vehicleInfoArray[index1].abModuleDatasLONG = new ulong[checked (vehicleInfoArray[index1].abModuleAddrCount - 1 + 1)];
-          var num12 = checked (vehicleInfoArray[index1].abModuleAddrCount - 1);
-          var index8 = 0;
-          while (index8 <= num12)
-          {
-            vehicleInfoArray[index1].abModuleDatasBinStr[index8] = modAsBuilt.AsBuilt_HexStr2BinStr(vehicleInfoArray[index1].abModuleDatasHex[index8]);
-            vehicleInfoArray[index1].abModuleDatasLONG[index8] = modAsBuilt.AsBuilt_HexStr2UINT64(vehicleInfoArray[index1].abModuleDatasHex[index8]);
-            checked { ++index8; }
-          }
-          checked { ++index1; }
-        }
-        checked { ++index4; }
       }
-      var strArray12 = new string[1];
-      var index9 = 0;
-      var num13 = checked (index1 - 1);
-      var index10 = 0;
-      while (index10 <= num13)
+      finally
       {
-        var num14 = checked (vehicleInfoArray[index10].abModuleAddrCount - 1);
-        var index11 = 0;
-        while (index11 <= num14)
-        {
-          var num15 = -1;
-          var num16 = checked (index9 - 1);
-          var index12 = 0;
-          while (index12 <= num16)
-          {
-            if (Operators.CompareString(strArray12[index12], vehicleInfoArray[index10].abModuleAddresses[index11], false) == 0)
-            {
-              num15 = index12;
-              break;
-            }
-            checked { ++index12; }
-          }
-          if (num15 == -1)
-          {
-            strArray12 = (string[]) Utils.CopyArray((Array) strArray12, (Array) new string[checked (index9 + 1)]);
-            strArray12[index9] = vehicleInfoArray[index10].abModuleAddresses[index11];
-            checked { ++index9; }
-          }
-          checked { ++index11; }
-        }
-        checked { ++index10; }
+          if (File.Exists(tempFile)) File.Delete(tempFile);
       }
-      Array.Sort<string>(strArray12);
+
       lstBit_Modules.Items.Clear();
-      var num17 = checked (index9 - 1);
-      var index13 = 0;
-      while (index13 <= num17)
-      {
-        lstBit_Modules.Items.Add((object) strArray12[index13]);
-        checked { ++index13; }
-      }
-    }
+      var sortedModules = new List<string>(modules);
+      sortedModules.Sort();
+      
+      foreach (var m in sortedModules) lstBit_Modules.Items.Add(m);
+
+      if (lstBit_Modules.Items.Count == 0)
+          Interaction.MsgBox("No modules found for the selected vehicles.");
+      else
+          Interaction.MsgBox($"Found {lstBit_Modules.Items.Count} unique modules.");
   }
 
 
@@ -3797,6 +3281,168 @@ label_24:
                 Button10_Click(sender, e); // Refresh List
             }
         }
+    }
+
+    // Optimized Helper Method for Analysis for Deducer-By-Bit
+    private string AnalyzeBit(string moduleAddr, int bitIndex)
+    {
+        var selectedYears = new HashSet<string>();
+        foreach (var item in lstBit_Years.CheckedItems) selectedYears.Add(item.ToString());
+
+        var selectedModels = new HashSet<string>();
+        foreach (var item in lstBit_Models.CheckedItems) selectedModels.Add(item.ToString());
+
+        // Groups
+        var vinSet1 = new List<string>(); // Bit = 1
+        var vinSet0 = new List<string>(); // Bit = 0
+
+        // Feature Sets
+        var featuresInAllSet1 = new HashSet<string>();
+        var featuresInAnySet1 = new HashSet<string>();
+        bool firstSet1 = true;
+
+        var featuresInAllSet0 = new HashSet<string>();
+        var featuresInAnySet0 = new HashSet<string>();
+        bool firstSet0 = true;
+
+        var tempFile = Path.GetTempFileName();
+
+        try
+        {
+            foreach (var v in VehicleDatabase.Entries)
+            {
+                if (!selectedYears.Contains(v.Year) || !selectedModels.Contains(v.Model)) continue;
+                
+                // Load Content
+                var content = v.FileContent;
+                if (string.IsNullOrWhiteSpace(content) && File.Exists(v.FilePath))
+                {
+                    try { content = File.ReadAllText(v.FilePath); } catch { }
+                }
+                if (string.IsNullOrWhiteSpace(content)) continue;
+
+                // Parse AB
+                File.WriteAllText(tempFile, content);
+
+                var retModuleAddresses = new string[1];
+                var retModuleDatas = new string[1];
+                var retModuleAddressCount = 0;
+                var retVIN = "";
+                // Dummies
+                var d1 = new string[1]; var d2 = new string[1]; var d3 = new string[1]; var d4 = new string[1]; var d5 = 0; var d6 = "";
+                
+                modAsBuilt.AsBuilt_LoadFile_AB(tempFile, ref retModuleAddresses, ref retModuleDatas, ref retModuleAddressCount, ref retVIN, ref d1, ref d2, ref d3, ref d4, ref d5, ref d6);
+
+                if (string.IsNullOrEmpty(retVIN)) retVIN = v.VIN;
+
+                // Find Module
+                int modIdx = -1;
+                for(int i=0; i<retModuleAddressCount; i++)
+                {
+                    if (string.Equals(retModuleAddresses[i], moduleAddr, StringComparison.OrdinalIgnoreCase))
+                    {
+                        modIdx = i;
+                        break;
+                    }
+                }
+
+                if (modIdx == -1) continue; // Module not found in this car
+
+                // Check Bit
+                string hexData = retModuleDatas[modIdx];
+                string binData = modAsBuilt.AsBuilt_HexStr2BinStr(hexData);
+
+                // Validate Index
+                if (bitIndex >= binData.Length) continue; 
+
+                char bitChar = binData[bitIndex]; 
+                bool isBitSet = (bitChar == '1');
+
+                // Parse Features
+                var matchFeatures = new HashSet<string>();
+                if (!string.IsNullOrEmpty(v.Features))
+                {
+                     var parts = v.Features.Split(';');
+                     foreach(var p in parts) if(!string.IsNullOrWhiteSpace(p)) matchFeatures.Add(p);
+                }
+
+                if (isBitSet)
+                {
+                    vinSet1.Add(retVIN);
+                    // Update Sets
+                    if (firstSet1)
+                    {
+                        featuresInAllSet1 = new HashSet<string>(matchFeatures);
+                        firstSet1 = false;
+                    }
+                    else
+                    {
+                        featuresInAllSet1.IntersectWith(matchFeatures);
+                    }
+                    featuresInAnySet1.UnionWith(matchFeatures);
+                }
+                else
+                {
+                    vinSet0.Add(retVIN);
+                    if (firstSet0)
+                    {
+                        featuresInAllSet0 = new HashSet<string>(matchFeatures);
+                        firstSet0 = false;
+                    }
+                    else
+                    {
+                        featuresInAllSet0.IntersectWith(matchFeatures);
+                    }
+                    featuresInAnySet0.UnionWith(matchFeatures);
+                }
+            }
+        }
+        catch { }
+        finally
+        {
+            if (File.Exists(tempFile)) File.Delete(tempFile);
+        }
+
+        // Calculate Unique Features
+        var candidates1 = new List<string>();
+        if (vinSet1.Count > 0)
+        {
+            foreach (var f in featuresInAllSet1)
+            {
+                if (!featuresInAnySet0.Contains(f)) candidates1.Add(f);
+            }
+        }
+        candidates1.Sort();
+
+        var candidates0 = new List<string>();
+        if (vinSet0.Count > 0)
+        {
+            foreach (var f in featuresInAllSet0)
+            {
+                if (!featuresInAnySet1.Contains(f)) candidates0.Add(f);
+            }
+        }
+        candidates0.Sort();
+
+
+        // Build Report
+        var sb = new StringBuilder();
+        sb.AppendLine($"VINs with bit set: {vinSet1.Count}");
+        foreach (var vin in vinSet1) sb.AppendLine("  " + vin);
+        sb.AppendLine();
+
+        sb.AppendLine($"VINs without bit set: {vinSet0.Count}");
+        foreach (var vin in vinSet0) sb.AppendLine("  " + vin);
+        sb.AppendLine();
+
+        sb.AppendLine($"Possible Features ({candidates1.Count}) for {moduleAddr} bit {bitIndex} on:");
+        foreach (var f in candidates1) sb.AppendLine("  " + f);
+        sb.AppendLine();
+
+        sb.AppendLine($"Possible Features ({candidates0.Count}) for {moduleAddr} bit {bitIndex} off:");
+        foreach (var f in candidates0) sb.AppendLine("  " + f);
+
+        return sb.ToString();
     }
 }
 }
