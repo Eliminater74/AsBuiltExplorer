@@ -160,7 +160,7 @@ public partial class Form1 : Form
 
       // Set Version from Assembly
       var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-      this.Text = $"AsBuiltExplorer v{version.Major}.{version.Minor}.{version.Build}";
+      this.Text = $"AsBuiltExplorer Toolkit v{version}";
       this.lblAboutVersion.Text = $"Version {version}";
   }
 
