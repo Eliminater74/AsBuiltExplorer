@@ -111,7 +111,29 @@ public partial class Form1 : Form
   private void Form1_Load(object sender, EventArgs e)
   {
       ModuleDatabase.LoadDatabase();
-      CommonDatabase.Load(); // Triggers Migration
+      ModuleDatabase.LoadDatabase();
+      CommonDatabase.Load();
+      VehicleDatabase.Load(); // Load existing vehicles
+      
+      // Auto-Import from AsBuiltData folder
+      try
+      {
+         string asBuiltDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AsBuiltData");
+         if (Directory.Exists(asBuiltDir))
+         {
+             int count = VehicleDatabase.BulkImport(asBuiltDir);
+             if (count > 0)
+             {
+                 // Optional: Notify user or just show in list (if list UI existed)
+                 // MessageBox.Show($"Imported {count} new vehicles from AsBuiltData folder.", "Auto-Import");
+             }
+         }
+      }
+      catch (Exception ex)
+      {
+          System.Diagnostics.Debug.WriteLine("Auto-Import Error: " + ex.Message);
+      }
+
       ApplyTheme();
 
       // Set Version from Assembly

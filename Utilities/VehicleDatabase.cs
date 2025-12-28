@@ -293,5 +293,89 @@ namespace AsBuiltExplorer
             }
             Load();
         }
+        public static int BulkImport(string directoryPath)
+        {
+            if (!Directory.Exists(directoryPath)) return 0;
+            int count = 0;
+
+            // Extensions to search for
+            var extensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".ab", ".abt", ".xml", ".txt" };
+
+            // Recursive search
+            foreach (var file in Directory.EnumerateFiles(directoryPath, "*.*", SearchOption.AllDirectories))
+            {
+                if (extensions.Contains(Path.GetExtension(file)))
+                {
+                    string vin = GetVinFromFile(file);
+                    
+                    // Basic VIN Validation
+                    if (!string.IsNullOrEmpty(vin) && vin.Length == 17)
+                    {
+                        // Check if already exists
+                        if (Entries.Exists(v => v.VIN == vin)) continue;
+
+                        // Create Name based on folder structure or decode
+                        // E.g. "Ford \ Expedition \ XLT" -> "Expedition XLT"
+                        string folderName = new DirectoryInfo(Path.GetDirectoryName(file)).Name;
+                        
+                        // Add it
+                        try
+                        {
+                            // We use AddEntry which handles decoding and DB insertion
+                            // We pass the folder name as initial FriendlyName, but AddEntry/UpdateVehicleData 
+                            // might refine it if we set up logic for it.
+                            // Actually, UpdateVehicleDataFromVIN overwrites Model/Make. 
+                            // FriendlyName is usually manually set or defaults to VIN.
+                            // Let's try to make a nice FriendlyName.
+                            
+                            AddEntry(folderName, vin, file, null);
+                            count++;
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Error importing {file}: {ex.Message}");
+                        }
+                    }
+                }
+            }
+            return count;
+        }
+
+        private static string GetVinFromFile(string path)
+        {
+            // 1. Check Filename (e.g. 1FMFK... .ab)
+            string name = Path.GetFileNameWithoutExtension(path);
+            if (name.Length == 17 && System.Text.RegularExpressions.Regex.IsMatch(name, "^[A-HJ-NPR-Z0-9]{17}$"))
+            {
+                return name.ToUpper();
+            }
+
+            // 2. Check Content
+            try 
+            {
+                // Peek first 2000 chars to save memory
+                // But .ab files are small, reading all is fine.
+                string content = File.ReadAllText(path);
+                
+                // XML <VIN> tag
+                var xmlMatch = System.Text.RegularExpressions.Regex.Match(content, @"<VIN>(.*?)</VIN>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                if (xmlMatch.Success) 
+                {
+                    string v = xmlMatch.Groups[1].Value.Trim();
+                    if(v.Length == 17) return v.ToUpper();
+                }
+
+                // General Regex Search 
+                // Look for pattern surrounded by distinct boundaries or whitespace
+                // Avoiding accidental long hex strings matching VINs 
+                // VINs shouldn't have I, O, Q.
+                var regex = new System.Text.RegularExpressions.Regex(@"\b[A-HJ-NPR-Z0-9]{17}\b");
+                var match = regex.Match(content);
+                if (match.Success) return match.Value.ToUpper();
+            }
+            catch {}
+
+            return null;
+        }
     }
 }

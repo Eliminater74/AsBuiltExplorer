@@ -661,14 +661,13 @@ label_1:
               if (Operators.CompareString(name1, "NODEID", false) == 0)
               {
                 flag4 = false;
-                if (Strings.InStr(1, inpFileName, "1FAHP2KT0DG105299", CompareMethod.Text) != 0)
-                  //inpFileName = inpFileName;
+                // inpFileName check removed (was debug no-op)
                 retModInfo_IDs = (string[]) Utils.CopyArray((Array) retModInfo_IDs, (Array) new string[checked (retModInfo_Count + 1)]);
                 retModInfo_PartNumbers = (string[]) Utils.CopyArray((Array) retModInfo_PartNumbers, (Array) new string[checked (retModInfo_Count + 1)]);
                 retModInfo_Strategies = (string[]) Utils.CopyArray((Array) retModInfo_Strategies, (Array) new string[checked (retModInfo_Count + 1)]);
                 retModInfo_Calibrations = (string[]) Utils.CopyArray((Array) retModInfo_Calibrations, (Array) new string[checked (retModInfo_Count + 1)]);
-                if (Operators.CompareString(Left2, "", false) == 0)
-                  //Left2 = Left2;
+                
+                // Left2 check removed (was debug no-op)
                 retModInfo_IDs[retModInfo_Count] = Left1;
                 retModInfo_PartNumbers[retModInfo_Count] = Left2;
                 retModInfo_Strategies[retModInfo_Count] = str1;
