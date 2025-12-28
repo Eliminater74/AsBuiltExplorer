@@ -126,59 +126,87 @@ namespace AsBuiltExplorer
         private static void ParseAndInsertCSV(string path)
         {
             var lines = File.ReadAllLines(path);
-            string currentFeatureName = "";
-            string currentModule = "";
-            string currentAddr = "";
+            
+            // State for "ditto" fields (empty cells meaning "same as above")
+            string lastFeatureName = "";
+            string lastModule = "";
+            string lastAddr = "";
+            
+            int detectedFormat = 0; // 0=Unknown, 1=AddrCol0, 2=AddrCol1, 3=AddrCol2
 
             foreach (var line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line)) continue;
-                if (line.Trim().StartsWith("#")) continue; // Skip comments
+                if (line.Trim().StartsWith("#")) continue;
 
                 var parts = SplitCsvLine(line);
-                if (parts.Count < 3) continue;
+                if (parts.Count < 2) continue;
 
-                if (parts[0].Trim().StartsWith("Feature Name") || parts[0].Trim().StartsWith("Module")) continue;
+                string col0 = parts[0].Trim();
+                string col1 = parts.Count > 1 ? parts[1].Trim() : "";
+                string col2 = parts.Count > 2 ? parts[2].Trim() : "";
+
+                // Attempt to detect format if explicit address is present
+                if (Regex.IsMatch(col0, @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}")) detectedFormat = 1;
+                else if (Regex.IsMatch(col1, @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}")) detectedFormat = 2;
+                else if (Regex.IsMatch(col2, @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}")) detectedFormat = 3;
+
+                if (detectedFormat == 0) continue;
 
                 string name = "", module = "", address = "", d1 = "", d2 = "", d3 = "", notes = "";
 
-                // Detect Format
-                bool isFormat2 = Regex.IsMatch(parts[1].Trim(), @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}");
-
-                if (isFormat2) // Module, Address, D1...
+                if (detectedFormat == 1)
                 {
-                    module = parts[0].Trim();
-                    address = parts[1].Trim();
-                    d1 = parts.Count > 2 ? parts[2].Trim() : "";
+                    // Format: Address | D1 | D2 | D3 | Name
+                    address = col0;
+                    d1 = col1;
+                    d2 = col2;
+                    d3 = parts.Count > 3 ? parts[3].Trim() : "";
+                    name = parts.Count > 4 ? parts[4].Trim() : "";
+                }
+                else if (detectedFormat == 2)
+                {
+                    // Format: Module | Address | D1 | D2 | D3 | Name
+                    module = col0;
+                    address = col1;
+                    d1 = col2;
                     d2 = parts.Count > 3 ? parts[3].Trim() : "";
                     d3 = parts.Count > 4 ? parts[4].Trim() : "";
                     name = parts.Count > 5 ? parts[5].Trim() : "";
-                    notes = parts.Count > 6 ? parts[6].Trim() : "";
-
-                    if (string.IsNullOrWhiteSpace(module)) module = currentModule; else currentModule = module;
-                    if (string.IsNullOrWhiteSpace(address)) address = currentAddr; else currentAddr = address;
                 }
-                else // Name, Module, Address...
+                else if (detectedFormat == 3)
                 {
-                    name = parts[0].Trim();
-                    if (string.IsNullOrWhiteSpace(name)) name = currentFeatureName; else currentFeatureName = name;
+                    // Format: Name | Module | Address | Default | Mask | Notes
+                    name = col0;
+                    module = col1;
+                    address = col2;
                     
-                    module = parts[1].Trim();
-                    address = parts[2].Trim();
-                    if (!address.Contains("-")) continue;
-
-                    d1 = parts.Count > 3 ? parts[3].Trim() : "";
-                    d2 = parts.Count > 4 ? parts[4].Trim() : "";
-                    d3 = parts.Count > 5 ? parts[5].Trim() : "";
-                    notes = parts.Count > 6 ? parts[6].Trim() : "";
+                    // Mask in Col 4
+                    string maskRaw = parts.Count > 4 ? parts[4].Trim() : "";
+                    var masks = maskRaw.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    
+                    if (masks.Length > 0) d1 = masks[0];
+                    if (masks.Length > 1) d2 = masks[1];
+                    if (masks.Length > 2) d3 = masks[2];
+                    
+                    notes = parts.Count > 5 ? parts[5].Trim() : "";
                 }
 
-                // Normalize Wildcards
-                d1 = d1.Replace("*", "x");
-                d2 = d2.Replace("*", "x");
-                d3 = d3.Replace("*", "x");
+                // Handle Persistence / Merged Cells
+                if (string.IsNullOrEmpty(address)) address = lastAddr; else lastAddr = address;
+                if (string.IsNullOrEmpty(module)) module = lastModule; else lastModule = module;
+                if (string.IsNullOrEmpty(name)) name = lastFeatureName; else lastFeatureName = name; // If name is empty, assume same feature (e.g. multiple options)
 
-                // Insert into SQLite
+                if (string.IsNullOrEmpty(address)) continue;
+
+                // Cleanup Masks (Wildcards)
+                d1 = d1.Replace("*", "x").Replace(" ", "");
+                d2 = d2.Replace("*", "x").Replace(" ", "");
+                d3 = d3.Replace("*", "x").Replace(" ", "");
+
+                // Only insert if we have at least one mask
+                if (string.IsNullOrEmpty(d1) && string.IsNullOrEmpty(d2) && string.IsNullOrEmpty(d3)) continue;
+
                 DefinitionsDBHelper.AddEntry(name, module, address, d1, d2, d3, notes);
             }
         }

@@ -1542,6 +1542,18 @@ public partial class Form1 : Form
               stringBuilder.AppendLine($"{arySrc3[index31]} bit {Conversions.ToString(arySrc4[index31])}  val 0");
             else if (arySrc5[index31] == index14)
               stringBuilder.AppendLine($"{arySrc3[index31]} bit {Conversions.ToString(arySrc4[index31])}  val 1");
+            
+            // --- Library Lookup ---
+            var candidates = CommonDatabase.GetFeaturesForAddress(arySrc3[index31]);
+            if (candidates != null && candidates.Count > 0)
+            {
+                 foreach(var cand in candidates)
+                 {
+                     stringBuilder.AppendLine($"       Possible Match: {cand.Name} (Mask: {cand.Data1Mask} {cand.Data2Mask})");
+                 }
+            }
+            // ----------------------
+
             arySrc9 = (string[]) Utils.CopyArray((Array) arySrc9, (Array) new string[checked (index30 + 1)]);
             arySrc10 = (int[]) Utils.CopyArray((Array) arySrc10, (Array) new int[checked (index30 + 1)]);
             arySrc11 = (int[]) Utils.CopyArray((Array) arySrc11, (Array) new int[checked (index30 + 1)]);
