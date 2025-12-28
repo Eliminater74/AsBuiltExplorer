@@ -1,0 +1,27 @@
+Era,Model,Module,Address,Hex Mask,Value,Description,Notes
+Legacy,F-150/Exped,GEM,726-02-01,0000-FFFF-0000,2323,TPMS: 35 PSI,Standard setting
+Legacy,F-150/Exped,GEM,726-02-01,0000-FFFF-0000,2D2D,TPMS: 45 PSI,Load Range D
+Legacy,F-150/Exped,GEM,726-02-01,0000-FFFF-0000,3232,TPMS: 50 PSI,Load Range E
+Legacy,F-150/Exped,GEM,726-02-01,0000-FFFF-0000,3C3C,TPMS: 60 PSI,Max Load
+Legacy,All Fords,ACM,727-01-01,0000-000F-0000,0,Subwoofer: Disabled,Clean signal output
+Legacy,All Fords,ACM,727-01-01,0000-000F-0000,8,Subwoofer: Enabled,Audiophile/Sony Output
+Legacy,F-150/Exped,IPC,720-01-01,0000-F000-0000,D,Running Boards: Menu Enable,Adds Auto/Off/Out
+Legacy,F-150/Exped,IPC,720-01-01,0000-F000-0000,7,Running Boards: Menu Disable,Hides menu
+Legacy,Super Duty,IC,720-01-01,0000-000F-0000,3,Compass: Enabled,Enables Compass in Cluster
+Legacy,Super Duty,IC,720-01-01,0000-000F-0000,B,Compass: Disabled,Disables Compass
+Modern,F-150 (15+),BCM,726-27-01,0000-0001-0000,0,Bambi Mode: Enabled,Fogs stay ON with High Beams
+Modern,F-150 (15+),BCM,726-27-01,0000-0001-0000,1,Bambi Mode: Disabled,Factory Setting (Fogs cut out)
+Modern,F-150 (15+),BCM,726-41-02,0000-0001-0000,0,Double Honk: Disabled,No honk when leaving running truck
+Modern,F-150 (15+),BCM,726-41-02,0000-0001-0000,1,Double Honk: Enabled,Factory Setting
+Modern,F-150 (15+),BCM,726-17-01,0000-0001-0000,1,Global Window: Open (BCM),Part 1 of 2
+Modern,F-150 (15+),BCM,726-17-02,0000-0001-0000,1,Global Window: Close (BCM),Part 2 of 2
+Modern,Mustang S550,ACM,727-01-01,0000-0001-0000,0,Active Noise Control: Disabled,Turns off fake engine noise
+Modern,Mustang S550,APIM,7D0-01-01,0000-000F-0000,2,Boot Screen: GT350,Cobra Logo Startup
+Modern,Mustang S550,APIM,7D0-01-01,0000-000F-0000,B,Boot Screen: Raptor,Raptor Logo Startup
+Modern,Mustang S550,APIM,7D0-01-01,0000-000F-0000,C,Boot Screen: Lincoln,Lincoln Theme
+Modern,All Fords,APIM,7D0-01-02,0000-0001-0000,1,Navigation: Enabled,Activates Nav tab (Need Map Card)
+Modern,All Fords,APIM,7D0-02-01,0000-000F-0000,E,Background: Timeless,Cleaner Sync 3 Look
+Modern,F-150 (15+),IPC,720-07-01,0000-000F-0000,5,Temps: Enabled,Show Numbers above Eng/Trans Gauges
+Modern,Super Duty,IPC,720-01-01,0000-000F-0000,9,DPF %: Enabled,Show Soot Level in Cluster
+Modern,F-150 (15+),DDM,740-05-01,0000-0001-0000,1,Global Window: Open (Driver),Part 3 of 4
+Modern,F-150 (15+),PDM,741-05-01,0000-0001-0000,1,Global Window: Open (Pass),Part 4 of 4
