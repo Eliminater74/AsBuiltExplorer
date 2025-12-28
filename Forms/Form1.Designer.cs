@@ -161,6 +161,21 @@ namespace AsBuiltExplorer
             this.Label18 = new System.Windows.Forms.Label();
             this.grpChecksum = new System.Windows.Forms.GroupBox();
             this.grpConverter = new System.Windows.Forms.GroupBox();
+            this.grpTPMS = new System.Windows.Forms.GroupBox();
+            this.numTPMS_PSI = new System.Windows.Forms.NumericUpDown();
+            this.tbxTPMS_Hex = new System.Windows.Forms.TextBox();
+            this.lblTPMS_Desc = new System.Windows.Forms.Label();
+            this.grpAudio = new System.Windows.Forms.GroupBox();
+            this.chkAudio_Sub = new System.Windows.Forms.CheckBox();
+            this.chkAudio_DVD = new System.Windows.Forms.CheckBox();
+            this.chkAudio_Sat = new System.Windows.Forms.CheckBox();
+            this.tbxAudio_Hex = new System.Windows.Forms.TextBox();
+            this.lblAudio_Desc = new System.Windows.Forms.Label();
+            this.grpVIN = new System.Windows.Forms.GroupBox();
+            this.txtVIN_Input = new System.Windows.Forms.TextBox();
+            this.txtVIN_Hex = new System.Windows.Forms.TextBox();
+            this.btnVIN_Convert = new System.Windows.Forms.Button();
+            this.lblVIN_Desc = new System.Windows.Forms.Label();
 
             this.tbxDeduceReport2 = new System.Windows.Forms.TextBox();
             this.tabMods = new System.Windows.Forms.TabPage();
@@ -806,6 +821,9 @@ namespace AsBuiltExplorer
             // TabPage2
             // 
             this.TabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.TabPage2.Controls.Add(this.grpAudio);
+            this.TabPage2.Controls.Add(this.grpVIN);
+            this.TabPage2.Controls.Add(this.grpTPMS);
             this.TabPage2.Controls.Add(this.grpConverter);
             this.TabPage2.Controls.Add(this.grpChecksum);
             this.TabPage2.Location = new System.Drawing.Point(4, 25);
@@ -814,7 +832,7 @@ namespace AsBuiltExplorer
             this.TabPage2.Padding = new System.Windows.Forms.Padding(4);
             this.TabPage2.Size = new System.Drawing.Size(991, 562);
             this.TabPage2.TabIndex = 1;
-            this.TabPage2.Text = "Checksum Calc";
+            this.TabPage2.Text = "Calculators & Tools";
             this.TabPage2.Click += new System.EventHandler(this.TabPage2_Click);
             // 
             // grpChecksum
@@ -858,6 +876,168 @@ namespace AsBuiltExplorer
             this.grpConverter.TabIndex = 1;
             this.grpConverter.TabStop = false;
             this.grpConverter.Text = "Quick Converter";
+            // 
+            // grpTPMS
+            // 
+            this.grpTPMS.Controls.Add(this.lblTPMS_Desc);
+            this.grpTPMS.Controls.Add(this.tbxTPMS_Hex);
+            this.grpTPMS.Controls.Add(this.numTPMS_PSI);
+            this.grpTPMS.Location = new System.Drawing.Point(440, 300);
+            this.grpTPMS.Name = "grpTPMS";
+            this.grpTPMS.Size = new System.Drawing.Size(250, 150);
+            this.grpTPMS.TabIndex = 2;
+            this.grpTPMS.TabStop = false;
+            this.grpTPMS.Text = "Tire Pressure (TPMS)";
+            // 
+            // numTPMS_PSI
+            // 
+            this.numTPMS_PSI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numTPMS_PSI.Location = new System.Drawing.Point(20, 30);
+            this.numTPMS_PSI.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.numTPMS_PSI.Name = "numTPMS_PSI";
+            this.numTPMS_PSI.Size = new System.Drawing.Size(80, 26);
+            this.numTPMS_PSI.TabIndex = 0;
+            this.numTPMS_PSI.ValueChanged += new System.EventHandler(this.numTPMS_PSI_ValueChanged);
+            // 
+            // tbxTPMS_Hex
+            // 
+            this.tbxTPMS_Hex.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxTPMS_Hex.Location = new System.Drawing.Point(120, 30);
+            this.tbxTPMS_Hex.Name = "tbxTPMS_Hex";
+            this.tbxTPMS_Hex.ReadOnly = true;
+            this.tbxTPMS_Hex.Size = new System.Drawing.Size(60, 26);
+            this.tbxTPMS_Hex.TabIndex = 1;
+            this.tbxTPMS_Hex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lblTPMS_Desc
+            // 
+            this.lblTPMS_Desc.AutoSize = true;
+            this.lblTPMS_Desc.Location = new System.Drawing.Point(20, 70);
+            this.lblTPMS_Desc.Name = "lblTPMS_Desc";
+            this.lblTPMS_Desc.Size = new System.Drawing.Size(200, 32);
+            this.lblTPMS_Desc.TabIndex = 2;
+            this.lblTPMS_Desc.Text = "Enter PSI. Result is Hex value\r\nfor 726-02-01.";
+            // 
+            // grpAudio
+            // 
+            this.grpAudio.Controls.Add(this.lblAudio_Desc);
+            this.grpAudio.Controls.Add(this.tbxAudio_Hex);
+            this.grpAudio.Controls.Add(this.chkAudio_Sat);
+            this.grpAudio.Controls.Add(this.chkAudio_DVD);
+            this.grpAudio.Controls.Add(this.chkAudio_Sub);
+            this.grpAudio.Location = new System.Drawing.Point(440, 460);
+            this.grpAudio.Name = "grpAudio";
+            this.grpAudio.Size = new System.Drawing.Size(250, 150);
+            this.grpAudio.TabIndex = 4;
+            this.grpAudio.TabStop = false;
+            this.grpAudio.Text = "Audio Config (Legacy)";
+            // 
+            // chkAudio_Sub
+            // 
+            this.chkAudio_Sub.AutoSize = true;
+            this.chkAudio_Sub.Location = new System.Drawing.Point(20, 25);
+            this.chkAudio_Sub.Name = "chkAudio_Sub";
+            this.chkAudio_Sub.Size = new System.Drawing.Size(160, 20);
+            this.chkAudio_Sub.TabIndex = 0;
+            this.chkAudio_Sub.Text = "Audiophile / Subwoofer";
+            this.chkAudio_Sub.UseVisualStyleBackColor = true;
+            this.chkAudio_Sub.CheckedChanged += new System.EventHandler(this.chkAudio_CheckedChanged);
+            // 
+            // chkAudio_DVD
+            // 
+            this.chkAudio_DVD.AutoSize = true;
+            this.chkAudio_DVD.Location = new System.Drawing.Point(20, 50);
+            this.chkAudio_DVD.Name = "chkAudio_DVD";
+            this.chkAudio_DVD.Size = new System.Drawing.Size(160, 20);
+            this.chkAudio_DVD.TabIndex = 1;
+            this.chkAudio_DVD.Text = "Rear DVD Entertainment";
+            this.chkAudio_DVD.UseVisualStyleBackColor = true;
+            this.chkAudio_DVD.CheckedChanged += new System.EventHandler(this.chkAudio_CheckedChanged);
+            // 
+            // chkAudio_Sat
+            // 
+            this.chkAudio_Sat.AutoSize = true;
+            this.chkAudio_Sat.Location = new System.Drawing.Point(20, 75);
+            this.chkAudio_Sat.Name = "chkAudio_Sat";
+            this.chkAudio_Sat.Size = new System.Drawing.Size(120, 20);
+            this.chkAudio_Sat.TabIndex = 2;
+            this.chkAudio_Sat.Text = "Satellite Radio";
+            this.chkAudio_Sat.UseVisualStyleBackColor = true;
+            this.chkAudio_Sat.CheckedChanged += new System.EventHandler(this.chkAudio_CheckedChanged);
+            // 
+            // tbxAudio_Hex
+            // 
+            this.tbxAudio_Hex.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxAudio_Hex.Location = new System.Drawing.Point(120, 105);
+            this.tbxAudio_Hex.Name = "tbxAudio_Hex";
+            this.tbxAudio_Hex.ReadOnly = true;
+            this.tbxAudio_Hex.Size = new System.Drawing.Size(80, 26);
+            this.tbxAudio_Hex.TabIndex = 3;
+            // 
+            // lblAudio_Desc
+            // 
+            this.lblAudio_Desc.AutoSize = true;
+            this.lblAudio_Desc.Location = new System.Drawing.Point(20, 110);
+            this.lblAudio_Desc.Name = "lblAudio_Desc";
+            this.lblAudio_Desc.Size = new System.Drawing.Size(90, 16);
+            this.lblAudio_Desc.TabIndex = 4;
+            this.lblAudio_Desc.Text = "727-01-01 Hex:";
+            // 
+            // grpVIN
+            // 
+            this.grpVIN.Controls.Add(this.lblVIN_Desc);
+            this.grpVIN.Controls.Add(this.btnVIN_Convert);
+            this.grpVIN.Controls.Add(this.txtVIN_Hex);
+            this.grpVIN.Controls.Add(this.txtVIN_Input);
+            this.grpVIN.Location = new System.Drawing.Point(710, 20);
+            this.grpVIN.Name = "grpVIN";
+            this.grpVIN.Size = new System.Drawing.Size(260, 430);
+            this.grpVIN.TabIndex = 3;
+            this.grpVIN.TabStop = false;
+            this.grpVIN.Text = "VIN to Hex (ABS Fix)";
+            // 
+            // txtVIN_Input
+            // 
+            this.txtVIN_Input.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtVIN_Input.Location = new System.Drawing.Point(20, 30);
+            this.txtVIN_Input.MaxLength = 17;
+            this.txtVIN_Input.Name = "txtVIN_Input";
+            this.txtVIN_Input.Size = new System.Drawing.Size(220, 22);
+            this.txtVIN_Input.TabIndex = 0;
+            this.txtVIN_Input.Text = "VIN...";
+            // 
+            // btnVIN_Convert
+            // 
+            this.btnVIN_Convert.Location = new System.Drawing.Point(20, 60);
+            this.btnVIN_Convert.Name = "btnVIN_Convert";
+            this.btnVIN_Convert.Size = new System.Drawing.Size(220, 30);
+            this.btnVIN_Convert.TabIndex = 1;
+            this.btnVIN_Convert.Text = "Convert to Hex Blocks";
+            this.btnVIN_Convert.UseVisualStyleBackColor = true;
+            this.btnVIN_Convert.Click += new System.EventHandler(this.btnVIN_Convert_Click);
+            // 
+            // txtVIN_Hex
+            // 
+            this.txtVIN_Hex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVIN_Hex.Location = new System.Drawing.Point(20, 100);
+            this.txtVIN_Hex.Multiline = true;
+            this.txtVIN_Hex.Name = "txtVIN_Hex";
+            this.txtVIN_Hex.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtVIN_Hex.Size = new System.Drawing.Size(220, 310);
+            this.txtVIN_Hex.TabIndex = 2;
+            // 
+            // lblVIN_Desc
+            // 
+            this.lblVIN_Desc.AutoSize = true;
+            this.lblVIN_Desc.Location = new System.Drawing.Point(20, 420);
+            this.lblVIN_Desc.Name = "lblVIN_Desc";
+            this.lblVIN_Desc.Size = new System.Drawing.Size(0, 16);
+            this.lblVIN_Desc.TabIndex = 3;
+            
 
 
             // 
@@ -1945,6 +2125,12 @@ namespace AsBuiltExplorer
             this.Data3hexToolStripMenuItem.Click += new System.EventHandler(this.Data3hexToolStripMenuItem_Click);
             this.Data2hexToolStripMenuItem.Click += new System.EventHandler(this.Data2hexToolStripMenuItem_Click);
             this.Data1hexToolStripMenuItem.Click += new System.EventHandler(this.Data1hexToolStripMenuItem_Click);
+            this.Data2hexToolStripMenuItem.Click += new System.EventHandler(this.Data2hexToolStripMenuItem_Click);
+            this.Data3hexToolStripMenuItem.Click += new System.EventHandler(this.Data3hexToolStripMenuItem_Click);
+
+            this.tbxData1hex.TextChanged += new System.EventHandler(this.tbxData1hex_TextChanged);
+            this.tbxData2hex.TextChanged += new System.EventHandler(this.tbxData2hex_TextChanged);
+            this.tbxData3hex.TextChanged += new System.EventHandler(this.tbxData3hex_TextChanged);
             this.EntireLineToolStripMenuItem.Click += new System.EventHandler(this.EntireLineToolStripMenuItem_Click);
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
 
@@ -2119,6 +2305,24 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.Label Label10;
     private System.Windows.Forms.Label Label11;
     private System.Windows.Forms.Label Label13;
+
+    private System.Windows.Forms.GroupBox grpTPMS;
+    private System.Windows.Forms.NumericUpDown numTPMS_PSI;
+    private System.Windows.Forms.TextBox tbxTPMS_Hex;
+    private System.Windows.Forms.Label lblTPMS_Desc;
+    
+    private System.Windows.Forms.GroupBox grpVIN;
+    private System.Windows.Forms.TextBox txtVIN_Input;
+    private System.Windows.Forms.TextBox txtVIN_Hex;
+    private System.Windows.Forms.Button btnVIN_Convert;
+    private System.Windows.Forms.Label lblVIN_Desc;
+
+    private System.Windows.Forms.GroupBox grpAudio;
+    private System.Windows.Forms.CheckBox chkAudio_Sub;
+    private System.Windows.Forms.CheckBox chkAudio_DVD;
+    private System.Windows.Forms.CheckBox chkAudio_Sat;
+    private System.Windows.Forms.TextBox tbxAudio_Hex;
+    private System.Windows.Forms.Label lblAudio_Desc;
 
     private System.Windows.Forms.GroupBox grpChecksum;
     private System.Windows.Forms.GroupBox grpConverter;

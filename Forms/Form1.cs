@@ -1537,6 +1537,14 @@ public partial class Form1 : Form
     string str3 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData3hex.Text);
     this.tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
     this.tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+    ValidateChecksum();
+  }
+
+  // Added missing handler for Data2
+  private void tbxData2hex_TextChanged(object sender, EventArgs e)
+  {
+      // Re-run logic if needed, or just validate
+      ValidateChecksum();
   }
 
   private void tbxData3hex_TextChanged(object sender, EventArgs e)
@@ -1550,11 +1558,48 @@ public partial class Form1 : Form
     string str3 = modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxData3hex.Text);
     this.tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
     this.tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+    ValidateChecksum();
   }
 
   private void tbxChecksumHex_TextChanged(object sender, EventArgs e)
   {
     this.tbxChecksumBin.Text = Strings.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(this.tbxChecksumHex.Text), 1, 8);
+    ValidateChecksum();
+  }
+
+  private void ValidateChecksum()
+  {
+      if (string.IsNullOrEmpty(tbxModIDhex.Text) || 
+          string.IsNullOrEmpty(tbxData1hex.Text) || 
+          string.IsNullOrEmpty(tbxData2hex.Text) || 
+          string.IsNullOrEmpty(tbxData3hex.Text)) return;
+
+      string calculated = modAsBuilt.AsBuilt_CalculateChecksum(
+          tbxModIDhex.Text, 
+          tbxData1hex.Text + tbxData2hex.Text + tbxData3hex.Text);
+      
+      if (tbxChecksumHex.Text.Trim().ToUpper() == calculated.Trim().ToUpper())
+      {
+          tbxChecksumHex.BackColor = Color.LightGreen;
+      }
+      else
+      {
+          tbxChecksumHex.BackColor = Color.LightPink;
+      }
+  }
+
+  private void chkAudio_CheckedChanged(object sender, EventArgs e)
+  {
+      // Byte 1: 1=Base, 4=DVD
+      string d1 = chkAudio_DVD.Checked ? "4" : "1";
+      // Byte 2: 0=Std, 8=Sat
+      string d2 = chkAudio_Sat.Checked ? "8" : "0";
+      // Byte 3: 4 (seems constant in user example 1040 vs 4848)
+      string d3 = "4";
+      // Byte 4: 0=Base, 8=Sub
+      string d4 = chkAudio_Sub.Checked ? "8" : "0";
+      
+      tbxAudio_Hex.Text = d1 + d2 + d3 + d4;
   }
 
   private void Button2_Click_2(object sender, EventArgs e)
@@ -3311,6 +3356,30 @@ label_24:
       }
 
 }
+  private void numTPMS_PSI_ValueChanged(object sender, EventArgs e)
+  {
+      int psi = (int)numTPMS_PSI.Value;
+      tbxTPMS_Hex.Text = psi.ToString("X2");
+  }
+
+  private void btnVIN_Convert_Click(object sender, EventArgs e)
+  {
+      string vin = txtVIN_Input.Text;
+      if (string.IsNullOrWhiteSpace(vin)) return;
+
+      StringBuilder sb = new StringBuilder();
+      foreach (char c in vin)
+      {
+          sb.Append(((int)c).ToString("X2") + " ");
+      }
+      txtVIN_Hex.Text = sb.ToString().Trim();
+  }
+
+
+
+
+
 }
 }
+
 
