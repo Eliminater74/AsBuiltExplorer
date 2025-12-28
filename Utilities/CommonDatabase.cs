@@ -36,11 +36,9 @@ namespace AsBuiltExplorer
             // 1. Ensure DB exists
             DefinitionsDBHelper.Initialize();
 
-            // 2. Check if we need to migrate (First Run)
-            if (DefinitionsDBHelper.IsEmpty())
-            {
-                ImportFromCSV();
-            }
+            // 2. Import any new CSVs found in CustomCSV folder
+            // (We do this every time because processed files get renamed to .bak)
+            ImportFromCSV();
 
             // 3. Load from SQL to Memory (for fast FindMatch)
             LoadFromSQL();
@@ -103,6 +101,7 @@ namespace AsBuiltExplorer
 
                 if (files.Length == 0) return;
 
+                int count = 0;
                 foreach (var path in files)
                 {
                     ParseAndInsertCSV(path);
@@ -113,8 +112,14 @@ namespace AsBuiltExplorer
                         string backupPath = path + ".bak";
                         if (File.Exists(backupPath)) File.Delete(backupPath);
                         File.Move(path, backupPath);
+                        count++;
                     }
                     catch { /* Ignore file lock issues, migration is what matters */ }
+                }
+
+                if (count > 0)
+                {
+                    MessageBox.Show($"Successfully imported {count} new definition files into the Common Database!", "Library Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
