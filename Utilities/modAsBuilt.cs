@@ -494,13 +494,11 @@ label_6:
     bool flag7 = false;
     bool flag8 = false;
     int index = -1;
-    bool flag9 = true;
 label_1:
     while (true)
     {
       do
       {
-        flag9 = false;
         bool flag10;
         try
         {

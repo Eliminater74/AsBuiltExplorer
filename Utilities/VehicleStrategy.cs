@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AsBuiltExplorer;
 
 namespace AsBuiltExplorer.Utilities
 {
@@ -33,7 +34,7 @@ namespace AsBuiltExplorer.Utilities
     {
         public string GetModuleName(string address)
         {
-            if (string.IsNullOrEmpty(address) || address.Length < 3) return "Unknown";
+            if (string.IsNullOrEmpty(address) || address.Length < 3) return "";
             string prefix = address.Substring(0, 3);
 
             switch (prefix)
@@ -44,7 +45,10 @@ namespace AsBuiltExplorer.Utilities
                 case "737": return "HVAC"; // Heating Ventilation Air Conditioning
                 case "760": return "ABS"; // Anti-Lock Brake System
                 case "7E0": return "PCM"; // Powertrain Control Module
-                default: return "Unknown";
+                default: 
+                    // Fallback to generic database
+                    string dbName = ModuleDatabase.GetModuleName(address);
+                    return string.IsNullOrEmpty(dbName) ? "Unknown" : dbName;
             }
         }
 
@@ -61,7 +65,7 @@ namespace AsBuiltExplorer.Utilities
     {
         public string GetModuleName(string address)
         {
-            if (string.IsNullOrEmpty(address) || address.Length < 3) return "Unknown";
+            if (string.IsNullOrEmpty(address) || address.Length < 3) return "";
             string prefix = address.Substring(0, 3);
 
             switch (prefix)
@@ -74,7 +78,10 @@ namespace AsBuiltExplorer.Utilities
                 case "760": return "ABS"; // Anti-Lock Brake System
                 case "754": return "TCU"; // Telematics Control Module (Modem)
                 case "706": return "IPMA"; // Image Processing Module A (Camera)
-                default: return "Unknown";
+                default: 
+                     // Fallback to generic database
+                    string dbName = ModuleDatabase.GetModuleName(address);
+                    return string.IsNullOrEmpty(dbName) ? "Unknown" : dbName;
             }
         }
 

@@ -79,7 +79,6 @@ internal sealed class MyProject
       else
         MyProject.MyForms.m_FormBeingCreated = new Hashtable();
       MyProject.MyForms.m_FormBeingCreated.Add((object) typeof (T), (object) null);
-      TargetInvocationException invocationException;
       try
       {
         return new T();

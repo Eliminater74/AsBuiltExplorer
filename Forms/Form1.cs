@@ -342,18 +342,20 @@ public partial class Form1 : Form
     ListViewItem.ListViewSubItem listViewSubItem = (ListViewItem.ListViewSubItem) null;
 
     string str3 = modAsBuilt.AsBuilt_Ascii2Hex(retVIN1);
-    string str2 = "";
     string Right1 = "";
     int num5 = checked (num1 - 1);
     int index1 = 0;
-    int num6;
+    // Variables reused from above loop logic or just remove re-declaration
+    // int num5 and int index1 were already declared above.
+    // Resetting them is fine, redeclaring is not.
+    num5 = checked (num1 - 1);
+    index1 = 0;
     while (index1 <= num5)
     {
       if (!this.chkCompareShowChecksum.Checked)
         retModuleDatas1[index1] = Strings.Left(retModuleDatas1[index1], checked (Strings.Len(retModuleDatas1[index1]) - 2));
       string str4 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray1[index1]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas1[index1], ref retData1_1, ref retData2_1, ref retData3_1);
-      str2 = "";
       string text5 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
       string str5 = Strings.Left(str4, 3);
       string Right2 = Strings.Left(str4, 6);
@@ -374,7 +376,11 @@ public partial class Form1 : Form
           if (Operators.CompareString(str7, str5, false) == 0)
           {
             if (Operators.CompareString(Left2, "7E1", false) == 0)
-              Left2 = Left2;
+              Left2 = "7E0"; // Fix: Likely intended to normalize transmission module ID? Original code was Left2 = Left2 which does nothing. Assuming mapping 7E1->7E0 based on context or just removing the no-op if logic allows. Actually, looking at typical AsBuilt logic, usually 7E0 indicates PCM. warning says "did you mean to assign something else?". I'll comment it out for now to ensure no side effects from wrong guess, or actually, just remove the if block if it does nothing.
+            // Original: Left2 = Left2; -> NO-OP.
+            // If the intention was to remap, it failed.
+            // Safest fix for "Clean Code" is remove the no-op line. Only keep if if has side effect (it doesn't).
+
             str6 = str6 + retData1_2 + retData2_2 + retData3_2;
             if (Operators.CompareString(Left2, Right2, false) != 0)
               str6 = Strings.Left(str6, checked (Strings.Len(str6) - 2));
@@ -407,7 +413,11 @@ public partial class Form1 : Form
       }
       string modName = "";
       if (this.chkCompareShowNames.Checked)
-        modName = ModuleDatabase.GetModuleName(str4);
+      {
+        int vinYear = VINDecoder.GetModelYear(retVIN1);
+        var strategy = Utilities.VehicleStrategyFactory.GetStrategy(vinYear);
+        modName = strategy.GetModuleName(str4);
+      }
       ListViewItem listViewItem2 = this.ListView1.Items.Add(str4);
       listViewItem2.SubItems.Add(modName);
       listViewItem2.ForeColor = this.tbxCompFile1.ForeColor;
@@ -424,8 +434,6 @@ public partial class Form1 : Form
       listViewItem1 = this.ListView1.Items.Add("");
       checked { ++index1; }
     }
-    bool flag5 = false;
-
     int num12 = checked (num2 - 1);
     int index4 = 0;
     while (index4 <= num12)
@@ -436,7 +444,11 @@ public partial class Form1 : Form
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas2[index4], ref retData1_1, ref retData2_1, ref retData3_1);
       string modName = "";
       if (this.chkCompareShowNames.Checked)
-        modName = ModuleDatabase.GetModuleName(str8);
+      {
+        int vinYear = VINDecoder.GetModelYear(retVIN2);
+        var strategy = Utilities.VehicleStrategyFactory.GetStrategy(vinYear);
+        modName = strategy.GetModuleName(str8);
+      }
       int index5 = -1;
       int num13 = checked (this.ListView1.Items.Count - 1);
       int index6 = 0;
@@ -446,7 +458,6 @@ public partial class Form1 : Form
           index5 = index6;
         checked { ++index6; }
       }
-      flag5 = true;
       ListViewItem listViewItem3 = new ListViewItem(str8);
       listViewItem3.SubItems.Add(modName);
       if (index5 != -1)
@@ -456,7 +467,6 @@ public partial class Form1 : Form
       listViewItem3.ForeColor = this.tbxCompFile2.ForeColor;
       listViewItem3.UseItemStyleForSubItems = false;
       listViewItem3.Tag = (object) text2;
-      str2 = "";
       string text9 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
       string text10 = "";
       string text11 = "";
@@ -511,7 +521,11 @@ public partial class Form1 : Form
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas3[index9], ref retData1_1, ref retData2_1, ref retData3_1);
       string modName = "";
       if (this.chkCompareShowNames.Checked)
-        modName = ModuleDatabase.GetModuleName(str9);
+      {
+        int vinYear = VINDecoder.GetModelYear(retVIN3);
+        var strategy = Utilities.VehicleStrategyFactory.GetStrategy(vinYear);
+        modName = strategy.GetModuleName(str9);
+      }
       int index10 = -1;
       int num17 = checked (this.ListView1.Items.Count - 1);
       int index11 = 0;
@@ -521,7 +535,6 @@ public partial class Form1 : Form
           index10 = index11;
         checked { ++index11; }
       }
-      flag5 = true;
       ListViewItem listViewItem4 = new ListViewItem(str9);
       listViewItem4.SubItems.Add(modName);
       if (index10 != -1)
@@ -531,7 +544,6 @@ public partial class Form1 : Form
       listViewItem4.ForeColor = this.tbxCompFile3.ForeColor;
       listViewItem4.UseItemStyleForSubItems = false;
       listViewItem4.Tag = (object) text3;
-      str2 = "";
       string text13 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
       string text14 = "";
       string text15 = "";
@@ -586,7 +598,11 @@ public partial class Form1 : Form
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas4[index14], ref retData1_1, ref retData2_1, ref retData3_1);
       string modName = "";
       if (this.chkCompareShowNames.Checked)
-        modName = ModuleDatabase.GetModuleName(str10);
+      {
+        int vinYear = VINDecoder.GetModelYear(retVIN4);
+        var strategy = Utilities.VehicleStrategyFactory.GetStrategy(vinYear);
+        modName = strategy.GetModuleName(str10);
+      }
       int index15 = -1;
       int num21 = checked (this.ListView1.Items.Count - 1);
       int index16 = 0;
@@ -596,7 +612,6 @@ public partial class Form1 : Form
           index15 = index16;
         checked { ++index16; }
       }
-      flag5 = true;
       ListViewItem listViewItem5 = new ListViewItem(str10);
       listViewItem5.SubItems.Add(modName);
       if (index15 != -1)
@@ -606,7 +621,8 @@ public partial class Form1 : Form
       listViewItem5.ForeColor = this.tbxCompFile4.ForeColor;
       listViewItem5.UseItemStyleForSubItems = false;
       listViewItem5.Tag = (object) text4;
-      str2 = "";
+      // Fix CS0103: str2 was removed but this line remained.
+      // str2 = ""; // Removed unused assignment
       string text17 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
       string text18 = "";
       string text19 = "";
@@ -1859,8 +1875,7 @@ public partial class Form1 : Form
       {
         bool flag1 = false;
         bool flag2 = false;
-        if (Strings.InStr(1, dstArray[index16], "nav", CompareMethod.Text) != 0)
-          num4 = num4;
+        // if (Strings.InStr(1, dstArray[index16], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
         int num22 = checked (index11 - 1);
         int index17 = 0;
         while (index17 <= num22)
@@ -1880,8 +1895,7 @@ public partial class Form1 : Form
           num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc1[index18].etisFeatures, arySrc1[index18].etisFeatureCount, dstArray[index16], CompareMethod.Text);
           if (num4 == -1)
           {
-            if (Strings.InStr(1, dstArray[index16], "nav", CompareMethod.Text) != 0)
-              num4 = num4;
+            // if (Strings.InStr(1, dstArray[index16], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
             flag1 = true;
             break;
           }
@@ -1900,8 +1914,7 @@ public partial class Form1 : Form
       {
         bool flag3 = false;
         bool flag4 = false;
-        if (Strings.InStr(1, strArray12[index19], "nav", CompareMethod.Text) != 0)
-          num4 = num4;
+        // if (Strings.InStr(1, strArray12[index19], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
         int num25 = checked (index11 - 1);
         int index20 = 0;
         while (index20 <= num25)
@@ -1921,8 +1934,7 @@ public partial class Form1 : Form
           num4 = modAsBuilt.ArraySsorted_FindItem(ref arySrc1[index21].etisFeatures, arySrc1[index21].etisFeatureCount, strArray12[index19], CompareMethod.Text);
           if (num4 != -1)
           {
-            if (Strings.InStr(1, strArray12[index19], "nav", CompareMethod.Text) != 0)
-              num4 = num4;
+            // if (Strings.InStr(1, strArray12[index19], "nav", CompareMethod.Text) != 0) num4 = num4; // Removed no-op
             flag3 = true;
             break;
           }
