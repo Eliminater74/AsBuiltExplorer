@@ -31,6 +31,9 @@ public partial class Form1 : Form
     this.Shown += new EventHandler(this.Form1_Shown);
     this.abDownloadTriggered = 0;
     this.InitializeComponent();
+
+    // Set Application Icon (Top Left)
+    try { this.Icon = new System.Drawing.Icon("app_icon.ico"); } catch { /* Ignore if missing */ }
   }
 
   private string VehicleInfo_GetModuleDataByID_Binary(
