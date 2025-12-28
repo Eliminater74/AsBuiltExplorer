@@ -398,7 +398,7 @@ namespace AsBuiltExplorer
             // lblComp3VIN
             // 
             this.lblComp3VIN.AutoSize = true;
-            this.lblComp3VIN.ForeColor = System.Drawing.Color.Indigo;
+            this.lblComp3VIN.ForeColor = System.Drawing.Color.DarkMagenta;
             this.lblComp3VIN.Location = new System.Drawing.Point(700, 85);
             this.lblComp3VIN.Name = "lblComp3VIN";
             this.lblComp3VIN.Size = new System.Drawing.Size(50, 16);
@@ -466,7 +466,7 @@ namespace AsBuiltExplorer
             // 
             // tbxCompFile3
             // 
-            this.tbxCompFile3.ForeColor = System.Drawing.Color.Indigo;
+            this.tbxCompFile3.ForeColor = System.Drawing.Color.DarkMagenta;
             this.tbxCompFile3.Location = new System.Drawing.Point(167, 82);
             this.tbxCompFile3.Name = "tbxCompFile3";
             this.tbxCompFile3.Size = new System.Drawing.Size(343, 22);
@@ -476,7 +476,7 @@ namespace AsBuiltExplorer
             // 
             this.Label22.AutoSize = true;
             this.Label22.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label22.ForeColor = System.Drawing.Color.Indigo;
+            this.Label22.ForeColor = System.Drawing.Color.DarkMagenta;
             this.Label22.Location = new System.Drawing.Point(24, 85);
             this.Label22.Name = "Label22";
             this.Label22.Size = new System.Drawing.Size(110, 17);
