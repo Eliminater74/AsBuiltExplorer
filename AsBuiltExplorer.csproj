@@ -164,6 +164,9 @@
     <None Include="README.md" />
     <None Include="app.config" />
     <Content Include="app_icon.ico" />
+    <Content Include="Help\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CustomCSV\CommonCodes.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

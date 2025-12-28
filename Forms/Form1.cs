@@ -113,6 +113,28 @@ public partial class Form1 : Form
       ModuleDatabase.LoadDatabase();
       ModuleDatabase.LoadDatabase();
       CommonDatabase.Load();
+
+      // Initialize Help Screen (TabPage7)
+      if (this.TabPage7.Controls.Count == 0) 
+      {
+          WebBrowser helpBrowser = new WebBrowser();
+          helpBrowser.Dock = DockStyle.Fill;
+          helpBrowser.IsWebBrowserContextMenuEnabled = false; 
+          helpBrowser.AllowWebBrowserDrop = false;
+          helpBrowser.ScriptErrorsSuppressed = true;
+          this.TabPage7.Controls.Add(helpBrowser);
+          
+          string helpPath = Path.Combine(Application.StartupPath, "Help", "index.html");
+          if (File.Exists(helpPath))
+          {
+              helpBrowser.Navigate(helpPath);
+          }
+          else
+          {
+               Label errLbl = new Label() { Text = "Help file not found: " + helpPath, Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter };
+               this.TabPage7.Controls.Add(errLbl);
+          }
+      }
       VehicleDatabase.Load(); // Load existing vehicles
       
       // Auto-Import from AsBuiltData folder

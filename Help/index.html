@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AsBuiltExplorer Help</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #004481; /* Ford Blue-ish */
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+            border-left: 5px solid #004481;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #e67e22;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        .section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .note {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AsBuiltExplorer Help</h1>
+    
+    <div class="section">
+        <h2>Introduction</h2>
+        <p>Welcome to <strong>AsBuiltExplorer</strong>, a powerful toolkit designed for "Digital Archaeology" of vehicle configuration data. This tool allows you to compare, analyze, and modify As-Built data files (.ab, .abt, .ucds) to discover hidden features and understand vehicle configurations.</p>
+    </div>
+
+    <div class="section">
+        <h2>Compare As-Built</h2>
+        <p>This is the core feature for discovering differences between vehicles.</p>
+        <ul>
+            <li><strong>Load Files</strong>: Load up to 4 different As-Built files to compare side-by-side.</li>
+            <li><strong>Smart Comparison</strong>: Differences are automatically highlighted.
+                <ul>
+                    <li><span style="background-color:mistyrose">Red Highlight</span>: Value mismatch.</li>
+                    <li><span style="background-color:lightyellow">Yellow Highlight</span>: Checksum difference only.</li>
+                </ul>
+            </li>
+            <li><strong>Known Features</strong>: The application attempts to translate hex data into human-readable feature names (e.g., "Heated Seats") based on the internal database.</li>
+            <li><strong>Right-Click Actions</strong>: Right-click any row to Identify Feature, Copy Data, or Edit.</li>
+        }
+    </div>
+
+    <div class="section">
+        <h2>Calculators & Tools</h2>
+        <p>Essential utilities for modifying hex data.</p>
+        <ul>
+            <li><strong>Checksum Calculator</strong>: Automatically calculate the correct checksum byte for modified data.</li>
+            <li><strong>Hex/Decimal Converter</strong>: Quick conversion between numbering systems.</li>
+            <li><strong>Bit Helper</strong>: Visualize specific bits within a byte (useful for toggle flags).</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Vehicle Database & Deducer</h2>
+        <p>Analyze patterns across multiple vehicles.</p>
+        <div class="note">
+            <strong>Tip:</strong> Use the "Scan Folder" button to import your entire collection of As-Built files into the local database for powerful searching.
+        </div>
+        <ul>
+            <li><strong>Deducer</strong>: Filter vehicles by features (e.g., "Find all F-150s with Sunroof") to isolate the specific address/bit controlling that feature.</li>
+            <li><strong>Analyze Library</strong>: Compare a specific file against your entire library to find unique or common settings.</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Generated for AsBuiltExplorer v1.0 | <a href="https://github.com/Eliminater74/AsBuiltExplorer">GitHub Project</a></p>
+    </footer>
+
+</body>
+</html>
