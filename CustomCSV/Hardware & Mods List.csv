@@ -1,0 +1,9 @@
+Feature,Module ID,Your Truck Status,Limited/KR Status,Action Required to Add
+Power Liftgate,776 (LTM),MISSING,PRESENT,Must buy Module 7L1T-14C144 + Motor + Harness
+Rear Park Aid,736 (PAM),MISSING,PRESENT,Must buy PAM Module + Bumper Harness + Sensors
+Power Running Boards,766 (PRB),MISSING,PRESENT (Some),Must buy PRB Module 7L74-14C357 + Motors + Harness
+Bambi Mode,N/A - Hardwired,N/A,N/A,Bend/Ground Pin 2 on Relay 201 (Kick Panel)
+Seatbelt Chime,N/A - Sequence,Enabled,Enabled,Perform Buckle/Unbuckle Cheat Code Sequence
+Dark Car Mode,GEM / SJB,Enabled,Enabled,Use FORScan Config (Not As-Built) to Disable
+Skid Plates,Mechanical,PRESENT,Varies,Factory installed on EL 2WD (Rare)
+Ground Point,Physical,Passenger Kick Panel,Passenger Kick Panel,Perfect for Aftermarket Amp Grounding

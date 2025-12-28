@@ -1,0 +1,12 @@
+VIN (Last 5),Trim,Body Style,Drivetrain,Audio Code (727-01-01),Cluster Code (720-01-01),Liftgate Module (776),Park Aid Module (736),Power Boards Menu,Notes
+51274 (YOURS),XLT,EL (Long),2WD,1040 (Base),9905 (Basic),MISSING,MISSING,No (Standard),Your Truck - Base Audio / No Sub
+75084,XLT,EL (Long),2WD,1840 (Sat Radio),9905 (Basic),MISSING,MISSING,No (Standard),Comparison XLT - Added Sat Radio
+33501,XLT,Std (Short),2WD,1040 (Base),9905 (Basic),MISSING,MISSING,No (Standard),Standard Wheelbase Donor
+42509,XLT,EL (Long),4WD,1040 (Base),9905 (Basic),MISSING,MISSING,No (Standard),4WD Version of your truck
+49574,XLT,Std (Short),4WD,4840 (Prem),6BF4 (Enhanced),MISSING,MISSING,No (Standard),Rare XLT with Premium Sound
+82118,Eddie Bauer,EL (Long),2WD,1848 (Sub+Sat),9105 (Msg Ctr),PRESENT,PRESENT,No (Standard),Luxury Donor
+41609,Eddie Bauer,EL (Long),4WD,4848 (DVD+Sub),9105 (Msg Ctr),PRESENT,PRESENT,No (Standard),Fully Loaded EB
+61893,Limited,EL (Long),4WD,4848 (DVD+Sub),9105 (Msg Ctr),PRESENT,PRESENT,No (Standard),Limited Trim Donor
+27863,Limited,EL (Long),2WD,4848 (DVD+Sub),9105 (Msg Ctr),PRESENT,PRESENT,No (Standard),Limited Trim Donor
+88177,King Ranch,Std (Short),4WD,1848 (Sub+Sat),9105 (Msg Ctr),PRESENT,PRESENT,YES (DFF6),Has Power Running Boards
+46673,King Ranch,Std (Short),4WD,1848 (Sub+Sat),9105 (Msg Ctr),PRESENT,PRESENT,No (7FF6),Missing Power Boards

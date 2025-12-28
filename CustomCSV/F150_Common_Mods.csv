@@ -1,0 +1,124 @@
+726-01-01,x*xx,xxxx,,"Fuel Prime Upon Door Ajar Feature: 0=no prime, 1=prime"
+726-01-01,xxx*,xxxx,,"PCM Wake Upon Door Ajar Feature: 0=no wake, 1=wake"
+726-01-01,xxxx,x*xx,,"Lighting Control Module Present: 0=disabled, 1=enabled"
+726-02-01,**xx,,,Diagnostic Reset Delay (ms)
+726-03-01,x*xx,xxxx,xx,"Body Manufacture Mode: 0=factory, 1=normal, 2=transport"
+726-03-01,xxx*,xxxx,xx,"Post Crash Alert Feature: 0=disable, 1=enable"
+726-03-01,xxxx,x*xx,xx,"Liftgate/Trunk Present: 0=none, 1=liftgate, 2=trunk"
+726-03-01,xxxx,xxx*,xx,"Number of Side Doors: 0=two, 1=four"
+726-04-01,x*xx,xxxx,,"Power 2nd/3rd Row Folding Seat Present: 0=disable, 2=row 2, 3=row 3"
+726-04-01,xxx*,xxxx,,"Global Close Feature: 0=disable, 1=remote, 2=key, 3=key and remote"
+726-04-01,xxxx,x*xx,,"Global Open Feature: 0=disable, 1=remote, 2=key, 3=key and remote"
+726-05-01,**xx,xxxx,xx,LIN Subnet 1 Schedule Table Config File Selector (count)
+726-05-01,xx**,xxxx,xx,LIN Subnet 2 Schedule Table Config File Selector (count)
+726-05-01,xxxx,x*xx,xx,"Park Brake Chime Activation Method: 0=speed, 1=PRNDL"
+726-05-01,xxxx,xxx*,xx,"Liftgate Type: 0=manual, 1=power"
+726-06-01,**xx,xxxx,xx,LIN Subnet 3 Schedule Table Config File Selector (count)
+726-06-01,xx**,xxxx,xx,LIN Subnet 4 Schedule Table Config File Selector (count)
+726-06-01,xxxx,x*xx,xx,"Remote LSlide: 0=null, 1=LSlide"
+726-06-01,xx**,xxx*,xx,"Remote RSlide: 0=null, 1=RSlide"
+726-07-01,x*xx,xx,,"Ignition System Type: 0=not configured, 1=key cylinder, 2=pushbutton, 3=passive"
+726-07-01,xx*x,xx,,"Ignition Power Shutdown: 0=disable, 1=enable"
+726-07-01,xxx*,xx,,"Customer Spare Key: 0=off, 1=on"
+726-08-01,x*xx,xx,,"Courtesy Lamp Dimming Type: 1=immediate, 2=theater dimming"
+726-08-01,xx*x,xx,,"Police Rear Door: 0=disabled, 1=enabled"
+726-08-01,xxx*,xx,,"Police Dark Car: 0=null, 1=dark"
+726-09-01,x*xx,xx,,"Autolamp Feature: 0=disabled, 1=enabled"
+726-09-01,xxx*,xx,,"Daytime Running Lights Feature: 0=not present, 1=present"
+726-10-01,xxxx,xx**,xx,Autolamp Delay Time (seconds)
+726-11-01,x*xx,xxxx,xx,"Daytime Running Lights Type: 0=none, 1=Low Beams, 2=Fog Lamps, 3=Turn Lamps"
+726-11-01,xxx*,xxxx,xx,"Fog Lamps Present: 0=disabled, 1=enabled, 2=enabled with high beams"
+726-11-01,xxxx,x*xx,xx,"Ancillary Body Module Present: 0=off, 1=on"
+726-11-01,xxxx,xxx*,xx,"Bulb Outage Rance ConfigFile Selection: 0=type 0, 1=type 1, 2=type 2, 3=type 3, 4=type 4"
+726-12-01,x*xx,xxxx,xx,"StopTurn Lamps Configuration: 0=Stop and Turn, 1=Turn Only"
+726-12-01,xxx*,xxxx,xx,"Ambient Light Sensor Present: 0=not present, 1=present"
+726-12-01,xxxx,x*xx,xx,"Daytime Running Lights uses Parklamps: 0=disable, 1=enable"
+726-12-01,xxxx,xx**,xx,"Dimming Level: 0C=Night12, 0D=Day1, 0E=Day2, 0F=Day3, 10=Day4, 11=Day5, 12=Day6"
+726-13-01,x*xx,xxxx,xx,"Outage Cfg LF Turn Lamp: 0=no outage, 1=outage"
+726-13-01,xxx*,xxxx,xx,"Outage Cfg RFTurn Lamp: 0=no outage, 1=outage"
+726-13-01,xxxx,x*xx,xx,"Outage Cfg Left Cornering Lamp: 0=no outage, 1=outage"
+726-13-01,xxxx,xxx*,xx,"Outage Cfg Right Cornering Lamp: 0=no outage, 1=outage"
+726-14-01,x*xx,xxxx,xx,"Bulb Outage LR Stop Turns Lamps: 0=no outage, 1=outage"
+726-14-01,xxx*,xxxx,xx,"Bulb Outage RR Stop Turns Lamps: 0=no outage, 1=outage"
+726-14-01,xxxx,x*xx,xx,"Bulb Outage LR Turn Lamp: 0=no outage, 1=outage"
+726-14-01,xxxx,xxx*,xx,"Bulb Outage RR Turn Lamp: 0=no outage, 1=outage"
+726-15-01,x*xx,xxxx,xx,"Driver Door Key Cylinder Circuit Present: 0=disable, 1=enable"
+726-15-01,xxx*,xxxx,xx,"Key Pad Present: 0=disable, 1=enable"
+726-15-01,xxxx,x*xx,xx,"Locking Horn Feedback Feature: 0=disable, 1=enable, 2=Inop"
+726-15-01,xxxx,xxx*,xx,"Locking Light Feedback Feature: 0=disable, 1=enable, 2=Inop"
+726-16-01,x*xx,xx,,"Trunk/Liftglass Release Present: 0=disable, 1=liftglass, 2=decklid"
+726-16-01,xx*x,xx,,"Lost PKE Notification: 0=disabled, 1=enabled"
+726-16-01,xxx*,xx,,"Smart Unlock: 0=disabled, 1=enabled"
+726-17-01,x*xx,xx,,"Unlocking Light Feedback Feature: 0=disable, 1=enable, 2=Inop"
+726-17-01,xxx*,xx,,"Integrated Key Head Transmitter Feature: 0=disable, 1=enable"
+726-18-01,x*xx,xxxx,xx,"RKE/IKT Present: 0=disable, 1=enable"
+726-18-01,xxx*,xxxx,xx,"RKE/IKT Control Code 0x02 action: 0=no action, 1=Glass Single, 2=Trunk Single, 3=LPSD Double, 4=RPSD Double, 5=PLG Double, 6=Glass Double, 7=PDL Double, 8=Trunk Double"
+726-18-01,xxxx,x*xx,xx,"RKE Control Code 0x04 action: 0=no action, 1=Glass Single, 2=Trunk Single, 3=LPSD Double, 4=RPSD Double, 5=PLG Double, 6=Glass Double, 7=PDL Double, 8=Trunk Double"
+726-18-01,xxxx,xxx*,xx,"RKE/IKT Control Code 0x40 action: 0=no action, 1=Glass Single, 2=Trunk Single, 3=LPSD Double, 4=RPSD Double, 5=PLG Double, 6=Glass Double, 7=PDL Double, 8=Trunk Double"
+726-19-01,x*xx,,,"Remote Start Feature: 0=disabled, 1=enabled"
+726-20-01,x*xx,xxxx,xx,"Panic Feature Activation Type: 0=disabled, 1=hold, 2=pulse, 3=double"
+726-20-01,xxx*,xxxx,xx,"Panic Feature Timeout Time: 0=disable, 1=enable"
+726-20-01,xxxx,x*xx,xx,"Perimeter Alarm Feature: 0=disable, 1=enable"
+726-20-01,xxxx,xx**,xx,Perimeter Alarm Max Activation (count)
+726-21-01,*xxx,xx,,"Security Ripcord: 0=disabled, 1=enabled"
+726-21-01,x*xx,xx,,"CSM Configuration: 0=disabled, 1=enabled"
+726-21-01,xx*x,xx,,"Audile Alarm: 0=none, 1=panic, 2=perimeter, 3=panic and perimeter"
+726-21-01,xxx*,xx,,"Security Horn: 0=not used, 1=used"
+726-22-01,x*xx,xxxx,xx,"TPMS Feature: 0=disabled, 1=enabled"
+726-22-01,xxx*,xxxx,xx,"Number of Tires Monitored by TPMS: 4=four, 6=six"
+726-22-01,xxxx,**xx,xx,Front Tire Placard Pressure (psi) - convert psi to hex
+726-22-01,xxxx,xx**,xx,Rear Tire Placard Pressure (psi) - convert psi to hex
+726-23-01,x*xx,xx,,"TPMS Autolearn Feature: 0=off, 1=on"
+726-23-01,xxx*,xx,,"TPMS Autorange Sensors Feature: 0=off, 1=on"
+726-24-01,x*xx,xx,,"TPMS Sensor Type: 0=MY06, 1=MY09"
+726-24-01,xxx*,xx,,"TPMS Sensor Pressure Range Type: 0=low, 1=high"
+726-25-01,****,xx,,Engine Off Battery Drain Limit (Percent)
+726-26-01,**xx,xxxx,xx,Maximum Number of Load Shed 1 Features (count)
+726-26-01,xx**,xxxx,xx,Load Shed Feature Map Row Selector (count)
+726-26-01,xxxx,****,xx,Critical Battery State of Charge 1 (percent)
+726-27-01,****,xxxx,xx,Engine Off Battery State of Charge Limit (percent)
+726-27-01,xxxx,****,xx,Load Shed Percent Battery State of Charge Maximum (percent)
+726-28-01,****,xx,,Engine Off Battery State of Charge Limit (percent)
+726-29-01,x*xx,,,"EPAS Load Shed: 0=false, 1=true"
+726-30-01,x*xx,,,"In-Vehicle Battery Management Configuration Feature: 0=false, 1=true"
+726-31-01,**xx,,,Climate Fan Speed Limit (detents)
+726-32-01,**xx,xx,,Climate Fan Speed Power Limit Cfg (detents)
+726-32-01,xx**,xx,,Coolant Fan Step Limit (detents)
+726-33-01,****,xx,,Target SOC Cfg (percent)
+726-34-01,xx**,**xx,,Battery U OCV Start (Volts)
+726-35-01,**xx,xx,,Rear Climate Fan Speed Limit (detents)
+726-35-01,xx**,xx,,Rear Climate Fan Speed Power Limit (count)
+726-36-01,**xx,xxxx,xx,LINsel RVC Cfg (count)
+726-36-01,xxx*,xxxx,xx,"Slave Exists CM Cfg: 0=not present, 1=present"
+726-36-01,xxxx,x*xx,xx,"Slave Exists ICM Cfg: 0=not present, 1=present"
+726-36-01,xxxx,xxx*,xx,"Slave Exists RVC Cfg: 0=not present, 1=present"
+726-37-01,x*xx,xxxx,,"Cornering Circuit Present: 0=not used, 1=used"
+726-37-01,xxx*,xxxx,,"Power Locks Trim Switch Present: 0=disable, 1=enable"
+726-37-01,xxxx,x*xx,,"Pulse Train Circuit Present: 0=disable, 1=enable"
+726-38-01,x*xx,,,"White Lighting Circuit Present: 0=not used, 1=used"
+726-39-01,x*xx,xxxx,,"Lift Glass Switch Circuit Present: 0=not present, 1=present"
+726-39-01,xxx*,xxxx,,"PATS Timed Security Access Feature: 0=not allowed, 1=allowed"
+726-39-01,xxxx,x*xx,,"Trailer Tow Relays Present: 0=no, 1=yes"
+726-40-01,x*xx,,,"Backlight Dim Open DTC: 0=not used, 1=used"
+726-41-01,x*xx,xx,,"Fog Lamp Circuit Present: 0=not used, 1=used"
+726-41-01,xxx*,xx,,"Puddle Lamp Circuit Present: 0=not used, 1=used"
+726-42-01,****,****,**xx,VIN (first 5 characters)
+726-42-02,**xx,,,VIN (6th character)
+726-43-01,****,****,**xx,VIN (7-11th characters)
+726-43-02,**xx,,,VIN (12th character)
+726-44-01,****,****,**xx,VIN (13-17th characters)
+726-44-02,**xx,,,Reserved
+726-45-01,x***,xxxx,xxxx,Axle Ratio
+726-45-01,xxxx,****,xxxx,Tire Circumference
+726-45-02,**xx,,,RCM Aux ID
+726-46-01,***x,xxxx,xxxx,Forward Collision Warning (FCW) & Engine Fuel Capability (EFC):
+"088=without FCW & EFC=gasoline, 090=without FCW & EFC=diesel"
+"098=without FCW & EFC=Gas/Electric Hybrid, 0A0=without FCW & EFC=Hydrogen Fuel Cell"
+"108=with FCW & EFC=gasoline, 110=with FCW & EFC=diesel"
+"118=with FCW & EFC=Gas/Electric Hybrid, 120=with FCW & EFC=Hydrogen Fuel Cell"
+726-46-01,xxx*,xxxx,xxxx,"Cruise Control: 4=without cruise control, 8=cruise control, C=adaptive cruise control"
+726-46-01,xxxx,*xxx,xxxx,"Collision Mitigatiion: 2=without collision mitigation by braking, 4=collision mitigation by braking"
+726-46-01,xxxx,x*xx,xxxx,"Keyless Entry and Start: 2=without keyless entry and start, 4=keyless entry and start, 6=keyless start, 8=keyless entry and start less recharging"
+726-46-01,xxxx,xx*x,xxxx,"Four Wheel Drive Type: 2=not 4WD, 4=Selectable 4WD, 6=permanent 4WD, 8=AWD"
+726-46-01,xxxx,xxx*,*xx,"Steering Wheel Location (SWL) & Gearbox Type (GT): 48=SWL Left Hand Drive & GT Manual. 50=SWL Left Hand Drive & GT Automatic, 88=SWL Right Hand Drive & GT Manual, 90=SWL Right Hand Drive & GT Automatic"
+726-47-01,x*xx,,,"PATS Key Read Feature: 0=no read key, 1=read keys"

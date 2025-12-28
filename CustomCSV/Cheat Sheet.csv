@@ -1,0 +1,15 @@
+System,Module,Address,Hex Code,Description,Notes
+Audio,ACM,727-01-01,xxxx-xx0x-xxxx,Subwoofer OFF (Base),Use for Aftermarket Amps (Clean Signal)
+Audio,ACM,727-01-01,xxxx-xx8x-xxxx,Subwoofer ON (Audiophile),Low Voltage Output for Factory Amp
+Audio,ACM,727-01-01,1xxx-xxxx-xxxx,Standard Radio,No Rear Seat Entertainment
+Audio,ACM,727-01-01,4xxx-xxxx-xxxx,RSE Enabled,DVD System Active
+Cluster,IPC,720-01-01,9905-xxxx-xx,Basic Display,Found in XLT
+Cluster,IPC,720-01-01,9105-xxxx-xx,Message Center,Found in Limited/KR
+Running Boards,IPC,720-01-01,xxxx-7xxx-xx,Menu DISABLED,Power Boards Menu Hidden
+Running Boards,IPC,720-01-01,xxxx-Dxxx-xx,Menu ENABLED,Shows "Auto/Off/Out" in Dash
+Tire Pressure,BCM,726-02-01,xxxx-2323-xx,35 PSI,Factory Standard
+Tire Pressure,BCM,726-02-01,xxxx-2D2D-xx,45 PSI,Load Range D
+Tire Pressure,BCM,726-02-01,xxxx-3232-xx,50 PSI,Load Range E
+VIN Stamp,ABS,760-01-01,ASCII Text,VIN Encoded,Must copy lines 760-01 to 760-04 if swapping ABS module
+Climate HW,HVAC,Node ID,14C258,Manual Climate,3-Knob System (XLT)
+Climate HW,HVAC,Node ID,14C239,EATC Digital,Dual Zone Screen (Limited/KR)

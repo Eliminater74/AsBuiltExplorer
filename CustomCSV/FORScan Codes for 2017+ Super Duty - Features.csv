@@ -1,0 +1,131 @@
+NEW USERS READ FIRST:,"Installation and usage instructions are on the 'Setup Instructions' tab below including links to purchase an OBDII adapter on Amazon. When FORScan is completely installed and setup, review the tutorial document linked in the FORScan Training section BEFORE making any changes. Don't forget to backup your modules first!",,,,,,
+,,,,,,,
+Feature Name,As Built Module,Key Position,Example Value,New Value,Notes,FTE Member,Status
+TPMS (Tire Pressure Monitoring System) thresholds,BCM,726-40-01,xxxx 3C50 xxxx,xxxx 3C41 xxxx,"3C41 indicates 60 psi front 65 psi rear. First two digits are front, second two are rear. Replace either of those two values with the desired PSI hex equivalent. (28=40 PSI, 2d=45 PSI, 32=50 PSI, 37=55 PSI, 3C=60 PSI, 41=65 PSI, 46=70 PSI, 50=80 PSI)",switch.,Multiple Confirmations
+Double Horn Honk Disable,BCM,726-41-02,xxx1 xxxx xxxx,xxx0 xxxx xxxx,This disables the double honk when walking away from truck with engine running and key fob in pocket. Recommended to implement the Secure Idle (Police Mode) feature to prevent unauthorized driving away without the key fob.,switch.,Multiple Confirmations
+Fog Lights with High Beam LED and some HALOGEN,BCM,726-27-01,xxxx xxx1 xxxx,xxxx xxx0 xxxx,This allows LED fog lights to stay on when high beams are also turned on. This code has been confirmed to work with some halogen headlght trucks also. Also known as Bambi mode (to see deer better).,switch.,Multiple Confirmations
+Fog Lights with High Beam HALOGEN,BCM,726-27-01,x0xx xxxx xxxx,x1xx xxxx xxxx,This allows Halogen fog lights to stay on when high beams are also turned on. Also known as Bambi mode (to see deer better).,KubotaOrange76,Multiple Confirmations
+Show Temps on Gauges,IPC,720-07-01,xxxx xEA xxxx,xxxx x**x xxxx,"Display exact termperatures above the gauge on the center cluster. Replace ** with E5 with brake controller, 65 if no brake controller. A5 adds temps above gauges without adding boost gauge and boost data to menus.",,Multiple Confirmations
+Heated and Cooled Seats Icons on Home and Climate Screens,APIM,7D0-01-01,xxxx xxxx x4xx,xxxx xxxx x*xx,"1 = Cooled seats option on screen, no heated seats or heated wheel option.
+2 = Heated/cooled seats option on screen with no heated wheel option.
+3 = Heated seats on screen, no cooled seats and no heated wheel option.
+4 = No on screen heated/cooled seats on any screen, heated wheel is in top left.
+5 = Unknown
+6 = Heated/Cooled seats and heated wheel options on screen.
+7 = Heated seats and heated wheel, no cooled seats.
+8 = Rear Climate Control panel, no heated/cooled options for front.",AllGoNShow,Multiple Confirmations
+Fog Light Switches Off w/Blinker,BCM,726-28-02,xxxx x0xx xxxx,xxxx x1xx xxxx,"Confirmed on LED and halogen headlights/fog lights.
+0 (Default Operation - Fog Lights Constant), 1 (Fog Lights Switchback w/Blinker)",AllGoNShow,Multiple Confirmations
+Disable Door Lock Horn Honk,BCM,726-38-02,xxx1 xxxx xxxx,xxx0 xxxx xxxx,"1 (Enabled - Default), 0 (Disabled)",AllGoNShow,Multiple Confirmations
+Secure Idle (Police Mode),BCM,726-42-01,x0xx xxxx xxxx,x1xx xxxx xxxx,Prevents vehicle transmission from shifting out of Park without passive key inside vehicle (Shifter Locked w/No Key Detected message) 0=Disabled 1=Enabled,AllGoNShow,Multiple Confirmations
+Remember Fog Lights on Startup,BCM,726-27-01,xxxx x1xx xxxx,xxxx xxx0 xxxx,Default value does not remember either high beam or fog light status on key off/on. Headlight switch in Auto position. Restores previous setting only if lights are needed on next startup.,AllGoNShow,Multiple Confirmations
+Remember Fog Lights and High Beams on Startup,BCM,726-27-01,xxxx x1xx xxxx,xxxx xxx0 x1xx,Default value does not remember either high beam or fog light status on key off/on. Headlight switch in Auto position. Restores previous setting only if lights are needed on next startup.,AllGoNShow,Multiple Confirmations
+Speedometer Recalibration for Different Tire Size,BCM,726-12-01,xxxx xx00 xxxx,xxxx xx4C xxxx,"Forum comment: ""Original tire size 275/70r18, New size 285/75r18. No DTC codes after 900 miles. This is a small change. Larger tire size changes do calibrate the speedometer but a check engine light will persist."" The following can be used for a slightly larger calibration (approx 2.5%) without CEL: xxxx-0AAE-xxxx",KubotaOrange76,Multiple Confirmations
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx x7xx xxxx,GT350 Boot Screen Animation *Sync 3.0 only,RebelZ,Multiple Confirmations
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx x9xx xxxx,GT350 Boot Screen Animation *Sync 3.0 only,RebelZ,Multiple Confirmations
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx x5xx xxxx,Raptor SVT Boot Screen Animation *Sync 3.0 only,RebelZ,Multiple Confirmations
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx x6xx xxxx,Mustang Boot Screen Animation *Sync 3.0 only,RebelZ,Multiple Confirmations
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx x4xx xxxx,Lincoln Presidential Boot Screen Animation *Sync 3.0 only,RebelZ,Multiple Confirmations
+,BCM,726-31-02,,xxxx 07xx xxxx,Fixes Incorrect Color Choices When Using Lincoln Theme,Livinitup,Single Confirmation
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx x8xx xxxx,Vignale Boot Screen Animation *Sync 3.0 only,RebelZ,Multiple Confirmations
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx x5xx xxxx,"Raptor Ford Performance Boot Screen Animation *Sync 3.0, Sync 2.2",RebelZ,Multiple Confirmations
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx xCxx xxxx,"RS Boot Screen Animation *Sync 3.0, Sync 2.2",RebelZ,Multiple Confirmations
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx xBxx xxxx,"RS Boot Screen Animation *Sync 3.0, Sync 2.2",RebelZ,Multiple Confirmations
+Sync 3 Boot Screen Animations,APIM,7D0-02-01,xxxx x1xx xxxx,xxxx xDxx xxxx,"RS Boot Screen Animation *Sync 3.0, Sync 2.2",RebelZ,Multiple Confirmations
+Global Window Open/Close,BCM,726-17-01,0000 0000 0045,0101 0101 014A,"Allows front windows to open/close with remote button. To open windows, press the unlock button once on fob, then press and hold the unlock button again until front windows begin opening. To close windows, press and hold the lock button for approximately 5 seconds and release when windows begin to close. Window movement can be interrupted at any time by pressing either the lock or unlock buttons.",RebelZ,Multiple Confirmations
+,BCM,726-17-02,0101 0101 014B,0101 0101 014B,,,
+,BCM,726-30-01,0001 0000 005F,0101 xxxx xxxx,,,
+,DDM,740-05-01,9A00 E7,Dxxx xxxx xxxx,,,
+,PDM,741-05-01,8A00 D8,Dxxx xxxx xxxx,,,
+,IPC,720-02-01,3xxx xxxx xxxx,7xxx xxxx xxxx,Adds new menu item under Advanced Settings/Vehicle/Windows to enable Remote Close. Remote Open or Close can be enabled and disabled using the checkboxes.,KYLongRifle,Multiple Confirmations
+Disable Panic Alarm Horn,BCM,726-01-02,xxx0 xxxx xxxx,xxx1 xxxx xxxx,Disables the horn when pressing the panic button on key fob. Lights will still flash.,Livnitup,Single Confirmation
+Panic Alarm Button Press Count,BCM,726-37-01,xxxx xxx2 xxxx,xxxx xxx* xxxx,"Replace the asterisk with one of the following: 0=Panic alarm button on fob disabled, 1=Panic alarm button on fob requires 2 presses, 2=Panic alarm button on fob requires single press to activate.",Livnitup,Multiple Confirmations
+Enable/Disable Spot Lights,BCM,726-56-01,xxxx x1xx xxxx,xxxx x0xx xxxx,"1 for enable, 0 for disable",Livnitup,Single Confirmation
+Disable Tire Pressure Monitor,BCM,726-08-01,x1xx xxxx xxxx,x0xx xxxx xxxx,"1 for enable, 0 for disable",Livnitup,Multiple Confirmations
+Timeouts for Heated Steering Wheel,HSWM,714-01-01,*xxx xxxx xxxx,*xxx xxxx xxxx,"HSWM is Heated Steering Wheel Module. Replace the asterisk with one of the following: 1=Timeout disabled, 8=5 mins, 9=10 mins, A=12 mins, B=15 mins, C=18 mins, D=20 mins, E=25 mins, F=30 mins",Livnitup,"Not confirmed, possible F150 only module"
+Parking lamps on with low beams for DRL,BCM,726-26-02,x0xx xxxx xxxx,x1xx xxxx xxxx,Enables parking lamps while headlights are on low beam when in DRL (daytime running lights).,Livnitup,Waiting Confirmation
+Remove CD Option from Sync,APIM,7D0-04-01,x1xx xxxx xxxx,x0xx xxxx xxxx,Remove the CD player from source in the Sync screen,Livnitup,Multiple Confirmations
+Remove Sirius from Sync,APIM,7D0-01-01,*xxx xxxx xxxx,8xxx xxxx xxxx,"Removes Sirius as a media source in Sync. If * is A change to 8, if 2 change to 0. Change does not take effect immediately. Turn truck off, open and shut door, wait 30 seconds and restart.",Texmudder,Multiple Confirmations
+Courtesy Lamps Ramp Down,BCM,726-32-02,,xx** xxxx xxxx,Courtesy Lamps ramp down duration (seconds converted to hex),Livnitup,Waiting Confirmation
+Courtesy Lamps Ramp Up,BCM,726-32-02,,xxxx xx** xxxx,Courtesy Lamps ramp up duration (seconds converted to hex),Livnitup,Waiting Confirmation
+Courtesy Lamps Configuration,BCM,726-31-01,,xxxx x*xx xxxx,"Courtesy Lamps Cfg: 0=immediate, 1=Theater Dimming",Livnitup,Waiting Confirmation
+Puddle Lights Show Time,BCM,726-31-01,,xxxx xxxx **xx,Approach (Puddle) Light Show Max Time (seconds converted to hex). When truck unlocked via fob.,Livnitup,Waiting Confirmation
+Change Fuel Tank Size,IPC,720-03-01,xxx* **xx xxxx,xxx* **xx xxxx,"Change asterisks to one of the following: 30 Gal=4 4A, 34 Gal=5 07, 40 Gal=5 EA, 48 Gal=7 19, 50 Gal=7 65, 55 Gal=8 22, 60 Gal=8 DF, 68 Gal=A 0E, 70 Gal=A 5A (This parameter is in Liters in this format XXX.x. 55gal equals 208.198L so round to 208.2 and drop the decimal to get 2082. Convert decimal value 2082 to HEX equals 822 or 8 22.)",KYLongRifle,Multiple Confirmations
+Driver Seat Belt Chime Disable,IPC,720-01-01,xxxx xx6x xxxx,xxxx xx2x xxxx,Number 2 in this position disables the chime on the driver seat,jjmcc2,Waiting Confirmation
+Passenger Seat Belt Chime Diable,IPC,720-01-01,,xxxx xx4x xxxx,Number 4 in this position disables the chime on the passenger seat,jjmcc2,Waiting Confirmation
+Disble all Seat Belt Chimes,IPC,720-01-01,,xxxx xx0x xxxx,Number 0 in this position disables the chime on the driver and passenger seats. NOTE: Seat belts can be disabled via instructions in the owners manual,jjmcc2,Multiple Confirmations
+Autofold/Unfold Mirrors via Lock/Unlock on Fob,DDM,740-03-01,,x8xx xx,Autofold mirrors via unlock/lock on fob. ** Tow mirrors require swapping pins 18 & 19 on mirror connector. See link: http://www.f150forum.com/f118/tow-mirrors-auto-fold-mod-pictures-365884/. Fxxx works on trucks with 2 key fobs but FCxx is required if using 3 or 4 key fobs.,hollapm,Multiple Confirmations
+,DDM,740-12-01,,Fxxx or FCxx,,,
+,PDM,741-03-01,,x8xx xx,,,
+,PDM,741-12-01,,Fxxx or FCxx,,,
+Autofold/Unfold Mirrors (Lincoln Style),DDM,740-03-01,,x84x xx,"Autofold mirrors - Lincoln Style (doesn't unfold/fold with unlock/lock on fob...requires opening/closing door).
+** Tow mirrors require swapping pins 18 & 19 on mirror connector. See link: http://www.f150forum.com/f118/tow-mirrors-auto-fold-mod-pictures-365884/. Fxxx works on trucks with 2 key fobs but FCxx is required if using 3 or 4 key fobs.",hollapm,Multiple Confirmations
+,DDM,740-12-01,,Fxxx or FCxx,,,
+,PDM,741-03-01,,x84x xx,,,
+,PDM,741-12-01,,Fxxx or FCxx,,,
+Sync 3 Theme - Ford GT (Blue),APIM,7D0-01-02,,0xxx xxxx xxxx,Changes the Sync 3 screens to a GT theme. Splash screen will change to GT.,Livinitup,Multiple Confirmations
+,,7D0-02-01,,xxxx xDxx xxxx,,,
+,,7D0-03-01,,xxxx x4xx xxxx,,,
+Increase radio on time after truck shut down,APIM,7D0-01-01,xx2x xxxx xxxx,xx6x xxxx xxxx,"This changes the radio power-off delay to 60 minutes after the truck is shut off. Wait for the ingition power to time out and then turn the radio back on with the RADIO power button. Alternatively, after turning off the ignition, open and close any door to disable accessory power. Then press the radio power button to turn radio back on. It will now stay on for the extended time amount.",Livinitup,Multiple Confirmations
+Add DPF Filter % to screen,IPC,720-07-02,x7xx xxxx,xFxx xxxx,"This adds the DPF % screen to the Truck Information screen. Some trucks will report a camera error after making this modification. To avoid this, update according to the following: If original default value is 0, change to 8; if 1, change to 9; if 2 then A; if 3 then B; if 4 then C; if 5 then D; if 6 then E, if 7 then F.",screwy,Multiple Confirmations
+Enable Auto-Regen Checkbox,IPC/PCM,720-07-02,Plain English,Not HEX,"Enable auto regen in IPC and select option 3 under ""DPF manual regeneration"" in PCM (not as built).",screwy,Multiple Confirmations
+Power Point Timeout Disable,BCM,726-39-01,xxxx x1xx xxxx,xxxx x0xx xxxx,Turns off the timeout on the power points in the truck. Battery Monitoring System (BMS) will override unless disabled. This feature has had multiple confirmations but also failed on other trucks. Differences are unknown.,Livinitup,Multiple Confirmations
+Power Point Timeout 4 Hours,BCM,726-39-01,xxxx x1xx xxxx,**** xxxx xxxx,Replace the **** with 3870. Allows power points to remain powered for 4 hours after the vehicle is shut down. After four hours the power points will timeout and stop supplying voltage to plugged in devices. This feature has had multiple confirmations but also failed on other trucks. Differences are unknown.,manowell,Single Confirmation
+Battery Monitoring System (BMS) Disable,BCM,726-04-01,xxx1 xxxx xxxx,xxx0 xxxx xxxx,"Disables battery protection system. Electrical systems will remain on and vehicle batteries can drain completely. THIS MAY NOT WORK. The default value is already 0, not 1 as shown. Waiting additional updates.",Livinitup,Waiting Confirmation
+Daytime Running Lights (DRL),BCM,726-45-01,,xxxx 7Fxx xxxx,Allow DRL choices below:,DanMc85 & Livinitup,Single Confirmation
+,,726-50-01,,xxxx **xx xxxx,"Replace ** with the two digit value of the desired lights to illuminate in DRL mode.
+01 = DRL Master Disable
+02 = Low Beams
+04 = Front Fog Lamps
+08 = Front Turn Lamps
+10 = Dedicated DRL Lights (LED Light Bars/Strips) - Enables BCM DRL Outputs
+20 = High Beams
+40 = Low Beams and Dedicated DRL Lights
+Hex addition of all the choices above: 10+01+02+04+08+20+40=7F
+
+Example 1: A truck with LEDs would have an as-built value of 726-45-01 xxxx 11xx xxxx which would only allow values at 726-50-01 of Dedicated DRL Lights (10) or DRL disabled (01) = (Hex addition of 10 + 01 = 11)
+
+Example 2: A truck with Halogens would have an as-built value of 726-45-01 xxxx 03xx xxxx which would only allow values at 726-50-01 of DRL disabled (01) or DRL low beams (02) = (Hex addition of 01 + 02 = 03)",,
+Outer Halo Lights as DRLs,BCM,726-26-02,,x1xx xxxx xxxx,"Outer halo lights as DRLs (no low beam, no turn signals). Confirmed on F150s but waiting confirmation on SDs",Livinitup,Waiting Confirmation
+,,726-50-01,,017F,,,
+Halogen to LED Headlight Conversion,BCM,726-26-02,xxxx xxx1 xxxx,xxxx xxx0 xxxx,Frequency select configuration: 0 = default for OEM LED; 1 = default for OEM Halogen. Excellent tutorial that goes beyond the instructions provided here: https://www.ford-trucks.com/forums/1517743-complete-how-to-halogen-to-led-heads-and-tails.html (thanks to jmeo for the contribution),Livinitup & jmeo,Waiting Confirmation
+Halogen to LED Rear Turn Signal Conversion,BCM,726-27-02,,xxxx xxxx x*xx,"Rear bulb turn outage config: 1=outage, 0=no outage",,
+Bluetooth Pairing Name,APIM,7D0-04-01,,xxxx xxxx **xx,"This changes the device name of the truck when pairing bluetooth devices. Change the asteriscs with: 2D=Raptor, 0E=F150, 0F=F250, 10=F350, 19=MKZ, 02=Focus, 03=Fusion, 04=C-Max, 06=Mustang, 08=Escape, 09=Edge, 24=Mondeo, 0B=Explorer, 20=Fiesta, 1B=MKC, 2E=Continental, 1C=MKX, 1E=Navigator, 0C=Expedition. ** The above only works in Sync 3 ver 2.0+ and if you wish to change it you must remove paired phone from Sync 3 & paired name from phone and re-pair.",Livinitup,Waiting Confirmation
+Average Speed Display,IPC,720-01-01,xxxx x1xx xxxx,xxxx x4xx xxxx,"Adds ""Average Speed"" menu item to the Trip/Fuel menu.",Livinitup,Multiple Confirmations
+Massage Seats,SCMG/SCMH,Multiple,,See link,Link to F150 Spreadsheet for all values,Livinitup,Waiting Confirmation
+Turn Signal Flash Count,SCCM,724-01-01,xxxx x6xx xx,xxxx x*xx xx,"Replace * with one of the following:
+0=1 Flash OUC False 1=1 Flash OUC True
+2=1 Flash OUC False 3=1 Flash OUC True
+4=2 Flashes OUC False 5=2 Flashes OUC True
+6=3 Flashes OUC False 7=3 Flashes OUC True
+8=4 Flashes OUC False 9=4 Flashes OUC True
+A=5 Flashes OUC False B=5 Flashes OUC True
+C=6 Flashes OUC False D=6 Flashes OUC True
+E=7 Flashes OUC False F=7 Flashes OUC True
+On Until Cancelled (OUC) means manually moving the turn signal arm in opposite direction or manually cancelling the turn signal. Two flashes are added automatically when trailer is attached.",Livinitup,Multiple Confirmations
+Switch Steering Wheel Buttons,SCCM,724-01-01,xxxx 0xxx xx,xxxx 8xxx xx,"If you like your stereo buttons on the left instead of the right this value will swap button functions from right bank to left bank. Note: This is only for the Up,Down,Right,Left/Center buttons. Not the lower set for cruise control, voice commands, etc. Cluster Crossover Cfg: 0=disable, 8=enable",Livinitup,Waiting Confirmation
+Ambient LED Lighting (Door Ajar),BCM,726-31-01,,x*xx xxxx xx,"Replace * with one of the following: 0=Ice Blue (Ford), 1=Orange (Ford), 2=Soft Blue (Ford), 3=Red (Ford), 4=Green (Ford), 5=Blue (Ford), 5=Purple (Ford), 7=White (Lincoln), 8=Amber (Lincoln), 9=Teal (Lincoln), A=Red (Lincoln), B=Blue (Lincoln), C=Green (Lincoln), D=Lilac (Lincoln), E=Unknown, F=Unknown. Note: Sync 3: Use Lincoln Splash Screen Brand (7D0-01-02 8xxx xxxx xx--), on your APIM so that on screen color selections will match BCM if you use a color greater than or equal to 7 .",flsdiver,Single Confirmation
+Ambient LED Lighting (Entry),BCM,726-31-02,,xxxx x*xx xx,"Replace * with one of the following: 0=Ice Blue (Ford), 1=Orange (Ford), 2=Soft Blue (Ford), 3=Red (Ford), 4=Green (Ford), 5=Blue (Ford), 6=Purple (Ford), 7=White (Lincoln), 8=Amber (Lincoln), 9=Teal (Lincoln), A=Red (Lincoln), B=Blue (Lincoln), C=Green (Lincoln), D=Lilac (Lincoln), E=Unknown, F=Unknown. Note: Sync 3: Use Lincoln Splash Screen Brand (7D0-01-02 8xxx xxxx xx--), on your APIM so that on screen color selections will match BCM if you use a color greater than or equal to 7 .",flsdiver,Single Confirmation
+Add Hill Descent Control,ABS,760-03-01,x1xx xx,x3xx xx,This feature requires addition of an activation button on the dash. Replace the hazard button with a dual function hazard and HDC enable button part #: HC3Z-13D730-CA. For more information see the following thread: https://www.ford-trucks.com/forums/1503198-forscan-adding-hill-descent-control-to-non-fx4-4x4.html,Mooch91,Single Confirmation
+"Add TPMS ""Specified"" to display",IPC,720-04-01,,xx*x xxxx xxxx,"Replace * with one of the following:
+0=TBC Gain disabled & TPMS Specified value disabled
+4=TBC Gain enabled & TPMS Specified value disabled
+8=TBC Gain disabled & TPMS Specified value enabled
+C=TBC Gain enabled & TPMS Specified value enabled",Livinitup,Multiple Confirmations
+Disable Traction Control,IPC,720-01-01,,xx2x xxxx xxxx,AdvanceTrac Disabled,Livinitup,Single Confirmation
+Enter NAV Destination and viewing texts while vehicle is in motion,APIM,7D0-02-01,,5753 xxxx xxxx,"Enables entering NAV destination and viewing texts while vehicle is in motion. Sync version must be upgraded to version 2.2 or higher. Insrtuction for upgrading Sync begin on post 2044 Page 52 of the FORScan spreadsheet. https://www.ford-trucks.com/forums/1460787-forscan-spreadsheet-52.html. Ahem, do we need to say it? This feature should be used by the passenger and the driver should keep their eyes on the road. Be smart and be safe. This feature disables automatic 911 calling if in an accident. ",Livinitup,Multiple Confirmations
+Disable Door Chime when Door Ajar,IPC,720-01-02,xx1x xxxx xxxx,xx0x xxxx xxxx,Disables door chime when door open and ignition on.,neonovulator,Multiple Confirmations
+Disable Key In Ignition Chime,IPC,720-02-01,,xx*x xxxx xxxx,"This disables chime when key is in the iginition and ignition is off. Subtract 8 from the value in the * position. For example, if C then change to 4. This feature is dependent upon the Disable Door Chime when Door Ajar feature. That must be enabled first for this to work.",neonovulator,Multiple Confirmations
+Disable Illuminated Entry/Exit - Dark Car Mode,BCM,726-32-01,,xxxx x1xx xxxx,Turns off parking and cargo lights when door is opened. ,R1xterGonz0,Single Confirmation
+,BCM,726-58-02,,xxxx xxxx x1xx,Silent mode. Waiting for better description,,Single Confirmation
+Remote Start Enable/Disable,BCM,726-22-02,,xxx* xxxx xxxx,"Substitute * with one of the following: 0=disabled, 1=enabled",Livinitup,Waiting Confirmation
+Add  Climate Screen for XL/XLT,APIM,7D0-01-01,,xxxx xxx3 xxxx,"Adds climate screen to Sync v3 and above XL and XLT trims. Note: Fan speed control does not work, remains on the analog dial, Does not add dual climate capabilities, Temp control does not work, remains on the analog dial. What does work- On/Off, AC & Recirculate On/Off, Vent Control - foot, dash, windshield, Some voice commands",Uzumati,Single Confirmation
+,APIM,7D0-01-02,,xxxx x2xx xxxx,,,
+Ambient Light Sensor Speed,BCM,726-26-01,,xxx* xxxx xxxx,"0=15 seconds delay turning on headlamps when dark, 1=2 seconds delay turning on headlamps when dark",Livinitup,Single Confirmation
+Speedometer Calibration for 37 inch Tires,BCM,726-12-01,,0163 0ACC xxxx,"This update will correct the speedometer to read accurately for the larger tire size. It will however, also set a check engine light (CEL) because of the difference from factory settings. There appears to be no other negative effects other than the CEL.",KubotaOrange76,Multiple Confirmations
+Disable Triple Ding at Startup,IPC,720-01-02,,xxxx x2xx,"Turns off ""ding ding ding"" at start up.",,
+DRL to Full Bright w/Headlights,BCM,726-29-02,,x1xx xxxx xxxx,"Stops DRL's from dimming when headlights are in the On, Parking, and Auto positions.",Tippmann7641,Multiple Confirmations
+DRL Turn Signal Switchback,BCM,726-26-02,,xxxX xxxx xxxx,Turn signal turns the DRL off. 0 = Diasabled 1 = Enabled,Anibal Medina,Multiple Confirmations
+Auto-Engine Shutdown Disable,BCM,726-22-01,,xxxx xxx0 xxxx,"Ignition Power Shutdown Enable Cfg: 0=disable, 1=enabled",Livinitup,Multiple Confirmations
+Radio Extended Play,APIM,7D0-01-01,,xx*x xxxx xxxx,"RadioExtended Play: A=off, 2=20mins, 3=30mins, 4=40mins, 5=50mins, 6=60mins (Sync 2 & Sync 3)",Livinitup,Multiple Confirmations
+IPC Quick Boot (No Ford animation shows on cluster),IPC,720-07-01,,xxxx xxxx *xxx,2=Enable quick boot,Livinitup,Multiple Confirmations

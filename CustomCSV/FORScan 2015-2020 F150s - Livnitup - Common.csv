@@ -1,0 +1,133 @@
+Last Revised: 10/29/22  These features are not currently possible: operating cameras/spot light/ACC at any speed,,,,,,
+** Below: ignore whatever you have where the x's are and just write the non-x value in the correct position **  Note: module BCM=BdyCM in FORScan,,,,,,
+Feature Name,Module,Address,Value change,,,Notes
+Auto Start/Stop Disable - by disabling BMS (Battery Management System),BCM,726-48-02,x0xx,xxxx,xxxx,
+,FCIM,7A7-01-01,xxxx,x0xx,xxxx,(optional - disables switch)
+,IPC,720-01-01,xxxx,1xxx,xxxx,(optional - disables stop/start message center in the trip/fuel IPC menu)
+DRL  - Position Lamp Cfg,BCM,726-29-02,x1xx,xxxx,xxxx,position lamps at full brightness like Super Duty
+DRL - Parking Lights only (stock LEDs only),BCM,726-26-02,x1xx,xxxx,xxxx,"** Testing DRLs: Make sure all of the following are set: **
+
+1. Daytime Lights box checked in cluster under settings, adv settings, vehicle, lighting
+2. Headlamp switch in the Auto position
+3. Truck must be in gear for DRLs to work"
+,,726-50-01,01xx,,,
+DRL - Parking Light only (Halogens),BCM,726-26-02,x1xx,xxxx,xxxx,
+,,726-45-01,xxxx,7Fxx,xxxx,
+,,726-50-01,108E,,,
+DRL - Parking Lights & Low Beams only,BCM,726-26-02,x1xx,xxxx,xxxx,
+,,726-50-01,02xx,,,
+DRL - Parking Lights & Turns only,BCM,726-45-01,xxxx,7Fxx,xxxx,
+,,726-26-02,x1xx,xxxx,xxxx,
+,,726-50-01,08xx,,,
+DRL - Anzo switchback white halo,BCM,726-45-01,xxxx,7Fxx,xxxx,
+,,726-26-02,x1xx,xxxx,xxxx,
+,,726-50-01,10xx,,,
+DRL - Turns only (Halogen/aftermarket lights only),BCM,726-45-01,xxxx,7Fxx,xxxx,** On stock LEDs this will also illuminate outer halo
+,,726-50-01,08xx,,,
+DRL - Front Fog Lights only,BCM,726-45-01,xxxx,7Fxx,xxxx,To enable DRL Parking Lights with these set 726-26-02: x1xx xxxx xxxx also
+,,726-50-01,04xx,,,
+DRL - High beams only,BCM,726-45-01,xxxx,7Fxx,xxxx,
+,,726-50-01,20xx,,,
+Powerfold Mirrors (trucks without memory buttons),DDM,740-03-01,*xxx,xx,,"0=disabled, 8=enabled  "
+,PDM,741-03-01,*xxx,xx,,
+,,,,,,** click here for tmcolegr's post on retrofitting non-folding to folding mirrors
+Autofold Mirrors,DDM,740-03-01,x8xx,xx,,** Tow mirrors require swapping pin 18 & 19 on mirror connector (see posts linked below) **
+,DDM,740-12-01,Fxxx,,,Tow Mirror mod instructions
+,PDM,741-03-01,x8xx,xx,,B-ManFX4's comprehensive write-up w/pics on tow mirror mod here
+,PDM,741-12-01,Fxxx,,,regular autofold vs Lincoln autofold explained
+Autofold Mirrors - Lincoln Style (see desc in Notes),DDM,740-03-01,x84x,xx,,** Tow mirrors require swapping pin 18 & 19 on mirror connector (see posts linked above) **
+,DDM,740-12-01,Fxxx,,,regular autofold vs Lincoln autofold explained
+,PDM,741-03-01,x84x,xx,,
+,PDM,741-12-01,Fxxx,,,
+Reverse Tilt Mirrors,DDM,740-03-01,Fxxx,xx,,** Note: this only works for mirrors with memory **
+,DDM,740-13-01,Fxxx,,,"Select left/right mirror, put truck in Reverse and mirror will automatically tilt down toward curb and then return to normal position when gear is changed."
+,PDM,741-03-01,Fxxx,xx,,Follow this link for the proper adjustment procedure for this mod
+,PDM,741-13-01,Fxxx,,,** For a 2018 740/741-13-01 may require FCxx **
+,,,,,,
+Global Window Open/Close,BCM,726-17-01,0101,0101,014A,"After pressing lock/unlock on fob, press lock/unlock again and hold button for front windows to go up/down"
+,BCM,726-17-02,0101,0101,014B,
+,BCM,726-30-01,0101,xxxx,xxxx,
+,DDM,740-05-01,Dxxx,xx,,
+,PDM,741-05-01,Dxxx,xx,,
+Disabling Canadian forced DRLs to cluster controlled,BCM,726-16-02,0101,0101,014A,DRL Cluster Control 1 enabled
+,BCM,726-21-01,xxxx,xxxx,x1xx,
+,IPC,720-02-01,xxEx,xxxx,xxxx,Daytime Lights option & Lane Keeping System present in Settings
+,OR,,,,,
+,IPC,720-02-01,xxCx,xxxx,xxxx,Daytime Lights option present & Lane Keeping System absent in Settings
+Double Horn Honk disable,BCM,726-41-02,xxx0,xxxx,xxxx,
+Auto Relock enable (2015-2016s),BCM,726-15-02,0101,0101,0149,"If truck unlocked with fob, truck auto relocks after 45 seconds"
+Auto Relock enable (2017-present),BCM,726-15-02,0101,0101,0149,
+,BCM,726-21-01,xxxx,x1xx,xxxx,
+,BCM,726-38-02,xxxx,xxx*,xxxx,"Auto Relock Time Duration: 1=30 seconds, 2=45 seconds"
+Allows NAV & ability to read text messages while vehicle in motion,APIM,7D0-02-01,5753,xxxx,xxxx,Sync2 - Sirius Travel Link no longer works
+,,,,,,Sync3 - 911 assist will be disabled with this enabled. Speed limit sign will look European and FM radio stations will have and extra number like 102.70 instead of 102.7
+"Ability to do fogs & high beams at same time
+aka ""Bambi mode""",BCM,726-27-01,xxxx,xxx0,xxxx,Bambi mode without high beam/fogs remembered after ignition off/on
+,BCM,726-27-01,xxxx,xxx0,01xx,Bambi mode with high beam/fogs remembered after ignition off/on
+Driver seatbelt minder status off,IPC,720-01-01,xxxx,xx2x,xxxx,
+Passenger seatbelt minder status off,IPC,720-01-01,xxxx,xx4x,xxxx,
+Driver & passenger seatbelt minder status off,IPC,720-01-01,xxxx,xx0x,xxxx,
+Disables Door Ajar warning chime,IPC,720-01-02,xx0x,xxxx,,
+"Engine temp & Transmission temp shows above gauges (8"" Clusters only)",IPC,720-07-01,xxxx,xE5x,xxxx,** use this if you have trailer brake controller and turbos **
+,IPC,720-07-01,xxxx,x65x,xxxx,** use this if you don't have trailer brake controller but have turbos **
+,IPC,720-07-01,xxxx,xA5x,xxxx,** use this if you have TBC but don't have turbos **
+,IPC,720-07-01,xxxx,x25x,xxxx,** use this if you don't have TBC or turbos **
+IPC Quick Boot (No Ford animation shows on cluster),IPC,720-07-01,xxxx,xxxx,2xxx,
+Enables stereo to be turned on without Accessories on (2015 F150s only),APIM,7D0-01-01,xx2x,xxxx,xxxx,2016 Models already have this capability
+Fake engine noise disable,ACM,727-01-01,xxxx,x0xx,xxxx,
+,DSP,783-01-01,Exxx,xxxx,,<---2018 Lariat+ models may require this also
+Heated & Cooled Seat Icons on home & climate screen,APIM,7D0-01-01,xxxx,xxxx,x2xx,** use this for Sync 3  **
+,APIM,7D0-01-01,xxxx,xxxx,A6xx,"** use this for Sync 2, also enable Climate Quadrant for this **"
+Heated & Cooled Seat Icons AND Heated Steering Wheel on home & climate screen,APIM,7D0-01-01,xxxx,xxxx,x6xx,** use this for Sync 3  **
+Climate Quadrant enabled (only Sync 2),APIM,7D0-04-01,xxxx,xxx0,xxxx,
+Powerpoint timeout disabled,BCM,726-39-01,1194,x0xx,xxxx,Click here for a hardware mod that achieves the same thing
+Powerpoint timeout enabled & set to 1 second,BCM,726-39-01,0001,x1xx,xxxx,use DeltaNu1142's powerpoint timeout calculator here **
+,,,,,,
+Hill Descent Control enabled (2015-2017s),ABS,760-03-01,x*xx,xx,,
+,"If you have 0 for asterisk make it 2, if 4 make it 6, if 8 make A, if C make E, if 1 make it a 3",,,,,** also need this switch **
+,,,,,,youtube video showing removing front cover to access switch
+Hill Descent Control enabled (2018-2020s),ABS,760-03-01,*xxx,xx,,"if your as-built is 0, use 2, if as-built is 1, use 3.  if as-built is D, use F.  If as-built is 5, use 7.  If as-built is 4, use 6"
+Trailer Brake Control Module enabled,IPC,720-07-01,xxxx,x*xx,xxxx,"if your as-built is 0, use 8.  if your as-built is 6, use E"
+Trailer Brake Controller Gain Setting enabled,IPC,720-04-01,xx4x,xxxx,xxxx,
+Perpendicular Park enable,PAM,736-04-01,x2xx,xxxx,,** only for trucks that already have Active Park Assist **
+Secure Idle enable,BCM,726-42-01,x1xx,xxxx,xxxx,"if engine is running but fob is away from vehicle, vehicle cannot be put into any gear"
+Panic Alarm,BCM,726-37-01,xxxx,xxx0,xxxx,Panic alarm on fob disabled
+,BCM,726-37-01,xxxx,xxx1,xxxx,Panic alarm on fob requires 2 presses
+,BCM,726-37-01,xxxx,xxx2,xxxx,Panic alarm on fob enabled
+Panic Alarm,BCM,726-01-02,xxx0,xxxx,xxxx,Panic alarm - lights & horn
+,BCM,726-01-02,xxx1,xxxx,xxxx,Panic alarm - lights only
+Adding Climate menu on Sync (XL/XLTs),APIM,7D0-01-01,xxxx,xxx3,xxxx,"The following won't work on XLT w/climate: Max A/C, Auto mode, Temp (numerical) settings, Fan speed, Max Defrost"
+,,7D0-01-02,xxxx,x2xx,xxxx,
+Auxiliary External Subwoofer,ACM,727-01-01,xxx8,xxxx,xxxx,** use this for aftermarket kicker sub & amp **
+Sync 3 New Blue Theme - GT Performance boot animation - doesn't work on Sync 3 v3.4,APIM,7D0-01-02,0xxx,xxxx,xxxx,
+,,7D0-02-01,xxxx,xDxx,xxxx,
+,,7D0-03-01,xxxx,x4xx,xxxx,
+Variable Line Level Preamp Outputs From ACM (for adding aftermarket amp without sound clipping),ACM,727-01-01,xx5A,xxxx,xxxx,See DanMc85's post here for a write-up on this
+,,727-01-02,00xx,xxxx,xxxx,
+,APIM,7D0-01-01,2xxx,xxxx,xxxx,<--- this change required only if you have Sony DSP
+Stereo Extended Play,APIM,7D0-01-01,xx*x,xxxx,xxxx,"Stereo Extended Play: A=off, 2=20mins, 3=30mins, 4=40mins, 5=50mins, 6=60mins (Sync 2 & Sync 3)"
+Turn Signal Flashes (# of),SCCM,724-01-01,xxxx,x*xx,xx,"0=1 flash, 4=2 flashes, 6=3 flashes, 8=4 flashes, A=5 flashes, C=6 flashes, E=7 flashes  ** see SCCM spreadsheet for more options **"
+,,,,,,** when trailer is connected the truck will add 2 flashes to the above values **
+"TPMS ""Specified"" Value Displayed (Placard pressure)",IPC,720-04-01,xx*x,xxxx,xxxx,
+,,,,,,"Trailer Brake Controller Gain & TPMS Specified Value
+0=TBC Gain disabled & TPMS Specified Value disabled 
+4=TBC Gain enabled & TPMS Specified Value disabled 
+8=TBC Gain disabled & TPMS Specified Value enabled 
+C=TBC Gain enabled & TPMS Specified Value enabled"
+,,,,,,click here for a picture of what this does
+,,,,,,** Note: the value(s) displayed here is from BCM 726-40-01 xxxx **** xxxx
+Remote Start - Aftermarket enable,BCM,726-22-02,xxx1,xxxx,xxxx,
+,BCM,726-38-02,xxx0,xxxx,xxxx,"<-- optional, disables horn honk with 2 presses of lock button on fob"
+,,* see IPC spreadsheet 720-02-02 xxxx **xx for adding remote start climate/duration settings to the cluster menu,,,,
+Intrusion Alarm Enable ,IPC,720-02-02,5xxx,xx,,"These settings are for those who add the intrusion sensors after buying their truck.  After making the changes run a BdyCM LIN New Module Initialization in FORScan wrench icon.  This also works on the 4.2"" cluster "
+,BCM,726-02-01,xxxx,x1xx,xxxx,
+,,726-34-01,x1xx,xxxx,xxxx,
+,,726-39-02,x1xx,xxxx,xxxx,See this write-up by Firerunner for adding intrusion sensor
+"Auto Lock Control present in cluster settings
+(absent in some 2018 F150s)",IPC,720-01-01,xxxB,xxxx,xxxx,<-- use this for XL/XLTs
+,,720-01-01,xxxF,xxxx,xxxx,<-- use this for Lariat+ models
+,,,,,,"** This is located in cluster menu under settings, adv settings, vehicle, locks"
+"Disables three ""doo-doo-doo"" start-up chimes from cluster",IPC,720-01-02,xxxx,x2xx,,
+Adding reverse camera to non-touchscreen unit,FCDIM,7A5-01-01,x2xx,xxxx,xxxx,After making the changes run a BdyCM LIN New Module Initialization in FORScan wrench icon
+,BCM,726-39-02,xxxx,x1xx,xxxx,
+NAV/Audio Controls in Motion (if passenger in vehicle),APIM,7D0-09-04,xxxx,xxxx,*xxx,enable DRPE - requires 3.4.21265 or above and MY18.5 -E* firmware

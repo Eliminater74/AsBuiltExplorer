@@ -1,0 +1,69 @@
+Last Revised: 30 Oct 2017 ,,,,,,,,,
+"** Below: ignore whatever you have where the lowercase x's are and replace the capital X or X's with what is listed in the ""Specifics""",,,,,,,,,
+Feature Name,Module,Address,Value Change(s),,,Specifics,Notes,Links,Credit
+"Heated & Cooled Seat Icons on Home & Climate Screen
+*Confirmed for Sync II
+",APIM,7D0-01-01,xxxx,xxxx,AXxx,"8 (Removes Seat Controls from Screen, Maintains Rear Controls)
+6 (Adds Seat Controls to Screen, Maintains Rear Controls)
+2 (Adds Seat Controls to Screen, Disables Rear Controls)",,,
+Traffic Message Channel,APIM,7D0-01-01,xxxx,xxXx,xxxx,"0 (Disabled)
+1 (Enabled)","Traffic Alerts via FM Signal. U.S vehicles hav this 
+turned off since Sirius Travel Link is enabled",,
+Audio Equalizer,APIM,7D0-01-02,xxxx,xXxx,xxxx,"0 (Disabled) 
+8 (Adds OFF, ROCK, POP, CLASSIC, VOICE options)","Found under Sound Settings with Sync II and 
+Sony Audio System",,
+Navigation In Motion,APIM,7D0-02-01,xXxx,xxxx,xxxx,"5 (Disabled)
+7 (Enabled)","Allows for use of Navigation while in gear
+Note: Sirius XM TravelLink is taken away while enabled",,
+Navigation Speed Cameras,APIM,7D0-02-02,xxxX,xxxx,xxxx,"0 (Disabled)
+8 (Enabled)",Alerts of upcoming speed cameras,,
+Seat Belt Minder,IPC,720-01-01,xxxx,xxXx,xxxx,2 (Driver Minder Off)                                                                4 (Passenger Minder Off)                                                         0 (Both Minders Off),,,AllBoostNoEco
+Green Fog Indicator on Dash,IPC,720-01-02,xxxx,Xxxx,,"0 (Disabled)
+1 (Enabled)",Might want to turn off if using Fog Lights as your DRLs,,MCoston
+"Daytime Running Light Option 
+on Left Side Dash Screen",IPC,720-02-01,xxXx,xxxx,xxxx,"8 (Disabled)
+C (Enabled)","Shows via: Advanced Settings>Vehicle>Lighting. 
+Haven't figured out how to make it function though like 
+the F150 guys have. It's greyed out in the menu",,
+Key in Ignition Chime,IPC,720-02-01,xxXx,xxxx,xxxx,"0 (Disabled)
+8 (Enabled)",,,MCoston
+Green Headlight Indicator on Dash,IPC,720-03-01,Xxxx,xxxx,xxxx,"4 (Disabled)
+6 (Enabled)",,,MCoston
+Engine and Engine Idle Hours Display on Dash,IPC,720-04-01,Xxxx,xxxx,xxxx,"0 (Disabled)
+C (Enabled)","Will begin counting Engine and Engine Idle Hours starting 
+at 0 from moment this is activated in the dash",,
+"Right LCD Cluster Menu Options
+Type 3 Cluster ",IPC,720-05-01,xxXx,xxxx,xxxx,"3, 7, B, F (Phone, Entertainment, Navigation options present)
+0, 4, 8, C (Phone option only)
+1, 5, 9, D (Navigation, Phone options only)
+2, 6, A, E (Entertainment, Phone options only)",Unable to find/activate Climate option thus far,Type 3 Cluster,AllBoostNoEco
+Turn Signal Flash,SCCM,724-01-01,xxxx,xXxx,xx,"0-3 (1 flash)
+4,5 (2 flashes)
+6,7 (3 flashes)
+8,9 (4 flashes)
+A,B (5 flashes)
+C,D (6 flashes)
+E,F (7 flashes)","Turn Signal flashes for set amount of times when bumped
+Turn Signal flashes until canceled with full click",,
+Dark Car Mode,BdyCM,726-08-01,xxxX,xx,,0 (Disabled)                                                                             1 (Enabled),"When activated, interior and exterior lights do not come on when you open the door. Lights will still flash when locking/unlocking from the remote.",,AllBoostNoEco
+Daytime Running Lights,BdyCM,726-11-01,xXxx,xxxx,xx,"0 (Disabled)
+1 (DRL - 50% Low Beam)
+2 (DRL - Fog Lights)
+3 (DRL - Turn Signals)",,,MCoston
+"Bambi Mode 
+(Allows High Beams & Fog Lights to be on at same time)",BdyCM,726-11-01,xxxX,xxxx,xx,"1 (Disabled)
+2 (Enabled)",,,MCoston
+Parking Lights as DRLs (with Rear Running Lights),BdyCM,726-12-01,xxxx,xXxx,xx,"0 (Disabled)
+1 (Enabled)",Must still activate DRLs via line 726-11-01,,Flexitis
+Front Turn Signal Hyperflash Disable,BdyCM,726-13-01,xXxX,xxxx,xx,"0 (Disabled)
+1 (Enabled)",Disables Hyperflash,,"LokiWolf
+ExpeditionAndy"
+Rear Lamp Outage Hyperflash Disable,BdyCM,726-14-01,xXxX,xxxx,xx,"0 (Disabled)
+1 (Enabled)",Disables Hyperflash,,MCoston
+"Double Honk
+(When exiting vehicle while running with Key Fob)",BdyCM,726-16-01,xxXx,xx,,"0 (Disabled)
+1 (Enabled)",,,
+DRL Lock ,BdyCM,726-49-01,xxxx,xxxx,xX,"1 (ON)
+0 (OFF)","Some trucks have this enabled and some disabled from 
+the factory. If you want to switch your DRLs off, this DRL
+Lock needs to be turned off",,AllBoostNoEco
