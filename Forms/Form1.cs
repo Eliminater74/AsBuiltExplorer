@@ -443,7 +443,7 @@ public partial class Form1 : Form
       ListViewItem listViewItem2 = this.ListView1.Items.Add(str4);
       listViewItem2.SubItems.Add(modName);
       listViewItem2.ForeColor = this.tbxCompFile1.ForeColor;
-      listViewItem2.UseItemStyleForSubItems = true;
+      listViewItem2.UseItemStyleForSubItems = false;
       listViewItem2.Tag = (object) text1;
       listViewSubItem = listViewItem2.SubItems.Add(retData1_1);
       listViewSubItem = listViewItem2.SubItems.Add(retData2_1);
@@ -453,6 +453,10 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem2.SubItems.Add(text6);
       listViewSubItem = listViewItem2.SubItems.Add(text7);
       listViewSubItem = listViewItem2.SubItems.Add(text8);
+      foreach (ListViewItem.ListViewSubItem sub in listViewItem2.SubItems)
+      {
+          sub.ForeColor = this.tbxCompFile1.ForeColor;
+      }
       listViewItem1 = this.ListView1.Items.Add("");
       checked { ++index1; }
     }
@@ -487,7 +491,7 @@ public partial class Form1 : Form
       else
         listViewItem3 = this.ListView1.Items.Add(str8);
       listViewItem3.ForeColor = this.tbxCompFile2.ForeColor;
-      listViewItem3.UseItemStyleForSubItems = true;
+      listViewItem3.UseItemStyleForSubItems = false;
       listViewItem3.Tag = (object) text2;
       string text9 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
       string text10 = "";
@@ -531,6 +535,10 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem3.SubItems.Add(text12);
       if (index5 == -1)
         listViewItem1 = this.ListView1.Items.Add("");
+      foreach (ListViewItem.ListViewSubItem sub in listViewItem3.SubItems)
+      {
+          sub.ForeColor = this.tbxCompFile2.ForeColor;
+      }
       checked { ++index4; }
     }
     int num16 = checked (num3 - 1);
@@ -564,8 +572,7 @@ public partial class Form1 : Form
       else
         listViewItem4 = this.ListView1.Items.Add(str9);
       listViewItem4.ForeColor = this.tbxCompFile3.ForeColor;
-      listViewItem4.UseItemStyleForSubItems = true;
-      listViewItem4.Tag = (object) text3;
+      listViewItem4.UseItemStyleForSubItems = false;
       string text13 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
       string text14 = "";
       string text15 = "";
@@ -608,6 +615,10 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem4.SubItems.Add(text16);
       if (index10 == -1)
         listViewItem1 = this.ListView1.Items.Add("");
+      foreach (ListViewItem.ListViewSubItem sub in listViewItem4.SubItems)
+      {
+          sub.ForeColor = this.tbxCompFile3.ForeColor;
+      }
       checked { ++index9; }
     }
     int num20 = checked (num4 - 1);
@@ -641,7 +652,7 @@ public partial class Form1 : Form
       else
         listViewItem5 = this.ListView1.Items.Add(str10);
       listViewItem5.ForeColor = this.tbxCompFile4.ForeColor;
-      listViewItem5.UseItemStyleForSubItems = true;
+      listViewItem5.UseItemStyleForSubItems = false;
       listViewItem5.Tag = (object) text4;
       // Fix CS0103: str2 was removed but this line remained.
       // str2 = ""; // Removed unused assignment
@@ -687,6 +698,10 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem5.SubItems.Add(text20);
       if (index15 == -1)
         listViewItem1 = this.ListView1.Items.Add("");
+      foreach (ListViewItem.ListViewSubItem sub in listViewItem5.SubItems)
+      {
+          sub.ForeColor = this.tbxCompFile4.ForeColor;
+      }
       checked { ++index14; }
     }
     if (!flag1 & !flag2 & !flag3 & !flag4)
