@@ -242,23 +242,37 @@ namespace AsBuiltExplorer
                 // --- 1. Fix Merged Address/Mask (e.g. "7D0-01-02 0xxx") ---
                 if (address.Contains(" "))
                 {
-                    // The address column likely contains "Address Mask"
+                    // The address column likely contains "Address Mask" OR "Address (Year)"
                     string[] addrParts = address.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     
                     if (addrParts.Length > 1 && Regex.IsMatch(addrParts[0], @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}"))
                     {
                         address = addrParts[0]; // The clean address
-                        string extractedMask = addrParts[1]; // The mask trapped in the address col
-                        
-                        // If we found a mask here, the "D1" column we parsed earlier was probably actually Notes
-                        // because everything shifted left.
-                        if (!string.IsNullOrEmpty(d1))
+                        string suffix = addrParts[1]; 
+
+                        // Determine if the suffix is a Mask or just Info (Year, etc)
+                        // Masks usually contain 'x', '*', or are purely hex/numeric.
+                        // Info usually starts with '('.
+                        bool looksLikeMask = Regex.IsMatch(suffix, @"[*xX]") || (Regex.IsMatch(suffix, @"^[0-9A-F]+$") && !suffix.StartsWith("("));
+
+                        if (looksLikeMask)
                         {
-                            if (!string.IsNullOrEmpty(notes)) notes = d1 + " " + notes;
-                            else notes = d1;
+                            // It's a mask trapped in the address col
+                            // If we found a mask here, the "D1" column we parsed earlier was probably actually Notes
+                            if (!string.IsNullOrEmpty(d1))
+                            {
+                                if (!string.IsNullOrEmpty(notes)) notes = d1 + " " + notes;
+                                else notes = d1;
+                            }
+                            d1 = suffix; // Put extracted mask into D1
                         }
-                        
-                        d1 = extractedMask; // Put extracted mask into D1
+                        else
+                        {
+                            // It's just info (e.g. "(2013+"), move to notes
+                            if (!string.IsNullOrEmpty(notes)) notes = suffix + " " + notes;
+                            else notes = suffix;
+                            // Leave D1 alone (it probably contains the real mask)
+                        }
                     }
                 }
 
