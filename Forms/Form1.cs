@@ -3501,11 +3501,29 @@ label_24:
 
     private void DecodeNHTSAToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        if (lvwBrowser.SelectedItems.Count == 0) return;
+        System.Collections.IList itemsToProcess = lvwBrowser.SelectedItems;
 
-        if (lvwBrowser.SelectedItems.Count > 1)
+        if (itemsToProcess.Count == 0)
         {
-             if (MessageBox.Show($"Are you sure you want to attempt online decoding for {lvwBrowser.SelectedItems.Count} vehicles? This may take a moment.", "Confirm Batch Decode", MessageBoxButtons.YesNo) == DialogResult.No) return;
+             if (lvwBrowser.Items.Count > 0)
+             {
+                 if (MessageBox.Show($"No vehicles selected.\n\nDo you want to decode the entire database ({lvwBrowser.Items.Count} vehicles)?", "Decode All?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                 {
+                     itemsToProcess = lvwBrowser.Items;
+                 }
+                 else
+                 {
+                     return;
+                 }
+             }
+             else
+             {
+                 return;
+             }
+        }
+        else
+        {
+             if (MessageBox.Show($"Are you sure you want to attempt online decoding for {itemsToProcess.Count} vehicles? This may take a moment.", "Confirm Batch Decode", MessageBoxButtons.YesNo) == DialogResult.No) return;
         }
 
         int successCount = 0;
@@ -3513,7 +3531,7 @@ label_24:
         
         try
         {
-            foreach (ListViewItem item in lvwBrowser.SelectedItems)
+            foreach (ListViewItem item in itemsToProcess)
             {
                 string vin = item.SubItems[4].Text;
                 var entry = VehicleDatabase.GetEntry(vin);
@@ -3576,6 +3594,151 @@ label_24:
         {
             MessageBox.Show("No updates found or API request failed.", "Decode Results");
         }
+    }
+
+    private void ScanLibraryToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        System.Collections.IList itemsToProcess = lvwBrowser.SelectedItems;
+
+        if (itemsToProcess.Count == 0)
+        {
+             if (lvwBrowser.Items.Count > 0)
+             {
+                 if (MessageBox.Show($"No vehicles selected.\n\nDo you want to scan the entire database ({lvwBrowser.Items.Count} vehicles) against the Common Feature Library?\n\nThis will look for known module patterns (like 'DRL Enable') and tag them if found.", "Scan All?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                 {
+                     itemsToProcess = lvwBrowser.Items;
+                 }
+                 else return;
+             }
+             else return;
+        }
+
+        int successCount = 0;
+        int featureCount = 0;
+        Cursor = Cursors.WaitCursor;
+        string tempFile = Path.GetTempFileName();
+        
+        try
+        {
+            // Ensure CommonDB loaded
+            CommonDatabase.Load();
+
+            foreach (ListViewItem item in itemsToProcess)
+            {
+                string vin = item.SubItems[4].Text;
+                var entry = VehicleDatabase.GetEntry(vin);
+                if (entry != null && !string.IsNullOrEmpty(entry.FileContent))
+                {
+                    // Write to temp file to reuse existing parser
+                    File.WriteAllText(tempFile, entry.FileContent);
+                    
+                    // Parse
+                    var vInfo = new VehicleInfo(); 
+                    if (modAsBuilt.AsBuilt_LoadFile_AB(tempFile, ref vInfo))
+                    {
+                         List<string> foundFeatures = new List<string>();
+                         // Iterate modules in vehicle
+                         for(int i = 0; i < vInfo.abModuleAddrCount; i++)
+                         {
+                             string addr = vInfo.abModuleAddresses[i]; // e.g. 720-01-01
+                             string data = vInfo.abModuleValues[i];    // e.g. 01020304
+                            
+                             // Look up in CommonDB
+                             var candidates = CommonDatabase.GetFeaturesForAddress(addr);
+                             foreach(var cand in candidates)
+                             {
+                                 // Check mask against data
+                                 // Helper needed. CommonDatabase has MatchMask but it expects split D1,D2,D3.
+                                 // The loader puts all data in 'abModuleValues'? 
+                                 // Let's check 'AsBuilt_LoadFile_AB'. It puts Hex Data in abModuleValues.
+                                 // We need to split it if the mask is split?
+                                 // Or use a helper that takes raw hex.
+                                 
+                                 // Simplification: We will pass data to a helper and let it split?
+                                 // CommonDatabase stores D1, D2, D3 masks.
+                                 // We need to parse 'data' into D1/D2/D3.
+                                 // Assuming data format: "D1 D2 D3" or just continuous hex?
+                                 // Inspection of modAsBuilt needed. For now assume continuous hex string.
+                                 // We need to split into blocks.
+                                 
+                                 string[] blocks = SplitHexUnk(data); // "AABB", "CCDD"...
+                                 string d1 = blocks.Length > 0 ? blocks[0] : "";
+                                 string d2 = blocks.Length > 1 ? blocks[1] : "";
+                                 string d3 = blocks.Length > 2 ? blocks[2] : "";
+
+                                 if (CommonDatabase.FindMatch(addr, d1, d2, d3) == cand) // Reuse FindMatch logic
+                                 {
+                                      foundFeatures.Add(cand.Name);
+                                 }
+                             }
+                         }
+
+                         // Update Entry
+                         var current = new List<string>((entry.Features ?? "").Split(';'));
+                         bool changed = false;
+                         foreach(var newF in foundFeatures)
+                         {
+                              // Normalize name to be tag-like (remove spaces? or keep readable?)
+                              // User used "Trim:XLT". CommonDB has "DRL - Enable".
+                              // Let's keep it readable but maybe sanitize semicolons.
+                              string tag = newF.Replace(";", ",");
+                              
+                              bool exists = false;
+                              foreach(var c in current) if(c.Trim().Equals(tag, StringComparison.OrdinalIgnoreCase)) exists = true;
+                              if (!exists) 
+                              {
+                                  current.Add(tag);
+                                  featureCount++;
+                                  changed = true;
+                              }
+                         }
+                         
+                         if(changed)
+                         {
+                             entry.Features = string.Join(";", current).Trim(';');
+                             VehicleDatabase.UpdateEntry(entry);
+                             successCount++;
+                         }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error scanning library: " + ex.Message);
+        }
+        finally
+        {
+            if(File.Exists(tempFile)) File.Delete(tempFile);
+            Cursor = Cursors.Default;
+        }
+
+        if (successCount > 0)
+        {
+            MessageBox.Show($"Scanned {itemsToProcess.Count} vehicles.\nFound {featureCount} new feature matches across {successCount} vehicles.", "Library Scan Complete");
+            Button10_Click(sender, e);
+        }
+        else
+        {
+             MessageBox.Show("No known library features found in selected vehicles.", "Scan Complete");
+        }
+    }
+
+    private string[] SplitHexUnk(string hex)
+    {
+         // Simple splitter assuming 4-byte (8-char) blocks?
+         // CommonDB format is usually 720-01-01 xxxx xxxx xxxx
+         // So 2 bytes per block? Or 4?
+         // "Data1Mask" in DB usually looks like "xxxx" (2 bytes/4 chars).
+         // So we split every 4 chars.
+         var list = new List<string>();
+         if(string.IsNullOrEmpty(hex)) return list.ToArray();
+         for(int i=0; i<hex.Length; i+=4)
+         {
+             if(i+4 <= hex.Length) list.Add(hex.Substring(i, 4));
+             else list.Add(hex.Substring(i));
+         }
+         return list.ToArray();
     }
 
     private void btnDB_Scan_Click(object sender, EventArgs e)

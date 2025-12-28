@@ -189,6 +189,7 @@ namespace AsBuiltExplorer
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.EditFeaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // Added
             this.DecodeNHTSAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // Added
+            this.ScanLibraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // Added
             this.DeleteFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TabPage9 = new System.Windows.Forms.TabPage();
             this.lvwDecodeResults = new System.Windows.Forms.ListView();
@@ -1812,9 +1813,10 @@ namespace AsBuiltExplorer
             this.ToolStripMenuItem1,
             this.EditFeaturesToolStripMenuItem, // Added
             this.DecodeNHTSAToolStripMenuItem, // Added
+            this.ScanLibraryToolStripMenuItem, // Added
             this.DeleteFileToolStripMenuItem});
             this.ContextMenuStrip2.Name = "ContextMenuStrip2";
-            this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 164); // Increased Height
+            this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 186); // Increased Height
             this.ContextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip2_Opening);
             // 
             // SetAsCompare1ToolStripMenuItem
@@ -1862,7 +1864,15 @@ namespace AsBuiltExplorer
             this.DecodeNHTSAToolStripMenuItem.Name = "DecodeNHTSAToolStripMenuItem";
             this.DecodeNHTSAToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.DecodeNHTSAToolStripMenuItem.Text = "Decode with NHTSA (Online)";
+            this.DecodeNHTSAToolStripMenuItem.Text = "Decode with NHTSA (Online)";
             this.DecodeNHTSAToolStripMenuItem.Click += new System.EventHandler(this.DecodeNHTSAToolStripMenuItem_Click);
+            // 
+            // ScanLibraryToolStripMenuItem
+            // 
+            this.ScanLibraryToolStripMenuItem.Name = "ScanLibraryToolStripMenuItem";
+            this.ScanLibraryToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.ScanLibraryToolStripMenuItem.Text = "Analyze against Library (Offline)";
+            this.ScanLibraryToolStripMenuItem.Click += new System.EventHandler(this.ScanLibraryToolStripMenuItem_Click);
             // 
             // DeleteFileToolStripMenuItem
             // 
@@ -2362,6 +2372,7 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.ColumnHeader colModCat;
     private System.Windows.Forms.ToolStripMenuItem EditFeaturesToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem DecodeNHTSAToolStripMenuItem; // Added
+    private System.Windows.Forms.ToolStripMenuItem ScanLibraryToolStripMenuItem; // Added
     private System.Windows.Forms.PictureBox pbSettings;
     private System.Windows.Forms.Button btnDB_Scan;
     private System.Windows.Forms.ColumnHeader colFeatures; // Added

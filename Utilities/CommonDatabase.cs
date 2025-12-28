@@ -48,9 +48,12 @@ namespace AsBuiltExplorer
             _loaded = true;
         }
 
+        private static Dictionary<string, List<CommonFeature>> _lookup = new Dictionary<string, List<CommonFeature>>();
+
         private static void LoadFromSQL()
         {
             Features.Clear();
+            _lookup.Clear();
             using (var conn = DefinitionsDBHelper.GetConnection())
             {
                 string sql = "SELECT * FROM CommonCodes";
@@ -70,9 +73,19 @@ namespace AsBuiltExplorer
                             Notes = reader["Notes"].ToString()
                         };
                         Features.Add(f);
+
+                        if (!_lookup.ContainsKey(f.Address)) _lookup[f.Address] = new List<CommonFeature>();
+                        _lookup[f.Address].Add(f);
                     }
                 }
             }
+        }
+
+        public static List<CommonFeature> GetFeaturesForAddress(string address)
+        {
+            if (!_loaded) Load();
+            if (_lookup.ContainsKey(address)) return _lookup[address];
+            return new List<CommonFeature>();
         }
 
         private static void ImportFromCSV()
