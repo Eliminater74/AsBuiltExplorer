@@ -310,10 +310,27 @@ namespace AsBuiltExplorer
                      d3 = "";
                 }
 
+                // --- 5. Heuristic: Extract Mask from Notes (e.g. "xxxx xBxx xxxx - Description") ---
+                // Some files put the specific value in the Notes column
+                var maskInNotesMatch = Regex.Match(notes.Trim(), @"^([xX0-9A-Fa-f]{4}[\s\-]+[xX0-9A-Fa-f]{4}[\s\-]+[xX0-9A-Fa-f]{4})");
+                if (maskInNotesMatch.Success)
+                {
+                    string extractedMask = maskInNotesMatch.Groups[1].Value;
+                    
+                    // If D1 is garbage (length mismatch) or we trust the note more?
+                    // Usually if the note has a full mask, it's the specific setting for this row.
+                    d1 = extractedMask;
+                    
+                    // Remove mask from notes
+                    notes = notes.Substring(maskInNotesMatch.Length).Trim();
+                    // Clean up leading " - " or similar
+                    if (notes.StartsWith("-") || notes.StartsWith(":")) notes = notes.Substring(1).Trim();
+                }
+
                 // Cleanup Masks (Wildcards) - PRESERVE *
-                d1 = d1.Replace(" ", "");
-                d2 = d2.Replace(" ", "");
-                d3 = d3.Replace(" ", "");
+                d1 = d1.Replace(" ", "").Replace("-", ""); // Also strip hyphens if pseudo-mask used them
+                d2 = d2.Replace(" ", "").Replace("-", "");
+                d3 = d3.Replace(" ", "").Replace("-", "");
 
                 // Only insert if we have at least one mask
                 if (string.IsNullOrEmpty(d1) && string.IsNullOrEmpty(d2) && string.IsNullOrEmpty(d3)) continue;
