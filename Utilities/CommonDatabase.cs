@@ -10,6 +10,7 @@ namespace AsBuiltExplorer
 {
     public class CommonFeature
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Module { get; set; }
         public string Address { get; set; }
@@ -32,7 +33,11 @@ namespace AsBuiltExplorer
         public static void Load()
         {
             if (_loaded) return;
+            ForceReload();
+        }
 
+        public static void ForceReload()
+        {
             // 1. Ensure DB exists
             DefinitionsDBHelper.Initialize();
 
@@ -62,6 +67,7 @@ namespace AsBuiltExplorer
                     {
                         var f = new CommonFeature
                         {
+                            ID = Convert.ToInt32(reader["ID"]),
                             Name = reader["FeatureName"].ToString(),
                             Module = reader["Module"].ToString(),
                             Address = reader["Address"].ToString(),
@@ -394,6 +400,60 @@ namespace AsBuiltExplorer
             }
 
             return true;
+        }
+
+        public static void UpdateEntry(CommonFeature f)
+        {
+            DefinitionsDBHelper.UpdateEntry(f.ID, f.Name, f.Module, f.Address, f.Data1Mask, f.Data2Mask, f.Data3Mask, f.Notes);
+            var existing = Features.FirstOrDefault(x => x.ID == f.ID);
+            if (existing != null)
+            {
+                existing.Name = f.Name;
+                existing.Module = f.Module;
+                existing.Address = f.Address;
+                existing.Data1Mask = f.Data1Mask;
+                existing.Data2Mask = f.Data2Mask;
+                existing.Data3Mask = f.Data3Mask;
+                existing.Notes = f.Notes;
+            }
+        }
+
+        public static void ExportToCSV(string filename, List<CommonFeature> exportList = null)
+        {
+            var list = exportList ?? Features;
+            using (var sw = new StreamWriter(filename))
+            {
+                sw.WriteLine("FeatureName,Module,Address,Data1Mask,Data2Mask,Data3Mask,Notes");
+                foreach(var f in list)
+                {
+                    string line = $"{EscapeCsv(f.Name)},{EscapeCsv(f.Module)},{EscapeCsv(f.Address)},{EscapeCsv(f.Data1Mask)},{EscapeCsv(f.Data2Mask)},{EscapeCsv(f.Data3Mask)},{EscapeCsv(f.Notes)}";
+                    sw.WriteLine(line);
+                }
+            }
+        }
+
+        private static string EscapeCsv(string val)
+        {
+            if (string.IsNullOrEmpty(val)) return "";
+            if (val.Contains(",") || val.Contains("\"") || val.Contains("\n"))
+            {
+                val = val.Replace("\"", "\"\"");
+                return $"\"{val}\"";
+            }
+            return val;
+        }
+
+        public static void ImportCSV(string filepath)
+        {
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string customCsvDir = Path.Combine(baseDir, "CustomCSV");
+            if (!Directory.Exists(customCsvDir)) Directory.CreateDirectory(customCsvDir);
+
+            string dest = Path.Combine(customCsvDir, Path.GetFileName(filepath));
+            File.Copy(filepath, dest, true);
+
+            _loaded = false; 
+            Load(); 
         }
     }
 }

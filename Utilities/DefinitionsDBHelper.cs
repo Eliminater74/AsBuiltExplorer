@@ -79,6 +79,26 @@ namespace AsBuiltExplorer
             }
         }
 
+        public static void UpdateEntry(int id, string name, string module, string address, string d1, string d2, string d3, string notes)
+        {
+            using (var conn = GetConnection())
+            {
+                string query = "UPDATE CommonCodes SET FeatureName=@name, Module=@mod, Address=@addr, Data1Mask=@d1, Data2Mask=@d2, Data3Mask=@d3, Notes=@notes WHERE ID=@id";
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@mod", module);
+                    cmd.Parameters.AddWithValue("@addr", address);
+                    cmd.Parameters.AddWithValue("@d1", d1);
+                    cmd.Parameters.AddWithValue("@d2", d2);
+                    cmd.Parameters.AddWithValue("@d3", d3);
+                    cmd.Parameters.AddWithValue("@notes", notes);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public static System.Data.DataTable GetAllCodes()
         {
             var dt = new System.Data.DataTable();
