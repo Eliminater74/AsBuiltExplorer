@@ -213,6 +213,7 @@ namespace AsBuiltExplorer
             this.lblAboutTitle = new System.Windows.Forms.Label();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbSettings = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.TabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.ContextMenuStrip1.SuspendLayout();
@@ -239,6 +240,7 @@ namespace AsBuiltExplorer
             this.TabPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // TabControl1
@@ -2008,6 +2010,7 @@ namespace AsBuiltExplorer
             // TabPage8
             // 
             this.TabPage8.BackColor = System.Drawing.SystemColors.Control;
+            this.TabPage8.Controls.Add(this.pictureBox2);
             this.TabPage8.Controls.Add(this.lnkAboutGithub);
             this.TabPage8.Controls.Add(this.lblAboutMoto);
             this.TabPage8.Controls.Add(this.lblAboutCredits);
@@ -2110,6 +2113,15 @@ namespace AsBuiltExplorer
             this.pbSettings.TabStop = false;
             this.pbSettings.Click += new System.EventHandler(this.pbSettings_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.Location = new System.Drawing.Point(387, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(600, 582);
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2161,6 +2173,7 @@ namespace AsBuiltExplorer
             this.TabPage8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
     }
@@ -2370,7 +2383,8 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.PictureBox pbSettings;
     private System.Windows.Forms.Button btnDB_Scan;
     private System.Windows.Forms.ColumnHeader colFeatures; // Added
- }
+        private PictureBox pictureBox2;
+    }
 }
 
 
