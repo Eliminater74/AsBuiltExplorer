@@ -119,6 +119,7 @@
     <Compile Include="Utilities\ModDatabase.cs" />
     <Compile Include="Utilities\modAsBuilt.cs" />
     <Compile Include="Utilities\VINDecoder.cs" />
+    <Compile Include="Utilities\VehicleStrategy.cs" />
     <Compile Include="My\MyApplication.cs" />
     <Compile Include="My\MyComputer.cs" />
     <Compile Include="My\MyProject.cs" />
@@ -148,7 +149,7 @@
     <Content Include="CustomCSV\CommonCodes2.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="AsBuiltData\1FMFK15598LA51274.ab">
+    <Content Include="AsBuiltData\README.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
