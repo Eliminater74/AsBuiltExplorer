@@ -171,31 +171,64 @@ namespace AsBuiltExplorer
                 // Apply Format Logic based on Anchor (detectedFormat)
                 if (detectedFormat == 0) // Format 1 (My Export): Addr | D1 | D2 | D3 | Name
                 {
+                    address = parts.Count > 0 ? parts[0].Trim() : "";
                     d1 = parts.Count > 1 ? parts[1].Trim() : "";
                     d2 = parts.Count > 2 ? parts[2].Trim() : "";
                     d3 = parts.Count > 3 ? parts[3].Trim() : "";
                     name = parts.Count > 4 ? parts[4].Trim() : "";
                 }
-                else if (detectedFormat == 1) // Format 2 (CommonCodes2): Mod | Addr | D1 | D2 | D3 | Name | Notes
+                else if (detectedFormat == 1) // Format 2 (2GFusions/CommonCodes2): Index | Polyglot(Addr/Mod/Name) | D1 | D2?
                 {
-                    module = parts.Count > 0 ? parts[0].Trim() : "";
+                    // This format is tricky. Col 0 is Index. Col 1 is "Key".
+                    string key = parts.Count > 1 ? parts[1].Trim() : "";
+                    
+                    if (Regex.IsMatch(key, @"^[0-9A-F]{3}-[0-9A-F]{2}-[0-9A-F]{2}.*")) // Allow suffix text
+                    {
+                        address = key;
+                    }
+                    else if (key.StartsWith("(") || (key.Length < 10 && key.Any(char.IsLetterOrDigit))) 
+                    {
+                         // Likely a Module name like "(IPC)" or "APIM"
+                         module = key;
+                    }
+                    else if (key.Length > 0)
+                    {
+                        // Likely a Feature Name
+                        name = key;
+                    }
+
+                    // D1 is Column 2
                     d1 = parts.Count > 2 ? parts[2].Trim() : "";
+                    
+                    // Col 3 usually D2?
                     d2 = parts.Count > 3 ? parts[3].Trim() : "";
-                    d3 = parts.Count > 4 ? parts[4].Trim() : "";
-                    name = parts.Count > 5 ? parts[5].Trim() : "";
-                    notes = parts.Count > 6 ? parts[6].Trim() : "";
+                    
+                    // Note: Format 2 (CommonCodes2) had: Mod(0)|Addr(1)|D1(2)... 
+                    // But 2GFusions has Index(0)|Addr(1)|D1(2)...
+                    // Both have Address in Col 1.
+                    // My Polyglot logic sees key="760..." -> Addr.
+                    // But it ignores Col 0 "ABS". 
+                    // Fix: Check Col 0 too!
+                    
+                    string col0 = parts.Count > 0 ? parts[0].Trim() : "";
+                    if (!string.IsNullOrEmpty(col0) && !Regex.IsMatch(col0, @"^\d+$") && col0.Length < 10) 
+                    {
+                        // Col 0 is NOT an index, so it might be Module (CommonCodes2 style)
+                        module = col0;
+                    }
                 }
                 else if (detectedFormat == 2) // Format 3 (Livnitup): Name | Mod | Addr | D1 | D2 | D3 | Notes
                 {
                     name = parts.Count > 0 ? parts[0].Trim() : "";
                     module = parts.Count > 1 ? parts[1].Trim() : "";
+                    address = parts.Count > 2 ? parts[2].Trim() : "";
+
                     d1 = parts.Count > 3 ? parts[3].Trim() : "";
                     d2 = parts.Count > 4 ? parts[4].Trim() : "";
                     d3 = parts.Count > 5 ? parts[5].Trim() : "";
                     notes = parts.Count > 6 ? parts[6].Trim() : "";
 
-                     // Fix: Some files have "D1 D2 D3" in a single column? 
-                     // If d1 has spaces and d2 is empty, try split
+                     // Fix: Some files have "D1 D2 D3" in a single column
                      if (d1.Contains(" ") && string.IsNullOrEmpty(d2))
                      {
                          var masks = d1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -205,7 +238,7 @@ namespace AsBuiltExplorer
                      }
                 }
                 
-                // Handle Dittos / Merged Cells persistence
+                // Handle Persistence / Merged Cells (Re-check after clearing indices)
                 if (string.IsNullOrEmpty(module)) module = lastModule; else lastModule = module;
                 if (string.IsNullOrEmpty(name)) name = lastFeatureName; else lastFeatureName = name;
                 if (!string.IsNullOrEmpty(address)) lastAddr = address;
@@ -237,13 +270,15 @@ namespace AsBuiltExplorer
                 }
 
                 // Problem: Some files have an Index number in the Module or Name column
-                if (Regex.IsMatch(module.Trim(), @"^\d+$")) module = "";
-                if (Regex.IsMatch(name.Trim(), @"^\d+$")) name = "";
+                if (Regex.IsMatch(module.Trim(), @"^[\d\.]+$")) module = "";
+                if (Regex.IsMatch(name.Trim(), @"^[\d\.]+$")) name = "";
                 
-                // Handle Persistence / Merged Cells (Re-check after clearing indices)
-                if (string.IsNullOrEmpty(module)) module = lastModule; else lastModule = module;
-                if (string.IsNullOrEmpty(name)) name = lastFeatureName; else lastFeatureName = name;
-                if (!string.IsNullOrEmpty(address)) lastAddr = address;
+                // Re-persistence check in case we wiped it
+                if (string.IsNullOrEmpty(module)) module = lastModule; // Fallback to last valid
+                else lastModule = module; // Update last valid (if not empty)
+
+                if (string.IsNullOrEmpty(name)) name = lastFeatureName; // Fallback
+                else lastFeatureName = name; 
 
                 // Cleanup Masks (Wildcards) - PRESERVE *
                 // Now it is safe to strip spaces from the actual masks
