@@ -210,19 +210,10 @@ namespace AsBuiltExplorer
                 if (string.IsNullOrEmpty(name)) name = lastFeatureName; else lastFeatureName = name;
                 if (!string.IsNullOrEmpty(address)) lastAddr = address;
 
-                // Cleanup Masks (Wildcards) - PRESERVE *
-                d1 = d1.Replace(" ", "");
-                d2 = d2.Replace(" ", "");
-                d3 = d3.Replace(" ", "");
-
-                // Only insert if we have at least one mask
-                if (string.IsNullOrEmpty(d1) && string.IsNullOrEmpty(d2) && string.IsNullOrEmpty(d3)) continue;
-                
-                // Skip Header-like lines that slipped through (e.g. "Address" as name?)
-                if (name.ToLower() == "feature name" || module.ToLower() == "module") continue;
-
                 // --- Heuristic Cleanup ---
                 // Problem: Some files put "Note: ..." in D2 or D3 columns
+                // Do this BEFORE stripping spaces so we preserve note readability
+                
                 // Check if D2 looks like a note
                 if (!string.IsNullOrEmpty(d2) && (d2.ToLower().Contains("note:") || d2.Contains("(") || d2.Length > 12))
                 {
@@ -245,8 +236,26 @@ namespace AsBuiltExplorer
                      d3 = "";
                 }
 
-                // Problem: Some files have an Index number in the Module column
-                if (Regex.IsMatch(module, @"^\d+$")) module = "";
+                // Problem: Some files have an Index number in the Module or Name column
+                if (Regex.IsMatch(module.Trim(), @"^\d+$")) module = "";
+                if (Regex.IsMatch(name.Trim(), @"^\d+$")) name = "";
+                
+                // Handle Persistence / Merged Cells (Re-check after clearing indices)
+                if (string.IsNullOrEmpty(module)) module = lastModule; else lastModule = module;
+                if (string.IsNullOrEmpty(name)) name = lastFeatureName; else lastFeatureName = name;
+                if (!string.IsNullOrEmpty(address)) lastAddr = address;
+
+                // Cleanup Masks (Wildcards) - PRESERVE *
+                // Now it is safe to strip spaces from the actual masks
+                d1 = d1.Replace(" ", "");
+                d2 = d2.Replace(" ", "");
+                d3 = d3.Replace(" ", "");
+
+                // Only insert if we have at least one mask
+                if (string.IsNullOrEmpty(d1) && string.IsNullOrEmpty(d2) && string.IsNullOrEmpty(d3)) continue;
+                
+                // Skip Header-like lines that slipped through
+                if (name.ToLower() == "feature name" || module.ToLower() == "module") continue;
 
                 DefinitionsDBHelper.AddEntry(name, module, address, d1, d2, d3, notes);
             }
