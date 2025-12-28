@@ -104,6 +104,7 @@ namespace AsBuiltExplorer
             // Determine Era
             string targetEra = (year > 0 && year < 2011) ? "Legacy" : "Modern"; // Default to Modern if unknown
 
+            // 1. Try Strict Era Match
             foreach (var f in candidates)
             {
                 // Filter by Era if specified in DB
@@ -115,22 +116,38 @@ namespace AsBuiltExplorer
                         continue; // Era Mismatch
                     }
                 }
-
-                // Basic matching logic: If mask is present, data must match it
-                // We assume masks are stored as Hex strings like "720-01-01" or just "xxxx"
-                // Actually, typically they are just the data part.
                 
-                bool match = true;
-                if (!IsHexMatch(d1, f.Data1Mask)) match = false;
-                if (match && !IsHexMatch(d2, f.Data2Mask)) match = false;
-                if (match && !IsHexMatch(d3, f.Data3Mask)) match = false;
-
-                if (match)
+                if (IsFeatureMatch(f, d1, d2, d3))
                 {
                     matches.Add(f.Name);
                 }
             }
-            return matches;
+
+            // 2. If no matches found, try Fuzzy Era Match (Fallback)
+            if (matches.Count == 0 && candidates.Count > 0)
+            {
+                foreach (var f in candidates)
+                {
+                     // Skip if we already checked it (meaning it was filtered by Era)
+                     // Actually, just check if it matches data.
+                     if (IsFeatureMatch(f, d1, d2, d3))
+                     {
+                         string suffix = (!string.IsNullOrEmpty(f.Era) && !f.Era.Equals("All", StringComparison.OrdinalIgnoreCase)) ? $" ({f.Era}?)" : "";
+                         matches.Add(f.Name + suffix);
+                     }
+                }
+            }
+
+            return matches.Distinct().ToList();
+        }
+
+        private static bool IsFeatureMatch(CommonFeature f, string d1, string d2, string d3)
+        {
+            bool match = true;
+            if (!IsHexMatch(d1, f.Data1Mask)) match = false;
+            if (match && !IsHexMatch(d2, f.Data2Mask)) match = false;
+            if (match && !IsHexMatch(d3, f.Data3Mask)) match = false;
+            return match;
         }
 
         private static bool IsHexMatch(string data, string mask)

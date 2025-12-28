@@ -216,8 +216,8 @@ public partial class Form1 : Form
 
   private void Button2_Click(object sender, EventArgs e)
   {
-
-    string[] retModuleNames = new string[1];
+      CommonDatabase.ForceReload(); // Reload DB to pick up CSV changes
+      string[] retModuleNames = new string[1];
     string[] retModuleShortNames = new string[1];
     string[] retModuleAddresses = new string[1];
 
@@ -451,15 +451,15 @@ public partial class Form1 : Form
       listViewSubItem = listViewItem2.SubItems.Add(retData3_1);
       listViewSubItem = listViewItem2.SubItems.Add("");
       listViewSubItem = listViewItem2.SubItems.Add(text5);
-      listViewSubItem = listViewItem2.SubItems.Add(text6);
-      listViewSubItem = listViewItem2.SubItems.Add(text7);
-      listViewSubItem = listViewItem2.SubItems.Add(text6);
-      listViewSubItem = listViewItem2.SubItems.Add(text7);
-      listViewSubItem = listViewItem2.SubItems.Add(text8);
+      
       // Feature Translation
       int vinYear1 = VINDecoder.GetModelYear(retVIN1);
       var feats1 = CommonDatabase.GetMatchingFeatures(str4, retData1_1, retData2_1, retData3_1, vinYear1);
       listViewSubItem = listViewItem2.SubItems.Add(string.Join(", ", feats1));
+
+      listViewSubItem = listViewItem2.SubItems.Add(text6);
+      listViewSubItem = listViewItem2.SubItems.Add(text7);
+      listViewSubItem = listViewItem2.SubItems.Add(text8);
       foreach (ListViewItem.ListViewSubItem sub in listViewItem2.SubItems)
       {
           sub.ForeColor = this.tbxCompFile1.ForeColor;
@@ -538,13 +538,15 @@ public partial class Form1 : Form
       }
       listViewSubItem = index5 == -1 ? listViewItem3.SubItems.Add("No Match") : (!flag6 ? listViewItem3.SubItems.Add("No") : listViewItem3.SubItems.Add("Yes"));
       listViewSubItem = listViewItem3.SubItems.Add(text9);
-      listViewSubItem = listViewItem3.SubItems.Add(text10);
-      listViewSubItem = listViewItem3.SubItems.Add(text11);
-      listViewSubItem = listViewItem3.SubItems.Add(text12);
+      
       // Feature Translation
       int vinYear2 = VINDecoder.GetModelYear(retVIN2);
       var feats2 = CommonDatabase.GetMatchingFeatures(str8, retData1_1, retData2_1, retData3_1, vinYear2);
       listViewSubItem = listViewItem3.SubItems.Add(string.Join(", ", feats2));
+
+      listViewSubItem = listViewItem3.SubItems.Add(text10);
+      listViewSubItem = listViewItem3.SubItems.Add(text11);
+      listViewSubItem = listViewItem3.SubItems.Add(text12);
       if (index5 == -1)
         listViewItem1 = this.ListView1.Items.Add("");
       foreach (ListViewItem.ListViewSubItem sub in listViewItem3.SubItems)
@@ -623,13 +625,15 @@ public partial class Form1 : Form
       }
       listViewSubItem = index10 == -1 ? listViewItem4.SubItems.Add("No Match") : (!flag7 ? listViewItem4.SubItems.Add("No") : listViewItem4.SubItems.Add("Yes"));
       listViewSubItem = listViewItem4.SubItems.Add(text13);
-      listViewSubItem = listViewItem4.SubItems.Add(text14);
-      listViewSubItem = listViewItem4.SubItems.Add(text15);
-      listViewSubItem = listViewItem4.SubItems.Add(text16);
+      
       // Feature Translation
       int vinYear3 = VINDecoder.GetModelYear(retVIN3);
       var feats3 = CommonDatabase.GetMatchingFeatures(str9, retData1_1, retData2_1, retData3_1, vinYear3);
       listViewSubItem = listViewItem4.SubItems.Add(string.Join(", ", feats3));
+
+      listViewSubItem = listViewItem4.SubItems.Add(text14);
+      listViewSubItem = listViewItem4.SubItems.Add(text15);
+      listViewSubItem = listViewItem4.SubItems.Add(text16);
       if (index10 == -1)
         listViewItem1 = this.ListView1.Items.Add("");
       foreach (ListViewItem.ListViewSubItem sub in listViewItem4.SubItems)
@@ -711,13 +715,15 @@ public partial class Form1 : Form
       }
       listViewSubItem = index15 == -1 ? listViewItem5.SubItems.Add("No Match") : (!flag8 ? listViewItem5.SubItems.Add("No") : listViewItem5.SubItems.Add("Yes"));
       listViewSubItem = listViewItem5.SubItems.Add(text17);
-      listViewSubItem = listViewItem5.SubItems.Add(text18);
-      listViewSubItem = listViewItem5.SubItems.Add(text19);
-      listViewSubItem = listViewItem5.SubItems.Add(text20);
+
       // Feature Translation
       int vinYear4 = VINDecoder.GetModelYear(retVIN4);
       var feats4 = CommonDatabase.GetMatchingFeatures(str10, retData1_1, retData2_1, retData3_1, vinYear4);
       listViewSubItem = listViewItem5.SubItems.Add(string.Join(", ", feats4));
+
+      listViewSubItem = listViewItem5.SubItems.Add(text18);
+      listViewSubItem = listViewItem5.SubItems.Add(text19);
+      listViewSubItem = listViewItem5.SubItems.Add(text20);
       if (index15 == -1)
         listViewItem1 = this.ListView1.Items.Add("");
       foreach (ListViewItem.ListViewSubItem sub in listViewItem5.SubItems)
@@ -2480,6 +2486,8 @@ public partial class Form1 : Form
       }
     }
   }
+
+
 
   private void Button7_Click(object sender, EventArgs e)
   {
