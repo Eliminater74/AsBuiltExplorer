@@ -357,6 +357,7 @@ public partial class Form1 : Form
       this.lblComp4VIN.Text = "No VIN (UCDS)";
     }
     this.ListView1.Items.Clear();
+    System.Drawing.Font listBoldFont = new System.Drawing.Font(this.ListView1.Font, System.Drawing.FontStyle.Bold);
     string retData1_1 = "";
     string retData2_1 = "";
     string retData3_1 = "";
@@ -456,6 +457,7 @@ public partial class Form1 : Form
       foreach (ListViewItem.ListViewSubItem sub in listViewItem2.SubItems)
       {
           sub.ForeColor = this.tbxCompFile1.ForeColor;
+          sub.Font = listBoldFont;
       }
       listViewItem1 = this.ListView1.Items.Add("");
       checked { ++index1; }
@@ -538,6 +540,7 @@ public partial class Form1 : Form
       foreach (ListViewItem.ListViewSubItem sub in listViewItem3.SubItems)
       {
           sub.ForeColor = this.tbxCompFile2.ForeColor;
+          sub.Font = listBoldFont;
       }
       checked { ++index4; }
     }
@@ -618,6 +621,7 @@ public partial class Form1 : Form
       foreach (ListViewItem.ListViewSubItem sub in listViewItem4.SubItems)
       {
           sub.ForeColor = this.tbxCompFile3.ForeColor;
+          sub.Font = listBoldFont;
       }
       checked { ++index9; }
     }
@@ -701,6 +705,7 @@ public partial class Form1 : Form
       foreach (ListViewItem.ListViewSubItem sub in listViewItem5.SubItems)
       {
           sub.ForeColor = this.tbxCompFile4.ForeColor;
+          sub.Font = listBoldFont;
       }
       checked { ++index14; }
     }
