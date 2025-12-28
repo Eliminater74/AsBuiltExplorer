@@ -31,11 +31,13 @@ jobs:
         $ver = "${{ github.ref_name }}".TrimStart('v')
         echo "VERSION=$ver" >> $env:GITHUB_OUTPUT
 
-    - name: Setup Inno Setup
-      uses: thirdwigg/inno-setup-action@v1.4.1
+    - name: Install Inno Setup
+      run: |
+        choco install innosetup
+        echo "C:\Program Files (x86)\Inno Setup 6" >> $env:GITHUB_PATH
 
     - name: Compile Installer
-      run: iscc /DMyAppVersion="${{ steps.get_version.outputs.VERSION }}" setup.iss
+      run: ISCC.exe /DMyAppVersion="${{ steps.get_version.outputs.VERSION }}" setup.iss
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
