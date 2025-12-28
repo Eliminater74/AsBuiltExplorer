@@ -116,8 +116,9 @@
     <Compile Include="Utilities\ModuleDatabase.cs" />
     <Compile Include="Utilities\SQLiteHelper.cs" />
     <Compile Include="Utilities\VehicleDatabase.cs" />
-    <Compile Include="Utilities\ModDatabase.cs" />
     <Compile Include="Utilities\modAsBuilt.cs" />
+    <Compile Include="Utilities\NHTSADecoder.cs" />
+    <Compile Include="Utilities\ModDatabase.cs" />
     <Compile Include="Utilities\VINDecoder.cs" />
     <Compile Include="Utilities\VehicleStrategy.cs" />
     <Compile Include="My\MyApplication.cs" />

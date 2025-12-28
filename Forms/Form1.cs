@@ -1029,7 +1029,7 @@ public partial class Form1 : Form
       
       if(features.Count == 0)
       {
-          MessageBox.Show("No vehicle features found in the database.\n\nEnsure you have imported vehicles that have associated ETIS/Feature data (e.g. .ETIS.HTML files next to .ab files).\nYou can use the 'Scan Folder' button in the Vehicle Database tab to import them.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          MessageBox.Show("No vehicle features found in the database.\n\nWays to fix this:\n1. Import vehicles with associated .ETIS.HTML files.\n2. Manually tag vehicles: Go to 'Vehicle Database', right-click a vehicle, and select 'Edit Features...'.\n\nOnce vehicles are tagged with features (e.g. 'CruiseControl'), they will appear here.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
   }
 
@@ -3442,30 +3442,49 @@ label_24:
     {
         if (lvwBrowser.SelectedItems.Count == 0) return;
         
-        string vin = lvwBrowser.SelectedItems[0].SubItems[4].Text; // VIN column
-        var entry = VehicleDatabase.GetEntry(vin);
-        
-        if (entry != null)
+        // BATCH MODE
+        if (lvwBrowser.SelectedItems.Count > 1)
         {
-            string currentFeatures = entry.Features ?? "";
+            string newTag = Interaction.InputBox($"Enter feature tag to ADD to {lvwBrowser.SelectedItems.Count} selected vehicles:", "Batch Add Feature");
+            if (!string.IsNullOrWhiteSpace(newTag))
+            {
+                 int count = 0;
+                 foreach(ListViewItem item in lvwBrowser.SelectedItems)
+                 {
+                      string vin = item.SubItems[4].Text;
+                      var entry = VehicleDatabase.GetEntry(vin);
+                      if (entry != null)
+                      {
+                           // Add unique
+                           var parts = new List<string>((entry.Features ?? "").Split(';'));
+                           bool exists = false;
+                           foreach(var p in parts) if(string.Equals(p.Trim(), newTag.Trim(), StringComparison.OrdinalIgnoreCase)) exists = true;
+                           
+                           if(!exists)
+                           {
+                               if(string.IsNullOrEmpty(entry.Features)) entry.Features = newTag.Trim();
+                               else entry.Features += ";" + newTag.Trim();
+                               
+                               VehicleDatabase.UpdateEntry(entry);
+                               count++;
+                           }
+                      }
+                 }
+                 MessageBox.Show($"Added '{newTag}' to {count} vehicles.", "Batch Update Complete");
+            }
+            return;
+        }
+
+        // SINGLE MODE (Full Edit)
+        string vinSingle = lvwBrowser.SelectedItems[0].SubItems[4].Text; // VIN column
+        var entrySingle = VehicleDatabase.GetEntry(vinSingle);
+        
+        if (entrySingle != null)
+        {
+            string currentFeatures = entrySingle.Features ?? "";
             string newFeatures = Interaction.InputBox("Edit features for this vehicle (semicolon separated):", "Edit Features", currentFeatures);
             
-            if (newFeatures != currentFeatures) // InputBox returns empty string if cancelled? No, returns default if cancelled in some versions, or empty string. 
-            // Wait, Interaction.InputBox behavior: Returns empty string if user clicks Cancel.
-            // But what if user wants to clear features? Handled by empty input.
-            // Risk: User clicks Cancel and it clears features. 
-            // Better check: If newFeatures is empty string, we should verify if the user actually typed empty string or cancelled.
-            // InputBox is nasty for that. 
-            // Let's assume non-empty string means change, or strict check. 
-            // Actually, for simplicity now: If it differs, update. 
-            
-            // To differentiate Cancel vs Empty: InputBox doesn't support that well.
-            // I will assume if string is different, we update. 
-            // If user cancels, it returns empty string. If original was not empty, it wipes it. That's bad.
-            // Alternative: Custom Form? Too much work for now.
-            // Workaround: Use default as current. If result is empty and current wasn't, confirm clear?
-            
-            if (newFeatures != currentFeatures)
+            if (newFeatures != currentFeatures) 
             {
                  // Small check for empty result on non-empty current
                  if(string.IsNullOrEmpty(newFeatures) && !string.IsNullOrEmpty(currentFeatures))
@@ -3473,12 +3492,89 @@ label_24:
                       if(MessageBox.Show("Are you sure you want to clear all features?", "Confirm Clear", MessageBoxButtons.YesNo) == DialogResult.No) return;
                  }
                  
-                 entry.Features = newFeatures;
-                 VehicleDatabase.UpdateEntry(entry);
-                 
-                 // Update ListView? Not showing features currently.
+                 entrySingle.Features = newFeatures;
+                 VehicleDatabase.UpdateEntry(entrySingle);
                  MessageBox.Show("Features updated.", "Success");
             }
+        }
+    }
+
+    private void DecodeNHTSAToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        if (lvwBrowser.SelectedItems.Count == 0) return;
+
+        if (lvwBrowser.SelectedItems.Count > 1)
+        {
+             if (MessageBox.Show($"Are you sure you want to attempt online decoding for {lvwBrowser.SelectedItems.Count} vehicles? This may take a moment.", "Confirm Batch Decode", MessageBoxButtons.YesNo) == DialogResult.No) return;
+        }
+
+        int successCount = 0;
+        Cursor = Cursors.WaitCursor;
+        
+        try
+        {
+            foreach (ListViewItem item in lvwBrowser.SelectedItems)
+            {
+                string vin = item.SubItems[4].Text;
+                var entry = VehicleDatabase.GetEntry(vin);
+                if (entry != null)
+                {
+                    var result = NHTSADecoder.Decode(vin);
+                    if (result != null)
+                    {
+                        // Update Basic Info
+                        if(!string.IsNullOrEmpty(result.Make)) entry.Make = result.Make;
+                        if(!string.IsNullOrEmpty(result.Year)) entry.Year = result.Year;
+                        
+                        string model = result.Model;
+                        if (!string.IsNullOrEmpty(result.Trim)) model += " " + result.Trim;
+                        if(!string.IsNullOrEmpty(model)) entry.Model = model;
+
+                        // Add Features
+                        var newTags = new List<string>();
+                        if (!string.IsNullOrEmpty(result.Trim)) newTags.Add("Trim:" + result.Trim);
+                        if (!string.IsNullOrEmpty(result.DriveType)) newTags.Add("Drive:" + result.DriveType);
+                        if (!string.IsNullOrEmpty(result.BodyClass)) newTags.Add("Body:" + result.BodyClass);
+                        if (!string.IsNullOrEmpty(result.FuelType)) newTags.Add("Fuel:" + result.FuelType);
+                        if (!string.IsNullOrEmpty(result.Series)) newTags.Add("Series:" + result.Series);
+
+                        // Merge Features
+                        var current = new List<string>((entry.Features ?? "").Split(';'));
+                        bool changed = false;
+                        foreach (var tag in newTags)
+                        {
+                             bool exists = false;
+                             foreach(var c in current) if(c.Trim().Equals(tag, StringComparison.OrdinalIgnoreCase)) exists = true;
+                             if (!exists)
+                             {
+                                 current.Add(tag);
+                                 changed = true;
+                             }
+                        }
+
+                        if (changed || !string.IsNullOrEmpty(result.Model))
+                        {
+                            entry.Features = string.Join(";", current).Trim(';');
+                            VehicleDatabase.UpdateEntry(entry);
+                            successCount++;
+                        }
+                    }
+                }
+            }
+        }
+        finally
+        {
+            Cursor = Cursors.Default;
+        }
+
+        if (successCount > 0)
+        {
+            MessageBox.Show($"Successfully decoded and updated {successCount} vehicles from NHTSA.", "Decode Complete");
+            Button10_Click(sender, e); // Refresh
+        }
+        else
+        {
+            MessageBox.Show("No updates found or API request failed.", "Decode Results");
         }
     }
 

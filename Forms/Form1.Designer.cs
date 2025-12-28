@@ -180,6 +180,7 @@ namespace AsBuiltExplorer
             this.ColumnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colFeatures = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader())); // Added
             this.ContextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SetAsCompare1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SetAsCompare2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,6 +188,7 @@ namespace AsBuiltExplorer
             this.SetAsCompare4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.EditFeaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // Added
+            this.DecodeNHTSAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // Added
             this.DeleteFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TabPage9 = new System.Windows.Forms.TabPage();
             this.lvwDecodeResults = new System.Windows.Forms.ListView();
@@ -1754,7 +1756,8 @@ namespace AsBuiltExplorer
             this.ColumnHeader11,
             this.ColumnHeader12,
             this.ColumnHeader13,
-            this.ColumnHeader14});
+            this.ColumnHeader14,
+            this.colFeatures});
             this.lvwBrowser.ContextMenuStrip = this.ContextMenuStrip2;
             this.lvwBrowser.FullRowSelect = true;
             this.lvwBrowser.GridLines = true;
@@ -1793,6 +1796,11 @@ namespace AsBuiltExplorer
             this.ColumnHeader14.Text = "VIN";
             this.ColumnHeader14.Width = 225;
             // 
+            // colFeatures
+            // 
+            this.colFeatures.Text = "Features";
+            this.colFeatures.Width = 300;
+            // 
             // ContextMenuStrip2
             // 
             this.ContextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1803,9 +1811,10 @@ namespace AsBuiltExplorer
             this.SetAsCompare4ToolStripMenuItem,
             this.ToolStripMenuItem1,
             this.EditFeaturesToolStripMenuItem, // Added
+            this.DecodeNHTSAToolStripMenuItem, // Added
             this.DeleteFileToolStripMenuItem});
             this.ContextMenuStrip2.Name = "ContextMenuStrip2";
-            this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 142); // Increased Height
+            this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 164); // Increased Height
             this.ContextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip2_Opening);
             // 
             // SetAsCompare1ToolStripMenuItem
@@ -1847,6 +1856,13 @@ namespace AsBuiltExplorer
             this.EditFeaturesToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.EditFeaturesToolStripMenuItem.Text = "Edit Features...";
             this.EditFeaturesToolStripMenuItem.Click += new System.EventHandler(this.EditFeaturesToolStripMenuItem_Click);
+            // 
+            // DecodeNHTSAToolStripMenuItem
+            // 
+            this.DecodeNHTSAToolStripMenuItem.Name = "DecodeNHTSAToolStripMenuItem";
+            this.DecodeNHTSAToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.DecodeNHTSAToolStripMenuItem.Text = "Decode with NHTSA (Online)";
+            this.DecodeNHTSAToolStripMenuItem.Click += new System.EventHandler(this.DecodeNHTSAToolStripMenuItem_Click);
             // 
             // DeleteFileToolStripMenuItem
             // 
@@ -2345,8 +2361,10 @@ namespace AsBuiltExplorer
 
     private System.Windows.Forms.ColumnHeader colModCat;
     private System.Windows.Forms.ToolStripMenuItem EditFeaturesToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem DecodeNHTSAToolStripMenuItem; // Added
     private System.Windows.Forms.PictureBox pbSettings;
-    private System.Windows.Forms.Button btnDB_Scan; // Added
+    private System.Windows.Forms.Button btnDB_Scan;
+    private System.Windows.Forms.ColumnHeader colFeatures; // Added
  }
 }
 
