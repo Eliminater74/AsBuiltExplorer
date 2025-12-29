@@ -40,7 +40,7 @@ namespace AsBuiltExplorer
                 Platform = platformExp,
                 Category = "Coding",
                 Description = "Hold the Unlock button on your fob to roll down the front windows before you get in.",
-                Instructions = "Module: GEM / SJB\r\nAddress: 726-xx-xx\r\n\r\nNote: Requires specific 'Security Package' GEM.\r\nCheck 'Module Configuration' screen to see if 'Global Open' is an available option to enable."
+                Instructions = "Module: GEM / SJB\r\nAddress: 726-xx-xx\r\n\r\nNote: Requires specific 'Security Package' GEM.\r\nCheck 'Module Configuration' screen to see if 'Global Open' is an available option to enable.\r\n\r\nWARNING: HARDWARE MISMATCH RISK\r\nIF Module = GEM (2007-2014) AND 'Perimeter Alarm' was Factory Disabled THEN Global Windows cannot be enabled via software.\r\nREASON: Missing internal relays and Hood/Door sensor wiring. Enabling Alarm will cause 'Double Honk' errors and Battery Drain issues."
             });
 
             Mods.Add(new ModEntry
