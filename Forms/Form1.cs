@@ -31,8 +31,12 @@ public partial class Form1 : Form
     Shown += new EventHandler(Form1_Shown);
     abDownloadTriggered = 0;
 
-    // Fix for WebBrowser control to use IE11 mode (11001)
-    // MUST be done before InitializeComponent() where the browser is created
+    // Ensure TLS 1.2 is enabled (Critical for modern web compatibility)
+    System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
+
+    // Fix for WebBrowser control to use IE11 Standards mode (11000)
+    // 11001 (Edge mode) can sometimes break scripts that rely on DOCTYPEs. 
+    // 11000 is safer for general compatibility.
     try
     {
         string dynamicName = System.IO.Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
@@ -44,7 +48,8 @@ public partial class Form1 : Form
             {
                 foreach (string name in appNames)
                 {
-                    key.SetValue(name, 11001, Microsoft.Win32.RegistryValueKind.DWord);
+                    // 11000 (0x2AF8) = IE11 content, generic
+                    key.SetValue(name, 11000, Microsoft.Win32.RegistryValueKind.DWord);
                 }
             }
         }
