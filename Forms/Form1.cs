@@ -125,16 +125,26 @@ public partial class Form1 : Form
           TabPage7.Controls.Add(helpBrowser);
           
           var helpPath = Path.Combine(Application.StartupPath, "Help", "index.html");
-          if (File.Exists(helpPath))
-          {
-              helpBrowser.Navigate(helpPath);
-          }
-          else
-          {
-               var errLbl = new Label() { Text = "Help file not found: " + helpPath, Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter };
-               TabPage7.Controls.Add(errLbl);
-          }
-      }
+        if (File.Exists(helpPath))
+        {
+            try 
+            {
+               var htmlContent = File.ReadAllText(helpPath);
+               var appVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+               htmlContent = htmlContent.Replace("{{VERSION}}", "v" + appVersion.ToString());
+               helpBrowser.DocumentText = htmlContent;
+            }
+            catch
+            {
+               helpBrowser.Navigate(helpPath);
+            }
+        }
+        else
+        {
+             var errLbl = new Label() { Text = "Help file not found: " + helpPath, Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter };
+             TabPage7.Controls.Add(errLbl);
+        }
+    }
       VehicleDatabase.Load(); // Load existing vehicles
       
       // Auto-Import from AsBuiltData folder
