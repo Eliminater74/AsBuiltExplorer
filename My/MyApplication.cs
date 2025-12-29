@@ -27,6 +27,30 @@ namespace AsBuiltExplorer.My
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         internal static void Main(string[] Args)
         {
+            // Fix for WebBrowser control to use IE11 mode (11001)
+            try
+            {
+                // Use both dynamic and hardcoded names to be safe
+                string dynamicName = System.IO.Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                string[] appNames = { "AsBuiltExplorer.exe", dynamicName };
+
+                using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"))
+                {
+                    if (key != null)
+                    {
+                        foreach (string name in appNames)
+                        {
+                            key.SetValue(name, 11001, Microsoft.Win32.RegistryValueKind.DWord);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Warn user if this fails, as it breaks the MotorCraft tab
+                System.Windows.Forms.MessageBox.Show("Failed to set IE11 Emulation Key: " + ex.Message, "Registry Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+            }
+
             try
             {
                 Application.SetCompatibleTextRenderingDefault(WindowsFormsApplicationBase.UseCompatibleTextRendering);
