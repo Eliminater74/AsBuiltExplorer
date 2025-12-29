@@ -37,6 +37,7 @@ namespace AsBuiltExplorer
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.TabPage1 = new System.Windows.Forms.TabPage();
             this.btnViewDefs = new System.Windows.Forms.Button();
+            this.btnAboutDev = new System.Windows.Forms.Button();
             this.btnDB4 = new System.Windows.Forms.Button();
             this.btnDB3 = new System.Windows.Forms.Button();
             this.btnDB2 = new System.Windows.Forms.Button();
@@ -2031,6 +2032,8 @@ namespace AsBuiltExplorer
             this.TabPage8.Controls.Add(this.lblAboutMoto);
             this.TabPage8.Controls.Add(this.lblAboutCredits);
             this.TabPage8.Controls.Add(this.lblAboutDev);
+            this.TabPage8.Controls.Add(this.lblAboutDev);
+            this.TabPage8.Controls.Add(this.btnAboutDev);
             this.TabPage8.Controls.Add(this.lblAboutVersion);
             this.TabPage8.Controls.Add(this.lblAboutTitle);
             this.TabPage8.Location = new System.Drawing.Point(184, 4);
@@ -2044,7 +2047,7 @@ namespace AsBuiltExplorer
             // 
             this.lnkAboutGithub.AutoSize = true;
             this.lnkAboutGithub.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkAboutGithub.Location = new System.Drawing.Point(54, 350);
+            this.lnkAboutGithub.Location = new System.Drawing.Point(54, 410);
             this.lnkAboutGithub.Name = "lnkAboutGithub";
             this.lnkAboutGithub.Size = new System.Drawing.Size(301, 17);
             this.lnkAboutGithub.TabIndex = 5;
@@ -2057,7 +2060,7 @@ namespace AsBuiltExplorer
             this.lblAboutMoto.AutoSize = true;
             this.lblAboutMoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAboutMoto.ForeColor = System.Drawing.Color.DarkBlue;
-            this.lblAboutMoto.Location = new System.Drawing.Point(53, 300);
+            this.lblAboutMoto.Location = new System.Drawing.Point(53, 360);
             this.lblAboutMoto.Name = "lblAboutMoto";
             this.lblAboutMoto.Size = new System.Drawing.Size(108, 24);
             this.lblAboutMoto.TabIndex = 4;
@@ -2066,7 +2069,7 @@ namespace AsBuiltExplorer
             // lblAboutCredits
             // 
             this.lblAboutCredits.AutoSize = true;
-            this.lblAboutCredits.Location = new System.Drawing.Point(54, 200);
+            this.lblAboutCredits.Location = new System.Drawing.Point(54, 270);
             this.lblAboutCredits.Name = "lblAboutCredits";
             this.lblAboutCredits.Size = new System.Drawing.Size(281, 32);
             this.lblAboutCredits.TabIndex = 3;
@@ -2082,6 +2085,17 @@ namespace AsBuiltExplorer
             this.lblAboutDev.Size = new System.Drawing.Size(197, 20);
             this.lblAboutDev.TabIndex = 2;
             this.lblAboutDev.Text = "Developed by Eliminater74";
+            // 
+            // btnAboutDev
+            // 
+            this.btnAboutDev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAboutDev.Location = new System.Drawing.Point(54, 200);
+            this.btnAboutDev.Name = "btnAboutDev";
+            this.btnAboutDev.Size = new System.Drawing.Size(180, 35);
+            this.btnAboutDev.TabIndex = 6;
+            this.btnAboutDev.Text = "About Developer";
+            this.btnAboutDev.UseVisualStyleBackColor = true;
+            this.btnAboutDev.Click += new System.EventHandler(this.btnAboutDev_Click);
             // 
             // lblAboutVersion
             // 
@@ -2324,8 +2338,9 @@ namespace AsBuiltExplorer
    private System.Windows.Forms.Label lblAboutVersion;
    private System.Windows.Forms.Label lblAboutDev;
    private System.Windows.Forms.Label lblAboutCredits;
-   private System.Windows.Forms.Label lblAboutMoto;
-   private System.Windows.Forms.LinkLabel lnkAboutGithub;
+    private System.Windows.Forms.Label lblAboutMoto;
+    private System.Windows.Forms.Button btnAboutDev;
+    private System.Windows.Forms.LinkLabel lnkAboutGithub;
    // VIN Decoder Controls
    private System.Windows.Forms.TabPage TabPage9;
    private System.Windows.Forms.Label lblVinInput;

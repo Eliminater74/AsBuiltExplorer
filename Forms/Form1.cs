@@ -3519,6 +3519,14 @@ label_24:
 
         return sb.ToString();
     }
+        
+    private void btnAboutDev_Click(object sender, EventArgs e)
+    {
+        using (var form = new Forms.frmAboutDev())
+        {
+            form.ShowDialog(this);
+        }
+    }
 }
 }
 
