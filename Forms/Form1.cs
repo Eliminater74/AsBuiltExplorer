@@ -2908,7 +2908,8 @@ label_24:
       var isDark = ("Dark" == My.MySettings.Default.AppTheme);
       var backColor = isDark ? Color.FromArgb(45, 45, 48) : SystemColors.Control;
       var foreColor = isDark ? Color.White : SystemColors.ControlText;
-      var selectedBack = isDark ? Color.FromArgb(60, 60, 60) : Color.White;
+      // Highlight: Lighter Grey for Dark, Soft Blue for Light
+      var selectedBack = isDark ? Color.FromArgb(80, 80, 80) : Color.FromArgb(210, 230, 255);
       var selectedFore = isDark ? Color.Cyan : Color.Black; 
 
       if (e.State == DrawItemState.Selected)
