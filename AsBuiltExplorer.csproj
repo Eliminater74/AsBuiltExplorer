@@ -170,10 +170,7 @@
   <ItemGroup>
     <None Include="README.md" />
     <None Include="app.config" />
-    <Content Include="Resources\definitions.db">
-      <Link>definitions.db</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\definitions.db" />
     <Content Include="app_icon.ico" />
     <Content Include="Help\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -218,4 +215,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+      copy /Y "$(ProjectDir)Resources\definitions.db" "$(TargetDir)definitions.db"
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

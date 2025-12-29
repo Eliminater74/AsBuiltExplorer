@@ -2882,6 +2882,17 @@ label_24:
       }
   }
 
+  void TabPage2_Enter(object sender, EventArgs e)
+  {
+      // Populate VIN Calculator Dropdown
+      txtVIN_Input.Items.Clear();
+      foreach (var v in VehicleDatabase.Entries)
+      {
+          // Add the string representation
+          txtVIN_Input.Items.Add(v.ToString());
+      }
+  }
+
   void TabPage9_Enter(object sender, EventArgs e)
   {
       VehicleDatabase.Load(); // Ensure latest
@@ -3016,7 +3027,13 @@ label_24:
 
   void btnVIN_Convert_Click(object sender, EventArgs e)
   {
-      var vin = txtVIN_Input.Text;
+      var vin = txtVIN_Input.Text.Trim();
+      // Extract VIN if it's a formatted database entry (e.g. "2020 F-150 - 1FT...")
+      if (vin.Contains(" - "))
+      {
+          var parts = vin.Split(new string[] { " - " }, StringSplitOptions.None);
+          if (parts.Length > 1) vin = parts[parts.Length - 1].Trim();
+      }
       if (string.IsNullOrWhiteSpace(vin)) return;
 
       var sb = new StringBuilder();

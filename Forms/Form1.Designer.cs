@@ -96,7 +96,7 @@ namespace AsBuiltExplorer
             this.lblVIN_Desc = new System.Windows.Forms.Label();
             this.btnVIN_Convert = new System.Windows.Forms.Button();
             this.txtVIN_Hex = new System.Windows.Forms.TextBox();
-            this.txtVIN_Input = new System.Windows.Forms.TextBox();
+            this.txtVIN_Input = new System.Windows.Forms.ComboBox();
             this.grpTPMS = new System.Windows.Forms.GroupBox();
             this.lblTPMS_Desc = new System.Windows.Forms.Label();
             this.tbxTPMS_Hex = new System.Windows.Forms.TextBox();
@@ -757,6 +757,7 @@ namespace AsBuiltExplorer
             this.TabPage2.TabIndex = 1;
             this.TabPage2.Text = "Calculators & Tools";
             this.TabPage2.Click += new System.EventHandler(this.TabPage2_Click);
+            this.TabPage2.Enter += new System.EventHandler(this.TabPage2_Enter);
             // 
             // grpAudio
             // 
@@ -864,13 +865,15 @@ namespace AsBuiltExplorer
             this.txtVIN_Hex.Size = new System.Drawing.Size(220, 310);
             this.txtVIN_Hex.TabIndex = 2;
             // 
+            // 
             // txtVIN_Input
             // 
-            this.txtVIN_Input.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtVIN_Input.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtVIN_Input.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.txtVIN_Input.Location = new System.Drawing.Point(20, 30);
             this.txtVIN_Input.MaxLength = 17;
             this.txtVIN_Input.Name = "txtVIN_Input";
-            this.txtVIN_Input.Size = new System.Drawing.Size(220, 22);
+            this.txtVIN_Input.Size = new System.Drawing.Size(220, 24);
             this.txtVIN_Input.TabIndex = 0;
             this.txtVIN_Input.Text = "VIN...";
             // 
@@ -2381,7 +2384,7 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.Label lblTPMS_Desc;
     
     private System.Windows.Forms.GroupBox grpVIN;
-    private System.Windows.Forms.TextBox txtVIN_Input;
+    private System.Windows.Forms.ComboBox txtVIN_Input;
     private System.Windows.Forms.TextBox txtVIN_Hex;
     private System.Windows.Forms.Button btnVIN_Convert;
     private System.Windows.Forms.Label lblVIN_Desc;
