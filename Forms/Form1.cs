@@ -48,15 +48,28 @@ public partial class Form1 : Form
             {
                 foreach (string name in appNames)
                 {
-                    // 11000 (0x2AF8) = IE11 content, generic
-                    key.SetValue(name, 11000, Microsoft.Win32.RegistryValueKind.DWord);
+                    // 11001 (0x2AF9) = IE11 Edge Mode (Best for modern sites)
+                    key.SetValue(name, 11001, Microsoft.Win32.RegistryValueKind.DWord);
                 }
             }
         }
     }
     catch (Exception) { }
 
+    ChangeUserAgent(); // Hack to spoof Chrome UA
+
     InitializeComponent();
+  }
+
+  [System.Runtime.InteropServices.DllImport("urlmon.dll", CharSet = System.Runtime.InteropServices.CharSet.Ansi)]
+  private static extern int UrlMkSetSessionOption(int dwOption, string pBuffer, int dwBufferLength, int dwReserved);
+  const int URLMON_OPTION_USERAGENT = 0x10000001;
+
+  void ChangeUserAgent()
+  {
+      // Spoof modern Chrome to bypass "Browser not supported" checks
+      string ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+      UrlMkSetSessionOption(URLMON_OPTION_USERAGENT, ua, ua.Length, 0);
   }
 
   string VehicleInfo_GetModuleDataByID_Binary(
