@@ -37,6 +37,19 @@
 *   **Polyglot CSV Support**: intelligently parses various community CSV formats (Livnitup, 2GFusions, etc.).
 
 ---
+## 📸 Gallery
+
+![Main Interface](Resources/Screenshots/AsBuiltExplorerToolKit%201.png)
+![Compare Tab](Resources/Screenshots/AsBuiltExplorerToolKit%202.png)
+![Analysis](Resources/Screenshots/AsBuiltExplorerToolKit%203.png)
+![Deducer](Resources/Screenshots/AsBuiltExplorerToolKit%204.png)
+![Calculators](Resources/Screenshots/AsBuiltExplorerToolKit%205.png)
+![Settings](Resources/Screenshots/AsBuiltExplorerToolKit%206.png)
+![Vehicle Database](Resources/Screenshots/AsBuiltExplorerToolKit%207.png)
+![Mods Tab](Resources/Screenshots/AsBuiltExplorerToolKit%208.png)
+![About](Resources/Screenshots/AsBuiltExplorerToolKit%209%20.png)
+
+---
 
 ## 📂 Magic Folders
 
