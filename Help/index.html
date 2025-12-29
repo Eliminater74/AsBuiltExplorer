@@ -5,111 +5,98 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AsBuiltExplorer Toolkit Help</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        h1 {
-            color: #004481; /* Ford Blue-ish */
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #2c3e50;
-            margin-top: 30px;
-            border-left: 5px solid #004481;
-            padding-left: 10px;
-        }
-        h3 {
-            color: #e67e22;
-        }
-        p {
-            margin-bottom: 15px;
-        }
-        .section {
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        code {
-            background-color: #eee;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: Consolas, monospace;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        .note {
-            background-color: #e8f4f8;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 0.9em;
-            color: #777;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 950px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+        h1 { color: #004481; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+        h2 { color: #2c3e50; margin-top: 30px; border-left: 5px solid #004481; padding-left: 10px; }
+        h3 { color: #e67e22; margin-top: 20px; }
+        p { margin-bottom: 15px; }
+        .section { background: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        code { background-color: #eee; padding: 2px 5px; border-radius: 3px; font-family: Consolas, monospace; font-weight: bold; color: #d63031; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        .note { background-color: #e8f4f8; border-left: 4px solid #3498db; padding: 15px; margin: 15px 0; }
+        .warning { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 15px 0; }
+        .tip { background-color: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0; }
+        footer { margin-top: 50px; text-align: center; font-size: 0.9em; color: #777; border-top: 1px solid #ddd; padding-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
 
     <h1>AsBuiltExplorer Toolkit Help</h1>
+    <p>Version {{VERSION}}</p>
     
     <div class="section">
-        <h2>Introduction</h2>
-        <p>Welcome to <strong>AsBuiltExplorer</strong>, a powerful toolkit designed for "Digital Archaeology" of vehicle configuration data. This tool allows you to compare, analyze, and modify As-Built data files (.ab, .abt, .ucds) to discover hidden features and understand vehicle configurations.</p>
+        <h2>1. Overview</h2>
+        <p><strong>AsBuiltExplorer</strong> is your "Swiss Army Knife" for Ford As-Built data. Whether you are adding features to your F-150, fixing a replacement module, or just exploring what your truck can do, this tool simplifies the complex hex data found in FORScan.</p>
     </div>
 
     <div class="section">
-        <h2>Compare As-Built</h2>
-        <p>This is the core feature for discovering differences between vehicles.</p>
-        <ul>
-            <li><strong>Load Files</strong>: Load up to 4 different As-Built files to compare side-by-side.</li>
-            <li><strong>Smart Comparison</strong>: Differences are automatically highlighted.
-                <ul>
-                    <li><span style="background-color:mistyrose">Red Highlight</span>: Value mismatch.</li>
-                    <li><span style="background-color:lightyellow">Yellow Highlight</span>: Checksum difference only.</li>
-                </ul>
-            </li>
-            <li><strong>Known Features</strong>: The application attempts to translate hex data into human-readable feature names (e.g., "Heated Seats") based on the internal database.</li>
-            <li><strong>Right-Click Actions</strong>: Right-click any row to Identify Feature, Copy Data, or Edit.</li>
-        }
-    </div>
+        <h2>2. As-Built Comparison (The Core Feature)</h2>
+        <p>This tab allows you to load multiple vehicle files and see exactly what makes them different. This is how "Mods" are discovered.</p>
+        
+        <h3>How to Use:</h3>
+        <ol>
+            <li><strong>Load File 1 (Base):</strong> Click <code>Browse</code> to load your own backup file (<code>.ab</code> or <code>.abt</code>).</li>
+            <li><strong>Load File 2 (Target):</strong> Load a file from a vehicle that has the features you want (e.g., a Raptor or Platinum).</li>
+            <li><strong>Analysis:</strong> The tool will instantly align the files by Module Address (e.g., <code>726-01-01</code>).</li>
+        </ol>
 
-    <div class="section">
-        <h2>Calculators & Tools</h2>
-        <p>Essential utilities for modifying hex data.</p>
+        <h3>Understanding the Colors:</h3>
         <ul>
-            <li><strong>Checksum Calculator</strong>: Automatically calculate the correct checksum byte for modified data.</li>
-            <li><strong>Hex/Decimal Converter</strong>: Quick conversion between numbering systems.</li>
-            <li><strong>Bit Helper</strong>: Visualize specific bits within a byte (useful for toggle flags).</li>
+            <li><span style="background-color:white; border:1px solid #ccc; padding:0 5px;">White</span>: Identical data. No changes needed.</li>
+            <li><span style="background-color:mistyrose; border:1px solid #ccc; padding:0 5px;">Red</span>: <strong>Value Mismatch</strong>. The actual configuration data is different. This is where the magic happens.</li>
+            <li><span style="background-color:lightyellow; border:1px solid #ccc; padding:0 5px;">Yellow</span>: <strong>Checksum Difference Only</strong>. The data is the same, but the checksum byte (last byte) differs. You can usually ignore these.</li>
         </ul>
-    </div>
 
-    <div class="section">
-        <h2>Vehicle Database & Deducer</h2>
-        <p>Analyze patterns across multiple vehicles.</p>
-        <div class="note">
-            <strong>Tip:</strong> Use the "Scan Folder" button to import your entire collection of As-Built files into the local database for powerful searching.
+        <div class="tip">
+            <strong>Pro Tip:</strong> Right-click on any line to copy the data or "View Definition" to see if we know what that specific address controls.
         </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Calculators & Tools</h2>
+        <p>Stop guessing checksums or manually converting hex.</p>
+
+        <h3>Checksum Calculator</h3>
+        <p>When you change a digit in FORScan, the last two digits (the Checksum) become invalid. This tool fixes that.</p>
         <ul>
-            <li><strong>Deducer</strong>: Filter vehicles by features (e.g., "Find all F-150s with Sunroof") to isolate the specific address/bit controlling that feature.</li>
-            <li><strong>Analyze Library</strong>: Compare a specific file against your entire library to find unique or common settings.</li>
+            <li><strong>Summation (Legacy):</strong> Used by older modules (GEM, etc). Simple addition of bytes.</li>
+            <li><strong>CRC-8 / CRC-16 (Modern):</strong> Used by newer modules (IPMB, APIM, etc). Select the correct algorithm from the dropdown.</li>
         </ul>
+
+        <h3>VIN Decoder</h3>
+        <p>Find out exactly what options a donor VIN has.</p>
+        <ul>
+            <li><strong>Offline Mode:</strong> Instant decoding using our internal database. Secure and fast.</li>
+            <li><strong>Online (NHTSA):</strong> Check the box <code>Use Online API</code> to validte data against government records (req internet).</li>
+            <li><strong>Window Sticker:</strong> Use the generated link to grab the original PDF window sticker (if available).</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. Vehicle Database (Your Fleet)</h2>
+        <p>Keep track of all the vehicles you work on.</p>
+        <ul>
+            <li><strong>Importing:</strong> Drag & Drop <code>.ab</code> files into the app, or use the <strong>Scan Folder</strong> button to bulk-import your entire backup folder.</li>
+            <li><strong>Search:</strong> Quickly find verify if you have a "2018 Lariat" file to compare against without digging through folders.</li>
+            <li><strong>Deducer:</strong> (Advanced) Select multiple vehicles with a specific feature (e.g., "Has Sunroof") to let the tool find the common bits responsible for it.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. Mod Database & Warnings</h2>
+        <p>We've built in a library of common mods with instructions.</p>
+        <div class="warning">
+            <strong>Critical Warning:</strong> Always pay attention to the "Instructions" panel. Some mods require specific hardware!
+            <br><em>Example: Enabling "Global Windows" on a standard GEM module will not work and may cause battery drain if the hardware relays are missing.</em>
+        </div>
     </div>
 
     <footer>
-        <p>Generated for AsBuiltExplorer {{VERSION}} | <a href="https://github.com/Eliminater74/AsBuiltExplorer">GitHub Project</a></p>
+        <p>Created by Eliminater74 | <a href="https://github.com/Eliminater74/AsBuiltExplorer">Check for Updates on GitHub</a></p>
     </footer>
 
 </body>
