@@ -30,6 +30,27 @@ public partial class Form1 : Form
     MaximumSizeChanged += new EventHandler(Form1_MaximumSizeChanged);
     Shown += new EventHandler(Form1_Shown);
     abDownloadTriggered = 0;
+
+    // Fix for WebBrowser control to use IE11 mode (11001)
+    // MUST be done before InitializeComponent() where the browser is created
+    try
+    {
+        string dynamicName = System.IO.Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        string[] appNames = { "AsBuiltExplorer.exe", dynamicName };
+
+        using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"))
+        {
+            if (key != null)
+            {
+                foreach (string name in appNames)
+                {
+                    key.SetValue(name, 11001, Microsoft.Win32.RegistryValueKind.DWord);
+                }
+            }
+        }
+    }
+    catch (Exception) { }
+
     InitializeComponent();
   }
 
