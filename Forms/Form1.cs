@@ -2590,35 +2590,52 @@ label_24:
 
   void Button10_Click_1(object sender, EventArgs e)
   {
-    var stringBuilder = new StringBuilder();
-    var num1 = checked (lstBit_Modules.Items.Count - 1);
-    var num2 = 0;
-    while (num2 <= num1)
+    var sb = new StringBuilder();
+    int totalModules = lstBit_Modules.Items.Count;
+    
+    for (int m = 0; m < totalModules; m++)
     {
-      lstBit_Modules.SelectedIndex = num2;
-      var num3 = 0;
-      do
-      {
-        TextBox4.Text = Conversions.ToString(num3);
-        Button4.PerformClick();
-        var text = tbxDeduceReport2.Text;
-        if (Strings.InStr(1, text, "VINs without bit set: 0", CompareMethod.Text) == 0 && Strings.InStr(1, text, "VINs with bit set: 0", CompareMethod.Text) == 0)
+        // Update UI Selection
+        lstBit_Modules.SelectedIndex = m;
+        string modName = lstBit_Modules.Items[m].ToString();
+
+        for (int i = 0; i < 40; i++)
         {
-          var Start = Strings.InStr(1, text, "Possible Features (1)", CompareMethod.Text);
-          if (Start > 0)
-          {
-            var str1 = Strings.Mid(text, Start);
-            var str2 = $"{lstBit_Modules.SelectedItem.ToString()} bit # {Conversions.ToString(num3)}\r\n{str1}";
-            stringBuilder.Append(str2 + "\r\n\r\n");
-          }
+            TextBox4.Text = i.ToString();
+            MyProject.Application.DoEvents(); // Keep UI responsive
+
+            string result = AnalyzeBit(modName, i);
+
+            // Filter for "Interesting" results
+            // 1. Must have mixed population (some set, some unset)
+            bool mixedPop = !result.Contains("VINs with bit set: 0") && !result.Contains("VINs without bit set: 0");
+
+            // 2. Must have at least one potential feature candidate in either On or Off set
+            // The format is "Possible Features (N) ..."
+            // We can check if BOTH counts are 0.
+            bool hasFeatures = !result.Contains($"Possible Features (0) for {modName} bit {i} on:")
+                            || !result.Contains($"Possible Features (0) for {modName} bit {i} off:");
+
+            if (mixedPop && hasFeatures)
+            {
+                sb.AppendLine("--------------------------------------------------");
+                sb.AppendLine($"{modName} Bit {i}");
+                sb.AppendLine(result);
+                sb.AppendLine();
+            }
         }
-        MyProject.Application.DoEvents();
-        checked { ++num3; }
-      }
-      while (num3 <= 39);
-      checked { ++num2; }
     }
-    tbxDeduceReport2.Text = stringBuilder.ToString();
+
+    tbxDeduceReport2.Text = sb.ToString();
+    
+    if (sb.Length == 0)
+    {
+        Interaction.MsgBox("No conclusive bits found. Try selecting more vehicles with diverse feature sets.");
+    }
+    else
+    {
+        Interaction.MsgBox("Analysis complete. See results below.");
+    }
   }
 
   void IdentifyToolStripMenuItem_Click(object sender, EventArgs e)
