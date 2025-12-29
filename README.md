@@ -1,7 +1,7 @@
 # AsBuiltExplorer Toolkit
 
-![Visitors](https://api.visitorbadge.io/api/visitors?path=Eliminater74/AsBuiltExplorer&label=VISITORS&countColor=%23263759)
-
+![HitCounter](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FEliminater74%2FAsBuiltExplorer&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Visitors&edge_flat=false)
+[![Downloads](https://img.shields.io/github/downloads/Eliminater74/AsBuiltExplorer/total?color=blue&label=Downloads)](https://github.com/Eliminater74/AsBuiltExplorer/releases)
 **AsBuiltExplorer** is a comprehensive toolkit for analyzing, comparing, and modifying Ford As-Built data (`.ab` / `.abt`). Now powered by a centralized **SQLite Vehicle Database**, it helps enthusiasts and professionals organize their fleet, identify hidden features using offline libraries, and verify modifications with generation-aware intelligence.
 
 ---
