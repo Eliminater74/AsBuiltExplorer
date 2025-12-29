@@ -106,6 +106,7 @@ namespace AsBuiltExplorer
             this.tbxConvertHex = new System.Windows.Forms.TextBox();
             this.tbxConvertBin = new System.Windows.Forms.TextBox();
             this.grpChecksum = new System.Windows.Forms.GroupBox();
+            this.cmbChecksumType = new System.Windows.Forms.ComboBox();
             this.Label1 = new System.Windows.Forms.Label();
             this.tbxModIDhex = new System.Windows.Forms.TextBox();
             this.Label2 = new System.Windows.Forms.Label();
@@ -966,6 +967,7 @@ namespace AsBuiltExplorer
             // 
             // grpChecksum
             // 
+            this.grpChecksum.Controls.Add(this.cmbChecksumType);
             this.grpChecksum.Controls.Add(this.Label1);
             this.grpChecksum.Controls.Add(this.tbxModIDhex);
             this.grpChecksum.Controls.Add(this.Label2);
@@ -986,15 +988,29 @@ namespace AsBuiltExplorer
             this.grpChecksum.Controls.Add(this.tbxChecksumBin);
             this.grpChecksum.Location = new System.Drawing.Point(20, 20);
             this.grpChecksum.Name = "grpChecksum";
-            this.grpChecksum.Size = new System.Drawing.Size(600, 260);
+            this.grpChecksum.Size = new System.Drawing.Size(600, 280);
             this.grpChecksum.TabIndex = 0;
             this.grpChecksum.TabStop = false;
             this.grpChecksum.Text = "As-Built Checksum Calculator";
             // 
+            // cmbChecksumType
+            // 
+            this.cmbChecksumType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbChecksumType.FormattingEnabled = true;
+            this.cmbChecksumType.Items.AddRange(new object[] {
+            "Legacy (Summation)",
+            "CRC-8 (SAE J1850)",
+            "CRC-16 (CCITT-FALSE)"});
+            this.cmbChecksumType.Location = new System.Drawing.Point(23, 27);
+            this.cmbChecksumType.Name = "cmbChecksumType";
+            this.cmbChecksumType.Size = new System.Drawing.Size(550, 24);
+            this.cmbChecksumType.TabIndex = 22;
+            this.cmbChecksumType.SelectedIndexChanged += new System.EventHandler(this.cmbChecksumType_SelectedIndexChanged);
+            // 
             // Label1
             // 
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(20, 30);
+            this.Label1.Location = new System.Drawing.Point(20, 65);
             this.Label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(71, 16);
@@ -2363,6 +2379,7 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.Label lblAudio_Desc;
 
     private System.Windows.Forms.GroupBox grpChecksum;
+    private System.Windows.Forms.ComboBox cmbChecksumType;
     private System.Windows.Forms.GroupBox grpConverter;
 
     // Mods Tab Controls

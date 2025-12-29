@@ -95,17 +95,62 @@ public partial class Form1 : Form
 
   void Button1_Click(object sender, EventArgs e)
   {
-    tbxChecksumHex.Text = modAsBuilt.AsBuilt_CalculateChecksum(tbxModIDhex.Text, tbxData1hex.Text + tbxData2hex.Text + tbxData3hex.Text);
-    tbxChecksumBin.Text = Strings.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(tbxChecksumHex.Text), 1, 8);
-    var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
-    tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
-    tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
-    var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
-    tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
-    tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
-    var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
-    tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
-    tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+      try
+      {
+          if (cmbChecksumType.SelectedIndex == -1) cmbChecksumType.SelectedIndex = 0;
+
+          if (cmbChecksumType.SelectedIndex == 0) // Legacy (Summation)
+          {
+               tbxChecksumHex.Text = modAsBuilt.AsBuilt_CalculateChecksum(tbxModIDhex.Text, tbxData1hex.Text + tbxData2hex.Text + tbxData3hex.Text);
+          }
+          else 
+          {
+              // Modern CRC
+              string dataHex = (tbxData1hex.Text + tbxData2hex.Text + tbxData3hex.Text).Replace(" ", "");
+              
+              var bytes = new System.Collections.Generic.List<byte>();
+              for (int i = 0; i < dataHex.Length; i += 2)
+              {
+                 if (i+1 < dataHex.Length) 
+                 {
+                     string b = dataHex.Substring(i, 2);
+                     try { bytes.Add(Convert.ToByte(b, 16)); } catch {}
+                 }
+              }
+
+              if (cmbChecksumType.SelectedIndex == 1) // CRC-8
+              {
+                  var crc = AsBuiltExplorer.Utilities.CRC.CalculateCRC8(bytes.ToArray());
+                  tbxChecksumHex.Text = crc.ToString("X2");
+              }
+              else if (cmbChecksumType.SelectedIndex == 2) // CRC-16
+              {
+                  var crc = AsBuiltExplorer.Utilities.CRC.CalculateCRC16(bytes.ToArray());
+                  tbxChecksumHex.MaxLength = 4;
+                  tbxChecksumHex.Text = crc.ToString("X4");
+              }
+          }
+
+          tbxChecksumBin.Text = Strings.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(tbxChecksumHex.Text), 1, 8);
+          
+          var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
+          tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
+          tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
+          var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
+          tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
+          tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
+          var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
+          tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
+          tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+      }
+      catch (Exception ex)
+      {
+      }
+  }
+
+  void cmbChecksumType_SelectedIndexChanged(object sender, EventArgs e)
+  {
+      Button1.PerformClick();
   }
 
   void Form1_Load(object sender, EventArgs e)
@@ -190,6 +235,9 @@ public partial class Form1 : Form
       lblToolkit.Location = new Point(lblAboutTitle.Left + 5, lblAboutTitle.Bottom - 5); // Tweak position
       TabPage8.Controls.Add(lblToolkit);
       lblToolkit.BringToFront();
+
+      // Default Checksum Type
+      if (cmbChecksumType.Items.Count > 0) cmbChecksumType.SelectedIndex = 0;
   }
 
   void pbSettings_Click(object sender, EventArgs e)
