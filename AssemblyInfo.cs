@@ -8,6 +8,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("(C) 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("368755ac-9958-4ed7-871d-9abdfa68218e")]
+[assembly: Guid("50164a2e-b79e-4d00-b24b-5d291fd8df07")]
 [assembly: AssemblyFileVersion("1.0.0.5")]
 [assembly: AssemblyVersion("1.0.0.5")]
