@@ -2354,7 +2354,38 @@ public partial class Form1 : Form
   {
   }
 
-  void Form1_Shown(object sender, EventArgs e) => PopulateVehicleList();
+  async void Form1_Shown(object sender, EventArgs e)
+  {
+      PopulateVehicleList();
+
+      // Startup Update Check
+      if (AsBuiltExplorer.My.MySettings.Default.AutoCheckForUpdates)
+      {
+          await System.Threading.Tasks.Task.Delay(2000); // Wait for UI to settle
+
+          try
+          {
+              var info = await AsBuiltExplorer.Utilities.GitHubUpdateChecker.CheckForUpdateAsync();
+              if (info != null && info.IsNewer)
+              {
+                   // Check if user skipped this version
+                   if (info.NewVersion != AsBuiltExplorer.My.MySettings.Default.SkipUpdateVersion)
+                   {
+                        using (var frm = new AsBuiltExplorer.Forms.frmUpdateAvailable(info))
+                        {
+                            frm.ShowDialog();
+                            if (frm.Skipped)
+                            {
+                                AsBuiltExplorer.My.MySettings.Default.SkipUpdateVersion = info.NewVersion;
+                                AsBuiltExplorer.My.MySettings.Default.Save();
+                            }
+                        }
+                   }
+              }
+          }
+          catch { }
+      }
+  }
 
   void lvwBrowser_SelectedIndexChanged(object sender, EventArgs e)
   {

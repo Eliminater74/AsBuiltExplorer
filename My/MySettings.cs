@@ -75,5 +75,22 @@ namespace AsBuiltExplorer.My
             get { return ((string)(this["AppTheme"])); }
             set { this["AppTheme"] = value; }
         }
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("True")]
+        public bool AutoCheckForUpdates
+        {
+            get => (bool)this["AutoCheckForUpdates"];
+            set => this["AutoCheckForUpdates"] = value;
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("")]
+        public string SkipUpdateVersion
+        {
+            get => (string)this["SkipUpdateVersion"];
+            set => this["SkipUpdateVersion"] = value;
+        }
     }
 }

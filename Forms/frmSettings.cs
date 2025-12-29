@@ -31,6 +31,10 @@ namespace AsBuiltExplorer.Forms
             {
                 radThemeLight.Checked = true;
             }
+
+            // Load Updater Settings
+            chkAutoUpdate.Checked = My.MySettings.Default.AutoCheckForUpdates;
+            lblCurrentVersion.Text = "Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         void UpdateDBStats()
@@ -78,8 +82,41 @@ namespace AsBuiltExplorer.Forms
                 SelectedTheme = newTheme;
             }
 
+            // Save Updater Settings
+            My.MySettings.Default.AutoCheckForUpdates = chkAutoUpdate.Checked;
+            My.MySettings.Default.Save();
+
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        async void btnCheckUpdate_Click(object sender, EventArgs e)
+        {
+            btnCheckUpdate.Enabled = false;
+            btnCheckUpdate.Text = "Checking...";
+
+            var info = await Utilities.GitHubUpdateChecker.CheckForUpdateAsync();
+
+            btnCheckUpdate.Enabled = true;
+            btnCheckUpdate.Text = "Check Now";
+
+            if (info != null && info.IsNewer)
+            {
+                using (var frm = new frmUpdateAvailable(info))
+                {
+                    frm.ShowDialog();
+                    // If skipped, save it
+                    if (frm.Skipped)
+                    {
+                        My.MySettings.Default.SkipUpdateVersion = info.NewVersion;
+                        My.MySettings.Default.Save();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("You are running the latest version.", "Up to Date", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         void btnCancel_Click(object sender, EventArgs e)
