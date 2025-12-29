@@ -201,6 +201,7 @@ namespace AsBuiltExplorer
             this.colMean = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colNotes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnDecode = new System.Windows.Forms.Button();
+            this.chkUseNHTSA = new System.Windows.Forms.CheckBox();
             this.cmbSavedVehicles = new System.Windows.Forms.ComboBox();
             this.lblVinSelect = new System.Windows.Forms.Label();
             this.txtVinInput = new System.Windows.Forms.TextBox();
@@ -1916,6 +1917,7 @@ namespace AsBuiltExplorer
             // 
             this.TabPage9.Controls.Add(this.lvwDecodeResults);
             this.TabPage9.Controls.Add(this.btnDecode);
+            this.TabPage9.Controls.Add(this.chkUseNHTSA);
             this.TabPage9.Controls.Add(this.cmbSavedVehicles);
             this.TabPage9.Controls.Add(this.lblVinSelect);
             this.TabPage9.Controls.Add(this.txtVinInput);
@@ -1979,6 +1981,16 @@ namespace AsBuiltExplorer
             this.btnDecode.Text = "Decode";
             this.btnDecode.UseVisualStyleBackColor = true;
             this.btnDecode.Click += new System.EventHandler(this.btnDecode_Click);
+            // 
+            // chkUseNHTSA
+            // 
+            this.chkUseNHTSA.AutoSize = true;
+            this.chkUseNHTSA.Location = new System.Drawing.Point(870, 29);
+            this.chkUseNHTSA.Name = "chkUseNHTSA";
+            this.chkUseNHTSA.Size = new System.Drawing.Size(105, 17);
+            this.chkUseNHTSA.TabIndex = 5;
+            this.chkUseNHTSA.Text = "Use Online API";
+            this.chkUseNHTSA.UseVisualStyleBackColor = true;
             // 
             // cmbSavedVehicles
             // 
@@ -2351,6 +2363,7 @@ namespace AsBuiltExplorer
    private System.Windows.Forms.Label lblVinSelect;
    private System.Windows.Forms.ComboBox cmbSavedVehicles;
    private System.Windows.Forms.Button btnDecode;
+   private System.Windows.Forms.CheckBox chkUseNHTSA;
    private System.Windows.Forms.ListView lvwDecodeResults;
    private System.Windows.Forms.ColumnHeader colPos;
    private System.Windows.Forms.ColumnHeader colVal;

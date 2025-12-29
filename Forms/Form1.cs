@@ -2837,21 +2837,85 @@ label_24:
       Process.Start("https://github.com/Eliminater74/AsBuiltExplorer");
   }
 
-  void btnDecode_Click(object sender, EventArgs e)
+  async void btnDecode_Click(object sender, EventArgs e)
   {
       var vin = txtVinInput.Text.Trim();
+      
+      // Auto-extract VIN if needed (like in calculator)
+      if (vin.Contains(" - "))
+      {
+          var parts = vin.Split(new string[] { " - " }, StringSplitOptions.None);
+          if (parts.Length > 1) vin = parts[parts.Length - 1].Trim();
+      }
+
+      if (string.IsNullOrEmpty(vin)) return;
+
       lvwDecodeResults.Items.Clear();
 
-      var results = VINDecoder.Decode(vin);
-      
-      foreach (var r in results)
+      if (chkUseNHTSA.Checked)
       {
-          var lvi = new ListViewItem(r.Position);
-          lvi.SubItems.Add(r.Value);
-          lvi.SubItems.Add(r.Meaning);
-          lvi.SubItems.Add(r.Notes);
-          lvwDecodeResults.Items.Add(lvi);
+          // Online API (NHTSA)
+          btnDecode.Enabled = false;
+          btnDecode.Text = "Wait...";
+          
+          try
+          {
+               var res = await System.Threading.Tasks.Task.Run(() => NHTSADecoder.Decode(vin));
+               
+               if (res != null)
+               {
+                   AddDecodeItem("Year", res.Year, "Model Year");
+                   AddDecodeItem("Make", res.Make, "Manufacturer");
+                   AddDecodeItem("Model", res.Model, "Vehicle Model");
+                   AddDecodeItem("Trim", res.Trim, "Trim Level");
+                   AddDecodeItem("Series", res.Series, "Series");
+                   AddDecodeItem("Body", res.BodyClass, "Body Style");
+                   AddDecodeItem("Drive", res.DriveType, "Drive Type");
+                   AddDecodeItem("Fuel", res.FuelType, "Fuel Type");
+                   
+                   // Offline Helper for Window Sticker Link
+                   var stickerUrl = $"https://www.windowsticker.forddirect.com/windowsticker.pdf?vin={vin}";
+                   AddDecodeItem("URL", "Link", "Window Sticker", stickerUrl);
+               }
+               else
+               {
+                   MessageBox.Show("NHTSA API returned no data or timed out.", "Online Decode");
+               }
+          }
+          catch (Exception ex)
+          {
+               MessageBox.Show("Connectivity Error: " + ex.Message, "Online Decode");
+          }
+          finally
+          {
+               btnDecode.Enabled = true;
+               btnDecode.Text = "Decode";
+          }
       }
+      else
+      {
+          // Offline Logic (Legacy)
+          var results = VINDecoder.Decode(vin);
+      
+          foreach (var r in results)
+          {
+              var lvi = new ListViewItem(r.Position);
+              lvi.SubItems.Add(r.Value);
+              lvi.SubItems.Add(r.Meaning);
+              lvi.SubItems.Add(r.Notes);
+              lvwDecodeResults.Items.Add(lvi);
+          }
+      }
+  }
+
+  void AddDecodeItem(string pos, string val, string meaning, string notes = "NHTSA API")
+  {
+      if (string.IsNullOrEmpty(val) || val == "null") return;
+      var lvi = new ListViewItem(pos);
+      lvi.SubItems.Add(val);
+      lvi.SubItems.Add(meaning);
+      lvi.SubItems.Add(notes);
+      lvwDecodeResults.Items.Add(lvi);
   }
 
   void lvwDecodeResults_MouseClick(object sender, MouseEventArgs e)
