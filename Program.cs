@@ -36,7 +36,7 @@ namespace AsBuiltExplorer
 
                     // Auto-Save Settings on Exit
                     Application.ApplicationExit += (sender, e) => {
-                        try { AsBuiltExplorer.My.MySettings.Default.Save(); } catch { }
+                        try { AsBuiltExplorer.Properties.Settings.Default.Save(); } catch { }
                     };
 
                     Application.Run(new Form1());

@@ -1,11 +1,12 @@
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+// using Microsoft.VisualBasic;
+// using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections;
 using System.Windows.Forms;
 
 namespace AsBuiltExplorer
 {
+    using AsBuiltExplorer.Utilities;
     public class clsListviewSorter : IComparer
     {
         int m_ColumnNumber;
@@ -26,14 +27,14 @@ namespace AsBuiltExplorer
 
             if (m_SortOrder == SortOrder.Ascending)
             {
-                if (Versioned.IsNumeric((object)text1) & Versioned.IsNumeric((object)text2))
-                    return Conversion.Val(text1).CompareTo(Conversion.Val(text2));
+                if (Information.IsNumeric((object)text1) & Information.IsNumeric((object)text2))
+                    return Conversions.Val(text1).CompareTo(Conversions.Val(text2));
 
                 return Information.IsDate((object)text1) & Information.IsDate((object)text2) ? DateTime.Parse(text1).CompareTo(DateTime.Parse(text2)) : string.Compare(text1, text2);
             }
 
-            if (Versioned.IsNumeric((object)text1) & Versioned.IsNumeric((object)text2))
-                return Conversion.Val(text2).CompareTo(Conversion.Val(text1));
+            if (Information.IsNumeric((object)text1) & Information.IsNumeric((object)text2))
+                return Conversions.Val(text2).CompareTo(Conversions.Val(text1));
 
             return Information.IsDate((object)text1) & Information.IsDate((object)text2) ? DateTime.Parse(text2).CompareTo(DateTime.Parse(text1)) : string.Compare(text2, text1);
         }

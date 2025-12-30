@@ -23,7 +23,7 @@ namespace AsBuiltExplorer.Forms
             UpdateDBStats();
 
             // Load Theme (This functionality will rely on a new property in MySettings)
-            if (My.MySettings.Default.AppTheme == "Dark")
+            if (AsBuiltExplorer.Properties.Settings.Default.AppTheme == "Dark")
             {
                 radThemeDark.Checked = true;
             }
@@ -33,7 +33,7 @@ namespace AsBuiltExplorer.Forms
             }
 
             // Load Updater Settings
-            chkAutoUpdate.Checked = My.MySettings.Default.AutoCheckForUpdates;
+            chkAutoUpdate.Checked = AsBuiltExplorer.Properties.Settings.Default.AutoCheckForUpdates;
             lblCurrentVersion.Text = "Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
@@ -74,17 +74,17 @@ namespace AsBuiltExplorer.Forms
             // Save settings
             var newTheme = radThemeDark.Checked ? "Dark" : "Light";
 
-            if (My.MySettings.Default.AppTheme != newTheme)
+            if (AsBuiltExplorer.Properties.Settings.Default.AppTheme != newTheme)
             {
-                My.MySettings.Default.AppTheme = newTheme;
-                My.MySettings.Default.Save();
+                AsBuiltExplorer.Properties.Settings.Default.AppTheme = newTheme;
+                AsBuiltExplorer.Properties.Settings.Default.Save();
                 ThemeChanged = true;
                 SelectedTheme = newTheme;
             }
 
             // Save Updater Settings
-            My.MySettings.Default.AutoCheckForUpdates = chkAutoUpdate.Checked;
-            My.MySettings.Default.Save();
+            AsBuiltExplorer.Properties.Settings.Default.AutoCheckForUpdates = chkAutoUpdate.Checked;
+            AsBuiltExplorer.Properties.Settings.Default.Save();
 
             DialogResult = DialogResult.OK;
             Close();
@@ -108,8 +108,8 @@ namespace AsBuiltExplorer.Forms
                     // If skipped, save it
                     if (frm.Skipped)
                     {
-                        My.MySettings.Default.SkipUpdateVersion = info.NewVersion;
-                        My.MySettings.Default.Save();
+                        AsBuiltExplorer.Properties.Settings.Default.SkipUpdateVersion = info.NewVersion;
+                        AsBuiltExplorer.Properties.Settings.Default.Save();
                     }
                 }
             }

@@ -1,7 +1,7 @@
 
-using AsBuiltExplorer.My;
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+// using AsBuiltExplorer.My;
+// using Microsoft.VisualBasic;
+// using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using AsBuiltExplorer.Utilities;
 
 namespace AsBuiltExplorer
 {
@@ -97,7 +98,7 @@ public partial class Form1 : Form
     {
       if (moduleID.Length == vhclInfo.abModuleAddresses[index].Length)
       {
-        if (Operators.CompareString(moduleID, vhclInfo.abModuleAddresses[index], false) == 0)
+        if (moduleID == vhclInfo.abModuleAddresses[index])
         {
           modulePartNum = vhclInfo.abModuleInfo_PartNums[index];
           return vhclInfo.abModuleDatasBinStr[index];
@@ -121,7 +122,7 @@ public partial class Form1 : Form
     var index = 0;
     while (index <= num)
     {
-      if (moduleID.StartsWith(vhclInfo.abModuleAddresses[index]) && !Information.IsNothing((object) vhclInfo.abModuleInfo_PartNums[index]) && moduleID.EndsWith(vhclInfo.abModuleInfo_PartNums[index]))
+      if (moduleID.StartsWith(vhclInfo.abModuleAddresses[index]) && !VBCompat.IsNothing((object) vhclInfo.abModuleInfo_PartNums[index]) && moduleID.EndsWith(vhclInfo.abModuleInfo_PartNums[index]))
         return vhclInfo.abModuleDatasBinStr[index];
       checked { ++index; }
     }
@@ -131,14 +132,14 @@ public partial class Form1 : Form
   void TextBox3_TextChanged(object sender, EventArgs e)
   {
     var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
-    tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
-    tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
+    tbxData1bin1.Text = VBCompat.Mid(str1, 1, 8);
+    tbxData1bin2.Text = VBCompat.Mid(str1, 9, 8);
     var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
-    tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
-    tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
+    tbxData2bin1.Text = VBCompat.Mid(str2, 1, 8);
+    tbxData2bin2.Text = VBCompat.Mid(str2, 9, 8);
     var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
-    tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
-    tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+    tbxData3bin1.Text = VBCompat.Mid(str3, 1, 8);
+    tbxData3bin2.Text = VBCompat.Mid(str3, 9, 8);
   }
 
   void Label3_Click(object sender, EventArgs e)
@@ -183,17 +184,17 @@ public partial class Form1 : Form
               }
           }
 
-          tbxChecksumBin.Text = Strings.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(tbxChecksumHex.Text), 1, 8);
+          tbxChecksumBin.Text = VBCompat.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(tbxChecksumHex.Text), 1, 8);
           
           var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
-          tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
-          tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
+          tbxData1bin1.Text = VBCompat.Mid(str1, 1, 8);
+          tbxData1bin2.Text = VBCompat.Mid(str1, 9, 8);
           var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
-          tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
-          tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
+          tbxData2bin1.Text = VBCompat.Mid(str2, 1, 8);
+          tbxData2bin2.Text = VBCompat.Mid(str2, 9, 8);
           var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
-          tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
-          tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+          tbxData3bin1.Text = VBCompat.Mid(str3, 1, 8);
+          tbxData3bin2.Text = VBCompat.Mid(str3, 9, 8);
       }
       catch (Exception ex)
       {
@@ -305,7 +306,7 @@ public partial class Form1 : Form
 
   void ApplyTheme()
   {
-      var isDark = ("Dark" == My.MySettings.Default.AppTheme);
+      var isDark = ("Dark" == AsBuiltExplorer.Properties.Settings.Default.AppTheme);
       var backColor = isDark ? Color.FromArgb(45, 45, 48) : SystemColors.Control;
       var foreColor = isDark ? Color.White : SystemColors.ControlText;
       
@@ -371,8 +372,8 @@ public partial class Form1 : Form
     var retModuleShortNames = new string[1];
     var retModuleAddresses = new string[1];
 
-    var directoryPath = MyProject.Application.Info.DirectoryPath;
-    if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
+    var directoryPath = Application.StartupPath;
+    if (VBCompat.CompareString(VBCompat.Right(directoryPath, 1), "\\", false) != 0)
       directoryPath += "\\";
     if (chkCompareShowNames.Checked)
     {
@@ -419,18 +420,18 @@ public partial class Form1 : Form
     var strArray5 = new string[1];
     var retVIN1 = "";
     var fileType1 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text1);
-    var inpFileArray1 = Strings.Split(text1, "|");
-    if (Operators.CompareString(fileType1, "ABT", false) == 0)
+    var inpFileArray1 = VBCompat.Split(text1, "|");
+    if (VBCompat.CompareString(fileType1, "ABT", false) == 0)
     {
       flag1 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray1, inpFileArray1.Length, ref strArray1, ref retModuleDatas1, ref num1);
       lblComp1VIN.Text = "No VIN (ABT)";
     }
-    else if (Operators.CompareString(fileType1, "AB", false) == 0)
+    else if (VBCompat.CompareString(fileType1, "AB", false) == 0)
     {
       flag1 = modAsBuilt.AsBuilt_LoadFile_AB(text1, ref strArray1, ref retModuleDatas1, ref num1, ref retVIN1, ref retModInfo_IDs1, ref retModInfo_PartNumbers1, ref retModInfo_Strategies1, ref retModInfo_Calibrations1, ref retModInfo_Count1, ref retCCCdata1);
       lblComp1VIN.Text = retVIN1;
     }
-    else if (Operators.CompareString(fileType1, "UCDS", false) == 0)
+    else if (VBCompat.CompareString(fileType1, "UCDS", false) == 0)
     {
       flag1 = modAsBuilt.AsBuilt_LoadFile_UCDS(text1, ref strArray1, ref retModuleDatas1, ref num1);
       lblComp1VIN.Text = "No VIN (UCDS)";
@@ -444,18 +445,18 @@ public partial class Form1 : Form
     var strArray6 = new string[1];
     var retVIN2 = "";
     var fileType2 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text2);
-    var inpFileArray2 = Strings.Split(text2, "|");
-    if (Operators.CompareString(fileType2, "ABT", false) == 0)
+    var inpFileArray2 = VBCompat.Split(text2, "|");
+    if (VBCompat.CompareString(fileType2, "ABT", false) == 0)
     {
       flag2 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray2, inpFileArray2.Length, ref strArray2, ref retModuleDatas2, ref num2);
       lblComp2VIN.Text = "No VIN (ABT)";
     }
-    else if (Operators.CompareString(fileType2, "AB", false) == 0)
+    else if (VBCompat.CompareString(fileType2, "AB", false) == 0)
     {
       flag2 = modAsBuilt.AsBuilt_LoadFile_AB(text2, ref strArray2, ref retModuleDatas2, ref num2, ref retVIN2, ref retModInfo_IDs2, ref retModInfo_PartNumbers2, ref retModInfo_Strategies2, ref retModInfo_Calibrations2, ref retModInfo_Count2, ref retCCCdata2);
       lblComp2VIN.Text = retVIN2;
     }
-    else if (Operators.CompareString(fileType2, "UCDS", false) == 0)
+    else if (VBCompat.CompareString(fileType2, "UCDS", false) == 0)
     {
       flag2 = modAsBuilt.AsBuilt_LoadFile_UCDS(text2, ref strArray2, ref retModuleDatas2, ref num2);
       lblComp2VIN.Text = "No VIN (UCDS)";
@@ -469,18 +470,18 @@ public partial class Form1 : Form
     var strArray7 = new string[1];
     var retVIN3 = "";
     var fileType3 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text3);
-    var inpFileArray3 = Strings.Split(text3, "|");
-    if (Operators.CompareString(fileType3, "ABT", false) == 0)
+    var inpFileArray3 = VBCompat.Split(text3, "|");
+    if (VBCompat.CompareString(fileType3, "ABT", false) == 0)
     {
       flag3 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray3, inpFileArray3.Length, ref strArray3, ref retModuleDatas3, ref num3);
       lblComp3VIN.Text = "No VIN (ABT)";
     }
-    else if (Operators.CompareString(fileType3, "AB", false) == 0)
+    else if (VBCompat.CompareString(fileType3, "AB", false) == 0)
     {
       flag3 = modAsBuilt.AsBuilt_LoadFile_AB(text3, ref strArray3, ref retModuleDatas3, ref num3, ref retVIN3, ref retModInfo_IDs3, ref retModInfo_PartNumbers3, ref retModInfo_Strategies3, ref retModInfo_Calibrations3, ref retModInfo_Count3, ref retCCCdata3);
       lblComp3VIN.Text = retVIN3;
     }
-    else if (Operators.CompareString(fileType3, "UCDS", false) == 0)
+    else if (VBCompat.CompareString(fileType3, "UCDS", false) == 0)
     {
       flag3 = modAsBuilt.AsBuilt_LoadFile_UCDS(text3, ref strArray3, ref retModuleDatas3, ref num3);
       lblComp3VIN.Text = "No VIN (UCDS)";
@@ -490,18 +491,18 @@ public partial class Form1 : Form
     var strArray8 = new string[1];
     var retVIN4 = "";
     var fileType4 = modAsBuilt.AsBuilt_LoadFile_GetFileType(text4);
-    var inpFileArray4 = Strings.Split(tbxCompFile4.Text, "|");
-    if (Operators.CompareString(fileType4, "ABT", false) == 0)
+    var inpFileArray4 = VBCompat.Split(tbxCompFile4.Text, "|");
+    if (VBCompat.CompareString(fileType4, "ABT", false) == 0)
     {
       flag4 = modAsBuilt.AsBuilt_LoadFileArray_ABT(ref inpFileArray4, inpFileArray4.Length, ref strArray4, ref retModuleDatas4, ref num4);
       lblComp4VIN.Text = "No VIN (ABT)";
     }
-    else if (Operators.CompareString(fileType4, "AB", false) == 0)
+    else if (VBCompat.CompareString(fileType4, "AB", false) == 0)
     {
       flag4 = modAsBuilt.AsBuilt_LoadFile_AB(text4, ref strArray4, ref retModuleDatas4, ref num4, ref retVIN4, ref retModInfo_IDs4, ref retModInfo_PartNumbers4, ref retModInfo_Strategies4, ref retModInfo_Calibrations4, ref retModInfo_Count4, ref retCCCdata4);
       lblComp4VIN.Text = retVIN4;
     }
-    else if (Operators.CompareString(fileType4, "UCDS", false) == 0)
+    else if (VBCompat.CompareString(fileType4, "UCDS", false) == 0)
     {
       flag4 = modAsBuilt.AsBuilt_LoadFile_UCDS(text4, ref strArray4, ref retModuleDatas4, ref num4);
       lblComp4VIN.Text = "No VIN (UCDS)";
@@ -526,13 +527,13 @@ public partial class Form1 : Form
     while (index1 <= num5)
     {
       if (!chkCompareShowChecksum.Checked)
-        retModuleDatas1[index1] = Strings.Left(retModuleDatas1[index1], checked (Strings.Len(retModuleDatas1[index1]) - 2));
+        retModuleDatas1[index1] = VBCompat.Left(retModuleDatas1[index1], checked (VBCompat.Len(retModuleDatas1[index1]) - 2));
       var str4 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray1[index1]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas1[index1], ref retData1_1, ref retData2_1, ref retData3_1);
       var text5 = modAsBuilt.AsBuilt_FormatReadable_Binary(modAsBuilt.AsBuilt_HexStr2BinStr(retData1_1 + retData2_1 + retData3_1));
-      var str5 = Strings.Left(str4, 3);
-      var Right2 = Strings.Left(str4, 6);
-      if (Operators.CompareString(str5, Right1, false) != 0)
+      var str5 = VBCompat.Left(str4, 3);
+      var Right2 = VBCompat.Left(str4, 6);
+      if (VBCompat.CompareString(str5, Right1, false) != 0)
       {
         var str6 = "";
         var num7 = index1;
@@ -544,28 +545,28 @@ public partial class Form1 : Form
           var retData2_2 = "";
           var retData3_2 = "";
           modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas1[index2], ref retData1_2, ref retData2_2, ref retData3_2);
-          var str7 = Strings.Left(modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray1[index2]), 3);
-          var Left2 = Strings.Left(str7, 6);
-          if (Operators.CompareString(str7, str5, false) == 0)
+          var str7 = VBCompat.Left(modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray1[index2]), 3);
+          var Left2 = VBCompat.Left(str7, 6);
+          if (VBCompat.CompareString(str7, str5, false) == 0)
           {
-            if (Operators.CompareString(Left2, "7E1", false) == 0)
-              Left2 = "7E0"; // Fix: Likely intended to normalize transmission module ID? Original code was Left2 = Left2 which does nothing. Assuming mapping 7E1->7E0 based on context or just removing the no-op if logic allows. Actually, looking at typical AsBuilt logic, usually 7E0 indicates PCM. warning says "did you mean to assign something else?". I'll comment it out for now to ensure no side effects from wrong guess, or actually, just remove the if block if it does nothing.
+            if (VBCompat.CompareString(Left2, "7E1", false) == 0)
+              Left2 = "7E0"; // Fix: Likely intended to normalize transmission module ID? Original code was Left2 = Left2 which does nothing. Assuming mapping 7E1->7E0 based on context or just removing the no-op if logic allows. Actually, looking at typical AsBuilt logic, usually 7E0 indicates PCM. warning says "did you mean to assign something else?". I'll comment it out for now to ensure no side effects from wrong guess, or actually, just remove the no-op if block if it does nothing.
             // Original: Left2 = Left2; -> NO-OP.
             // If the intention was to remap, it failed.
             // Safest fix for "Clean Code" is remove the no-op line. Only keep if if has side effect (it doesn't).
 
             str6 = str6 + retData1_2 + retData2_2 + retData3_2;
-            if (Operators.CompareString(Left2, Right2, false) != 0)
-              str6 = Strings.Left(str6, checked (Strings.Len(str6) - 2));
+            if (VBCompat.CompareString(Left2, Right2, false) != 0)
+              str6 = VBCompat.Left(str6, checked (VBCompat.Len(str6) - 2));
             checked { ++index2; }
           }
           else
             break;
         }
-        var num9 = Strings.InStr(1, str6, str3);
+        var num9 = VBCompat.InStr(1, str6, str3);
         var num10 = 0;
         if (num9 != 0)
-          num10 = checked (num9 + Strings.Len(str3));
+          num10 = checked (num9 + VBCompat.Len(str3));
         Right1 = str5;
       }
       var text6 = "";
@@ -575,7 +576,7 @@ public partial class Form1 : Form
       var index3 = 0;
       while (index3 <= num11)
       {
-        if (Operators.CompareString(Strings.Left(strArray1[index1], Strings.Len(retModInfo_IDs1[index3])), retModInfo_IDs1[index3], false) == 0)
+        if (VBCompat.CompareString(VBCompat.Left(strArray1[index1], VBCompat.Len(retModInfo_IDs1[index3])), retModInfo_IDs1[index3], false) == 0)
         {
           text6 = retModInfo_PartNumbers1[index3];
           text7 = retModInfo_Strategies1[index3];
@@ -623,7 +624,7 @@ public partial class Form1 : Form
     while (index4 <= num12)
     {
       if (!chkCompareShowChecksum.Checked)
-        retModuleDatas2[index4] = Strings.Left(retModuleDatas2[index4], checked (Strings.Len(retModuleDatas2[index4]) - 2));
+        retModuleDatas2[index4] = VBCompat.Left(retModuleDatas2[index4], checked (VBCompat.Len(retModuleDatas2[index4]) - 2));
       var str8 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray2[index4]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas2[index4], ref retData1_1, ref retData2_1, ref retData3_1);
       var modName = "";
@@ -638,7 +639,7 @@ public partial class Form1 : Form
       var index6 = 0;
       while (index6 <= num13)
       {
-        if (Operators.CompareString(ListView1.Items[index6].Text, str8, false) == 0)
+        if (VBCompat.CompareString(ListView1.Items[index6].Text, str8, false) == 0)
           index5 = index6;
         checked { ++index6; }
       }
@@ -659,7 +660,7 @@ public partial class Form1 : Form
       var index7 = 0;
       while (index7 <= num14)
       {
-        if (Operators.CompareString(Strings.Left(strArray2[index4], Strings.Len(retModInfo_IDs2[index7])), retModInfo_IDs2[index7], false) == 0)
+        if (VBCompat.CompareString(VBCompat.Left(strArray2[index4], VBCompat.Len(retModInfo_IDs2[index7])), retModInfo_IDs2[index7], false) == 0)
         {
           text10 = retModInfo_PartNumbers2[index7];
           text11 = retModInfo_Strategies2[index7];
@@ -678,7 +679,7 @@ public partial class Form1 : Form
         var index8 = 0;
         while (index8 <= num15)
         {
-          if (Operators.CompareString(listViewItem3.SubItems[index8].Text, ListView1.Items[index5].SubItems[index8].Text, false) != 0)
+          if (VBCompat.CompareString(listViewItem3.SubItems[index8].Text, ListView1.Items[index5].SubItems[index8].Text, false) != 0)
           {
             flag6 = false;
             break;
@@ -711,7 +712,7 @@ public partial class Form1 : Form
     while (index9 <= num16)
     {
       if (!chkCompareShowChecksum.Checked)
-        retModuleDatas3[index9] = Strings.Left(retModuleDatas3[index9], checked (Strings.Len(retModuleDatas3[index9]) - 2));
+        retModuleDatas3[index9] = VBCompat.Left(retModuleDatas3[index9], checked (VBCompat.Len(retModuleDatas3[index9]) - 2));
       var str9 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray3[index9]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas3[index9], ref retData1_1, ref retData2_1, ref retData3_1);
       var modName = "";
@@ -726,7 +727,7 @@ public partial class Form1 : Form
       var index11 = 0;
       while (index11 <= num17)
       {
-        if (Operators.CompareString(ListView1.Items[index11].Text, str9, false) == 0)
+        if (VBCompat.CompareString(ListView1.Items[index11].Text, str9, false) == 0)
           index10 = index11;
         checked { ++index11; }
       }
@@ -746,7 +747,7 @@ public partial class Form1 : Form
       var index12 = 0;
       while (index12 <= num18)
       {
-        if (Operators.CompareString(Strings.Left(strArray3[index9], Strings.Len(retModInfo_IDs3[index12])), retModInfo_IDs3[index12], false) == 0)
+        if (VBCompat.CompareString(VBCompat.Left(strArray3[index9], VBCompat.Len(retModInfo_IDs3[index12])), retModInfo_IDs3[index12], false) == 0)
         {
           text14 = retModInfo_PartNumbers3[index12];
           text15 = retModInfo_Strategies3[index12];
@@ -765,7 +766,7 @@ public partial class Form1 : Form
         var index13 = 0;
         while (index13 <= num19)
         {
-          if (Operators.CompareString(listViewItem4.SubItems[index13].Text, ListView1.Items[index10].SubItems[index13].Text, false) != 0)
+          if (VBCompat.CompareString(listViewItem4.SubItems[index13].Text, ListView1.Items[index10].SubItems[index13].Text, false) != 0)
           {
             flag7 = false;
             break;
@@ -798,7 +799,7 @@ public partial class Form1 : Form
     while (index14 <= num20)
     {
       if (!chkCompareShowChecksum.Checked)
-        retModuleDatas4[index14] = Strings.Left(retModuleDatas4[index14], checked (Strings.Len(retModuleDatas4[index14]) - 2));
+        retModuleDatas4[index14] = VBCompat.Left(retModuleDatas4[index14], checked (VBCompat.Len(retModuleDatas4[index14]) - 2));
       var str10 = modAsBuilt.AsBuilt_FormatReadable_ModuleAddress(strArray4[index14]);
       modAsBuilt.AsBuilt_FormatReadable_ModuleData(retModuleDatas4[index14], ref retData1_1, ref retData2_1, ref retData3_1);
       var modName = "";
@@ -813,7 +814,7 @@ public partial class Form1 : Form
       var index16 = 0;
       while (index16 <= num21)
       {
-        if (Operators.CompareString(ListView1.Items[index16].Text, str10, false) == 0)
+        if (VBCompat.CompareString(ListView1.Items[index16].Text, str10, false) == 0)
           index15 = index16;
         checked { ++index16; }
       }
@@ -836,7 +837,7 @@ public partial class Form1 : Form
       var index17 = 0;
       while (index17 <= num22)
       {
-        if (Operators.CompareString(Strings.Left(strArray4[index14], Strings.Len(retModInfo_IDs4[index17])), retModInfo_IDs4[index17], false) == 0)
+        if (VBCompat.CompareString(VBCompat.Left(strArray4[index14], VBCompat.Len(retModInfo_IDs4[index17])), retModInfo_IDs4[index17], false) == 0)
         {
           text18 = retModInfo_PartNumbers4[index17];
           text19 = retModInfo_Strategies4[index17];
@@ -855,7 +856,7 @@ public partial class Form1 : Form
         var index18 = 0;
         while (index18 <= num23)
         {
-          if (Operators.CompareString(listViewItem5.SubItems[index18].Text, ListView1.Items[index15].SubItems[index18].Text, false) != 0)
+          if (VBCompat.CompareString(listViewItem5.SubItems[index18].Text, ListView1.Items[index15].SubItems[index18].Text, false) != 0)
           {
             flag8 = false;
             break;
@@ -897,7 +898,7 @@ public partial class Form1 : Form
       while (index20 <= num26)
       {
         ListView1.Items[index20].Tag = (object) "";
-        if (Operators.CompareString(ListView1.Items[index20].Text, "", false) != 0)
+        if (VBCompat.CompareString(ListView1.Items[index20].Text, "", false) != 0)
         {
           num24 = index20;
           checked { ++index20; }
@@ -922,7 +923,7 @@ public partial class Form1 : Form
       var index22 = num30;
       while (index22 <= num31)
       {
-        if (Operators.CompareString(ListView1.Items[index22].SubItems[6].Text, text21, false) != 0)
+        if (VBCompat.CompareString(ListView1.Items[index22].SubItems[6].Text, text21, false) != 0)
         {
           flag9 = false;
           break;
@@ -968,13 +969,13 @@ public partial class Form1 : Form
     }
     while (index19 <= checked (ListView1.Items.Count - 2));
     var num36 = 0;
-    if (Operators.CompareString(tbxCompFile1.Text, "", false) != 0)
+    if (VBCompat.CompareString(tbxCompFile1.Text, "", false) != 0)
       checked { ++num36; }
-    if (Operators.CompareString(tbxCompFile2.Text, "", false) != 0)
+    if (VBCompat.CompareString(tbxCompFile2.Text, "", false) != 0)
       checked { ++num36; }
-    if (Operators.CompareString(tbxCompFile3.Text, "", false) != 0)
+    if (VBCompat.CompareString(tbxCompFile3.Text, "", false) != 0)
       checked { ++num36; }
-    if (Operators.CompareString(tbxCompFile4.Text, "", false) != 0)
+    if (VBCompat.CompareString(tbxCompFile4.Text, "", false) != 0)
       checked { ++num36; }
     if (chkShowOnlyMismatches.Checked && num36 > 1)
     {
@@ -988,7 +989,7 @@ public partial class Form1 : Form
       var index27 = checked (ListView1.Items.Count - 1);
       while (index27 >= 1)
       {
-        if (Operators.CompareString(ListView1.Items[index27].Text, "", false) == 0 && Operators.CompareString(ListView1.Items[checked (index27 - 1)].Text, "", false) == 0)
+        if (VBCompat.CompareString(ListView1.Items[index27].Text, "", false) == 0 && VBCompat.CompareString(ListView1.Items[checked (index27 - 1)].Text, "", false) == 0)
           ListView1.Items.RemoveAt(index27);
         checked { index27 += -1; }
       }
@@ -1012,9 +1013,9 @@ public partial class Form1 : Form
     };
     var form = (Form) this;
     modAsBuilt.CmDlgDLL_ShowOpenEx(ref strArray3, ref strArray2, ref form, ref str, ref strArray1, ref num1, true, "");
-    if (Operators.CompareString(str, "", false) == 0)
+    if (str == "")
       return;
-    if (Operators.CompareString(Strings.Right(str, 1), "\\", false) != 0)
+    if (VBCompat.Right(str, 1) != "\\")
       str += "\\";
     tbxCompFile1.Text = "";
     var num2 = checked (num1 - 1);
@@ -1025,8 +1026,8 @@ public partial class Form1 : Form
       tbxCompFile1.Text = $"{tbxCompFile1.Text}{strArray1[index]}|";
       checked { ++index; }
     }
-    if (Operators.CompareString(Strings.Right(tbxCompFile1.Text, 1), "|", false) == 0)
-      tbxCompFile1.Text = Strings.Left(tbxCompFile1.Text, checked (Strings.Len(tbxCompFile1.Text) - 1));
+    if (VBCompat.Right(tbxCompFile1.Text, 1) == "|")
+      tbxCompFile1.Text = VBCompat.Left(tbxCompFile1.Text, checked (VBCompat.Len(tbxCompFile1.Text) - 1));
     lblComp1VIN.Text = "";
   }
 
@@ -1045,9 +1046,9 @@ public partial class Form1 : Form
     };
     var form = (Form) this;
     modAsBuilt.CmDlgDLL_ShowOpenEx(ref strArray3, ref strArray2, ref form, ref str, ref strArray1, ref num1, true, "");
-    if (Operators.CompareString(str, "", false) == 0)
+    if (VBCompat.CompareString(str, "", false) == 0)
       return;
-    if (Operators.CompareString(Strings.Right(str, 1), "\\", false) != 0)
+    if (VBCompat.CompareString(VBCompat.Right(str, 1), "\\", false) != 0)
       str += "\\";
     tbxCompFile2.Text = "";
     var num2 = checked (num1 - 1);
@@ -1058,8 +1059,8 @@ public partial class Form1 : Form
       tbxCompFile2.Text = $"{tbxCompFile2.Text}{strArray1[index]}|";
       checked { ++index; }
     }
-    if (Operators.CompareString(Strings.Right(tbxCompFile2.Text, 1), "|", false) == 0)
-      tbxCompFile2.Text = Strings.Left(tbxCompFile2.Text, checked (Strings.Len(tbxCompFile2.Text) - 1));
+    if (VBCompat.CompareString(VBCompat.Right(tbxCompFile2.Text, 1), "|", false) == 0)
+      tbxCompFile2.Text = VBCompat.Left(tbxCompFile2.Text, checked (VBCompat.Len(tbxCompFile2.Text) - 1));
     lblComp2VIN.Text = "";
   }
 
@@ -1233,15 +1234,15 @@ public partial class Form1 : Form
   void btnDeduceFigureIt_Click(object sender, EventArgs e)
   {
     tbxDeduceReport.Text = "";
-    if (Information.IsNothing(RuntimeHelpers.GetObjectValue(lstDeduceFactoryOptions.SelectedItem)))
+    if (VBCompat.IsNothing(RuntimeHelpers.GetObjectValue(lstDeduceFactoryOptions.SelectedItem)))
     {
       var num1 = (int) MessageBox.Show( "Select a feature to deduce.");
     }
-    else if (Information.IsNothing((object) lstDeduceModels.SelectedItems) || lstDeduceModels.SelectedItems.Count < 1)
+    else if (VBCompat.IsNothing((object) lstDeduceModels.SelectedItems) || lstDeduceModels.SelectedItems.Count < 1)
     {
       var num2 = (int) MessageBox.Show( "Select at least one vehicle model.");
     }
-    else if (Information.IsNothing((object) lstDeduceYears.SelectedItems) || lstDeduceYears.SelectedItems.Count < 1)
+    else if (VBCompat.IsNothing((object) lstDeduceYears.SelectedItems) || lstDeduceYears.SelectedItems.Count < 1)
     {
       var num3 = (int) MessageBox.Show( "Select at least one vehicle year.");
     }
@@ -1325,7 +1326,7 @@ public partial class Form1 : Form
           vi.carCCChex = dummyStr ?? ""; 
           if(!string.IsNullOrEmpty(vi.carCCChex) && vi.carCCChex.Length > 510)
           {
-               vi.carCCChex = Strings.Right(vi.carCCChex, 510);
+               vi.carCCChex = VBCompat.Right(vi.carCCChex, 510);
           }
           if(!string.IsNullOrEmpty(vi.carCCChex))
           {
@@ -1359,8 +1360,8 @@ public partial class Form1 : Form
       var index10 = strArray12.Length;
 
       /* [Old Logic Commented Out]
-      string directoryPath = MyProject.Application.Info.DirectoryPath;
-      if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
+      string directoryPath = Application.StartupPath;
+      if (VBCompat.CompareString(VBCompat.Right(directoryPath, 1), "\\", false) != 0)
         directoryPath += "\\";
       string path = directoryPath + "Deducer";
       try
@@ -1369,8 +1370,8 @@ public partial class Form1 : Form
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+        // ProjectData.SetProjectError(ex);
+        // ProjectData.ClearProjectError();
       }
       this.lstDeduceFactoryOptions.SelectedItem.ToString();
       string str1 = ";";
@@ -1408,7 +1409,7 @@ public partial class Form1 : Form
       int index5 = 0;
       while (index5 <= num7)
       {
-        string str4 = Strings.Replace(files[index5], ".ETIS.", ".AB.");
+        string str4 = VBCompat.Replace(files[index5], ".ETIS.", ".AB.");
         string[] strArray2 = new string[1];
         string[] strArray3 = new string[1];
         int num8 = 0;
@@ -1429,13 +1430,13 @@ public partial class Form1 : Form
         ref string[] local9 = ref strArray6;
         ref int local10 = ref num9;
         modAsBuilt.AsBuilt_LoadFile_AB_HTML(inpFileName1, ref local1, ref local2, ref local3, ref local4, ref local5, ref local6, ref local7, ref local8, ref local9, ref local10);
-        if (Strings.InStr(1, String1_2, $";{str2};") != 0 & Strings.InStr(1, String1_1, $";{str3};") != 0)
+        if (VBCompat.InStr(1, String1_2, $";{str2};") != 0 & VBCompat.InStr(1, String1_1, $";{str3};") != 0)
         {
           vehicleInfoArray[index2].carModel = str2;
           vehicleInfoArray[index2].carYear = str3;
           string str6 = files[index5];
           modAsBuilt.ETIS_LoadFile_FactoryOptions_HTML(str6, ref vehicleInfoArray[index2].etisFeatures, ref vehicleInfoArray[index2].etisFeatureCount, ref retVIN);
-          string str7 = Strings.Replace(str6, ".ETIS.HTML", "") + ".AB";
+          string str7 = VBCompat.Replace(str6, ".ETIS.HTML", "") + ".AB";
           string[] strArray7 = new string[1];
           string[] strArray8 = new string[1];
           string[] strArray9 = new string[1];
@@ -1467,7 +1468,7 @@ public partial class Form1 : Form
             int index7 = 0;
             while (index7 <= num12)
             {
-              if (Operators.CompareString(Strings.Left(vehicleInfoArray[index2].abModuleAddresses[index7], Strings.Len(strArray7[index6])), strArray7[index6], false) == 0)
+              if (VBCompat.CompareString(VBCompat.Left(vehicleInfoArray[index2].abModuleAddresses[index7], VBCompat.Len(strArray7[index6])), strArray7[index6], false) == 0)
               {
                 vehicleInfoArray[index2].abModuleInfo_PartNums[index7] = strArray9[index6];
                 vehicleInfoArray[index2].abModuleInfo_Strategies[index7] = strArray10[index6];
@@ -1481,10 +1482,10 @@ public partial class Form1 : Form
           int index8 = 0;
           while (index8 <= num13)
           {
-            vehicleInfoArray[index2].abModuleDatasHex[index8] = Strings.Left(vehicleInfoArray[index2].abModuleDatasHex[index8], checked (Strings.Len(vehicleInfoArray[index2].abModuleDatasHex[index8]) - 2));
+            vehicleInfoArray[index2].abModuleDatasHex[index8] = VBCompat.Left(vehicleInfoArray[index2].abModuleDatasHex[index8], checked (VBCompat.Len(vehicleInfoArray[index2].abModuleDatasHex[index8]) - 2));
             checked { ++index8; }
           }
-          vehicleInfoArray[index2].carCCChex = Strings.Right(vehicleInfoArray[index2].carCCChex, 510);
+          vehicleInfoArray[index2].carCCChex = VBCompat.Right(vehicleInfoArray[index2].carCCChex, 510);
           vehicleInfoArray[index2].carCCCbin = modAsBuilt.AsBuilt_HexStr2BinStr(vehicleInfoArray[index2].carCCChex);
           vehicleInfoArray[index2].abModuleDatasBinStr = new string[checked (vehicleInfoArray[index2].abModuleAddrCount - 1 + 1)];
           vehicleInfoArray[index2].abModuleDatasLONG = new ulong[checked (vehicleInfoArray[index2].abModuleAddrCount - 1 + 1)];
@@ -1515,7 +1516,7 @@ public partial class Form1 : Form
           int index13 = 0;
           while (index13 <= num18)
           {
-            if (Operators.CompareString(strArray12[index13], vehicleInfoArray[index11].abModuleAddresses[index12], false) == 0)
+            if (VBCompat.CompareString(strArray12[index13], vehicleInfoArray[index11].abModuleAddresses[index12], false) == 0)
             {
               num17 = index13;
               break;
@@ -1546,12 +1547,12 @@ public partial class Form1 : Form
         int index17 = 0;
         while (index17 <= num21)
         {
-          if (Operators.CompareString(vehicleInfoArray[index16].etisFeatures[index17], str1, false) == 0)
+          if (VBCompat.CompareString(vehicleInfoArray[index16].etisFeatures[index17], str1, false) == 0)
           {
             num20 = index17;
             break;
           }
-          if (Strings.InStr(1, str1, $";{vehicleInfoArray[index16].etisFeatures[index17]};", CompareMethod.Text) != 0)
+          if (VBCompat.InStr(1, str1, $";{vehicleInfoArray[index16].etisFeatures[index17]};", CompareMethod.Text) != 0)
           {
             num20 = index17;
             break;
@@ -1612,7 +1613,7 @@ public partial class Form1 : Form
             var moduleID = strArray12[index21];
             var vhclInfo = arySrc1[index22];
             var str9 = "";
-            if (Operators.CompareString(Strings.Mid(VehicleInfo_GetModuleDataByID_Binary(moduleID, vhclInfo, ref str9), Start, 1), "1", false) == 0)
+            if (VBCompat.CompareString(VBCompat.Mid(VehicleInfo_GetModuleDataByID_Binary(moduleID, vhclInfo, ref str9), Start, 1), "1", false) == 0)
               numArray1[checked (Start - 1)] = checked (numArray1[Start - 1] + 1);
             else
               numArray2[checked (Start - 1)] = checked (numArray2[Start - 1] + 1);
@@ -1649,7 +1650,7 @@ public partial class Form1 : Form
         var index24 = 0;
         while (index24 <= num26)
         {
-          if (Operators.CompareString(Strings.Mid(arySrc1[index24].carCCCbin, Start1, 1), "1", false) == 0)
+          if (VBCompat.CompareString(VBCompat.Mid(arySrc1[index24].carCCCbin, Start1, 1), "1", false) == 0)
             numArray3[checked (Start1 - 1)] = checked (numArray3[Start1 - 1] + 1);
           checked { ++index24; }
         }
@@ -1675,7 +1676,7 @@ public partial class Form1 : Form
             var moduleID = strArray12[index26];
             var vhclInfo = arySrc2[index27];
             var str10 = "";
-            if (Operators.CompareString(Strings.Mid(VehicleInfo_GetModuleDataByID_Binary(moduleID, vhclInfo, ref str10), Start2, 1), "1", false) == 0)
+            if (VBCompat.CompareString(VBCompat.Mid(VehicleInfo_GetModuleDataByID_Binary(moduleID, vhclInfo, ref str10), Start2, 1), "1", false) == 0)
               numArray4[checked (Start2 - 1)] = checked (numArray4[Start2 - 1] + 1);
             checked { ++index27; }
           }
@@ -1710,7 +1711,7 @@ public partial class Form1 : Form
         var index29 = 0;
         while (index29 <= num29)
         {
-          if (Operators.CompareString(Strings.Mid(arySrc2[index29].carCCCbin, Start3, 1), "1", false) == 0)
+          if (VBCompat.CompareString(VBCompat.Mid(arySrc2[index29].carCCCbin, Start3, 1), "1", false) == 0)
             numArray5[checked (Start3 - 1)] = checked (numArray5[Start3 - 1] + 1);
           checked { ++index29; }
         }
@@ -1731,7 +1732,7 @@ public partial class Form1 : Form
         var index32 = 0;
         while (index32 <= num31)
         {
-          if (Operators.CompareString(arySrc6[index32], arySrc3[index31], false) == 0 && arySrc7[index32] == arySrc4[index31] && arySrc8[index32] != arySrc5[index31] & checked (arySrc8[index32] * arySrc5[index31]) == 0 & checked (arySrc8[index32] + arySrc5[index31]) == index14)
+          if (VBCompat.CompareString(arySrc6[index32], arySrc3[index31], false) == 0 && arySrc7[index32] == arySrc4[index31] && arySrc8[index32] != arySrc5[index31] & checked (arySrc8[index32] * arySrc5[index31]) == 0 & checked (arySrc8[index32] + arySrc5[index31]) == index14)
           {
             if (arySrc5[index31] == 0)
               stringBuilder.AppendLine($"{arySrc3[index31]} bit {Conversions.ToString(arySrc4[index31])}  val 0");
@@ -1799,14 +1800,14 @@ public partial class Form1 : Form
   void tbxData1hex_TextChanged(object sender, EventArgs e)
   {
     var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
-    tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
-    tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
+    tbxData1bin1.Text = VBCompat.Mid(str1, 1, 8);
+    tbxData1bin2.Text = VBCompat.Mid(str1, 9, 8);
     var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
-    tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
-    tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
+    tbxData2bin1.Text = VBCompat.Mid(str2, 1, 8);
+    tbxData2bin2.Text = VBCompat.Mid(str2, 9, 8);
     var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
-    tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
-    tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+    tbxData3bin1.Text = VBCompat.Mid(str3, 1, 8);
+    tbxData3bin2.Text = VBCompat.Mid(str3, 9, 8);
     ValidateChecksum();
   }
 
@@ -1820,20 +1821,20 @@ public partial class Form1 : Form
   void tbxData3hex_TextChanged(object sender, EventArgs e)
   {
     var str1 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData1hex.Text);
-    tbxData1bin1.Text = Strings.Mid(str1, 1, 8);
-    tbxData1bin2.Text = Strings.Mid(str1, 9, 8);
+    tbxData1bin1.Text = VBCompat.Mid(str1, 1, 8);
+    tbxData1bin2.Text = VBCompat.Mid(str1, 9, 8);
     var str2 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData2hex.Text);
-    tbxData2bin1.Text = Strings.Mid(str2, 1, 8);
-    tbxData2bin2.Text = Strings.Mid(str2, 9, 8);
+    tbxData2bin1.Text = VBCompat.Mid(str2, 1, 8);
+    tbxData2bin2.Text = VBCompat.Mid(str2, 9, 8);
     var str3 = modAsBuilt.AsBuilt_HexStr2BinStr(tbxData3hex.Text);
-    tbxData3bin1.Text = Strings.Mid(str3, 1, 8);
-    tbxData3bin2.Text = Strings.Mid(str3, 9, 8);
+    tbxData3bin1.Text = VBCompat.Mid(str3, 1, 8);
+    tbxData3bin2.Text = VBCompat.Mid(str3, 9, 8);
     ValidateChecksum();
   }
 
   void tbxChecksumHex_TextChanged(object sender, EventArgs e)
   {
-    tbxChecksumBin.Text = Strings.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(tbxChecksumHex.Text), 1, 8);
+    tbxChecksumBin.Text = VBCompat.Mid(modAsBuilt.AsBuilt_HexStr2BinStr(tbxChecksumHex.Text), 1, 8);
     ValidateChecksum();
   }
 
@@ -1879,8 +1880,8 @@ public partial class Form1 : Form
 
   void Button3_Click_1(object sender, EventArgs e)
   {
-    var Expression = Conversion.Hex(modAsBuilt.AsBuilt_BinStr2UINT64(tbxConvertBin.Text));
-    if (Strings.Len(Expression) % 2 == 1)
+    var Expression = Conversions.Hex(modAsBuilt.AsBuilt_BinStr2UINT64(tbxConvertBin.Text));
+    if (VBCompat.Len(Expression) % 2 == 1)
       Expression = "0" + Expression;
     tbxConvertHex.Text = Expression;
   }
@@ -1897,12 +1898,12 @@ public partial class Form1 : Form
   {
       if (lstBit_Modules.SelectedItems.Count < 1)
       {
-          Interaction.MsgBox("Select a module bit to deduce.");
+          MessageBox.Show("Select a module bit to deduce.");
           return;
       }
       if (lstBit_Models.SelectedItems.Count < 1 || lstBit_Years.SelectedItems.Count < 1)
       {
-          Interaction.MsgBox("Select at least one vehicle year and model.");
+          MessageBox.Show("Select at least one vehicle year and model.");
           return;
       }
 
@@ -1934,22 +1935,22 @@ public partial class Form1 : Form
       contents = $"{contents}\r\nFeature:  {lstDeduceFactoryOptions.Items[index1].ToString()}\r\n";
       btnDeduceFigureIt.PerformClick();
       var text = tbxDeduceReport.Text;
-      var Start = Strings.InStrRev(text, "Perfect Bits:", Compare: CompareMethod.Text);
+      var Start = VBCompat.InStrRev(text, "Perfect Bits:", compare: CompareMethod.Text);
       if (string.IsNullOrEmpty(text))
         Start = 0;
       if (Start > 0)
       {
-        var Expression = Strings.Mid(text, Start);
+        var Expression = VBCompat.Mid(text, Start);
         var strArray1 = new string[1];
-        var strArray2 = Strings.Split(Expression, "\r\n");
+        var strArray2 = VBCompat.Split(Expression, "\r\n");
         var num2 = checked (strArray2.Length - 1);
         var index2 = 1;
         while (index2 <= num2)
         {
-          strArray2[index2] = Strings.Trim(strArray2[index2]);
-          if (Strings.InStr(1, strArray2[index2], "Perfect CCC", CompareMethod.Text) == 0)
+          strArray2[index2] = VBCompat.Trim(strArray2[index2]);
+          if (VBCompat.InStr(1, strArray2[index2], "Perfect CCC", CompareMethod.Text) == 0)
           {
-            if (Operators.CompareString(strArray2[index2], "", false) != 0)
+            if (VBCompat.CompareString(strArray2[index2], "", false) != 0)
               contents = $"{contents}  {strArray2[index2]}\r\n";
             checked { ++index2; }
           }
@@ -1965,8 +1966,8 @@ public partial class Form1 : Form
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
+      // ProjectData.SetProjectError(ex);
+      // ProjectData.ClearProjectError();
     }
     System.IO.File.WriteAllText("C:\\PerfectList.txt", contents);
   }
@@ -1995,14 +1996,14 @@ public partial class Form1 : Form
       foreach (var y in years) lstBit_Years.Items.Add(y);
       foreach (var m in models) lstBit_Models.Items.Add(m);
 
-      Interaction.MsgBox($"Loaded {VehicleDatabase.Entries.Count} vehicles from database.");
+      MessageBox.Show($"Loaded {VehicleDatabase.Entries.Count} vehicles from database.");
   }
 
   void Button6_Click_1(object sender, EventArgs e)
   {
       if (lstBit_Models.SelectedItems.Count < 1 || lstBit_Years.SelectedItems.Count < 1)
       {
-          Interaction.MsgBox("Select at least one vehicle year and model.");
+          MessageBox.Show("Select at least one vehicle year and model.");
           return;
       }
 
@@ -2070,9 +2071,9 @@ public partial class Form1 : Form
       foreach (var m in sortedModules) lstBit_Modules.Items.Add(m);
 
       if (lstBit_Modules.Items.Count == 0)
-          Interaction.MsgBox("No modules found for the selected vehicles.");
+          MessageBox.Show("No modules found for the selected vehicles.");
       else
-          Interaction.MsgBox($"Found {lstBit_Modules.Items.Count} unique modules.");
+          MessageBox.Show($"Found {lstBit_Modules.Items.Count} unique modules.");
   }
 
 
@@ -2092,9 +2093,9 @@ public partial class Form1 : Form
     };
     var form = (Form) this;
     modAsBuilt.CmDlgDLL_ShowOpenEx(ref strArray3, ref strArray2, ref form, ref str, ref strArray1, ref num1, true, "");
-    if (Operators.CompareString(str, "", false) == 0)
+    if (VBCompat.CompareString(str, "", false) == 0)
       return;
-    if (Operators.CompareString(Strings.Right(str, 1), "\\", false) != 0)
+    if (VBCompat.CompareString(VBCompat.Right(str, 1), "\\", false) != 0)
       str += "\\";
     tbxCompFile3.Text = "";
     var num2 = checked (num1 - 1);
@@ -2105,8 +2106,8 @@ public partial class Form1 : Form
       tbxCompFile3.Text = $"{tbxCompFile3.Text}{strArray1[index]}|";
       checked { ++index; }
     }
-    if (Operators.CompareString(Strings.Right(tbxCompFile3.Text, 1), "|", false) == 0)
-      tbxCompFile3.Text = Strings.Left(tbxCompFile3.Text, checked (Strings.Len(tbxCompFile3.Text) - 1));
+    if (VBCompat.CompareString(VBCompat.Right(tbxCompFile3.Text, 1), "|", false) == 0)
+      tbxCompFile3.Text = VBCompat.Left(tbxCompFile3.Text, checked (VBCompat.Len(tbxCompFile3.Text) - 1));
     lblComp3VIN.Text = "";
   }
 
@@ -2125,9 +2126,9 @@ public partial class Form1 : Form
     };
     var form = (Form) this;
     modAsBuilt.CmDlgDLL_ShowOpenEx(ref strArray3, ref strArray2, ref form, ref str, ref strArray1, ref num1, true, "");
-    if (Operators.CompareString(str, "", false) == 0)
+    if (VBCompat.CompareString(str, "", false) == 0)
       return;
-    if (Operators.CompareString(Strings.Right(str, 1), "\\", false) != 0)
+    if (VBCompat.CompareString(VBCompat.Right(str, 1), "\\", false) != 0)
       str += "\\";
     tbxCompFile4.Text = "";
     var num2 = checked (num1 - 1);
@@ -2138,8 +2139,8 @@ public partial class Form1 : Form
       tbxCompFile4.Text = $"{tbxCompFile4.Text}{strArray1[index]}|";
       checked { ++index; }
     }
-    if (Operators.CompareString(Strings.Right(tbxCompFile4.Text, 1), "|", false) == 0)
-      tbxCompFile4.Text = Strings.Left(tbxCompFile4.Text, checked (Strings.Len(tbxCompFile4.Text) - 1));
+    if (VBCompat.CompareString(VBCompat.Right(tbxCompFile4.Text, 1), "|", false) == 0)
+      tbxCompFile4.Text = VBCompat.Left(tbxCompFile4.Text, checked (VBCompat.Len(tbxCompFile4.Text) - 1));
     lblComp4VIN.Text = "";
   }
 
@@ -2153,9 +2154,9 @@ public partial class Form1 : Form
       str1 = $"{str1}{ListView1.Columns[index1].Text}, ";
       checked { ++index1; }
     }
-    var str2 = Strings.Trim(str1);
-    if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
-      str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
+    var str2 = VBCompat.Trim(str1);
+    if (VBCompat.CompareString(VBCompat.Right(str2, 1), ",", false) == 0)
+      str2 = VBCompat.Trim(VBCompat.Left(str2, checked (VBCompat.Len(str2) - 1)));
     var text = str2 + "\r\n";
     var num2 = checked (ListView1.Items.Count - 1);
     var index2 = 0;
@@ -2173,10 +2174,10 @@ public partial class Form1 : Form
             str3 = $"{str3}{ListView1.Items[index2].SubItems[index3].Text}, ";
             checked { ++index3; }
           }
-          var str4 = Strings.Trim(str3);
-          if (Operators.CompareString(Strings.Right(str4, 1), ",", false) == 0)
-            str4 = Strings.Trim(Strings.Left(str4, checked (Strings.Len(str4) - 1)));
-          if (Operators.CompareString(Strings.Trim(str4), ",", false) == 0)
+          var str4 = VBCompat.Trim(str3);
+          if (VBCompat.CompareString(VBCompat.Right(str4, 1), ",", false) == 0)
+            str4 = VBCompat.Trim(VBCompat.Left(str4, checked (VBCompat.Len(str4) - 1)));
+          if (VBCompat.CompareString(VBCompat.Trim(str4), ",", false) == 0)
             str4 = "";
           text = str4 + "\r\n";
         }
@@ -2191,9 +2192,9 @@ public partial class Form1 : Form
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
+      // ProjectData.SetProjectError(ex);
       var num4 = (int) MessageBox.Show( "Failed to set clipboard text.");
-      ProjectData.ClearProjectError();
+      // ProjectData.ClearProjectError();
     }
   }
 
@@ -2208,9 +2209,9 @@ public partial class Form1 : Form
       str1 = $"{str1}{ListView1.Columns[index2].Text}, ";
       checked { ++index2; }
     }
-    var str2 = Strings.Trim(str1);
-    if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
-      str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
+    var str2 = VBCompat.Trim(str1);
+    if (VBCompat.CompareString(VBCompat.Right(str2, 1), ",", false) == 0)
+      str2 = VBCompat.Trim(VBCompat.Left(str2, checked (VBCompat.Len(str2) - 1)));
     var text = str2 + "\r\n";
     var num2 = checked (ListView1.Items.Count - 1);
     var index3 = 0;
@@ -2220,10 +2221,10 @@ public partial class Form1 : Form
       {
         if (ListView1.Items[index3].SubItems.Count == ListView1.Columns.Count)
         {
-          var str3 = Strings.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
-          if (Operators.CompareString(Strings.Right(str3, 1), ",", false) == 0)
-            str3 = Strings.Trim(Strings.Left(str3, checked (Strings.Len(str3) - 1)));
-          if (Operators.CompareString(Strings.Trim(str3), ",", false) == 0)
+          var str3 = VBCompat.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
+          if (VBCompat.CompareString(VBCompat.Right(str3, 1), ",", false) == 0)
+            str3 = VBCompat.Trim(VBCompat.Left(str3, checked (VBCompat.Len(str3) - 1)));
+          if (VBCompat.CompareString(VBCompat.Trim(str3), ",", false) == 0)
             str3 = "";
           text = str3 + "\r\n";
         }
@@ -2238,9 +2239,9 @@ public partial class Form1 : Form
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
+      // ProjectData.SetProjectError(ex);
       var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
-      ProjectData.ClearProjectError();
+      // ProjectData.ClearProjectError();
     }
   }
 
@@ -2255,9 +2256,9 @@ public partial class Form1 : Form
       str1 = $"{str1}{ListView1.Columns[index2].Text}, ";
       checked { ++index2; }
     }
-    var str2 = Strings.Trim(str1);
-    if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
-      str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
+    var str2 = VBCompat.Trim(str1);
+    if (VBCompat.CompareString(VBCompat.Right(str2, 1), ",", false) == 0)
+      str2 = VBCompat.Trim(VBCompat.Left(str2, checked (VBCompat.Len(str2) - 1)));
     var text = str2 + "\r\n";
     var num2 = checked (ListView1.Items.Count - 1);
     var index3 = 0;
@@ -2267,10 +2268,10 @@ public partial class Form1 : Form
       {
         if (ListView1.Items[index3].SubItems.Count == ListView1.Columns.Count)
         {
-          var str3 = Strings.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
-          if (Operators.CompareString(Strings.Right(str3, 1), ",", false) == 0)
-            str3 = Strings.Trim(Strings.Left(str3, checked (Strings.Len(str3) - 1)));
-          if (Operators.CompareString(Strings.Trim(str3), ",", false) == 0)
+          var str3 = VBCompat.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
+          if (VBCompat.CompareString(VBCompat.Right(str3, 1), ",", false) == 0)
+            str3 = VBCompat.Trim(VBCompat.Left(str3, checked (VBCompat.Len(str3) - 1)));
+          if (VBCompat.CompareString(VBCompat.Trim(str3), ",", false) == 0)
             str3 = "";
           text = str3 + "\r\n";
         }
@@ -2285,9 +2286,9 @@ public partial class Form1 : Form
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
+      // ProjectData.SetProjectError(ex);
       var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
-      ProjectData.ClearProjectError();
+      // ProjectData.ClearProjectError();
     }
   }
 
@@ -2302,9 +2303,9 @@ public partial class Form1 : Form
       str1 = $"{str1}{ListView1.Columns[index2].Text}, ";
       checked { ++index2; }
     }
-    var str2 = Strings.Trim(str1);
-    if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
-      str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
+    var str2 = VBCompat.Trim(str1);
+    if (VBCompat.Right(str2, 1) == ",")
+      str2 = VBCompat.Trim(VBCompat.Left(str2, checked (VBCompat.Len(str2) - 1)));
     var text = str2 + "\r\n";
     var num2 = checked (ListView1.Items.Count - 1);
     var index3 = 0;
@@ -2314,10 +2315,10 @@ public partial class Form1 : Form
       {
         if (ListView1.Items[index3].SubItems.Count == ListView1.Columns.Count)
         {
-          var str3 = Strings.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
-          if (Operators.CompareString(Strings.Right(str3, 1), ",", false) == 0)
-            str3 = Strings.Trim(Strings.Left(str3, checked (Strings.Len(str3) - 1)));
-          if (Operators.CompareString(Strings.Trim(str3), ",", false) == 0)
+          var str3 = VBCompat.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
+          if (VBCompat.Right(str3, 1) == ",")
+            str3 = VBCompat.Trim(VBCompat.Left(str3, checked (VBCompat.Len(str3) - 1)));
+          if (VBCompat.Trim(str3) == ",")
             str3 = "";
           text = str3 + "\r\n";
         }
@@ -2332,9 +2333,9 @@ public partial class Form1 : Form
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
-      var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
-      ProjectData.ClearProjectError();
+      // ProjectData.SetProjectError(ex);
+      MessageBox.Show( "Failed to set clipboard text.");
+      // ProjectData.ClearProjectError();
     }
   }
 
@@ -2349,9 +2350,9 @@ public partial class Form1 : Form
       str1 = $"{str1}{ListView1.Columns[index2].Text}, ";
       checked { ++index2; }
     }
-    var str2 = Strings.Trim(str1);
-    if (Operators.CompareString(Strings.Right(str2, 1), ",", false) == 0)
-      str2 = Strings.Trim(Strings.Left(str2, checked (Strings.Len(str2) - 1)));
+    var str2 = VBCompat.Trim(str1);
+    if (VBCompat.Right(str2, 1) == ",")
+      str2 = VBCompat.Trim(VBCompat.Left(str2, checked (VBCompat.Len(str2) - 1)));
     var text = str2 + "\r\n";
     var num2 = checked (ListView1.Items.Count - 1);
     var index3 = 0;
@@ -2361,10 +2362,10 @@ public partial class Form1 : Form
       {
         if (ListView1.Items[index3].SubItems.Count == ListView1.Columns.Count)
         {
-          var str3 = Strings.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
-          if (Operators.CompareString(Strings.Right(str3, 1), ",", false) == 0)
-            str3 = Strings.Trim(Strings.Left(str3, checked (Strings.Len(str3) - 1)));
-          if (Operators.CompareString(Strings.Trim(str3), ",", false) == 0)
+          var str3 = VBCompat.Trim($"{$"{text}{Conversions.ToString(ListView1.Items[index3].Tag)}, "}{ListView1.Items[index3].SubItems[index1].Text}, ");
+          if (VBCompat.Right(str3, 1) == ",")
+            str3 = VBCompat.Trim(VBCompat.Left(str3, checked (VBCompat.Len(str3) - 1)));
+          if (VBCompat.Trim(str3) == ",")
             str3 = "";
           text = str3 + "\r\n";
         }
@@ -2379,9 +2380,9 @@ public partial class Form1 : Form
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
-      var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
-      ProjectData.ClearProjectError();
+      // ProjectData.SetProjectError(ex);
+      MessageBox.Show( "Failed to set clipboard text.");
+      // ProjectData.ClearProjectError();
     }
   }
 
@@ -2399,7 +2400,7 @@ public partial class Form1 : Form
       PopulateVehicleList();
 
       // Startup Update Check
-      if (AsBuiltExplorer.My.MySettings.Default.AutoCheckForUpdates)
+      if (AsBuiltExplorer.Properties.Settings.Default.AutoCheckForUpdates)
       {
           await System.Threading.Tasks.Task.Delay(2000); // Wait for UI to settle
 
@@ -2409,15 +2410,15 @@ public partial class Form1 : Form
               if (info != null && info.IsNewer)
               {
                    // Check if user skipped this version
-                   if (info.NewVersion != AsBuiltExplorer.My.MySettings.Default.SkipUpdateVersion)
+                   if (info.NewVersion != AsBuiltExplorer.Properties.Settings.Default.SkipUpdateVersion)
                    {
                         using (var frm = new AsBuiltExplorer.Forms.frmUpdateAvailable(info))
                         {
                             frm.ShowDialog();
                             if (frm.Skipped)
                             {
-                                AsBuiltExplorer.My.MySettings.Default.SkipUpdateVersion = info.NewVersion;
-                                AsBuiltExplorer.My.MySettings.Default.Save();
+                                AsBuiltExplorer.Properties.Settings.Default.SkipUpdateVersion = info.NewVersion;
+                                AsBuiltExplorer.Properties.Settings.Default.Save();
                             }
                         }
                    }
@@ -2500,21 +2501,21 @@ public partial class Form1 : Form
     {
       try
       {
-        System.IO.File.Delete(Strings.Replace(name, ".AB", ".AB.HTML"));
+        System.IO.File.Delete(VBCompat.Replace(name, ".AB", ".AB.HTML"));
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+        // ProjectData.SetProjectError(ex);
+        // ProjectData.ClearProjectError();
       }
       try
       {
-        System.IO.File.Delete(Strings.Replace(name, ".AB", ".ETIS.HTML"));
+        System.IO.File.Delete(VBCompat.Replace(name, ".AB", ".ETIS.HTML"));
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+        // ProjectData.SetProjectError(ex);
+        // ProjectData.ClearProjectError();
       }
       try
       {
@@ -2522,8 +2523,8 @@ public partial class Form1 : Form
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+        // ProjectData.SetProjectError(ex);
+        // ProjectData.ClearProjectError();
       }
       try
       {
@@ -2531,14 +2532,14 @@ public partial class Form1 : Form
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+        // ProjectData.SetProjectError(ex);
+        // ProjectData.ClearProjectError();
       }
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
+      // ProjectData.SetProjectError(ex);
+      // ProjectData.ClearProjectError();
     }
   }
 
@@ -2549,19 +2550,19 @@ public partial class Form1 : Form
 
   void ToUCDSToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    if (ListView1.SelectedItems.Count < 1 || Information.IsNothing(RuntimeHelpers.GetObjectValue(ListView1.SelectedItems[0].Tag)) || Operators.CompareString(ListView1.SelectedItems[0].Text, "", false) == 0)
+    if (ListView1.SelectedItems.Count < 1 || VBCompat.IsNothing(RuntimeHelpers.GetObjectValue(ListView1.SelectedItems[0].Tag)) || ListView1.SelectedItems[0].Text == "")
       return;
     var selectedItem = ListView1.SelectedItems[0];
     var text = selectedItem.Text;
     var str1 = "";
     var str2 = "";
-    var str3 = Strings.Left(text, 3);
+    var str3 = VBCompat.Left(text, 3);
     var retModuleNames = new string[1];
     var retModuleShortNames = new string[1];
     var retModuleAddresses = new string[1];
     var retModuleCount = 0;
-    var directoryPath = MyProject.Application.Info.DirectoryPath;
-    if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
+    var directoryPath = Application.StartupPath;
+    if (VBCompat.Right(directoryPath, 1) != "\\")
       directoryPath += "\\";
     var inpFileName = directoryPath + "ModuleList.txt";
     if (chkCompareShowNames.Checked)
@@ -2572,14 +2573,14 @@ public partial class Form1 : Form
     var addrToFind = str3;
     var num1 = -1;
     modAsBuilt.AsBuilt_ModuleList_FindAddressInfo(ref retModuleNames, modlistShortNames, modlistAddress, modlistCount, addrToFind, ref num1, ref str1, ref str2);
-    str2 = Interaction.InputBox("UCDS - Enter Module Type:", "UCDS - Enter Module Type", str2);
-    if (Operators.CompareString(str2, "", false) == 0)
+    str2 = VBCompat.InputBox("UCDS - Enter Module Type:", "UCDS - Enter Module Type", str2);
+    if (str2 == "")
       return;
-    var Left1 = Interaction.InputBox("UCDS - Enter Vehicle ID  (like 'U375'):", "UCDS - Enter Vehicle ID", "NONE");
-    if (Operators.CompareString(Left1, "", false) == 0)
+    var Left1 = VBCompat.InputBox("UCDS - Enter Vehicle ID  (like 'U375'):", "UCDS - Enter Vehicle ID", "NONE");
+    if (Left1 == "")
       return;
-    var Left2 = Interaction.InputBox("UCDS - Enter Vehicle Year (like 'MY15'):", "UCDS - Enter Vehicle Year", "NONE");
-    if (Operators.CompareString(Left2, "", false) == 0)
+    var Left2 = VBCompat.InputBox("UCDS - Enter Vehicle Year (like 'MY15'):", "UCDS - Enter Vehicle Year", "NONE");
+    if (Left2 == "")
       return;
     var foreColor = selectedItem.ForeColor;
     var strArray1 = new string[1000];
@@ -2587,16 +2588,16 @@ public partial class Form1 : Form
     var index = 0;
     while (index <= num2)
     {
-      if (ListView1.Items[index].ForeColor == foreColor && Operators.CompareString(Strings.Left(ListView1.Items[index].Text, 3), Strings.Left(str3, 3), false) == 0)
+      if (ListView1.Items[index].ForeColor == foreColor && VBCompat.Left(ListView1.Items[index].Text, 3) == VBCompat.Left(str3, 3))
       {
-        var num3 = Strings.InStr(ListView1.Items[index].Text, " ");
+        var num3 = VBCompat.InStr(ListView1.Items[index].Text, " ");
         if (num3 == 0)
-          num3 = checked (Strings.Len(ListView1.Items[index].Text) + 1);
+          num3 = checked (VBCompat.Len(ListView1.Items[index].Text) + 1);
         var strArray2 = new string[1];
-        var num4 = checked ((int) Math.Round(Conversion.Val(Strings.Split(Strings.Left(ListView1.Items[index].Text, num3 - 1), "-")[1])));
+        var num4 = checked ((int) Math.Round((double)VBCompat.Val(VBCompat.Split(VBCompat.Left(ListView1.Items[index].Text, num3 - 1), "-")[1])));
         var str4 = ListView1.Items[index].SubItems[1].Text + ListView1.Items[index].SubItems[2].Text + ListView1.Items[index].SubItems[3].Text;
         if (chkCompareShowChecksum.Checked)
-          str4 = Strings.Left(str4, checked (Strings.Len(str4) - 2));
+          str4 = VBCompat.Left(str4, checked (VBCompat.Len(str4) - 2));
         strArray1[checked (num4 - 1)] = strArray1[checked (num4 - 1)] + str4;
       }
       checked { ++index; }
@@ -2605,14 +2606,14 @@ public partial class Form1 : Form
     var Number = 0;
     do
     {
-      if (Operators.CompareString(strArray1[Number], "", false) != 0)
-        str5 = $"{str5}<DID ID=\"DE{Strings.Right("00" + Conversion.Hex(Number), 2)}\">{strArray1[Number]}</DID>\r\n";
+      if (VBCompat.CompareString(strArray1[Number], "", false) != 0)
+        str5 = $"{str5}<DID ID=\"DE{VBCompat.Right("00" + Conversions.Hex(Number), 2)}\">{strArray1[Number]}</DID>\r\n";
       checked { ++Number; }
     }
     while (Number <= 999);
     var contents = str5 + "</VEHICLE>\r\n" + "</DirectConfiguration>";
-    var str6 = modAsBuilt.CmDlgDLL_ShowSaveFile((Form) this, "All Files|*.*", "Export to UCDS...", $"Direct_{str2}_{Strings.Format((object) DateAndTime.Now.Day, "00")}{Strings.Format((object) DateAndTime.Now.Month, "00")}{Strings.Format((object) (DateAndTime.Now.Year % 100), "00")}_.XML");
-    if (Operators.CompareString(str6, "", false) == 0)
+    var str6 = modAsBuilt.CmDlgDLL_ShowSaveFile((Form) this, "All Files|*.*", "Export to UCDS...", $"Direct_{str2}_{VBCompat.Format((object) DateTime.Now.Day, "00")}{VBCompat.Format((object) DateTime.Now.Month, "00")}{VBCompat.Format((object) (DateTime.Now.Year % 100), "00")}_.XML");
+    if (VBCompat.CompareString(str6, "", false) == 0)
       return;
     try
     {
@@ -2622,23 +2623,23 @@ public partial class Form1 : Form
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
+      // ProjectData.SetProjectError(ex);
+      // ProjectData.ClearProjectError();
     }
   }
 
   void ToABTToolStripMenuItem_Click(object sender, EventArgs e)
   {
-    if (ListView1.SelectedItems.Count < 1 || Information.IsNothing(RuntimeHelpers.GetObjectValue(ListView1.SelectedItems[0].Tag)) || Operators.CompareString(ListView1.SelectedItems[0].Text, "", false) == 0)
+    if (ListView1.SelectedItems.Count < 1 || VBCompat.IsNothing(RuntimeHelpers.GetObjectValue(ListView1.SelectedItems[0].Tag)) || VBCompat.CompareString(ListView1.SelectedItems[0].Text, "", false) == 0)
       return;
     var selectedItem = ListView1.SelectedItems[0];
-    var str1 = Strings.Left(selectedItem.Text, 3);
+    var str1 = VBCompat.Left(selectedItem.Text, 3);
     var retModuleNames = new string[1];
     var retModuleShortNames = new string[1];
     var retModuleAddresses = new string[1];
     var retModuleCount = 0;
-    var directoryPath = MyProject.Application.Info.DirectoryPath;
-    if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
+    var directoryPath = Application.StartupPath;
+    if (VBCompat.CompareString(VBCompat.Right(directoryPath, 1), "\\", false) != 0)
       directoryPath += "\\";
     var inpFileName = directoryPath + "ModuleList.txt";
     if (chkCompareShowNames.Checked)
@@ -2657,16 +2658,16 @@ public partial class Form1 : Form
     var index1 = 0;
     while (index1 <= num2)
     {
-      if (ListView1.Items[index1].ForeColor == foreColor && Operators.CompareString(Strings.Left(ListView1.Items[index1].Text, 3), Strings.Left(str1, 3), false) == 0)
+      if (ListView1.Items[index1].ForeColor == foreColor && VBCompat.CompareString(VBCompat.Left(ListView1.Items[index1].Text, 3), VBCompat.Left(str1, 3), false) == 0)
       {
-        var num3 = Strings.InStr(ListView1.Items[index1].Text, " ");
+        var num3 = VBCompat.InStr(ListView1.Items[index1].Text, " ");
         if (num3 == 0)
-          num3 = checked (Strings.Len(ListView1.Items[index1].Text) + 1);
+          num3 = checked (VBCompat.Len(ListView1.Items[index1].Text) + 1);
         var strArray2 = new string[1];
-        var num4 = checked ((int) Math.Round(Conversion.Val(Strings.Split(Strings.Left(ListView1.Items[index1].Text, num3 - 1), "-")[1])));
+        var num4 = checked ((int) Math.Round((double)VBCompat.Val(VBCompat.Split(VBCompat.Left(ListView1.Items[index1].Text, num3 - 1), "-")[1])));
         var str3 = ListView1.Items[index1].SubItems[1].Text + ListView1.Items[index1].SubItems[2].Text + ListView1.Items[index1].SubItems[3].Text;
         if (!chkCompareShowChecksum.Checked)
-          str3 += modAsBuilt.AsBuilt_CalculateChecksum($"{str1}-{Strings.Mid(ListView1.Items[index1].Text, 5, 2)}-{Strings.Mid(ListView1.Items[index1].Text, 8, 2)}", str3 + "00");
+          str3 += modAsBuilt.AsBuilt_CalculateChecksum($"{str1}-{VBCompat.Mid(ListView1.Items[index1].Text, 5, 2)}-{VBCompat.Mid(ListView1.Items[index1].Text, 8, 2)}", str3 + "00");
         strArray1[checked (num4 - 1)] = strArray1[checked (num4 - 1)] + str3;
       }
       checked { ++index1; }
@@ -2676,16 +2677,16 @@ public partial class Form1 : Form
     var index2 = 0;
     do
     {
-      if (Operators.CompareString(strArray1[index2], "", false) != 0)
+      if (VBCompat.CompareString(strArray1[index2], "", false) != 0)
       {
         var num6 = 1;
         var Start = 1;
-        while (Operators.CompareString(Strings.Mid(strArray1[index2], Start, 12), "", false) != 0)
+        while (VBCompat.CompareString(VBCompat.Mid(strArray1[index2], Start, 12), "", false) != 0)
         {
           if (num6 > 99 | index2 > 99)
           {
             flag = true;
-            goto label_24;
+            // goto label_24;
           }
           checked { Start += 12; }
           checked { ++num6; }
@@ -2708,17 +2709,17 @@ label_24:
     var index3 = 0;
     do
     {
-      if (Operators.CompareString(strArray1[index3], "", false) != 0)
+      if (strArray1[index3] != "")
       {
         contents = $"{contents};Block {Conversions.ToString(num8)}\r\n";
         var num9 = 1;
         var Start = 1;
-        while (Operators.CompareString(Strings.Mid(strArray1[index3], Start, 12), "", false) != 0)
+        while (VBCompat.Mid(strArray1[index3], Start, 12) != "")
         {
           if (msgBoxResult == DialogResult.Yes)
-            contents = $"{contents}{modAsBuilt.AsBuilt_FormatNewABT(str1, checked (index3 + 1), num9)}{Strings.Mid(strArray1[index3], Start, 12)}\r\n";
+            contents = $"{contents}{modAsBuilt.AsBuilt_FormatNewABT(str1, checked (index3 + 1), num9)}{VBCompat.Mid(strArray1[index3], Start, 12)}\r\n";
           else
-            contents = $"{contents}{str1}{Strings.Format((object) checked (index3 + 1), "00")}{Strings.Format((object) num9, "00")}{Strings.Mid(strArray1[index3], Start, 12)}\r\n";
+            contents = $"{contents}{str1}{VBCompat.Format((object) checked (index3 + 1), "00")}{VBCompat.Format((object) num9, "00")}{VBCompat.Mid(strArray1[index3], Start, 12)}\r\n";
           checked { Start += 12; }
           checked { ++num9; }
         }
@@ -2727,7 +2728,7 @@ label_24:
       checked { ++index3; }
     }
     while (index3 <= 999);
-    if (Operators.CompareString(Left, "", false) == 0)
+    if (Left == "")
       Left = "Module" + str1;
     var path = modAsBuilt.CmDlgDLL_ShowSaveFile((Form) this, "All Files|*.*", "Export to ABT...", Left + ".ABT");
     try
@@ -2738,8 +2739,8 @@ label_24:
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
-      ProjectData.ClearProjectError();
+      // ProjectData.SetProjectError(ex);
+      // ProjectData.ClearProjectError();
     }
   }
 
@@ -2757,7 +2758,7 @@ label_24:
         for (int i = 0; i < 40; i++)
         {
             TextBox4.Text = i.ToString();
-            MyProject.Application.DoEvents(); // Keep UI responsive
+            Application.DoEvents(); // Keep UI responsive
 
             string result = AnalyzeBit(modName, i);
 
@@ -2785,11 +2786,11 @@ label_24:
     
     if (sb.Length == 0)
     {
-        Interaction.MsgBox("No conclusive bits found. Try selecting more vehicles with diverse feature sets.");
+        MessageBox.Show("No conclusive bits found. Try selecting more vehicles with diverse feature sets.");
     }
     else
     {
-        Interaction.MsgBox("Analysis complete. See results below.");
+        MessageBox.Show("Analysis complete. See results below.");
     }
   }
 
@@ -3051,7 +3052,7 @@ label_24:
       // Get the real bounds for the tab rectangle.
       var _tabBounds = TabControl1.GetTabRect(e.Index);
 
-      var isDark = ("Dark" == My.MySettings.Default.AppTheme);
+      var isDark = ("Dark" == AsBuiltExplorer.Properties.Settings.Default.AppTheme);
       var backColor = isDark ? Color.FromArgb(45, 45, 48) : SystemColors.Control;
       var foreColor = isDark ? Color.White : SystemColors.ControlText;
       // Highlight: Lighter Grey for Dark, Soft Blue for Light
@@ -3190,7 +3191,7 @@ label_24:
         // BATCH MODE
         if (lvwBrowser.SelectedItems.Count > 1)
         {
-            var newTag = Interaction.InputBox($"Enter feature tag to ADD to {lvwBrowser.SelectedItems.Count} selected vehicles:", "Batch Add Feature");
+            var newTag = VBCompat.InputBox($"Enter feature tag to ADD to {lvwBrowser.SelectedItems.Count} selected vehicles:", "Batch Add Feature");
             if (!string.IsNullOrWhiteSpace(newTag))
             {
                  var count = 0;
@@ -3227,7 +3228,7 @@ label_24:
         if (entrySingle != null)
         {
             var currentFeatures = entrySingle.Features ?? "";
-            var newFeatures = Interaction.InputBox("Edit features for this vehicle (semicolon separated):", "Edit Features", currentFeatures);
+            var newFeatures = VBCompat.InputBox("Edit features for this vehicle (semicolon separated):", "Edit Features", currentFeatures);
             
             if (newFeatures != currentFeatures) 
             {

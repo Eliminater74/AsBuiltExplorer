@@ -1,7 +1,7 @@
 
-using AsBuiltExplorer.My;
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+// using AsBuiltExplorer.My;
+// using Microsoft.VisualBasic;
+// using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -10,11 +10,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using AsBuiltExplorer.Utilities;
 
 namespace AsBuiltExplorer
 {
 
-[StandardModule]
+// [StandardModule]
 internal sealed class modAsBuilt
 {
   const int GENERIC_READ = -2147483648 /*0x80000000*/;
@@ -122,33 +123,33 @@ internal sealed class modAsBuilt
 
   public static string AsBuilt_CalculateChecksum(string moduleAddress, string dataIncludingChecksum)
   {
-    moduleAddress = Strings.Replace(moduleAddress, " ", "");
-    dataIncludingChecksum = Strings.Replace(dataIncludingChecksum, " ", "");
-    var str1 = Strings.Left(dataIncludingChecksum, checked (Strings.Len(dataIncludingChecksum) - 2));
+    moduleAddress = VBCompat.Replace(moduleAddress, " ", "");
+    dataIncludingChecksum = VBCompat.Replace(dataIncludingChecksum, " ", "");
+    var str1 = VBCompat.Left(dataIncludingChecksum, checked (VBCompat.Len(dataIncludingChecksum) - 2));
     var strArray1 = new string[1];
-    var strArray2 = Strings.Split(moduleAddress, "-");
+    var strArray2 = VBCompat.Split(moduleAddress, "-");
     moduleAddress = modAsBuilt.AsBuilt_LoadFile_ABT_ParseNewAddressFormat(strArray2[0], strArray2[1], strArray2[2]);
-    var strArray3 = Strings.Split(moduleAddress, "-");
+    var strArray3 = VBCompat.Split(moduleAddress, "-");
     moduleAddress = "";
     var num1 = checked (strArray3.Length - 1);
     var index = 0;
     while (index <= num1)
     {
-      if (Operators.CompareString(strArray3[index], "", false) != 0)
-        moduleAddress = Strings.Len(strArray3[index]) % 2 != 1 ? moduleAddress + strArray3[index] : $"{moduleAddress}0{strArray3[index]}";
+      if (VBCompat.CompareString(strArray3[index], "", false) != 0)
+        moduleAddress = VBCompat.Len(strArray3[index]) % 2 != 1 ? moduleAddress + strArray3[index] : $"{moduleAddress}0{strArray3[index]}";
       checked { ++index; }
     }
     var str2 = moduleAddress + str1;
     var num2 = 0;
-    var num3 = Strings.Len(str2);
+    var num3 = VBCompat.Len(str2);
     var Start = 1;
     while (Start <= num3)
     {
-      var num4 = checked ((int) Math.Round(Conversion.Val("&h" + Strings.Mid(str2, Start, 2))));
+      var num4 = checked ((int) Math.Round((double)VBCompat.Val("&h" + VBCompat.Mid(str2, Start, 2))));
       checked { num2 += num4; }
       checked { Start += 2; }
     }
-    return Strings.Right("00" + Conversion.Hex(num2 % 256 /*0x0100*/), 2);
+    return VBCompat.Right("00" + VBCompat.Hex(num2 % 256 /*0x0100*/), 2);
   }
 
   public static bool AsBuilt_LoadFileArray_ABT(
@@ -175,34 +176,34 @@ internal sealed class modAsBuilt
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         flag = false;
-        ProjectData.ClearProjectError();
-        goto label_15;
+        // ProjectData.ClearProjectError();
+        // goto label_15;
       }
       var num2 = checked (strArray2.Length - 1);
       var index2 = 0;
       while (index2 <= num2)
       {
-        strArray2[index2] = Strings.Trim(strArray2[index2]);
-        if (Operators.CompareString(strArray2[index2], "", false) != 0 && Operators.CompareString(Strings.Left(strArray2[index2], 1), ";", false) != 0)
+        strArray2[index2] = VBCompat.Trim(strArray2[index2]);
+        if (VBCompat.CompareString(strArray2[index2], "", false) != 0 && VBCompat.CompareString(VBCompat.Left(strArray2[index2], 1), ";", false) != 0)
         {
           string str1;
           string str2;
-          if (Strings.Len(strArray2[index2]) % 2 == 1)
+          if (VBCompat.Len(strArray2[index2]) % 2 == 1)
           {
-            str1 = Strings.Left(strArray2[index2], 7);
-            str2 = Strings.Mid(strArray2[index2], 8);
+            str1 = VBCompat.Left(strArray2[index2], 7);
+            str2 = VBCompat.Mid(strArray2[index2], 8);
           }
           else
           {
-            str1 = Strings.Left(strArray2[index2], 8);
-            str2 = Strings.Mid(strArray2[index2], 9);
+            str1 = VBCompat.Left(strArray2[index2], 8);
+            str2 = VBCompat.Mid(strArray2[index2], 9);
           }
           retModuleIDs = (string[]) Utils.CopyArray((Array) retModuleIDs, (Array) new string[checked (retModuleCount + 1)]);
           retModuleDatas = (string[]) Utils.CopyArray((Array) retModuleDatas, (Array) new string[checked (retModuleCount + 1)]);
-          var str3 = $"{Strings.Left(str1, 3)}-{Strings.Mid(str1, 4, 2)}-{Strings.Mid(str1, 6)}";
-          var newAddressFormat = modAsBuilt.AsBuilt_LoadFile_ABT_ParseNewAddressFormat(Strings.Left(str3, 3), Strings.Mid(str3, 5, 2), Strings.Mid(str3, 8));
+          var str3 = $"{VBCompat.Left(str1, 3)}-{VBCompat.Mid(str1, 4, 2)}-{VBCompat.Mid(str1, 6)}";
+          var newAddressFormat = modAsBuilt.AsBuilt_LoadFile_ABT_ParseNewAddressFormat(VBCompat.Left(str3, 3), VBCompat.Mid(str3, 5, 2), VBCompat.Mid(str3, 8));
           retModuleIDs[retModuleCount] = newAddressFormat;
           retModuleDatas[retModuleCount] = str2;
           checked { ++retModuleCount; }
@@ -212,7 +213,7 @@ internal sealed class modAsBuilt
       checked { ++index1; }
     }
     flag = true;
-label_15:
+// label_15:
     return flag;
   }
 
@@ -226,8 +227,8 @@ label_15:
     ref string retName,
     ref string retShortName)
   {
-    addrToFind = Strings.Trim(addrToFind);
-    addrToFind = Strings.Left(addrToFind, 3);
+    addrToFind = VBCompat.Trim(addrToFind);
+    addrToFind = VBCompat.Left(addrToFind, 3);
     retName = "";
     retShortName = "";
     retIdx = -1;
@@ -235,11 +236,11 @@ label_15:
     var index = 0;
     while (index <= num)
     {
-      if (Operators.CompareString(Strings.Trim(modlistAddress[index]), addrToFind, false) == 0)
+      if (VBCompat.CompareString(VBCompat.Trim(modlistAddress[index]), addrToFind, false) == 0)
       {
         retIdx = index;
-        retName = Strings.Trim(modlistNames[index]);
-        retShortName = Strings.Trim(modlistShortNames[index]);
+        retName = VBCompat.Trim(modlistNames[index]);
+        retShortName = VBCompat.Trim(modlistShortNames[index]);
         return true;
       }
       checked { ++index; }
@@ -264,9 +265,9 @@ label_15:
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
+      // ProjectData.SetProjectError(ex);
       flag = false;
-      ProjectData.ClearProjectError();
+      // ProjectData.ClearProjectError();
       goto label_9;
     }
     retModuleNames = new string[checked (strArray2.Length + 1)];
@@ -277,8 +278,8 @@ label_15:
     var index = 0;
     while (index <= num)
     {
-      var strArray4 = Strings.Split(strArray2[index], "|");
-      if (strArray4.Length == 3 && Operators.CompareString(Strings.Trim(strArray4[2]), "", false) != 0)
+      var strArray4 = VBCompat.Split(strArray2[index], "|");
+      if (strArray4.Length == 3 && VBCompat.CompareString(VBCompat.Trim(strArray4[2]), "", false) != 0)
       {
         retModuleNames[retModuleCount] = strArray4[0];
         retModuleShortNames[retModuleCount] = strArray4[1];
@@ -317,68 +318,68 @@ label_9:
     var Right = "";
     var str2 = File.ReadAllText(inpFileName);
     retVIN = "";
-    var num1 = Strings.InStr(1, str2, "<th>VIN</th>", CompareMethod.Text);
+    var num1 = VBCompat.InStr(1, str2, "<th>VIN</th>", CompareMethod.Text);
     if (num1 > 0)
     {
-      var num2 = Strings.InStr(checked (num1 + 1), str2, "<td>");
+      var num2 = VBCompat.InStr(checked (num1 + 1), str2, "<td>");
       if (num2 > 0)
       {
         var Start = checked (num2 + 4);
-        retVIN = Strings.Mid(str2, Start, 20);
-        var num3 = Strings.InStr(1, retVIN, "<");
+        retVIN = VBCompat.Mid(str2, Start, 20);
+        var num3 = VBCompat.InStr(1, retVIN, "<");
         if (num3 > 0)
-          retVIN = Strings.Left(retVIN, checked (num3 - 1));
-        retVIN = Strings.Trim(retVIN);
+          retVIN = VBCompat.Left(retVIN, checked (num3 - 1));
+        retVIN = VBCompat.Trim(retVIN);
       }
     }
     retCarModel = "";
-    var num4 = Strings.InStr(1, str2, "<span>Vehicle</span>");
+    var num4 = VBCompat.InStr(1, str2, "<span>Vehicle</span>");
     if (num4 > 0)
     {
-      var Start = checked (num4 + Strings.Len("<span>Vehicle</span>"));
-      retCarModel = Strings.Mid(str2, Start, 50);
-      var num5 = Strings.InStr(1, retCarModel, "\r");
+      var Start = checked (num4 + VBCompat.Len("<span>Vehicle</span>"));
+      retCarModel = VBCompat.Mid(str2, Start, 50);
+      var num5 = VBCompat.InStr(1, retCarModel, "\r");
       if (num5 > 0)
-        retCarModel = Strings.Left(retCarModel, checked (num5 - 1));
-      retCarModel = Strings.Trim(retCarModel);
+        retCarModel = VBCompat.Left(retCarModel, checked (num5 - 1));
+      retCarModel = VBCompat.Trim(retCarModel);
     }
     retCarYear = "";
-    var num6 = Strings.InStr(1, str2, "<span>Model Year</span>");
+    var num6 = VBCompat.InStr(1, str2, "<span>Model Year</span>");
     if (num6 > 0)
     {
-      var Start = checked (num6 + Strings.Len("<span>Model Year</span>"));
-      retCarYear = Strings.Mid(str2, Start, 50);
-      var num7 = Strings.InStr(1, retCarYear, "\r");
+      var Start = checked (num6 + VBCompat.Len("<span>Model Year</span>"));
+      retCarYear = VBCompat.Mid(str2, Start, 50);
+      var num7 = VBCompat.InStr(1, retCarYear, "\r");
       if (num7 > 0)
-        retCarYear = Strings.Left(retCarYear, checked (num7 - 1));
-      retCarYear = Strings.Trim(retCarYear);
+        retCarYear = VBCompat.Left(retCarYear, checked (num7 - 1));
+      retCarYear = VBCompat.Trim(retCarYear);
     }
-    if (Strings.InStr(1, str2, ">BCE Modules<") == 0)
+    if (VBCompat.InStr(1, str2, ">BCE Modules<") == 0)
       return false;
-    var Start1 = Strings.InStr(1, str2, "Instructions", CompareMethod.Text);
-    if (Strings.InStr(1, str2, "instructionsheet", CompareMethod.Text) == Start1)
-      Start1 = Strings.InStr(checked (Start1 + 1), str2, "Instructions", CompareMethod.Text);
-    var num8 = Strings.InStr(Start1, str2, "/table");
-    var str3 = Strings.Mid(str2, Start1, checked (num8 - Start1));
+    var Start1 = VBCompat.InStr(1, str2, "Instructions", CompareMethod.Text);
+    if (VBCompat.InStr(1, str2, "instructionsheet", CompareMethod.Text) == Start1)
+      Start1 = VBCompat.InStr(checked (Start1 + 1), str2, "Instructions", CompareMethod.Text);
+    var num8 = VBCompat.InStr(Start1, str2, "/table");
+    var str3 = VBCompat.Mid(str2, Start1, checked (num8 - Start1));
     var num9 = 0;
     while (true)
     {
-      var num10 = Strings.InStr(checked (num9 + 1), str3, "<tr>");
+      var num10 = VBCompat.InStr(checked (num9 + 1), str3, "<tr>");
       if (num10 >= 1)
       {
-        var pos1 = Strings.InStr(checked (num10 + 1), str3, "th colspan=");
-        var pos2 = Strings.InStr(checked (num10 + 1), str3, "<td>");
+        var pos1 = VBCompat.InStr(checked (num10 + 1), str3, "th colspan=");
+        var pos2 = VBCompat.InStr(checked (num10 + 1), str3, "<td>");
         if (pos1 > num10 & pos1 < pos2)
           str1 = modAsBuilt.AsBuilt_LoadFile_AB_HTML_GetText(str3, pos1);
         var text1 = modAsBuilt.AsBuilt_LoadFile_AB_HTML_GetText(str3, pos2);
-        var pos3 = Strings.InStr(checked (pos2 + 1), str3, "<td>");
+        var pos3 = VBCompat.InStr(checked (pos2 + 1), str3, "<td>");
         var str4 = modAsBuilt.AsBuilt_LoadFile_AB_HTML_GetText(str3, pos3);
-        var num11 = Strings.InStr(1, str4, "-");
+        var num11 = VBCompat.InStr(1, str4, "-");
         if (num11 > 1)
-          str4 = Strings.Left(str4, checked (num11 - 1));
-        if (Strings.Len(str4) % 2 == 1)
+          str4 = VBCompat.Left(str4, checked (num11 - 1));
+        if (VBCompat.Len(str4) % 2 == 1)
           str4 = "0" + str4;
-        if (Operators.CompareString(str4, Right, false) != 0)
+        if (VBCompat.CompareString(str4, Right, false) != 0)
         {
           retModInfo_IDs = (string[]) Utils.CopyArray((Array) retModInfo_IDs, (Array) new string[checked (retModInfo_Count + 1)]);
           retModInfo_Names = (string[]) Utils.CopyArray((Array) retModInfo_Names, (Array) new string[checked (retModInfo_Count + 1)]);
@@ -395,13 +396,13 @@ label_9:
         var text2 = modAsBuilt.AsBuilt_LoadFile_AB_HTML_GetText(str3, pos3);
         retModuleAddresses[index] = text2;
         retModuleDatas[index] = "";
-        var pos4 = Strings.InStr(checked (pos3 + 1), str3, "<text>");
+        var pos4 = VBCompat.InStr(checked (pos3 + 1), str3, "<text>");
         retModuleDatas[index] = retModuleDatas[index] + modAsBuilt.AsBuilt_LoadFile_AB_HTML_GetText(str3, pos4);
-        var pos5 = Strings.InStr(checked (pos4 + 1), str3, "<text>");
+        var pos5 = VBCompat.InStr(checked (pos4 + 1), str3, "<text>");
         if (pos5 > 0)
         {
           retModuleDatas[index] = retModuleDatas[index] + modAsBuilt.AsBuilt_LoadFile_AB_HTML_GetText(str3, pos5);
-          var pos6 = Strings.InStr(checked (pos5 + 1), str3, "<text>");
+          var pos6 = VBCompat.InStr(checked (pos5 + 1), str3, "<text>");
           retModuleDatas[index] = retModuleDatas[index] + modAsBuilt.AsBuilt_LoadFile_AB_HTML_GetText(str3, pos6);
         }
         num9 = pos3;
@@ -416,23 +417,23 @@ label_9:
   {
     if (pos < 1)
       return "";
-    var Length = checked (Strings.InStr(pos, inpStr, "</") - pos);
+    var Length = checked (VBCompat.InStr(pos, inpStr, "</") - pos);
     if (Length > 500 || Length < 10)
       Length = 500;
-    inpStr = Strings.Mid(inpStr, pos, Length);
-    var num1 = Strings.InStr(1, inpStr, ">");
-    inpStr = Strings.Mid(inpStr, checked (num1 + 1), Length);
-    var num2 = Strings.InStr(1, inpStr, "<");
+    inpStr = VBCompat.Mid(inpStr, pos, Length);
+    var num1 = VBCompat.InStr(1, inpStr, ">");
+    inpStr = VBCompat.Mid(inpStr, checked (num1 + 1), Length);
+    var num2 = VBCompat.InStr(1, inpStr, "<");
     if (num2 > 0)
-      inpStr = Strings.Left(inpStr, checked (num2 - 1));
-    inpStr = Strings.Trim(Strings.Replace(inpStr, "&nbsp;", ""));
+      inpStr = VBCompat.Left(inpStr, checked (num2 - 1));
+    inpStr = VBCompat.Trim(VBCompat.Replace(inpStr, "&nbsp;", ""));
     return inpStr;
   }
 
   public static string AsBuilt_LoadFile_GetFileType(string inpFileName)
   {
     string fileType;
-    if (Operators.CompareString(inpFileName, "", false) == 0)
+    if (VBCompat.CompareString(inpFileName, "", false) == 0)
     {
       fileType = "";
     }
@@ -445,12 +446,12 @@ label_9:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         fileType = "";
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
         goto label_6;
       }
-      fileType = Strings.InStr(1, String1, "<AS_BUILT_DATA>", CompareMethod.Text) == 0 ? (Strings.InStr(1, String1, "<DirectConfiguration>", CompareMethod.Text) == 0 ? "ABT" : "UCDS") : "AB";
+      fileType = VBCompat.InStr(1, String1, "<AS_BUILT_DATA>", CompareMethod.Text) == 0 ? (VBCompat.InStr(1, String1, "<DirectConfiguration>", CompareMethod.Text) == 0 ? "ABT" : "UCDS") : "AB";
     }
 label_6:
     return fileType;
@@ -506,8 +507,8 @@ label_1:
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
-          ProjectData.ClearProjectError();
+          // ProjectData.SetProjectError(ex);
+          // ProjectData.ClearProjectError();
           goto label_60;
         }
         if (flag10)
@@ -615,10 +616,10 @@ label_1:
             if (flag4)
             {
               var Expression = xmlTextReader.Value;
-              if (Operators.CompareString(Left1, "", false) == 0)
+              if (VBCompat.CompareString(Left1, "", false) == 0)
               {
                 Left1 = Expression;
-                if (Strings.Len(Expression) % 2 == 1)
+                if (VBCompat.Len(Expression) % 2 == 1)
                   str3 = "0" + Expression;
               }
             }
@@ -650,15 +651,15 @@ label_1:
       }
       while (xmlTextReader.NodeType != XmlNodeType.EndElement);
       var name1 = xmlTextReader.Name;
-      if (Operators.CompareString(name1, "CCC_DATA", false) != 0)
+      if (VBCompat.CompareString(name1, "CCC_DATA", false) != 0)
       {
-        if (Operators.CompareString(name1, "BCE_MODULE", false) != 0)
+        if (VBCompat.CompareString(name1, "BCE_MODULE", false) != 0)
         {
-          if (Operators.CompareString(name1, "CODE", false) != 0)
+          if (VBCompat.CompareString(name1, "CODE", false) != 0)
           {
-            if (Operators.CompareString(name1, "DATA", false) != 0)
+            if (VBCompat.CompareString(name1, "DATA", false) != 0)
             {
-              if (Operators.CompareString(name1, "NODEID", false) == 0)
+              if (VBCompat.CompareString(name1, "NODEID", false) == 0)
               {
                 flag4 = false;
                 // inpFileName check removed (was debug no-op)
@@ -706,8 +707,8 @@ label_60:
     var retModuleShortNames = new string[1];
     var retModuleAddresses1 = new string[1];
     var retModuleCount = 0;
-    var directoryPath = MyProject.Application.Info.DirectoryPath;
-    if (Operators.CompareString(Strings.Right(directoryPath, 1), "\\", false) != 0)
+    var directoryPath = Application.StartupPath;
+    if (VBCompat.CompareString(VBCompat.Right(directoryPath, 1), "\\", false) != 0)
       directoryPath += "\\";
     modAsBuilt.AsBuilt_LoadFile_ModuleList(directoryPath + "ModuleList.txt", ref retModuleNames, ref retModuleShortNames, ref retModuleAddresses1, ref retModuleCount);
     var strArray1 = new string[1];
@@ -719,9 +720,9 @@ label_60:
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
+      // ProjectData.SetProjectError(ex);
       flag = false;
-      ProjectData.ClearProjectError();
+      // ProjectData.ClearProjectError();
       return false;
     }
     var Left = "";
@@ -730,25 +731,25 @@ label_60:
     var index1 = 0;
     while (index1 <= num2)
     {
-      strArray2[index1] = Strings.Replace(strArray2[index1], "\t", " ");
-      strArray2[index1] = Strings.Trim(strArray2[index1]);
+      strArray2[index1] = VBCompat.Replace(strArray2[index1], "\t", " ");
+      strArray2[index1] = VBCompat.Trim(strArray2[index1]);
       if (strArray2[index1].StartsWith("<VEHICLE MODULE="))
       {
-        var str = Strings.Mid(strArray2[index1], 18);
-        var num3 = Strings.InStr(1, str, "\"");
+        var str = VBCompat.Mid(strArray2[index1], 18);
+        var num3 = VBCompat.InStr(1, str, "\"");
         if (num3 > 0)
-          str = Strings.Left(str, checked (num3 - 1));
+          str = VBCompat.Left(str, checked (num3 - 1));
         var num4 = checked (retModuleCount - 1);
         var index2 = 0;
         while (index2 <= num4)
         {
           var strArray3 = new string[1];
-          var strArray4 = Strings.Split(retModuleShortNames[index2], "/");
+          var strArray4 = VBCompat.Split(retModuleShortNames[index2], "/");
           var num5 = checked (strArray4.Length - 1);
           var index3 = 0;
           while (index3 <= num5)
           {
-            if (Operators.CompareString(strArray4[index3], str, false) == 0)
+            if (VBCompat.CompareString(strArray4[index3], str, false) == 0)
             {
               Left = retModuleAddresses1[index2];
               break;
@@ -757,23 +758,23 @@ label_60:
           }
           checked { ++index2; }
         }
-        if (Operators.CompareString(Left, "", false) == 0)
-          Left = Interaction.InputBox("Unable to determine Module address.  Please enter a 3-character address (such as 7D0) below:");
+        if (VBCompat.CompareString(Left, "", false) == 0)
+          Left = VBCompat.InputBox("Unable to determine Module address.  Please enter a 3-character address (such as 7D0) below:");
       }
-      var str1 = Strings.Format((object) checked ((int) Math.Round(Conversion.Val("&h" + Strings.Mid(strArray2[index1], 12, 2))) + 1), "#00");
+      var str1 = VBCompat.Format((object) checked ((int) Math.Round((double)VBCompat.Val("&h" + VBCompat.Mid(strArray2[index1], 12, 2))) + 1), "#00");
       if (strArray2[index1].StartsWith("<DID ID=\"DE"))
       {
-        var str2 = Strings.Mid(strArray2[index1], 16 /*0x10*/, checked (Strings.Len(strArray2[index1]) - 15 - 6));
-        // if (Operators.CompareString(Left, "", false) != 0) ;
+        var str2 = VBCompat.Mid(strArray2[index1], 16 /*0x10*/, checked (VBCompat.Len(strArray2[index1]) - 15 - 6));
+        // if (VBCompat.CompareString(Left, "", false) != 0) ;
         var Expression = 1;
         var Start = 1;
-        while (Start <= Strings.Len(str2))
+        while (Start <= VBCompat.Len(str2))
         {
           retModuleAddresses = (string[]) Utils.CopyArray((Array) retModuleAddresses, (Array) new string[checked (retModuleAddressCount + 1)]);
           retModuleDatas = (string[]) Utils.CopyArray((Array) retModuleDatas, (Array) new string[checked (retModuleAddressCount + 1)]);
-          retModuleAddresses[retModuleAddressCount] = $"{Left}-{str1}-{Strings.Format((object) Expression, "#00")}";
-          var checksum = modAsBuilt.AsBuilt_CalculateChecksum(retModuleAddresses[retModuleAddressCount], Strings.Mid(str2, Start, 10) + "00");
-          retModuleDatas[retModuleAddressCount] = Strings.Mid(str2, Start, 10) + checksum;
+          retModuleAddresses[retModuleAddressCount] = $"{Left}-{str1}-{VBCompat.Format((object) Expression, "#00")}";
+          var checksum = modAsBuilt.AsBuilt_CalculateChecksum(retModuleAddresses[retModuleAddressCount], VBCompat.Mid(str2, Start, 10) + "00");
+          retModuleDatas[retModuleAddressCount] = VBCompat.Mid(str2, Start, 10) + checksum;
           checked { ++retModuleAddressCount; }
           checked { Start += 10; }
           checked { ++Expression; }
@@ -793,12 +794,12 @@ label_60:
   {
     var str1 = moduleAddr;
     var Number1 = moduleBlock % 16 /*0x10*/;
-    var str2 = Conversions.ToString(Strings.Chr(checked (71 + unchecked (checked (moduleBlock - Number1) / 16 /*0x10*/))));
-    var str3 = Conversion.Hex(Number1);
+    var str2 = Conversions.ToString(VBCompat.Chr(checked (71 + unchecked (checked (moduleBlock - Number1) / 16 /*0x10*/))));
+    var str3 = VBCompat.Hex(Number1);
     var str4 = str1 + str2 + str3;
     var Number2 = moduleSection % 16 /*0x10*/;
-    var str5 = Conversions.ToString(Strings.Chr(checked (71 + unchecked (checked (moduleSection - Number2) / 16 /*0x10*/))));
-    var str6 = Conversion.Hex(Number2);
+    var str5 = Conversions.ToString(VBCompat.Chr(checked (71 + unchecked (checked (moduleSection - Number2) / 16 /*0x10*/))));
+    var str6 = VBCompat.Hex(Number2);
     return str4 + str5 + str6;
   }
 
@@ -807,13 +808,13 @@ label_60:
     string moduleBlock,
     string moduleSection)
   {
-    moduleAddr = Strings.UCase(Strings.Trim(moduleAddr));
-    moduleBlock = Strings.UCase(Strings.Trim(moduleBlock));
-    moduleSection = Strings.UCase(Strings.Trim(moduleSection));
-    var num1 = Strings.Asc(Strings.Mid(moduleBlock, 1, 1));
-    moduleBlock = Strings.Format((object) (!(num1 >= 71 & num1 <= 90) ? (!(num1 >= 65 & num1 <= 70) ? checked ((int) Math.Round(Conversion.Val(moduleBlock))) : checked ((int) Math.Round(Conversion.Val("&h" + moduleBlock)))) : checked ((num1 - 71) * 16 /*0x10*/ + (int) Math.Round(Conversion.Val("&h" + Strings.Mid(moduleBlock, 2, 1))))), "#00");
-    var num2 = Strings.Asc(Strings.Mid(moduleSection, 1, 1));
-    moduleSection = Strings.Format((object) (!(num2 >= 71 & num2 <= 90) ? (!(num2 >= 65 & num2 <= 70) ? checked ((int) Math.Round(Conversion.Val(moduleSection))) : checked ((int) Math.Round(Conversion.Val("&h" + moduleSection)))) : checked ((num2 - 71) * 16 /*0x10*/ + (int) Math.Round(Conversion.Val("&h" + Strings.Mid(moduleSection, 2, 1))))), "#00");
+    moduleAddr = VBCompat.UCase(VBCompat.Trim(moduleAddr));
+    moduleBlock = VBCompat.UCase(VBCompat.Trim(moduleBlock));
+    moduleSection = VBCompat.UCase(VBCompat.Trim(moduleSection));
+    var num1 = VBCompat.Asc(VBCompat.Mid(moduleBlock, 1, 1));
+    moduleBlock = VBCompat.Format((object) (!(num1 >= 71 & num1 <= 90) ? (!(num1 >= 65 & num1 <= 70) ? checked ((int) Math.Round((double)VBCompat.Val(moduleBlock))) : checked ((int) Math.Round((double)VBCompat.Val("&h" + moduleBlock)))) : checked ((num1 - 71) * 16 /*0x10*/ + (int) Math.Round((double)VBCompat.Val("&h" + VBCompat.Mid(moduleBlock, 2, 1))))), "#00");
+    var num2 = VBCompat.Asc(VBCompat.Mid(moduleSection, 1, 1));
+    moduleSection = VBCompat.Format((object) (!(num2 >= 71 & num2 <= 90) ? (!(num2 >= 65 & num2 <= 70) ? checked ((int) Math.Round((double)VBCompat.Val(moduleSection))) : checked ((int) Math.Round((double)VBCompat.Val("&h" + moduleSection)))) : checked ((num2 - 71) * 16 /*0x10*/ + (int) Math.Round((double)VBCompat.Val("&h" + VBCompat.Mid(moduleSection, 2, 1))))), "#00");
     return $"{moduleAddr}-{moduleBlock}-{moduleSection}";
   }
 
@@ -835,9 +836,9 @@ label_60:
     }
     catch (Exception ex)
     {
-      ProjectData.SetProjectError(ex);
+      // ProjectData.SetProjectError(ex);
       flag = false;
-      ProjectData.ClearProjectError();
+      // ProjectData.ClearProjectError();
       goto label_12;
     }
     var str1 = "";
@@ -846,22 +847,22 @@ label_60:
     var index = 0;
     while (index <= num)
     {
-      strArray2[index] = Strings.Trim(strArray2[index]);
-      if (Operators.CompareString(strArray2[index], "", false) != 0 && Operators.CompareString(Strings.Left(strArray2[index], 1), ";", false) != 0)
+      strArray2[index] = VBCompat.Trim(strArray2[index]);
+      if (VBCompat.CompareString(strArray2[index], "", false) != 0 && VBCompat.CompareString(VBCompat.Left(strArray2[index], 1), ";", false) != 0)
       {
         string str3;
-        if (Strings.Len(strArray2[index]) % 2 == 1)
+        if (VBCompat.Len(strArray2[index]) % 2 == 1)
         {
-          str3 = Strings.Left(strArray2[index], 7);
-          str2 = Strings.Mid(strArray2[index], 8);
+          str3 = VBCompat.Left(strArray2[index], 7);
+          str2 = VBCompat.Mid(strArray2[index], 8);
         }
         else
         {
-          str3 = Strings.Left(strArray2[index], 8);
-          str2 = Strings.Mid(strArray2[index], 9);
+          str3 = VBCompat.Left(strArray2[index], 8);
+          str2 = VBCompat.Mid(strArray2[index], 9);
         }
-        var str4 = $"{Strings.Left(str3, 3)}-{Strings.Mid(str3, 4, 2)}-{Strings.Mid(str3, 6)}";
-        str1 = modAsBuilt.AsBuilt_LoadFile_ABT_ParseNewAddressFormat(Strings.Left(str4, 3), Strings.Mid(str4, 5, 2), Strings.Mid(str4, 8));
+        var str4 = $"{VBCompat.Left(str3, 3)}-{VBCompat.Mid(str3, 4, 2)}-{VBCompat.Mid(str3, 6)}";
+        str1 = modAsBuilt.AsBuilt_LoadFile_ABT_ParseNewAddressFormat(VBCompat.Left(str4, 3), VBCompat.Mid(str4, 5, 2), VBCompat.Mid(str4, 8));
       }
       retModuleAddresses = (string[]) Utils.CopyArray((Array) retModuleAddresses, (Array) new string[checked (retModuleAddressCount + 1)]);
       retModuleDatas = (string[]) Utils.CopyArray((Array) retModuleDatas, (Array) new string[checked (retModuleAddressCount + 1)]);
@@ -877,19 +878,19 @@ label_12:
 
   public static ulong AsBuilt_HexStr2UINT64(string inpHex)
   {
-    if (Operators.CompareString(inpHex, "", false) == 0)
+    if (VBCompat.CompareString(inpHex, "", false) == 0)
       return 0;
-    if (Strings.Len(inpHex) % 2 == 1)
+    if (VBCompat.Len(inpHex) % 2 == 1)
       inpHex = "0" + inpHex;
     var numArray = new byte[8];
-    var num1 = checked (Strings.Len(inpHex) - 1);
+    var num1 = checked (VBCompat.Len(inpHex) - 1);
     var y = 0;
     ulong num2 = 0;
-    var Start = checked (Strings.Len(inpHex) - 1);
+    var Start = checked (VBCompat.Len(inpHex) - 1);
     while (Start >= 1)
     {
-      var num3 = checked ((byte) Math.Round(Conversion.Val("&h" + Strings.Mid(inpHex, Start, 2))));
-      num2 = checked ((ulong) Math.Round(unchecked ((double) num2 + (double) num3 * Math.Pow(2.0, (double) y))));
+      var num3 = checked ((byte) Math.Round((double)VBCompat.Val("&h" + VBCompat.Mid(inpHex, Start, 2))));
+      num2 = checked ((ulong) Math.Round((double)unchecked ((double) num2 + (double) num3 * Math.Pow(2.0, (double) y))));
       checked { y += 8; }
       checked { Start += -2; }
     }
@@ -898,18 +899,18 @@ label_12:
 
   public static ulong AsBuilt_BinStr2UINT64(string inpBIN)
   {
-    if (Operators.CompareString(inpBIN, "", false) == 0)
+    if (VBCompat.CompareString(inpBIN, "", false) == 0)
       return 0;
-    if (Strings.Len(inpBIN) % 2 == 1)
+    if (VBCompat.Len(inpBIN) % 2 == 1)
       inpBIN = "0" + inpBIN;
-    var num1 = checked (Strings.Len(inpBIN) - 1);
+    var num1 = checked (VBCompat.Len(inpBIN) - 1);
     var y = 0;
     ulong num2 = 0;
-    var Start = Strings.Len(inpBIN);
+    var Start = VBCompat.Len(inpBIN);
     while (Start >= 1)
     {
-      var num3 = checked ((ulong) Math.Round(Conversion.Val(Strings.Mid(inpBIN, Start, 1))));
-      num2 = checked ((ulong) Math.Round(unchecked ((double) num2 + (double) num3 * Math.Pow(2.0, (double) y))));
+      var num3 = checked ((ulong) Math.Round((double)VBCompat.Val(VBCompat.Mid(inpBIN, Start, 1))));
+      num2 = checked ((ulong) Math.Round((double)unchecked ((double) num2 + (double) num3 * Math.Pow(2.0, (double) y))));
       checked { ++y; }
       checked { Start += -1; }
     }
@@ -918,14 +919,14 @@ label_12:
 
   public static string AsBuilt_Ascii2Hex(string inpAsc)
   {
-    if (Operators.CompareString(inpAsc, "", false) == 0)
+    if (VBCompat.CompareString(inpAsc, "", false) == 0)
       return "";
     var str = "";
-    var num = Strings.Len(inpAsc);
+    var num = VBCompat.Len(inpAsc);
     var Start = 1;
     while (Start <= num)
     {
-      str += Strings.Right("00" + Conversion.Hex(Strings.Asc(Strings.Mid(inpAsc, Start, 1))), 2);
+      str += VBCompat.Right("00" + VBCompat.Hex(VBCompat.Asc(VBCompat.Mid(inpAsc, Start, 1))), 2);
       checked { ++Start; }
     }
     return str;
@@ -933,17 +934,17 @@ label_12:
 
   public static string AsBuilt_HexStr2BinStr(string inpHex)
   {
-    if (Operators.CompareString(inpHex, "", false) == 0)
+    if (VBCompat.CompareString(inpHex, "", false) == 0)
       return "";
-    if (Strings.Len(inpHex) % 2 == 1)
+    if (VBCompat.Len(inpHex) % 2 == 1)
       inpHex = "0" + inpHex;
-    var num1 = Strings.Len(inpHex);
+    var num1 = VBCompat.Len(inpHex);
     var str1 = "";
     var num2 = checked (num1 - 1);
     var Start = 1;
     while (Start <= num2)
     {
-      var str2 = modAsBuilt.AsBuilt_Dec2Bin((ulong) checked ((uint) Math.Round(Conversion.Val("&h" + Strings.Mid(inpHex, Start, 2)))));
+      var str2 = modAsBuilt.AsBuilt_Dec2Bin((ulong) checked ((uint) Math.Round((double)VBCompat.Val("&h" + VBCompat.Mid(inpHex, Start, 2)))));
       str1 += str2;
       checked { Start += 2; }
     }
@@ -965,9 +966,9 @@ label_12:
 
   public static string AsBuilt_FormatReadable_Binary(string inpBinary, int numSpaces = 1)
   {
-    inpBinary = Strings.Replace(inpBinary, " ", "");
-    if (Strings.Len(inpBinary) % 8 != 0)
-      inpBinary = new string('0', checked (8 - unchecked (Strings.Len(inpBinary) % 8))) + inpBinary;
+    inpBinary = VBCompat.Replace(inpBinary, " ", "");
+    if (VBCompat.Len(inpBinary) % 8 != 0)
+      inpBinary = new string('0', checked (8 - unchecked (VBCompat.Len(inpBinary) % 8))) + inpBinary;
     var str1 = "";
     var num1 = numSpaces;
     var num2 = 1;
@@ -977,18 +978,18 @@ label_12:
       checked { ++num2; }
     }
     var str2 = "";
-    var Start = checked (Strings.Len(inpBinary) - 7);
+    var Start = checked (VBCompat.Len(inpBinary) - 7);
     while (Start >= 1)
     {
-      str2 = Strings.Mid(inpBinary, Start, 8) + str1 + str2;
+      str2 = VBCompat.Mid(inpBinary, Start, 8) + str1 + str2;
       checked { Start += -8; }
     }
-    return Strings.Trim(str2);
+    return VBCompat.Trim(str2);
   }
 
   public static string AsBuilt_FormatReadable_ModuleAddress(string inpModuleID)
   {
-    return Strings.Trim(inpModuleID);
+    return VBCompat.Trim(inpModuleID);
   }
 
   public static void AsBuilt_FormatReadable_ModuleData(
@@ -1000,11 +1001,11 @@ label_12:
     retData1 = "";
     retData2 = "";
     retData3 = "";
-    if (Strings.Len(inpModuleData) % 2 == 1)
+    if (VBCompat.Len(inpModuleData) % 2 == 1)
       inpModuleData = "0" + inpModuleData;
-    retData1 = Strings.Mid(inpModuleData, 1, 4);
-    retData2 = Strings.Mid(inpModuleData, 5, 4);
-    retData3 = Strings.Mid(inpModuleData, 9, 4);
+    retData1 = VBCompat.Mid(inpModuleData, 1, 4);
+    retData2 = VBCompat.Mid(inpModuleData, 5, 4);
+    retData3 = VBCompat.Mid(inpModuleData, 9, 4);
   }
 
   public static bool CmDlgDLL_ShowOpenEx(
@@ -1025,19 +1026,19 @@ label_12:
     var index1 = 0;
     while (index1 <= num1)
     {
-      if (Operators.CompareString(sFileTypeArray[index1], "", false) != 0)
+      if (VBCompat.CompareString(sFileTypeArray[index1], "", false) != 0)
       {
-        var num2 = Strings.InStr(sFileTypeArray[index1], "(");
+        var num2 = VBCompat.InStr(sFileTypeArray[index1], "(");
         if (num2 > 0)
-          sFileTypeArray[index1] = Strings.Left(sFileTypeArray[index1], checked (num2 - 1));
-        sFileTypeArray[index1] = Strings.Trim(sFileTypeArray[index1]);
+          sFileTypeArray[index1] = VBCompat.Left(sFileTypeArray[index1], checked (num2 - 1));
+        sFileTypeArray[index1] = VBCompat.Trim(sFileTypeArray[index1]);
         sFileTypeArray[index1] = $"{sFileTypeArray[index1]} ({sFilePatternArray[index1]})";
         str = $"{str}{sFileTypeArray[index1]}|{sFilePatternArray[index1]}|";
       }
       checked { ++index1; }
     }
-    if (Operators.CompareString(Strings.Right(str, 1), "|", false) == 0)
-      str = Strings.Left(str, checked (Strings.Len(str) - 1));
+    if (VBCompat.CompareString(VBCompat.Right(str, 1), "|", false) == 0)
+      str = VBCompat.Left(str, checked (VBCompat.Len(str) - 1));
     openFileDialog.AddExtension = true;
     openFileDialog.CheckFileExists = true;
     openFileDialog.CheckPathExists = true;
@@ -1050,9 +1051,9 @@ label_12:
     var flag = false;
     if (dialogResult != DialogResult.Cancel)
     {
-      var num3 = Strings.InStrRev(openFileDialog.FileName, "\\");
-      retSelPath = Strings.Left(openFileDialog.FileName, checked (num3 - 1));
-      if (Operators.CompareString(Strings.Right(retSelPath, 1), ":", false) == 0)
+      var num3 = VBCompat.InStrRev(openFileDialog.FileName, "\\");
+      retSelPath = VBCompat.Left(openFileDialog.FileName, checked (num3 - 1));
+      if (VBCompat.CompareString(VBCompat.Right(retSelPath, 1), ":", false) == 0)
         retSelPath += "\\";
       retSelFileNames = openFileDialog.FileNames;
       retSelFileCount = openFileDialog.FileNames.Length;
@@ -1060,8 +1061,8 @@ label_12:
       var index2 = 0;
       while (index2 <= num4)
       {
-        var num5 = Strings.InStrRev(retSelFileNames[index2], "\\");
-        retSelFileNames[index2] = Strings.Mid(retSelFileNames[index2], checked (num5 + 1));
+        var num5 = VBCompat.InStrRev(retSelFileNames[index2], "\\");
+        retSelFileNames[index2] = VBCompat.Mid(retSelFileNames[index2], checked (num5 + 1));
         checked { ++index2; }
       }
       Array.Sort<string>(retSelFileNames);
@@ -1082,29 +1083,29 @@ label_12:
     var str1 = File.ReadAllText(inpFileName);
     retVIN = "";
     var str2 = "";
-    var num1 = Strings.InStr(1, str1, "VIN=");
+    var num1 = VBCompat.InStr(1, str1, "VIN=");
     if (num1 > 0)
-      str2 = Strings.Replace(Strings.Mid(str1, checked (num1 + 4), 17), "\"", "");
+      str2 = VBCompat.Replace(VBCompat.Mid(str1, checked (num1 + 4), 17), "\"", "");
     retVIN = str2;
-    var Start = Strings.InStr(1, str1, ">Minor Features<");
+    var Start = VBCompat.InStr(1, str1, ">Minor Features<");
     if (Start == 0)
       return false;
-    var num2 = Strings.InStr(Start, str1, "/table");
+    var num2 = VBCompat.InStr(Start, str1, "/table");
     if (num2 == 0)
-      num2 = Strings.InStr(Start, str1, "mfcShowMore");
-    var Expression = Strings.Mid(str1, Start, checked (num2 - Start));
+      num2 = VBCompat.InStr(Start, str1, "mfcShowMore");
+    var Expression = VBCompat.Mid(str1, Start, checked (num2 - Start));
     var strArray = new string[1];
-    var sourceArray = Strings.Split(Expression, "<li>");
+    var sourceArray = VBCompat.Split(Expression, "<li>");
     var num3 = checked (sourceArray.Length - 1);
     var index = 1;
     while (index <= num3)
     {
-      sourceArray[index] = Strings.Replace(sourceArray[index], "<span>", "");
-      sourceArray[index] = Strings.Replace(sourceArray[index], "</span>", "");
-      sourceArray[index] = Strings.Replace(sourceArray[index], "&nbsp;", "");
-      var num4 = Strings.InStr(1, sourceArray[index], "</li>");
+      sourceArray[index] = VBCompat.Replace(sourceArray[index], "<span>", "");
+      sourceArray[index] = VBCompat.Replace(sourceArray[index], "</span>", "");
+      sourceArray[index] = VBCompat.Replace(sourceArray[index], "&nbsp;", "");
+      var num4 = VBCompat.InStr(1, sourceArray[index], "</li>");
       if (num4 > 0)
-        sourceArray[index] = Strings.Left(sourceArray[index], checked (num4 - 1));
+        sourceArray[index] = VBCompat.Left(sourceArray[index], checked (num4 - 1));
       checked { ++index; }
     }
     retOptions = new string[checked (sourceArray.Length - 2 + 1)];
@@ -1118,13 +1119,13 @@ label_12:
     objWebBrowser.Navigate("http://www.etis.ford.com/vehicleRegSelector.do");
     do
     {
-      MyProject.Application.DoEvents();
+      Application.DoEvents();
     }
     while (objWebBrowser.IsBusy);
     objWebBrowser.Navigate("http://www.etis.ford.com/vehicleRegSelector.do");
     do
     {
-      MyProject.Application.DoEvents();
+      Application.DoEvents();
     }
     while (objWebBrowser.IsBusy);
     var Expression = modAsBuilt.DOM_WaitForElement_ByTag(objWebBrowser, "class", "vehicleIDLongVIN", 20.0);
@@ -1132,7 +1133,7 @@ label_12:
     Expression.SetAttribute("text", inpVIN);
     Expression.OuterText = inpVIN;
     Expression.InnerText = inpVIN;
-    return !Information.IsNothing((object) Expression);
+    return !VBCompat.IsNothing((object) Expression);
   }
 
   public static HtmlElement DOM_WaitForElement_ByID(
@@ -1145,10 +1146,10 @@ label_12:
     do
     {
       Application.DoEvents();
-      if (!Information.IsNothing((object) wbControl.Document))
+      if (!VBCompat.IsNothing((object) wbControl.Document))
       {
         Expression = wbControl.Document.GetElementById(elementID);
-        if (!Information.IsNothing((object) Expression))
+        if (!VBCompat.IsNothing((object) Expression))
           return Expression;
       }
     }
@@ -1163,21 +1164,21 @@ label_12:
     string tagValue,
     double maxWaitSeconds)
   {
-    if (Information.IsNothing((object) parentElement))
+    if (VBCompat.IsNothing((object) parentElement))
       return (HtmlElement) null;
     modAsBuilt.System_GetTickCount();
     Application.DoEvents();
     var all = parentElement.All;
-    if (!Information.IsNothing((object) all))
+    if (!VBCompat.IsNothing((object) all))
     {
       try
       {
         foreach (HtmlElement parentElement1 in all)
         {
-          if (Operators.CompareString(parentElement1.GetAttribute(tagID), tagValue, false) == 0)
+          if (VBCompat.CompareString(parentElement1.GetAttribute(tagID), tagValue, false) == 0)
             return parentElement1;
           var subElementByTag = modAsBuilt.DOM_FindSubElement_ByTag(parentElement1, tagID, tagValue, maxWaitSeconds);
-          if (!Information.IsNothing((object) subElementByTag))
+          if (!VBCompat.IsNothing((object) subElementByTag))
             return subElementByTag;
         }
       }
@@ -1203,20 +1204,20 @@ label_12:
     do
     {
       Application.DoEvents();
-      if (!Information.IsNothing((object) wbControl.Document))
+      if (!VBCompat.IsNothing((object) wbControl.Document))
       {
         var all = wbControl.Document.All;
-        if (!Information.IsNothing((object) all))
+        if (!VBCompat.IsNothing((object) all))
         {
           try
           {
             foreach (HtmlElement parentElement in all)
             {
-              if (Operators.CompareString(parentElement.GetAttribute(tagID), tagValue, false) == 0)
+              if (VBCompat.CompareString(parentElement.GetAttribute(tagID), tagValue, false) == 0)
                 return parentElement;
               str = parentElement.OuterHtml;
               var subElementByTag = modAsBuilt.DOM_FindSubElement_ByTag(parentElement, tagID, tagValue, maxWaitSeconds);
-              if (!Information.IsNothing((object) subElementByTag))
+              if (!VBCompat.IsNothing((object) subElementByTag))
                 return subElementByTag;
             }
           }
@@ -1237,7 +1238,7 @@ label_12:
   public static string StorageMedia_GetSerialNumber(string drvLetter, ref string retError)
   {
     retError = "";
-    drvLetter = Strings.UCase(Strings.Left(drvLetter, 1));
+    drvLetter = VBCompat.UCase(VBCompat.Left(drvLetter, 1));
     var udtBytes1 = new byte[1];
     modAsBuilt.UDT_SecurityAttributes_Init(ref udtBytes1);
     var lpFileName = $"\\\\.\\{drvLetter}:";
@@ -1266,10 +1267,10 @@ label_12:
       var index = num1;
       while (index <= num2)
       {
-        str = $"{str}{Conversion.Hex(udtBytes2[index])} ";
+        str = $"{str}{VBCompat.Hex(udtBytes2[index])} ";
         checked { ++index; }
       }
-      str = Strings.Trim(str);
+      str = VBCompat.Trim(str);
     }
     modAsBuilt.CloseHandle(fileNoUdt);
     return !flag ? "" : str;
@@ -1366,7 +1367,7 @@ label_12:
     ref string[] strArray,
     ref int strArrayItemCount,
     string strToRemove,
-    CompareMethod compMethod = CompareMethod.Binary)
+    AsBuiltExplorer.Utilities.CompareMethod compMethod = AsBuiltExplorer.Utilities.CompareMethod.Binary)
   {
       var index = ArraySsorted_FindItem(ref strArray, strArrayItemCount, strToRemove, compMethod);
       if (index != -1)
@@ -1385,11 +1386,11 @@ label_12:
     ref string[] strArray,
     int strArrayItemCount,
     string strToFind,
-    CompareMethod compMethod = CompareMethod.Binary)
+    AsBuiltExplorer.Utilities.CompareMethod compMethod = AsBuiltExplorer.Utilities.CompareMethod.Binary)
   {
       for (int i = 0; i < strArrayItemCount; i++)
       {
-          if (Strings.StrComp(strArray[i], strToFind, compMethod) == 0)
+          if (VBCompat.StrComp(strArray[i], strToFind, compMethod) == 0)
               return i;
       }
       return -1;

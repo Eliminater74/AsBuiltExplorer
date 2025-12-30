@@ -62,7 +62,7 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
+
     <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.1.11.2622, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
       <HintPath>packages\SQLitePCLRaw.bundle_green.2.1.11\lib\net461\SQLitePCLRaw.batteries_v2.dll</HintPath>
     </Reference>
@@ -139,6 +139,7 @@
     <Compile Include="Utilities\SQLiteHelper.cs" />
     <Compile Include="Utilities\VehicleDatabase.cs" />
     <Compile Include="Utilities\modAsBuilt.cs" />
+    <Compile Include="Utilities\VBCompat.cs" />
     <Compile Include="Utilities\CRC.cs" />
     <Compile Include="Utilities\NHTSADecoder.cs" />
     <Compile Include="Utilities\ModDatabase.cs" />
@@ -151,12 +152,8 @@
     </Compile>
     <Compile Include="Utilities\VINDecoder.cs" />
     <Compile Include="Utilities\VehicleStrategy.cs" />
-    <Compile Include="My\MyApplication.cs" />
-    <Compile Include="My\MyComputer.cs" />
-    <Compile Include="My\MyProject.cs" />
-    <Compile Include="My\MySettings.cs" />
-    <Compile Include="My\MySettingsProperty.cs" />
-    <Compile Include="My\Resources\Resources.cs" />
+
+    <Compile Include="Properties\Settings.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
