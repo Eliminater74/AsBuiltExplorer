@@ -196,7 +196,7 @@ public partial class Form1 : Form
           tbxData3bin1.Text = VBCompat.Mid(str3, 1, 8);
           tbxData3bin2.Text = VBCompat.Mid(str3, 9, 8);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
       }
   }
@@ -1369,7 +1369,7 @@ public partial class Form1 : Form
       {
         Directory.CreateDirectory(path);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         // ProjectData.SetProjectError(ex);
         // ProjectData.ClearProjectError();
@@ -1965,7 +1965,7 @@ public partial class Form1 : Form
     {
       System.IO.File.Delete("C:\\PerfectList.txt");
     }
-    catch (Exception ex)
+    catch (Exception)
     {
       // ProjectData.SetProjectError(ex);
       // ProjectData.ClearProjectError();
@@ -2191,7 +2191,7 @@ public partial class Form1 : Form
     {
       Clipboard.SetText(text);
     }
-    catch (Exception ex)
+    catch (Exception)
     {
       // ProjectData.SetProjectError(ex);
       var num4 = (int) MessageBox.Show( "Failed to set clipboard text.");
@@ -2238,7 +2238,7 @@ public partial class Form1 : Form
     {
       Clipboard.SetText(text);
     }
-    catch (Exception ex)
+    catch (Exception)
     {
       // ProjectData.SetProjectError(ex);
       var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
@@ -2285,7 +2285,7 @@ public partial class Form1 : Form
     {
       Clipboard.SetText(text);
     }
-    catch (Exception ex)
+    catch (Exception)
     {
       // ProjectData.SetProjectError(ex);
       var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
@@ -2332,7 +2332,7 @@ public partial class Form1 : Form
     {
       Clipboard.SetText(text);
     }
-    catch (Exception ex)
+    catch (Exception)
     {
       // ProjectData.SetProjectError(ex);
       MessageBox.Show( "Failed to set clipboard text.");
@@ -2379,7 +2379,7 @@ public partial class Form1 : Form
     {
       Clipboard.SetText(text);
     }
-    catch (Exception ex)
+    catch (Exception)
     {
       // ProjectData.SetProjectError(ex);
       MessageBox.Show( "Failed to set clipboard text.");
@@ -2506,7 +2506,7 @@ public partial class Form1 : Form
       {
         System.IO.File.Delete(VBCompat.Replace(name, ".AB", ".AB.HTML"));
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         // ProjectData.SetProjectError(ex);
         // ProjectData.ClearProjectError();
@@ -2515,7 +2515,7 @@ public partial class Form1 : Form
       {
         System.IO.File.Delete(VBCompat.Replace(name, ".AB", ".ETIS.HTML"));
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         // ProjectData.SetProjectError(ex);
         // ProjectData.ClearProjectError();
@@ -2524,7 +2524,7 @@ public partial class Form1 : Form
       {
         System.IO.File.Delete(name);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         // ProjectData.SetProjectError(ex);
         // ProjectData.ClearProjectError();
@@ -2533,13 +2533,13 @@ public partial class Form1 : Form
       {
         lvwBrowser.Items.Remove(selectedItem);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         // ProjectData.SetProjectError(ex);
         // ProjectData.ClearProjectError();
       }
     }
-    catch (Exception ex)
+    catch (Exception)
     {
       // ProjectData.SetProjectError(ex);
       // ProjectData.ClearProjectError();
@@ -2624,7 +2624,7 @@ public partial class Form1 : Form
         System.IO.File.Delete(str6);
       System.IO.File.WriteAllText(str6, contents);
     }
-    catch (Exception ex)
+    catch (Exception)
     {
       // ProjectData.SetProjectError(ex);
       // ProjectData.ClearProjectError();
@@ -2699,7 +2699,7 @@ public partial class Form1 : Form
       checked { ++index2; }
     }
     while (index2 <= 999);
-label_24:
+
     DialogResult msgBoxResult = DialogResult.Yes;
     if (flag)
     {
@@ -2740,7 +2740,7 @@ label_24:
         System.IO.File.Delete(path);
       System.IO.File.WriteAllText(path, contents);
     }
-    catch (Exception ex)
+    catch (Exception)
     {
       // ProjectData.SetProjectError(ex);
       // ProjectData.ClearProjectError();

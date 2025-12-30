@@ -174,7 +174,7 @@ internal sealed class modAsBuilt
       {
         strArray2 = File.ReadAllLines(path);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         // ProjectData.SetProjectError(ex);
         flag = false;
@@ -444,7 +444,7 @@ label_9:
       {
         String1 = File.ReadAllText(inpFileName);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         // ProjectData.SetProjectError(ex);
         fileType = "";
@@ -505,7 +505,7 @@ label_1:
         {
           flag10 = xmlTextReader.Read();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
           // ProjectData.SetProjectError(ex);
           // ProjectData.ClearProjectError();
