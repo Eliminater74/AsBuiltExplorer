@@ -1085,6 +1085,20 @@ public partial class Form1 : Form
       wbDeducer.Navigate("https://www.motorcraftservice.com/AsBuilt");
   }
 
+  void btnDeduceExternal_Click(object sender, EventArgs e)
+  {
+      // Copy VIN to clipboard for easy pasting
+      try 
+      { 
+          if (!string.IsNullOrEmpty(txtDeduceVIN.Text)) 
+              Clipboard.SetText(txtDeduceVIN.Text.Trim()); 
+      } 
+      catch { }
+
+      // Open System Browser
+      System.Diagnostics.Process.Start("https://www.motorcraftservice.com/AsBuilt");
+  }
+
   void wbDeducer_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
   {
       var vin = txtDeduceVIN.Text.Trim();

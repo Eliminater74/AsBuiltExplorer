@@ -131,6 +131,7 @@ namespace AsBuiltExplorer
             this.wbDeducer = new System.Windows.Forms.WebBrowser();
             this.grpDeduceSelection = new System.Windows.Forms.GroupBox();
             this.btnDeduceGo = new System.Windows.Forms.Button();
+            this.btnDeduceExternal = new System.Windows.Forms.Button();
             this.txtDeduceVIN = new System.Windows.Forms.TextBox();
             this.lblDeduceOr = new System.Windows.Forms.Label();
             this.cmbDeduceSavedVehicles = new System.Windows.Forms.ComboBox();
@@ -1260,6 +1261,7 @@ namespace AsBuiltExplorer
             this.grpDeduceSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpDeduceSelection.Controls.Add(this.btnDeduceGo);
+            this.grpDeduceSelection.Controls.Add(this.btnDeduceExternal);
             this.grpDeduceSelection.Controls.Add(this.txtDeduceVIN);
             this.grpDeduceSelection.Controls.Add(this.lblDeduceOr);
             this.grpDeduceSelection.Controls.Add(this.cmbDeduceSavedVehicles);
@@ -1280,6 +1282,16 @@ namespace AsBuiltExplorer
             this.btnDeduceGo.Text = "Open Motorcraft Website >>";
             this.btnDeduceGo.UseVisualStyleBackColor = true;
             this.btnDeduceGo.Click += new System.EventHandler(this.btnDeduceGo_Click);
+            // 
+            // btnDeduceExternal
+            // 
+            this.btnDeduceExternal.Location = new System.Drawing.Point(860, 20);
+            this.btnDeduceExternal.Name = "btnDeduceExternal";
+            this.btnDeduceExternal.Size = new System.Drawing.Size(80, 26);
+            this.btnDeduceExternal.TabIndex = 5;
+            this.btnDeduceExternal.Text = "Ext. Browser";
+            this.btnDeduceExternal.UseVisualStyleBackColor = true;
+            this.btnDeduceExternal.Click += new System.EventHandler(this.btnDeduceExternal_Click);
             // 
             // txtDeduceVIN
             // 
@@ -2429,6 +2441,7 @@ namespace AsBuiltExplorer
     private System.Windows.Forms.ToolStripMenuItem ScanLibraryToolStripMenuItem; 
     private System.Windows.Forms.ColumnHeader colKnownFeatures;
     private System.Windows.Forms.PictureBox pbSettings;
+    private System.Windows.Forms.Button btnDeduceExternal;
     private System.Windows.Forms.Button btnDB_Scan;
     private System.Windows.Forms.ColumnHeader colFeatures; // Added
         private PictureBox pictureBox2;
