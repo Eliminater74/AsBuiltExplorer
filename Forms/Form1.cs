@@ -1148,6 +1148,7 @@ public partial class Form1 : Form
               item.SubItems.Add(fullModel);
               
               item.SubItems.Add(v.VIN);
+              item.SubItems.Add(v.Features ?? "");
               
               // CRITICAL: Set Name to FilePath so Context Menus work (they read .Name)
               item.Name = v.FilePath; 
@@ -2388,12 +2389,14 @@ public partial class Form1 : Form
 
   void Button10_Click(object sender, EventArgs e)
   {
-      // Legacy "Deducer" folder scraper - Disabled in favor of VehicleDatabase
+      PopulateVehicleList();
   }
 
   void Form1_MaximumSizeChanged(object sender, EventArgs e)
   {
   }
+
+
 
   async void Form1_Shown(object sender, EventArgs e)
   {
