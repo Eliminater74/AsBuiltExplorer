@@ -53,6 +53,18 @@ public partial class Form1 : Form
                 }
             }
         }
+
+        // Enable JavaScript execution by allowing user privilege elevation (Fixes some CAPTCHA scripts)
+        using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_ALLOW_USER_PRIVILEGE_ELEVATION"))
+        {
+            if (key != null)
+            {
+                foreach (string name in appNames)
+                {
+                    key.SetValue(name, 1, Microsoft.Win32.RegistryValueKind.DWord);
+                }
+            }
+        }
     }
     catch (Exception) { }
 
@@ -71,6 +83,7 @@ public partial class Form1 : Form
       string ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
       UrlMkSetSessionOption(URLMON_OPTION_USERAGENT, ua, ua.Length, 0);
   }
+
 
   string VehicleInfo_GetModuleDataByID_Binary(
     string moduleID,

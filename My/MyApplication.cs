@@ -59,7 +59,26 @@ namespace AsBuiltExplorer.My
             {
             }
 
-            MyProject.Application.Run(Args);
+            // Global Exception Handling to catch "Silent Crashes"
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                MessageBox.Show("Fatal Startup Error (Domain): " + e.ExceptionObject.ToString(), "AsBuiltExplorer Crash", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
+
+            Application.ThreadException += (sender, e) => 
+            {
+                MessageBox.Show("Fatal Startup Error (Thread): " + e.Exception.ToString(), "AsBuiltExplorer Crash", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
+            try
+            {
+                MyProject.Application.Run(Args);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fatal Application Error: " + ex.ToString(), "AsBuiltExplorer Crash", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         [DebuggerStepThrough]
