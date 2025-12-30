@@ -219,7 +219,11 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
-            copy /Y "$(ProjectDir)Resources\definitions.db" "$(TargetDir)definitions.db"
-        </PostBuildEvent>
+      copy /Y "$(ProjectDir)Resources\definitions.db" "$(TargetDir)definitions.db"
+      if not exist "$(TargetDir)x86" mkdir "$(TargetDir)x86"
+      if not exist "$(TargetDir)x64" mkdir "$(TargetDir)x64"
+      copy /Y "$(ProjectDir)packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x86\native\e_sqlite3.dll" "$(TargetDir)x86\e_sqlite3.dll"
+      copy /Y "$(ProjectDir)packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x64\native\e_sqlite3.dll" "$(TargetDir)x64\e_sqlite3.dll"
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
