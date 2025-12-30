@@ -25,7 +25,7 @@ namespace AsBuiltExplorer.My
         [DebuggerHidden]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        internal static void Main(string[] Args)
+        internal static void Main_Legacy(string[] Args)
         {
             // Fix for WebBrowser control to use IE11 mode (11001)
             try
