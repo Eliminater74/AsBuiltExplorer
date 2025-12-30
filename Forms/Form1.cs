@@ -1235,15 +1235,15 @@ public partial class Form1 : Form
     tbxDeduceReport.Text = "";
     if (Information.IsNothing(RuntimeHelpers.GetObjectValue(lstDeduceFactoryOptions.SelectedItem)))
     {
-      var num1 = (int) Interaction.MsgBox((object) "Select a feature to deduce.");
+      var num1 = (int) MessageBox.Show( "Select a feature to deduce.");
     }
     else if (Information.IsNothing((object) lstDeduceModels.SelectedItems) || lstDeduceModels.SelectedItems.Count < 1)
     {
-      var num2 = (int) Interaction.MsgBox((object) "Select at least one vehicle model.");
+      var num2 = (int) MessageBox.Show( "Select at least one vehicle model.");
     }
     else if (Information.IsNothing((object) lstDeduceYears.SelectedItems) || lstDeduceYears.SelectedItems.Count < 1)
     {
-      var num3 = (int) Interaction.MsgBox((object) "Select at least one vehicle year.");
+      var num3 = (int) MessageBox.Show( "Select at least one vehicle year.");
     }
     else
     {
@@ -1779,15 +1779,15 @@ public partial class Form1 : Form
       tbxDeduceReport.Text = stringBuilder.ToString();
       if (index14 == 0)
       {
-        var num33 = (int) Interaction.MsgBox((object) "The analysis is useless because there were no vehicles with this feature");
+        var num33 = (int) MessageBox.Show( "The analysis is useless because there were no vehicles with this feature");
       }
       else if (index15 == 0)
       {
-        var num34 = (int) Interaction.MsgBox((object) "The analysis is useless because there were no vehicles missing this feature");
+        var num34 = (int) MessageBox.Show( "The analysis is useless because there were no vehicles missing this feature");
       }
       else
       {
-        var num35 = (int) Interaction.MsgBox((object) "The analysis is complete.");
+        var num35 = (int) MessageBox.Show( "The analysis is complete.");
       }
     }
   }
@@ -2192,7 +2192,7 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      var num4 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num4 = (int) MessageBox.Show( "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
@@ -2239,7 +2239,7 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      var num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
@@ -2286,7 +2286,7 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      var num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
@@ -2333,7 +2333,7 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      var num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
@@ -2380,7 +2380,7 @@ public partial class Form1 : Form
     catch (Exception ex)
     {
       ProjectData.SetProjectError(ex);
-      var num3 = (int) Interaction.MsgBox((object) "Failed to set clipboard text.");
+      var num3 = (int) MessageBox.Show( "Failed to set clipboard text.");
       ProjectData.ClearProjectError();
     }
   }
@@ -2696,13 +2696,13 @@ public partial class Form1 : Form
     }
     while (index2 <= 999);
 label_24:
-    var msgBoxResult = MsgBoxResult.Yes;
+    DialogResult msgBoxResult = DialogResult.Yes;
     if (flag)
     {
-      var num7 = (int) Interaction.MsgBox((object) "The module data contains sections / blocks with an ID greater than '99', and therefore requires the ABT file to be written out in the 'new' 2019-08 ABT format.", MsgBoxStyle.Information);
+      MessageBox.Show( "The module data contains sections / blocks with an ID greater than '99', and therefore requires the ABT file to be written out in the 'new' 2019-08 ABT format.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     else
-      msgBoxResult = Interaction.MsgBox((object) "Would you like the ABT file written out in the 'new' 2019-08 ABT format (YES), or the 'old' format (NO)?", MsgBoxStyle.YesNo | MsgBoxStyle.Question);
+      msgBoxResult = MessageBox.Show( "Would you like the ABT file written out in the 'new' 2019-08 ABT format (YES), or the 'old' format (NO)?", "Export Format", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
     var contents = "";
     var num8 = 1;
     var index3 = 0;
@@ -2715,7 +2715,7 @@ label_24:
         var Start = 1;
         while (Operators.CompareString(Strings.Mid(strArray1[index3], Start, 12), "", false) != 0)
         {
-          if (msgBoxResult == MsgBoxResult.Yes)
+          if (msgBoxResult == DialogResult.Yes)
             contents = $"{contents}{modAsBuilt.AsBuilt_FormatNewABT(str1, checked (index3 + 1), num9)}{Strings.Mid(strArray1[index3], Start, 12)}\r\n";
           else
             contents = $"{contents}{str1}{Strings.Format((object) checked (index3 + 1), "00")}{Strings.Format((object) num9, "00")}{Strings.Mid(strArray1[index3], Start, 12)}\r\n";
