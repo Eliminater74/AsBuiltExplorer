@@ -7,11 +7,34 @@ namespace AsBuiltExplorer
 {
     public static class SQLiteHelper
     {
-        static string _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vehicles.db");
-        static string _connectionString = $"Data Source={_dbPath};Version=3;";
+        static string _dbPath = "";
+        static string _connectionString = "";
 
         public static void Initialize()
         {
+            // Logic: 
+            // 1. Check if "vehicles.db" exists in the Application Directory (Portable Mode).
+            // 2. If it exists there, USE IT.
+            // 3. If not, default to %AppData%\AsBuiltExplorer\vehicles.db (Installed Mode).
+
+            string localPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vehicles.db");
+            string appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AsBuiltExplorer");
+            string appDataPath = Path.Combine(appDataFolder, "vehicles.db");
+
+            if (File.Exists(localPath))
+            {
+                // Portable Mode detected
+                _dbPath = localPath;
+            }
+            else
+            {
+                // Standard Mode
+                if (!Directory.Exists(appDataFolder)) Directory.CreateDirectory(appDataFolder);
+                _dbPath = appDataPath;
+            }
+
+            _connectionString = $"Data Source={_dbPath};Version=3;";
+
             // Self-heal: If file exists but is 0 bytes (corrupt from crash), delete it.
             if (File.Exists(_dbPath) && new FileInfo(_dbPath).Length == 0)
             {
