@@ -38,6 +38,8 @@ Source: "bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\AsBuiltData\*"; DestDir: "{app}\AsBuiltData"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "bin\Release\CustomCSV\*"; DestDir: "{app}\CustomCSV"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

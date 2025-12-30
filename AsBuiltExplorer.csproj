@@ -60,6 +60,8 @@
     <ApplicationIcon>app_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="x64\" />
+    <Folder Include="x86\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.1.11.2622, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
@@ -215,13 +217,19 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets'))" />
   </Target>
+  <ItemGroup>
+    <Content Include="packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x86\native\e_sqlite3.dll">
+      <Link>x86\e_sqlite3.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x64\native\e_sqlite3.dll">
+      <Link>x64\e_sqlite3.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>
       copy /Y "$(ProjectDir)Resources\definitions.db" "$(TargetDir)definitions.db"
-      if not exist "$(TargetDir)x86" mkdir "$(TargetDir)x86"
-      if not exist "$(TargetDir)x64" mkdir "$(TargetDir)x64"
-      copy /Y "$(ProjectDir)packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x86\native\e_sqlite3.dll" "$(TargetDir)x86\e_sqlite3.dll"
-      copy /Y "$(ProjectDir)packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x64\native\e_sqlite3.dll" "$(TargetDir)x64\e_sqlite3.dll"
     </PostBuildEvent>
   </PropertyGroup>
 </Project>
