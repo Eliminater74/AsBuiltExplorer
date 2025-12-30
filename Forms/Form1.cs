@@ -92,22 +92,32 @@ public partial class Form1 : Form
     ref string modulePartNum)
   {
     modulePartNum = "";
+    if (vhclInfo.abModuleAddresses == null || vhclInfo.abModuleDatasBinStr == null) return "";
+
     var num = checked (vhclInfo.abModuleAddrCount - 1);
     var index = 0;
     while (index <= num)
     {
-      if (moduleID.Length == vhclInfo.abModuleAddresses[index].Length)
+      if (index >= vhclInfo.abModuleAddresses.Length || index >= vhclInfo.abModuleDatasBinStr.Length) break;
+
+      var addr = vhclInfo.abModuleAddresses[index];
+      if (addr != null && moduleID != null)
       {
-        if (moduleID == vhclInfo.abModuleAddresses[index])
-        {
-          modulePartNum = vhclInfo.abModuleInfo_PartNums[index];
-          return vhclInfo.abModuleDatasBinStr[index];
-        }
-      }
-      else if (moduleID.StartsWith(vhclInfo.abModuleAddresses[index]))
-      {
-        modulePartNum = vhclInfo.abModuleInfo_PartNums[index];
-        return vhclInfo.abModuleDatasBinStr[index];
+          if (moduleID.Length == addr.Length)
+          {
+            if (moduleID == addr)
+            {
+              if (vhclInfo.abModuleInfo_PartNums != null && index < vhclInfo.abModuleInfo_PartNums.Length)
+                  modulePartNum = vhclInfo.abModuleInfo_PartNums[index];
+              return vhclInfo.abModuleDatasBinStr[index];
+            }
+          }
+          else if (moduleID.StartsWith(addr))
+          {
+            if (vhclInfo.abModuleInfo_PartNums != null && index < vhclInfo.abModuleInfo_PartNums.Length)
+                modulePartNum = vhclInfo.abModuleInfo_PartNums[index];
+            return vhclInfo.abModuleDatasBinStr[index];
+          }
       }
       checked { ++index; }
     }
@@ -118,12 +128,22 @@ public partial class Form1 : Form
     string moduleID,
     Form1.VehicleInfo vhclInfo)
   {
+    if (vhclInfo.abModuleAddresses == null || vhclInfo.abModuleDatasBinStr == null || vhclInfo.abModuleInfo_PartNums == null) return "";
+
     var num = checked (vhclInfo.abModuleAddrCount - 1);
     var index = 0;
     while (index <= num)
     {
-      if (moduleID.StartsWith(vhclInfo.abModuleAddresses[index]) && !VBCompat.IsNothing((object) vhclInfo.abModuleInfo_PartNums[index]) && moduleID.EndsWith(vhclInfo.abModuleInfo_PartNums[index]))
-        return vhclInfo.abModuleDatasBinStr[index];
+      if (index >= vhclInfo.abModuleAddresses.Length || index >= vhclInfo.abModuleInfo_PartNums.Length || index >= vhclInfo.abModuleDatasBinStr.Length) break;
+
+      var addr = vhclInfo.abModuleAddresses[index];
+      var partNum = vhclInfo.abModuleInfo_PartNums[index];
+
+      if (addr != null && partNum != null && moduleID != null)
+      {
+          if (moduleID.StartsWith(addr) && moduleID.EndsWith(partNum))
+            return vhclInfo.abModuleDatasBinStr[index];
+      }
       checked { ++index; }
     }
     return "";
