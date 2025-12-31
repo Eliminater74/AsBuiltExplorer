@@ -2983,7 +2983,9 @@ public partial class Form1 : Form
                    AddDecodeItem("Fuel", res.FuelType, "Fuel Type", "NHTSA API");
                    
                    // Brochure Search
-                   var query = $"{res.Year}+{res.Make}+{res.Model}+Brochure+filetype:pdf";
+                   // Strip specific trims/lengths (MAX, EL) to find the main vehicle lineup brochure
+                   var cleanModel = res.Model.Replace("MAX", "").Replace("EL", "").Trim();
+                   var query = $"{res.Year}+{res.Make}+{cleanModel}+Brochure+filetype:pdf";
                    AddDecodeItem("Info", "Brochure", "Marketing Info", $"Search: {query}");
                }
                else
