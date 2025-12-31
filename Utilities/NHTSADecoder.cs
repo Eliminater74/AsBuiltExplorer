@@ -23,7 +23,7 @@ namespace AsBuiltExplorer
         {
             try
             {
-                var url = $"https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/{vin}?format=json";
+                var url = $"https://vpic.nhtsa.dot.gov/api/vehicles/decodevinextended/{vin}?format=json";
                 var json = "";
 
                 using (var client = new WebClient())
