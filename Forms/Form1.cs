@@ -2947,9 +2947,20 @@ public partial class Form1 : Form
 
       lvwDecodeResults.Items.Clear();
 
+      // 1. Run Local Decoder (Always)
+      var localResults = VINDecoder.Decode(vin);
+      foreach (var r in localResults)
+      {
+          var lvi = new ListViewItem(r.Position);
+          lvi.SubItems.Add(r.Value);
+          lvi.SubItems.Add(r.Meaning);
+          lvi.SubItems.Add(r.Notes);
+          lvwDecodeResults.Items.Add(lvi);
+      }
+
+      // 2. Run Online API (Optional)
       if (chkUseNHTSA.Checked)
       {
-          // Online API (NHTSA)
           btnDecode.Enabled = false;
           btnDecode.Text = "Wait...";
           
@@ -2959,27 +2970,26 @@ public partial class Form1 : Form
                
                if (res != null)
                {
-                   AddDecodeItem("Year", res.Year, "Model Year");
-                   AddDecodeItem("Make", res.Make, "Manufacturer");
-                   AddDecodeItem("Model", res.Model, "Vehicle Model");
-                   AddDecodeItem("Trim", res.Trim, "Trim Level");
-                   AddDecodeItem("Series", res.Series, "Series");
-                   AddDecodeItem("Body", res.BodyClass, "Body Style");
-                   AddDecodeItem("Drive", res.DriveType, "Drive Type");
-                   AddDecodeItem("Fuel", res.FuelType, "Fuel Type");
+                   // Add Separator or just append
+                   // AddDecodeItem("---", "---", "---", "---"); 
                    
-                   // Offline Helper for Window Sticker Link
-                   var stickerUrl = $"https://www.windowsticker.forddirect.com/windowsticker.pdf?vin={vin}";
-                   AddDecodeItem("URL", "Link", "Window Sticker", stickerUrl);
+                   AddDecodeItem("Year", res.Year, "Model Year", "NHTSA API");
+                   AddDecodeItem("Make", res.Make, "Manufacturer", "NHTSA API");
+                   AddDecodeItem("Model", res.Model, "Vehicle Model", "NHTSA API");
+                   AddDecodeItem("Trim", res.Trim, "Trim Level", "NHTSA API");
+                   AddDecodeItem("Series", res.Series, "Series", "NHTSA API");
+                   AddDecodeItem("Body", res.BodyClass, "Body Style", "NHTSA API");
+                   AddDecodeItem("Drive", res.DriveType, "Drive Type", "NHTSA API");
+                   AddDecodeItem("Fuel", res.FuelType, "Fuel Type", "NHTSA API");
                }
                else
                {
-                   MessageBox.Show("NHTSA API returned no data or timed out.", "Online Decode");
+                   AddDecodeItem("API", "Error", "No Data Returned", "NHTSA API");
                }
           }
           catch (Exception ex)
           {
-               MessageBox.Show("Connectivity Error: " + ex.Message, "Online Decode");
+               AddDecodeItem("API", "Error", ex.Message, "Connectivity Error");
           }
           finally
           {
@@ -2987,8 +2997,6 @@ public partial class Form1 : Form
                btnDecode.Text = "Decode";
           }
       }
-      else
-      {
           // Offline Logic (Legacy)
           var results = VINDecoder.Decode(vin);
       
@@ -3300,51 +3308,72 @@ public partial class Form1 : Form
         
         try
         {
+            var itemsList = new List<ListViewItem>();
+            foreach (ListViewItem item in itemsToProcess) itemsList.Add(item);
+
+            var vinsToDecode = new List<string>();
+            foreach (var item in itemsList) vinsToDecode.Add(item.SubItems[4].Text); // VIN is col 4
+
+            Cursor = Cursors.WaitCursor;
+
+            // Batch Decode
+            var batchResults = NHTSADecoder.DecodeBatch(vinsToDecode);
+            var resultMap = new Dictionary<string, NHTSAResult>(StringComparer.OrdinalIgnoreCase);
+            
+            if (batchResults != null)
+            {
+               foreach(var r in batchResults) 
+               {
+                   if (!string.IsNullOrEmpty(r.VIN) && !resultMap.ContainsKey(r.VIN))
+                       resultMap.Add(r.VIN, r);
+               }
+            }
+
             foreach (ListViewItem item in itemsToProcess)
             {
                 var vin = item.SubItems[4].Text;
                 var entry = VehicleDatabase.GetEntry(vin);
-                if (entry != null)
+                
+                if (entry != null && resultMap.ContainsKey(vin))
                 {
-                    var result = NHTSADecoder.Decode(vin);
-                    if (result != null)
+                    var result = resultMap[vin];
+                    
+                    // Update Basic Info
+                    if(!string.IsNullOrEmpty(result.Make)) entry.Make = result.Make;
+                    if(!string.IsNullOrEmpty(result.Year)) entry.Year = result.Year;
+                    
+                    var model = result.Model;
+                    if (!string.IsNullOrEmpty(result.Trim)) model += " " + result.Trim;
+                    if(!string.IsNullOrEmpty(model)) entry.Model = model;
+
+                    // Add Features
+                    var newTags = new List<string>();
+                    if (!string.IsNullOrEmpty(result.Trim)) newTags.Add("Trim:" + result.Trim);
+                    if (!string.IsNullOrEmpty(result.DriveType)) newTags.Add("Drive:" + result.DriveType);
+                    if (!string.IsNullOrEmpty(result.BodyClass)) newTags.Add("Body:" + result.BodyClass);
+                    if (!string.IsNullOrEmpty(result.FuelType)) newTags.Add("Fuel:" + result.FuelType);
+                    // Note: Series might be missing or different in flat response vs extended, but we map it if present
+                    if (!string.IsNullOrEmpty(result.Series)) newTags.Add("Series:" + result.Series); 
+
+                    // Merge Features
+                    var current = new List<string>((entry.Features ?? "").Split(';'));
+                    var changed = false;
+                    foreach (var tag in newTags)
                     {
-                        // Update Basic Info
-                        if(!string.IsNullOrEmpty(result.Make)) entry.Make = result.Make;
-                        if(!string.IsNullOrEmpty(result.Year)) entry.Year = result.Year;
-                        
-                        var model = result.Model;
-                        if (!string.IsNullOrEmpty(result.Trim)) model += " " + result.Trim;
-                        if(!string.IsNullOrEmpty(model)) entry.Model = model;
+                            var exists = false;
+                            foreach(var c in current) if(c.Trim().Equals(tag, StringComparison.OrdinalIgnoreCase)) exists = true;
+                            if (!exists)
+                            {
+                                current.Add(tag);
+                                changed = true;
+                            }
+                    }
 
-                        // Add Features
-                        var newTags = new List<string>();
-                        if (!string.IsNullOrEmpty(result.Trim)) newTags.Add("Trim:" + result.Trim);
-                        if (!string.IsNullOrEmpty(result.DriveType)) newTags.Add("Drive:" + result.DriveType);
-                        if (!string.IsNullOrEmpty(result.BodyClass)) newTags.Add("Body:" + result.BodyClass);
-                        if (!string.IsNullOrEmpty(result.FuelType)) newTags.Add("Fuel:" + result.FuelType);
-                        if (!string.IsNullOrEmpty(result.Series)) newTags.Add("Series:" + result.Series);
-
-                        // Merge Features
-                        var current = new List<string>((entry.Features ?? "").Split(';'));
-                        var changed = false;
-                        foreach (var tag in newTags)
-                        {
-                             var exists = false;
-                             foreach(var c in current) if(c.Trim().Equals(tag, StringComparison.OrdinalIgnoreCase)) exists = true;
-                             if (!exists)
-                             {
-                                 current.Add(tag);
-                                 changed = true;
-                             }
-                        }
-
-                        if (changed || !string.IsNullOrEmpty(result.Model))
-                        {
-                            entry.Features = string.Join(";", current).Trim(';');
-                            VehicleDatabase.UpdateEntry(entry);
-                            successCount++;
-                        }
+                    if (changed || !string.IsNullOrEmpty(result.Model))
+                    {
+                        entry.Features = string.Join(";", current).Trim(';');
+                        VehicleDatabase.UpdateEntry(entry);
+                        successCount++;
                     }
                 }
             }
