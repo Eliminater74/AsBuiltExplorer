@@ -2981,6 +2981,10 @@ public partial class Form1 : Form
                    AddDecodeItem("Body", res.BodyClass, "Body Style", "NHTSA API");
                    AddDecodeItem("Drive", res.DriveType, "Drive Type", "NHTSA API");
                    AddDecodeItem("Fuel", res.FuelType, "Fuel Type", "NHTSA API");
+                   
+                   // Brochure Search
+                   var query = $"{res.Year}+{res.Make}+{res.Model}+Brochure+filetype:pdf";
+                   AddDecodeItem("Info", "Brochure", "Marketing Info", $"Search: {query}");
                }
                else
                {
@@ -3015,6 +3019,7 @@ public partial class Form1 : Form
       var hit = lvwDecodeResults.HitTest(e.Location);
       if (hit.Item != null)
       {
+          // Window Sticker Link
           if (hit.Item.Text == "URL")
           {
               var url = hit.Item.SubItems[3].Text; // Notes column has the URL
@@ -3022,6 +3027,16 @@ public partial class Form1 : Form
               {
                   Process.Start(url);
               }
+          }
+          // Brochure Search Link
+          else if (hit.Item.Text == "Info" && hit.Item.SubItems[1].Text == "Brochure")
+          {
+               var notes = hit.Item.SubItems[3].Text; // "Search: 2008+Ford..."
+               if (notes.StartsWith("Search: "))
+               {
+                   var q = notes.Substring(8);
+                   Process.Start($"https://www.google.com/search?q={q}");
+               }
           }
       }
   }
