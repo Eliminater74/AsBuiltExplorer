@@ -2997,19 +2997,8 @@ public partial class Form1 : Form
                btnDecode.Text = "Decode";
           }
       }
-          // Offline Logic (Legacy)
-          var results = VINDecoder.Decode(vin);
-      
-          foreach (var r in results)
-          {
-              var lvi = new ListViewItem(r.Position);
-              lvi.SubItems.Add(r.Value);
-              lvi.SubItems.Add(r.Meaning);
-              lvi.SubItems.Add(r.Notes);
-              lvwDecodeResults.Items.Add(lvi);
-          }
-      }
   }
+
 
   void AddDecodeItem(string pos, string val, string meaning, string notes = "NHTSA API")
   {
