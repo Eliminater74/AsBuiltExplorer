@@ -83,68 +83,114 @@ namespace AsBuiltExplorer.Utilities
 
                     if (!string.IsNullOrEmpty(bestTag))
                     {
-                        // Now extract details for this SPECIFIC tag
-                        // We need the object block for this tag. 
-                        // Search for the tag, then find closest html_url / body in that block?
-                        // Too complex for reliable Regex on full JSON.
+                        // Get tag details from the matching block logic (simplified for regex scan)
+                        // We need the block for 'bestTag'.
+                        // Scan for "tag_name": "bestTag"
+                        // Then scan for "body": "..." and "html_url": "..." in proximity?
+                        // Given the complexity, and assuming the FIRST item in /releases is the newest (usually true),
+                        // we'll grab the first item's details IF it matches bestTag.
+                        // If bestTag is NOT the first item (e.g. a patch release on an old branch), we fallback to generic logic.
                         
-                        // Fallback: Just get the FIRST match (Latest by Date) from the list.
-                        // Usually Latest Date == Latest Version.
-                        // If the user's issue was timing, fetching the list [0] is usually fresher than /latest endpoint (which has caching/delay).
-                        
-                        // Let's implement getting the FIRST item in the array properly.
-                        // The string starts with [. The first object is between { and }.
-                        // Note: Nested braces exist.
-                        
-                        // Let's stick to /releases/latest logic but switch to finding the block for the best tag?
-                        // No, let's keep it simple: Release 13 might not be marked "latest" yet but exists in the list.
-                        // We will just find the details for "bestTag".
-                        
-                        // Hacky but effective: Split by "tag_name"
+                        // Current logic: Find the block for bestTag.
+                        string tag = "", body = "", url = "";
+
                         var parts = json.Split(new[] { "\"tag_name\"" }, StringSplitOptions.None);
-                        // Part 0 is pre-first-tag. Part 1 starts with : "v1.0.0.13" ...
-                        
                         foreach(var p in parts)
                         {
                             if (p.Trim().StartsWith(":"))
                             {
-                                // Extract the value
                                 var tagMatch = Regex.Match(p, "^\\s*:\\s*\"([^\"]+)\"");
-                                if (tagMatch.Success) 
+                                if (tagMatch.Success && tagMatch.Groups[1].Value == bestTag)
                                 {
-                                    var thisTag = tagMatch.Groups[1].Value;
-                                    if (thisTag == bestTag)
-                                    {
-                                        // This is our block. Grab the URL and Body from THIS part (or look ahead?)
-                                        // Actually, "body" and "html_url" might appear BEFORE "tag_name" in the object.
-                                        // JSON keys are unordered.
-                                        
-                                        // OK, Plan B: Use /releases endpoint, but assume the first release in the list is the one we want if it is newer.
-                                        // The API guarantees sort by created_at desc.
-                                        // Use the first parsing logic we had, but applied to the first object in the array.
-                                        
-                                        // Just grab the first "tag_name" in the file. That is the newest created release.
-                                        string tag = GetJsonValue(json, "tag_name");
-                                        string body = GetJsonValue(json, "body");
-                                        string url = GetJsonValue(json, "html_url");
-                                        
-                                        info.NewVersion = tag.TrimStart('v', 'V');
-                                        info.DownloadUrl = url;
-                                        info.ReleaseNotes = UnescapeJson(body);
-
-                                        if (Version.TryParse(Unsuffix(info.NewVersion), out var vNew) &&
-                                            Version.TryParse(Unsuffix(info.CurrentVersion), out var vCur))
-                                        {
-                                            if (vNew > vCur)
-                                            {
-                                                info.IsNewer = true;
-                                            }
-                                        }
-                                        break; // Only check the very first one (Latest by Date)
-                                    }
+                                    // Extract body/url from this part (or look previous part for body/url if JSON ordered differently?)
+                                    // JSON keys are unordered. This splitting approach is risky.
+                                    
+                                    // Better approach: Rely on the MAX version logic, but fetch the specific release details by TAG name if possible?
+                                    // /releases/tags/{tag}
+                                    // YES. This is cleaner.
+                                    
+                                    // We found the best tag. Now get its specific details.
+                                    tag = bestTag;
+                                    break;
                                 }
                             }
                         }
+
+                            // If URL is missing, assume standard tag URL
+                            if (string.IsNullOrEmpty(url)) url = $"https://github.com/{RepoOwner}/{RepoName}/releases/tag/{tag}";
+
+                            // ASSET PARSING: Try to find a direct .exe download link
+                            // "assets": [ { "browser_download_url": "..." } ]
+                            // Only if we downloaded the tag JSON
+                            string assetUrl = "";
+                            var assetMatches = Regex.Matches(body + url + (json ?? ""), "\"browser_download_url\"\\s*:\\s*\"([^\"]+)\"");
+                            // Actually, we need to search the tagJson source if available, or original JSON if the block contains assets.
+                            // The original /releases JSON contains assets for each release. 
+                            // The regex `releases` splitting logic above makes it hard to pinpoint.
+                            // BUT, we have `tagUrl` fetching code now. `tagJson` contains the assets.
+                            
+                            // Let's re-fetch tagJson if we skipped it? No, code above fetches it.
+                            // But `tag` var was overwritten.
+                            // Let's improve the tagJson fetching block to extract assets.
+                            
+                            // RE-IMPLEMENTING the tag parsing block to be robust
+                            
+                            string directDownload = "";
+                            
+                            try
+                            {
+                                // We always fetch the specific tag details now to be safe and get assets
+                                var tagUrl = $"https://api.github.com/repos/{RepoOwner}/{RepoName}/releases/tags/{bestTag}"; // Use bestTag
+                                var tagJson = await client.DownloadStringTaskAsync(new Uri(tagUrl));
+                                
+                                tag = GetJsonValue(tagJson, "tag_name");
+                                body = GetJsonValue(tagJson, "body");
+                                url = GetJsonValue(tagJson, "html_url");
+                                
+                                // Find .exe asset
+                                var assets = Regex.Matches(tagJson, "\"browser_download_url\"\\s*:\\s*\"([^\"]+)\"");
+                                foreach (Match am in assets)
+                                {
+                                    var link = am.Groups[1].Value;
+                                    if (link.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        directDownload = link;
+                                        break; 
+                                    }
+                                }
+                            }
+                            catch 
+                            { 
+                                // Silent fail, keep html_url if setup fails
+                            }
+
+                            info.NewVersion = (tag ?? bestTag).TrimStart('v', 'V');
+                            info.DownloadUrl = !string.IsNullOrEmpty(directDownload) ? directDownload : url;
+                            info.ReleaseNotes = UnescapeJson(body);
+
+                            if (Version.TryParse(Unsuffix(info.NewVersion), out var vNew) &&
+                                Version.TryParse(Unsuffix(info.CurrentVersion), out var vCur))
+                            {
+                                if (vNew > vCur)
+                                {
+                                    info.IsNewer = true;
+                                    
+                                    bool notesAreEmpty = string.IsNullOrWhiteSpace(info.ReleaseNotes) || 
+                                                         info.ReleaseNotes.Contains("**Full Changelog**");
+                                                         
+                                    if (notesAreEmpty || true) 
+                                    {
+                                        var commits = await FetchCommits(client, "v" + info.CurrentVersion, "v" + info.NewVersion);
+                                        if (!string.IsNullOrEmpty(commits))
+                                        {
+                                            if (string.IsNullOrWhiteSpace(info.ReleaseNotes)) 
+                                                info.ReleaseNotes = "### Changes:\n" + commits;
+                                            else
+                                                info.ReleaseNotes += "\n\n### Recent Commits:\n" + commits;
+                                        }
+                                    }
+                                }
+                            }
                     }
                 }
             }
@@ -155,6 +201,47 @@ namespace AsBuiltExplorer.Utilities
             }
 
             return info;
+        }
+
+        private static async Task<string> FetchCommits(WebClient client, string baseTag, string headTag)
+        {
+            try
+            {
+                var compareUrl = $"https://api.github.com/repos/{RepoOwner}/{RepoName}/compare/{baseTag}...{headTag}";
+                var json = await client.DownloadStringTaskAsync(new Uri(compareUrl));
+                
+                // Extract commit messages
+                // Look for "message": "..." inside "commit" object
+                // Regex is tricky. 
+                // Pattern: "message"\s*:\s*"((?:[^"\\]|\\.)*)"
+                var msgs = Regex.Matches(json, "\"message\"\\s*:\\s*\"((?:[^\"\\\\]|\\\\.)*)\"");
+                
+                var sb = new System.Text.StringBuilder();
+                int count = 0;
+                
+                foreach (Match m in msgs)
+                {
+                    if (count >= 15) break; 
+                    
+                    var raw = m.Groups[1].Value;
+                    var msg = UnescapeJson(raw);
+                    
+                    // Filter: Only use first line of commit message
+                    var subject = msg.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    if (subject.StartsWith("Merge pull request")) continue; // Skip merge noise
+                    if (subject.StartsWith("Bump version")) continue;
+                    
+                    // Unique check? (Compare endpoint returns chrono list)
+                    sb.AppendLine("- " + subject);
+                    count++;
+                }
+                
+                return sb.ToString();
+            }
+            catch
+            {
+                return "";
+            }
         }
 
         static string Unsuffix(string v)

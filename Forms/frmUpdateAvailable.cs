@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Windows.Forms;
 using AsBuiltExplorer.Utilities;
 
@@ -19,16 +21,65 @@ namespace AsBuiltExplorer.Forms
             lblNewVer.Text = $"New Version: {info.NewVersion}";
             txtReleaseNotes.Text = info.ReleaseNotes;
             // Handle new lines correctly if they are raw \n
-            txtReleaseNotes.Text = txtReleaseNotes.Text.Replace("\n", Environment.NewLine); 
+            if (!string.IsNullOrEmpty(txtReleaseNotes.Text))
+                txtReleaseNotes.Text = txtReleaseNotes.Text.Replace("\n", Environment.NewLine); 
         }
 
-        private void btnDownload_Click(object sender, EventArgs e)
+        private async void btnDownload_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(_info.DownloadUrl))
+            if (string.IsNullOrEmpty(_info.DownloadUrl))
             {
-                Process.Start(_info.DownloadUrl);
+                Close();
+                return;
             }
-            Close();
+
+            // Check if direct download (EXE/MSI)
+            bool isDirect = _info.DownloadUrl.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) || 
+                            _info.DownloadUrl.EndsWith(".msi", StringComparison.OrdinalIgnoreCase);
+
+            if (isDirect)
+            {
+                // In-App Update
+                btnDownload.Enabled = false;
+                btnSkip.Enabled = false;
+                btnRemind.Enabled = false;
+                btnDownload.Text = "Downloading...";
+
+                string tempPath = Path.Combine(Path.GetTempPath(), "AsBuiltExplorer_Update.exe");
+
+                try
+                {
+                    using (var client = new WebClient())
+                    {
+                        // Simple progress tracking
+                        client.DownloadProgressChanged += (s, ev) => 
+                        {
+                            btnDownload.Text = $"{ev.ProgressPercentage}%";
+                        };
+
+                        await client.DownloadFileTaskAsync(new Uri(_info.DownloadUrl), tempPath);
+                    }
+
+                    // Run Installer
+                    btnDownload.Text = "Installing...";
+                    Process.Start(new ProcessStartInfo(tempPath) { UseShellExecute = true });
+                    
+                    // Exit Application so installer can overwrite files
+                    Application.Exit(); 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Download failed: " + ex.Message + "\nOpening browser instead.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Process.Start(_info.DownloadUrl); // Fallback to browser
+                    Close();
+                }
+            }
+            else
+            {
+                // Web Link
+                Process.Start(_info.DownloadUrl);
+                Close();
+            }
         }
 
         private void btnRemind_Click(object sender, EventArgs e)
