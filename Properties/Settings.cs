@@ -37,5 +37,14 @@ namespace AsBuiltExplorer.Properties
             get { return ((string)(this["SkipUpdateVersion"])); }
             set { this["SkipUpdateVersion"] = value; }
         }
+
+        [UserScopedSetting()]
+        [DefaultSettingValue("auto")]
+        public string AppLanguage
+        {
+            get { return ((string)(this["AppLanguage"])); }
+            set { this["AppLanguage"] = value; }
+        }
     }
 }
+

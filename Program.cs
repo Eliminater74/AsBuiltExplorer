@@ -26,7 +26,7 @@ namespace AsBuiltExplorer
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
 
-                try 
+                try
                 {
                     // Registry Fixes for Legacy IE Control (MotorCraft)
                     ApplyRegistryFixes();
@@ -34,8 +34,12 @@ namespace AsBuiltExplorer
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
 
+                    // Initialize localization (applies saved language or system default)
+                    Localization.LocalizationManager.Initialize();
+
                     // Auto-Save Settings on Exit
-                    Application.ApplicationExit += (sender, e) => {
+                    Application.ApplicationExit += (sender, e) =>
+                    {
                         try { AsBuiltExplorer.Properties.Settings.Default.Save(); } catch { }
                     };
 

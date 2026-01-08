@@ -1,7 +1,9 @@
 using AsBuiltExplorer;
+using AsBuiltExplorer.Localization;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AsBuiltExplorer.Forms
@@ -10,6 +12,9 @@ namespace AsBuiltExplorer.Forms
     {
         public bool ThemeChanged { get; private set; } = false;
         public string SelectedTheme { get; private set; } = "Light";
+        public bool LanguageChanged { get; private set; } = false;
+
+        private string _originalLanguage;
 
         public frmSettings()
         {
@@ -22,7 +27,7 @@ namespace AsBuiltExplorer.Forms
             // Load DB Stats
             UpdateDBStats();
 
-            // Load Theme (This functionality will rely on a new property in MySettings)
+            // Load Theme
             if (AsBuiltExplorer.Properties.Settings.Default.AppTheme == "Dark")
             {
                 radThemeDark.Checked = true;
@@ -34,13 +39,58 @@ namespace AsBuiltExplorer.Forms
 
             // Load Updater Settings
             chkAutoUpdate.Checked = AsBuiltExplorer.Properties.Settings.Default.AutoCheckForUpdates;
-            lblCurrentVersion.Text = "Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            lblCurrentVersion.Text = string.Format(Strings.Settings_Version,
+                System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
+            // Load Language Settings
+            LoadLanguageSettings();
+
+            // Apply localization to this form
+            ApplyLocalization();
+        }
+
+        void LoadLanguageSettings()
+        {
+            // Get available languages
+            var languages = LocalizationManager.GetAvailableLanguages();
+            cmbLanguage.Items.Clear();
+            cmbLanguage.Items.AddRange(languages.ToArray());
+
+            // Select current language
+            _originalLanguage = LocalizationManager.CurrentLanguage;
+            var currentLang = languages.FirstOrDefault(l => l.Code == _originalLanguage);
+            if (currentLang != null)
+            {
+                cmbLanguage.SelectedItem = currentLang;
+            }
+            else
+            {
+                cmbLanguage.SelectedIndex = 0; // Default to "Auto"
+            }
+        }
+
+        void ApplyLocalization()
+        {
+            // Apply localized strings to this form
+            this.Text = Strings.Settings_Title;
+            grpAppearance.Text = Strings.Settings_Appearance;
+            radThemeLight.Text = Strings.Settings_LightMode;
+            radThemeDark.Text = Strings.Settings_DarkMode;
+            grpData.Text = Strings.Settings_DataManagement;
+            btnClearDatabase.Text = Strings.Btn_ClearDatabase;
+            grpUpdates.Text = Strings.Settings_Updates;
+            chkAutoUpdate.Text = Strings.Settings_CheckUpdatesOnStartup;
+            btnCheckUpdate.Text = Strings.Btn_CheckNow;
+            grpLanguage.Text = Strings.Settings_Language;
+            lblLanguage.Text = Strings.Settings_SelectLanguage;
+            btnSave.Text = Strings.Btn_Save;
+            btnCancel.Text = Strings.Btn_Cancel;
         }
 
         void UpdateDBStats()
         {
             var count = VehicleDatabase.Entries.Count;
-            lblDatabaseStats.Text = $"Stored Vehicles: {count}";
+            lblDatabaseStats.Text = string.Format(Strings.Settings_StoredVehicles, count);
 
             long size = 0;
 
@@ -60,18 +110,18 @@ namespace AsBuiltExplorer.Forms
 
         void btnClearDatabase_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to COMPLETELY WIPE the vehicle database?\nThis cannot be undone.",
-                "Confirm Wipe", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (MessageBox.Show(Strings.Msg_ConfirmWipe,
+                Strings.Msg_Title_ConfirmWipe, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 VehicleDatabase.ClearDatabase();
                 UpdateDBStats();
-                MessageBox.Show("Database cleared successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Strings.Msg_DatabaseCleared, Strings.Msg_Title_Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         void btnSave_Click(object sender, EventArgs e)
         {
-            // Save settings
+            // Save Theme settings
             var newTheme = radThemeDark.Checked ? "Dark" : "Light";
 
             if (AsBuiltExplorer.Properties.Settings.Default.AppTheme != newTheme)
@@ -86,6 +136,20 @@ namespace AsBuiltExplorer.Forms
             AsBuiltExplorer.Properties.Settings.Default.AutoCheckForUpdates = chkAutoUpdate.Checked;
             AsBuiltExplorer.Properties.Settings.Default.Save();
 
+            // Save Language Settings
+            var selectedLang = cmbLanguage.SelectedItem as LanguageInfo;
+            if (selectedLang != null && selectedLang.Code != _originalLanguage)
+            {
+                LocalizationManager.ApplyLanguage(selectedLang.Code);
+                LanguageChanged = true;
+
+                // Show restart recommendation
+                MessageBox.Show(Strings.Settings_RestartRequired,
+                    Strings.Msg_Title_Information,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -93,12 +157,12 @@ namespace AsBuiltExplorer.Forms
         async void btnCheckUpdate_Click(object sender, EventArgs e)
         {
             btnCheckUpdate.Enabled = false;
-            btnCheckUpdate.Text = "Checking...";
+            btnCheckUpdate.Text = Strings.Btn_Checking;
 
             var info = await Utilities.GitHubUpdateChecker.CheckForUpdateAsync();
 
             btnCheckUpdate.Enabled = true;
-            btnCheckUpdate.Text = "Check Now";
+            btnCheckUpdate.Text = Strings.Btn_CheckNow;
 
             if (info != null && info.IsNewer)
             {
@@ -115,7 +179,7 @@ namespace AsBuiltExplorer.Forms
             }
             else
             {
-                MessageBox.Show("You are running the latest version.", "Up to Date", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Strings.Msg_UpToDate, Strings.Msg_Title_UpToDate, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

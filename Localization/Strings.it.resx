@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- ===== NOMI SCHEDE ===== -->
+  <data name="Tab_Compare" xml:space="preserve">
+    <value>Confronta As-Built</value>
+  </data>
+  <data name="Tab_Calculators" xml:space="preserve">
+    <value>Calcolatrici e Strumenti</value>
+  </data>
+  <data name="Tab_Deducer" xml:space="preserve">
+    <value>Deduttore Funzionalità</value>
+  </data>
+  <data name="Tab_DeducerAdvanced" xml:space="preserve">
+    <value>Deduttore (Avanzato)</value>
+  </data>
+  <data name="Tab_Mods" xml:space="preserve">
+    <value>Modifiche Comuni</value>
+  </data>
+  <data name="Tab_BitDeducer" xml:space="preserve">
+    <value>Deduttore Bit</value>
+  </data>
+  <data name="Tab_Browse" xml:space="preserve">
+    <value>Database Veicoli</value>
+  </data>
+  <data name="Tab_Decode" xml:space="preserve">
+    <value>Decodificatore VIN</value>
+  </data>
+  <data name="Tab_Help" xml:space="preserve">
+    <value>Aiuto</value>
+  </data>
+  <data name="Tab_About" xml:space="preserve">
+    <value>Informazioni</value>
+  </data>
+
+  <!-- ===== PULSANTI ===== -->
+  <data name="Btn_Browse" xml:space="preserve">
+    <value>Sfoglia...</value>
+  </data>
+  <data name="Btn_Load" xml:space="preserve">
+    <value>Carica File</value>
+  </data>
+  <data name="Btn_Save" xml:space="preserve">
+    <value>Salva</value>
+  </data>
+  <data name="Btn_Cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Btn_ViewCodeLibrary" xml:space="preserve">
+    <value>Visualizza Libreria Codici</value>
+  </data>
+  <data name="Btn_CheckNow" xml:space="preserve">
+    <value>Controlla Ora</value>
+  </data>
+  <data name="Btn_Checking" xml:space="preserve">
+    <value>Controllo...</value>
+  </data>
+  <data name="Btn_ClearDatabase" xml:space="preserve">
+    <value>Svuota Database</value>
+  </data>
+  <data name="Btn_Refresh" xml:space="preserve">
+    <value>Aggiorna</value>
+  </data>
+  <data name="Btn_Scan" xml:space="preserve">
+    <value>Scansiona</value>
+  </data>
+  <data name="Btn_Decode" xml:space="preserve">
+    <value>Decodifica</value>
+  </data>
+  <data name="Btn_Go" xml:space="preserve">
+    <value>Vai</value>
+  </data>
+  <data name="Btn_OpenExternal" xml:space="preserve">
+    <value>Apri nel Browser</value>
+  </data>
+  <data name="Btn_Convert" xml:space="preserve">
+    <value>Converti</value>
+  </data>
+  <data name="Btn_Calculate" xml:space="preserve">
+    <value>Calcola</value>
+  </data>
+  <data name="Btn_DownloadNow" xml:space="preserve">
+    <value>Scarica Ora</value>
+  </data>
+  <data name="Btn_Skip" xml:space="preserve">
+    <value>Salta Questa Versione</value>
+  </data>
+  <data name="Btn_RemindLater" xml:space="preserve">
+    <value>Ricordamelo Dopo</value>
+  </data>
+
+  <!-- ===== ETICHETTE - Scheda Confronto ===== -->
+  <data name="Lbl_File1" xml:space="preserve">
+    <value>File As-Built # 1:</value>
+  </data>
+  <data name="Lbl_File2" xml:space="preserve">
+    <value>File As-Built # 2:</value>
+  </data>
+  <data name="Lbl_File3" xml:space="preserve">
+    <value>File As-Built # 3:</value>
+  </data>
+  <data name="Lbl_File4" xml:space="preserve">
+    <value>File As-Built # 4:</value>
+  </data>
+  <data name="Lbl_NoFile" xml:space="preserve">
+    <value>[nessun file]</value>
+  </data>
+  <data name="Chk_IncludeChecksum" xml:space="preserve">
+    <value>Includi bit Checksum</value>
+  </data>
+  <data name="Chk_ShowModuleNames" xml:space="preserve">
+    <value>Mostra Nomi Moduli</value>
+  </data>
+  <data name="Chk_ShowOnlyMismatches" xml:space="preserve">
+    <value>Mostra Solo Gruppi Non Corrispondenti</value>
+  </data>
+
+  <!-- ===== INTESTAZIONI COLONNE ===== -->
+  <data name="Col_ModuleAddress" xml:space="preserve">
+    <value>Indirizzo Modulo</value>
+  </data>
+  <data name="Col_ModuleName" xml:space="preserve">
+    <value>Nome Modulo</value>
+  </data>
+  <data name="Col_Data1" xml:space="preserve">
+    <value>Dati1</value>
+  </data>
+  <data name="Col_Data2" xml:space="preserve">
+    <value>Dati2</value>
+  </data>
+  <data name="Col_Data3" xml:space="preserve">
+    <value>Dati3</value>
+  </data>
+  <data name="Col_Same" xml:space="preserve">
+    <value>Uguale?</value>
+  </data>
+  <data name="Col_Binary" xml:space="preserve">
+    <value>Binario</value>
+  </data>
+  <data name="Col_KnownFeatures" xml:space="preserve">
+    <value>Funzionalità Note</value>
+  </data>
+  <data name="Col_PartNumber" xml:space="preserve">
+    <value>Numero Parte</value>
+  </data>
+  <data name="Col_Strategy" xml:space="preserve">
+    <value>Strategia</value>
+  </data>
+  <data name="Col_Calibration" xml:space="preserve">
+    <value>Calibrazione</value>
+  </data>
+
+  <!-- ===== MENU CONTESTUALE ===== -->
+  <data name="Menu_Copy" xml:space="preserve">
+    <value>Copia</value>
+  </data>
+  <data name="Menu_EntireLine" xml:space="preserve">
+    <value>Riga Intera</value>
+  </data>
+  <data name="Menu_Data1Hex" xml:space="preserve">
+    <value>Dati 1 (hex)</value>
+  </data>
+  <data name="Menu_Data2Hex" xml:space="preserve">
+    <value>Dati 2 (hex)</value>
+  </data>
+  <data name="Menu_Data3Hex" xml:space="preserve">
+    <value>Dati 3 (hex)</value>
+  </data>
+  <data name="Menu_Binary" xml:space="preserve">
+    <value>Binario</value>
+  </data>
+  <data name="Menu_ExportModule" xml:space="preserve">
+    <value>Esporta Modulo</value>
+  </data>
+  <data name="Menu_ToUCDS" xml:space="preserve">
+    <value>In UCDS...</value>
+  </data>
+  <data name="Menu_ToABT" xml:space="preserve">
+    <value>In ABT...</value>
+  </data>
+  <data name="Menu_IdentifyFeature" xml:space="preserve">
+    <value>Identifica Funzionalità</value>
+  </data>
+  <data name="Menu_SetAsCompare1" xml:space="preserve">
+    <value>Imposta come Confronto #1</value>
+  </data>
+  <data name="Menu_SetAsCompare2" xml:space="preserve">
+    <value>Imposta come Confronto #2</value>
+  </data>
+  <data name="Menu_SetAsCompare3" xml:space="preserve">
+    <value>Imposta come Confronto #3</value>
+  </data>
+  <data name="Menu_SetAsCompare4" xml:space="preserve">
+    <value>Imposta come Confronto #4</value>
+  </data>
+  <data name="Menu_EditFeatures" xml:space="preserve">
+    <value>Modifica Funzionalità</value>
+  </data>
+  <data name="Menu_DecodeNHTSA" xml:space="preserve">
+    <value>Decodifica con NHTSA (Online)</value>
+  </data>
+  <data name="Menu_ScanLibrary" xml:space="preserve">
+    <value>Scansiona Libreria</value>
+  </data>
+  <data name="Menu_DeleteFile" xml:space="preserve">
+    <value>Elimina File</value>
+  </data>
+
+  <!-- ===== IMPOSTAZIONI ===== -->
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Impostazioni</value>
+  </data>
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>Aspetto</value>
+  </data>
+  <data name="Settings_LightMode" xml:space="preserve">
+    <value>Modalità Chiara</value>
+  </data>
+  <data name="Settings_DarkMode" xml:space="preserve">
+    <value>Modalità Scura</value>
+  </data>
+  <data name="Settings_DataManagement" xml:space="preserve">
+    <value>Gestione Dati</value>
+  </data>
+  <data name="Settings_StoredVehicles" xml:space="preserve">
+    <value>Veicoli Salvati: {0}</value>
+  </data>
+  <data name="Settings_Updates" xml:space="preserve">
+    <value>Aggiornamenti</value>
+  </data>
+  <data name="Settings_CheckUpdatesOnStartup" xml:space="preserve">
+    <value>Controlla aggiornamenti all'avvio</value>
+  </data>
+  <data name="Settings_Version" xml:space="preserve">
+    <value>Versione: {0}</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+  <data name="Settings_SelectLanguage" xml:space="preserve">
+    <value>Seleziona Lingua:</value>
+  </data>
+  <data name="Settings_RestartRequired" xml:space="preserve">
+    <value>Lingua modificata. Riavvia l'applicazione per applicare le modifiche.</value>
+  </data>
+
+  <!-- ===== SCHEDA CALCOLATRICI ===== -->
+  <data name="Calc_Checksum" xml:space="preserve">
+    <value>Calcolatrice Checksum</value>
+  </data>
+  <data name="Calc_ModuleID" xml:space="preserve">
+    <value>ID Modulo (hex):</value>
+  </data>
+  <data name="Calc_Data1" xml:space="preserve">
+    <value>Dati 1 (hex):</value>
+  </data>
+  <data name="Calc_Data2" xml:space="preserve">
+    <value>Dati 2 (hex):</value>
+  </data>
+  <data name="Calc_Data3" xml:space="preserve">
+    <value>Dati 3 (hex):</value>
+  </data>
+  <data name="Calc_Checksum_Result" xml:space="preserve">
+    <value>Checksum:</value>
+  </data>
+  <data name="Calc_Converter" xml:space="preserve">
+    <value>Convertitore Hex/Binario</value>
+  </data>
+  <data name="Calc_Hex" xml:space="preserve">
+    <value>Hex:</value>
+  </data>
+  <data name="Calc_Binary" xml:space="preserve">
+    <value>Binario:</value>
+  </data>
+  <data name="Calc_TPMS" xml:space="preserve">
+    <value>Calcolatrice PSI TPMS</value>
+  </data>
+  <data name="Calc_VIN" xml:space="preserve">
+    <value>Convertitore VIN</value>
+  </data>
+  <data name="Calc_Audio" xml:space="preserve">
+    <value>Configurazione Audio (Legacy)</value>
+  </data>
+
+  <!-- ===== SCHEDA DEDUTTORE ===== -->
+  <data name="Deduce_SelectVehicle" xml:space="preserve">
+    <value>Seleziona un veicolo salvato:</value>
+  </data>
+  <data name="Deduce_Or" xml:space="preserve">
+    <value>Oppure inserisci VIN:</value>
+  </data>
+  <data name="Deduce_Models" xml:space="preserve">
+    <value>Modelli</value>
+  </data>
+  <data name="Deduce_Years" xml:space="preserve">
+    <value>Anni</value>
+  </data>
+  <data name="Deduce_Features" xml:space="preserve">
+    <value>Funzionalità</value>
+  </data>
+  <data name="Deduce_FigureItOut" xml:space="preserve">
+    <value>Scoprilo!</value>
+  </data>
+  <data name="Deduce_LoadOptions" xml:space="preserve">
+    <value>Carica Opzioni</value>
+  </data>
+
+  <!-- ===== SCHEDA MODIFICHE ===== -->
+  <data name="Mods_SelectPlatform" xml:space="preserve">
+    <value>Seleziona Piattaforma:</value>
+  </data>
+  <data name="Mods_Help" xml:space="preserve">
+    <value>Seleziona una modifica dalla lista per vedere i dettagli.</value>
+  </data>
+  <data name="Mods_Title" xml:space="preserve">
+    <value>Titolo</value>
+  </data>
+  <data name="Mods_Category" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+
+  <!-- ===== SCHEDA DECODIFICATORE VIN ===== -->
+  <data name="VIN_Input" xml:space="preserve">
+    <value>Inserisci VIN:</value>
+  </data>
+  <data name="VIN_SelectVehicle" xml:space="preserve">
+    <value>Oppure seleziona un veicolo salvato:</value>
+  </data>
+  <data name="VIN_UseNHTSA" xml:space="preserve">
+    <value>Usa Decodificatore NHTSA Online</value>
+  </data>
+  <data name="Col_Position" xml:space="preserve">
+    <value>Posizione</value>
+  </data>
+  <data name="Col_Value" xml:space="preserve">
+    <value>Valore</value>
+  </data>
+  <data name="Col_Meaning" xml:space="preserve">
+    <value>Significato</value>
+  </data>
+  <data name="Col_Notes" xml:space="preserve">
+    <value>Note</value>
+  </data>
+
+  <!-- ===== FINESTRE DI DIALOGO ===== -->
+  <data name="Msg_LoadError" xml:space="preserve">
+    <value>Impossibile caricare il file: {0}
+File non trovato o formato sconosciuto.
+(Verifica se il file è stato spostato o eliminato)</value>
+  </data>
+  <data name="Msg_Title_LoadError" xml:space="preserve">
+    <value>Errore di Caricamento</value>
+  </data>
+  <data name="Msg_ConfirmWipe" xml:space="preserve">
+    <value>Sei sicuro di voler ELIMINARE COMPLETAMENTE il database dei veicoli?
+Questa operazione non può essere annullata.</value>
+  </data>
+  <data name="Msg_Title_ConfirmWipe" xml:space="preserve">
+    <value>Conferma Eliminazione</value>
+  </data>
+  <data name="Msg_DatabaseCleared" xml:space="preserve">
+    <value>Database svuotato con successo.</value>
+  </data>
+  <data name="Msg_Title_Success" xml:space="preserve">
+    <value>Successo</value>
+  </data>
+  <data name="Msg_UpToDate" xml:space="preserve">
+    <value>Stai utilizzando la versione più recente.</value>
+  </data>
+  <data name="Msg_Title_UpToDate" xml:space="preserve">
+    <value>Aggiornato</value>
+  </data>
+  <data name="Msg_EnterVehicleName" xml:space="preserve">
+    <value>Inserisci un nome per questo veicolo.</value>
+  </data>
+  <data name="Msg_Title_MissingName" xml:space="preserve">
+    <value>Nome Mancante</value>
+  </data>
+  <data name="Msg_NoFilePath" xml:space="preserve">
+    <value>Nessun percorso file da salvare.</value>
+  </data>
+  <data name="Msg_Title_MissingPath" xml:space="preserve">
+    <value>Percorso Mancante</value>
+  </data>
+  <data name="Msg_ConfirmDelete" xml:space="preserve">
+    <value>Sei sicuro di voler eliminare '{0}'?</value>
+  </data>
+  <data name="Msg_Title_ConfirmDelete" xml:space="preserve">
+    <value>Conferma Eliminazione</value>
+  </data>
+  <data name="Msg_SelectVehicle" xml:space="preserve">
+    <value>Seleziona un veicolo dalla lista.</value>
+  </data>
+  <data name="Msg_Title_NoSelection" xml:space="preserve">
+    <value>Nessuna Selezione</value>
+  </data>
+  <data name="Msg_DownloadFailed" xml:space="preserve">
+    <value>Download fallito: {0}
+Apertura del browser in corso.</value>
+  </data>
+  <data name="Msg_Title_UpdateError" xml:space="preserve">
+    <value>Errore Aggiornamento</value>
+  </data>
+  <data name="Msg_ErrorLoading" xml:space="preserve">
+    <value>Errore durante il caricamento: {0}</value>
+  </data>
+  <data name="Msg_SelectRowToEdit" xml:space="preserve">
+    <value>Seleziona una riga da modificare.</value>
+  </data>
+  <data name="Msg_ErrorSaving" xml:space="preserve">
+    <value>Errore durante il salvataggio: {0}</value>
+  </data>
+  <data name="Msg_ExportSuccessful" xml:space="preserve">
+    <value>Esportazione completata!</value>
+  </data>
+  <data name="Msg_ErrorExporting" xml:space="preserve">
+    <value>Errore durante l'esportazione: {0}</value>
+  </data>
+  <data name="Msg_ImportSuccessful" xml:space="preserve">
+    <value>Importazione completata! Database ricaricato.</value>
+  </data>
+  <data name="Msg_ErrorImporting" xml:space="preserve">
+    <value>Errore durante l'importazione: {0}</value>
+  </data>
+  <data name="Msg_SelectFeature" xml:space="preserve">
+    <value>Seleziona una funzionalità da dedurre.</value>
+  </data>
+  <data name="Msg_SelectModel" xml:space="preserve">
+    <value>Seleziona almeno un modello di veicolo.</value>
+  </data>
+  <data name="Msg_SelectYear" xml:space="preserve">
+    <value>Seleziona almeno un anno del veicolo.</value>
+  </data>
+  <data name="Msg_SelectYearAndModel" xml:space="preserve">
+    <value>Seleziona almeno un anno e un modello del veicolo.</value>
+  </data>
+  <data name="Msg_NoFeaturesFound" xml:space="preserve">
+    <value>Nessuna funzionalità trovata nel database.
+
+Per scoprire automaticamente le funzionalità:
+1. Vai alla scheda 'Database Veicoli'.
+2. Seleziona i tuoi veicoli.
+3. Clicca destro e scegli 'Decodifica con NHTSA (Online)'.
+
+Questo recupererà automaticamente le specifiche ufficiali usando l'API governativa.</value>
+  </data>
+  <data name="Msg_Title_NoFeaturesFound" xml:space="preserve">
+    <value>Nessuna Funzionalità Trovata</value>
+  </data>
+  <data name="Msg_NoVehiclesWithFeature" xml:space="preserve">
+    <value>L'analisi è inutile perché non c'erano veicoli con questa funzionalità.</value>
+  </data>
+  <data name="Msg_NoVehiclesWithoutFeature" xml:space="preserve">
+    <value>L'analisi è inutile perché non c'erano veicoli senza questa funzionalità.</value>
+  </data>
+  <data name="Msg_AnalysisComplete" xml:space="preserve">
+    <value>Analisi completata.</value>
+  </data>
+  <data name="Msg_SelectModuleBit" xml:space="preserve">
+    <value>Seleziona un bit del modulo da dedurre.</value>
+  </data>
+  <data name="Msg_LoadedVehicles" xml:space="preserve">
+    <value>Caricati {0} veicoli dal database.</value>
+  </data>
+  <data name="Msg_NoModulesFound" xml:space="preserve">
+    <value>Nessun modulo trovato per i veicoli selezionati.</value>
+  </data>
+  <data name="Msg_FoundModules" xml:space="preserve">
+    <value>Trovati {0} moduli unici.</value>
+  </data>
+  <data name="Msg_ClipboardFailed" xml:space="preserve">
+    <value>Impossibile copiare il testo negli appunti.</value>
+  </data>
+  <data name="Msg_ABTNewFormat" xml:space="preserve">
+    <value>I dati del modulo contengono sezioni/blocchi con ID maggiore di '99', quindi è necessario scrivere il file ABT nel 'nuovo' formato 2019-08.</value>
+  </data>
+  <data name="Msg_Title_Information" xml:space="preserve">
+    <value>Informazione</value>
+  </data>
+  <data name="Msg_ABTFormatChoice" xml:space="preserve">
+    <value>Vuoi che il file ABT venga scritto nel 'nuovo' formato 2019-08 (SÌ), o nel formato 'vecchio' (NO)?</value>
+  </data>
+  <data name="Msg_Title_ExportFormat" xml:space="preserve">
+    <value>Formato Esportazione</value>
+  </data>
+  <data name="Msg_NoConclusiveBits" xml:space="preserve">
+    <value>Nessun bit conclusivo trovato. Prova a selezionare più veicoli con set di funzionalità diversi.</value>
+  </data>
+  <data name="Msg_FatalError" xml:space="preserve">
+    <value>Errore fatale dell'applicazione: {0}</value>
+  </data>
+  <data name="Msg_Title_Crash" xml:space="preserve">
+    <value>Crash di AsBuiltExplorer</value>
+  </data>
+  <data name="Msg_RegistryError" xml:space="preserve">
+    <value>Impossibile impostare la chiave di emulazione IE11: {0}</value>
+  </data>
+  <data name="Msg_Title_RegistryError" xml:space="preserve">
+    <value>Errore Registro</value>
+  </data>
+  <data name="Msg_MigrationError" xml:space="preserve">
+    <value>Errore durante la migrazione dei CSV al Database: {0}</value>
+  </data>
+
+  <!-- ===== FINESTRA AGGIORNAMENTO ===== -->
+  <data name="Update_Title" xml:space="preserve">
+    <value>Aggiornamento Disponibile</value>
+  </data>
+  <data name="Update_NewVersion" xml:space="preserve">
+    <value>È disponibile una nuova versione: {0}</value>
+  </data>
+  <data name="Update_CurrentVersion" xml:space="preserve">
+    <value>Versione attuale: {0}</value>
+  </data>
+  <data name="Update_Changelog" xml:space="preserve">
+    <value>Novità:</value>
+  </data>
+
+  <!-- ===== SCHEDA INFORMAZIONI ===== -->
+  <data name="About_Title" xml:space="preserve">
+    <value>AsBuilt Explorer</value>
+  </data>
+  <data name="About_Developer" xml:space="preserve">
+    <value>Sviluppato da:</value>
+  </data>
+  <data name="About_Credits" xml:space="preserve">
+    <value>Crediti e Ringraziamenti</value>
+  </data>
+  <data name="About_GitHub" xml:space="preserve">
+    <value>Visualizza su GitHub</value>
+  </data>
+
+  <!-- ===== DATABASE VEICOLI ===== -->
+  <data name="VehicleDB_Title" xml:space="preserve">
+    <value>Database Veicoli</value>
+  </data>
+  <data name="VehicleDB_Name" xml:space="preserve">
+    <value>Nome Veicolo:</value>
+  </data>
+  <data name="VehicleDB_VIN" xml:space="preserve">
+    <value>VIN:</value>
+  </data>
+  <data name="VehicleDB_Features" xml:space="preserve">
+    <value>Funzionalità:</value>
+  </data>
+
+  <!-- ===== DATABASE DEFINIZIONI ===== -->
+  <data name="DefsDB_Title" xml:space="preserve">
+    <value>Database Definizioni</value>
+  </data>
+  <data name="DefsDB_Export" xml:space="preserve">
+    <value>Esporta</value>
+  </data>
+  <data name="DefsDB_Import" xml:space="preserve">
+    <value>Importa</value>
+  </data>
+  <data name="DefsDB_Edit" xml:space="preserve">
+    <value>Modifica</value>
+  </data>
+
+</root>

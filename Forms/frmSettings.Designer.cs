@@ -41,9 +41,13 @@ namespace AsBuiltExplorer.Forms
             this.lblDatabaseStats = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.grpLanguage = new System.Windows.Forms.GroupBox();
+            this.cmbLanguage = new System.Windows.Forms.ComboBox();
+            this.lblLanguage = new System.Windows.Forms.Label();
             this.grpAppearance.SuspendLayout();
             this.grpData.SuspendLayout();
             this.grpUpdates.SuspendLayout();
+            this.grpLanguage.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpAppearance
@@ -151,11 +155,40 @@ namespace AsBuiltExplorer.Forms
             this.btnCheckUpdate.Text = "Check Now";
             this.btnCheckUpdate.UseVisualStyleBackColor = true;
             this.btnCheckUpdate.Click += new System.EventHandler(this.btnCheckUpdate_Click);
+            //
+            // grpLanguage
+            //
+            this.grpLanguage.Controls.Add(this.cmbLanguage);
+            this.grpLanguage.Controls.Add(this.lblLanguage);
+            this.grpLanguage.Location = new System.Drawing.Point(12, 330);
+            this.grpLanguage.Name = "grpLanguage";
+            this.grpLanguage.Size = new System.Drawing.Size(300, 70);
+            this.grpLanguage.TabIndex = 5;
+            this.grpLanguage.TabStop = false;
+            this.grpLanguage.Text = "Language";
+            //
+            // lblLanguage
+            //
+            this.lblLanguage.AutoSize = true;
+            this.lblLanguage.Location = new System.Drawing.Point(20, 30);
+            this.lblLanguage.Name = "lblLanguage";
+            this.lblLanguage.Size = new System.Drawing.Size(90, 13);
+            this.lblLanguage.TabIndex = 0;
+            this.lblLanguage.Text = "Select Language:";
+            //
+            // cmbLanguage
+            //
+            this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLanguage.FormattingEnabled = true;
+            this.cmbLanguage.Location = new System.Drawing.Point(120, 27);
+            this.cmbLanguage.Name = "cmbLanguage";
+            this.cmbLanguage.Size = new System.Drawing.Size(160, 21);
+            this.cmbLanguage.TabIndex = 1;
             // 
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(135, 330);
+            this.btnSave.Location = new System.Drawing.Point(135, 415);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(85, 30);
             this.btnSave.TabIndex = 3;
@@ -166,7 +199,7 @@ namespace AsBuiltExplorer.Forms
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(227, 330);
+            this.btnCancel.Location = new System.Drawing.Point(227, 415);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(85, 30);
             this.btnCancel.TabIndex = 4;
@@ -180,9 +213,10 @@ namespace AsBuiltExplorer.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(324, 380);
+            this.ClientSize = new System.Drawing.Size(324, 465);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.grpLanguage);
             this.Controls.Add(this.grpData);
             this.Controls.Add(this.grpAppearance);
             this.Controls.Add(this.grpUpdates);
@@ -198,6 +232,8 @@ namespace AsBuiltExplorer.Forms
             this.grpData.PerformLayout();
             this.grpUpdates.ResumeLayout(false);
             this.grpUpdates.PerformLayout();
+            this.grpLanguage.ResumeLayout(false);
+            this.grpLanguage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -216,5 +252,8 @@ namespace AsBuiltExplorer.Forms
         private System.Windows.Forms.CheckBox chkAutoUpdate;
         private System.Windows.Forms.Label lblCurrentVersion;
         private System.Windows.Forms.Button btnCheckUpdate;
+        private System.Windows.Forms.GroupBox grpLanguage;
+        private System.Windows.Forms.ComboBox cmbLanguage;
+        private System.Windows.Forms.Label lblLanguage;
     }
 }
