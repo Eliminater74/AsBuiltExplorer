@@ -207,13 +207,13 @@ namespace AsBuiltExplorer.Utilities
         {
             try
             {
+                // Ensure TLS 1.2+ for GitHub API
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
                 var compareUrl = $"https://api.github.com/repos/{RepoOwner}/{RepoName}/compare/{baseTag}...{headTag}";
                 var json = await client.DownloadStringTaskAsync(new Uri(compareUrl));
                 
                 // Extract commit messages
-                // Look for "message": "..." inside "commit" object
-                // Regex is tricky. 
-                // Pattern: "message"\s*:\s*"((?:[^"\\]|\\.)*)"
                 var msgs = Regex.Matches(json, "\"message\"\\s*:\\s*\"((?:[^\"\\\\]|\\\\.)*)\"");
                 
                 var sb = new System.Text.StringBuilder();
@@ -226,21 +226,31 @@ namespace AsBuiltExplorer.Utilities
                     var raw = m.Groups[1].Value;
                     var msg = UnescapeJson(raw);
                     
-                    // Filter: Only use first line of commit message
                     var subject = msg.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    if (subject.StartsWith("Merge pull request")) continue; // Skip merge noise
+                    if (subject.StartsWith("Merge pull request")) continue; 
                     if (subject.StartsWith("Bump version")) continue;
                     
-                    // Unique check? (Compare endpoint returns chrono list)
                     sb.AppendLine("- " + subject);
                     count++;
                 }
                 
+                if (sb.Length == 0) return "No significant changes found (or all filtered).";
+
                 return sb.ToString();
             }
-            catch
+            catch (WebException we)
             {
-                return "";
+                // Return error to UI for debugging
+                if (we.Response is HttpWebResponse resp)
+                {
+                   if (resp.StatusCode == HttpStatusCode.Forbidden)
+                       return "Changelog unavailable: API Rate Limit Exceeded (Try again later).";
+                }
+                return "Changelog unavailable: " + we.Message;
+            }
+            catch (Exception ex)
+            {
+                return "Error fetching changelog: " + ex.Message;
             }
         }
 
