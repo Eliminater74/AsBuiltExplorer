@@ -27,7 +27,12 @@ namespace AsBuiltExplorer.Localization
         {
             new LanguageInfo("auto", "Auto (System Default)"),
             new LanguageInfo("en", "English"),
-            new LanguageInfo("it", "Italiano")
+            new LanguageInfo("it", "Italiano"),
+            new LanguageInfo("es", "Español"),
+            new LanguageInfo("de", "Deutsch"),
+            new LanguageInfo("fr", "Français"),
+            new LanguageInfo("pt", "Português"),
+            new LanguageInfo("pl", "Polski")
         };
 
         /// <summary>

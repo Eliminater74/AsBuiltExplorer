@@ -169,6 +169,11 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\Strings.it.resx" />
+    <EmbeddedResource Include="Localization\Strings.es.resx" />
+    <EmbeddedResource Include="Localization\Strings.de.resx" />
+    <EmbeddedResource Include="Localization\Strings.fr.resx" />
+    <EmbeddedResource Include="Localization\Strings.pt.resx" />
+    <EmbeddedResource Include="Localization\Strings.pl.resx" />
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
