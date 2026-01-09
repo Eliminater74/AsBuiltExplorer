@@ -12,6 +12,7 @@
 *.env
 
 TEMP/*
+/TEMP/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
