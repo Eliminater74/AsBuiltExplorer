@@ -32,7 +32,8 @@ namespace AsBuiltExplorer.Localization
             new LanguageInfo("de", "Deutsch"),
             new LanguageInfo("fr", "Français"),
             new LanguageInfo("pt", "Português"),
-            new LanguageInfo("pl", "Polski")
+            new LanguageInfo("pl", "Polski"),
+            new LanguageInfo("zh-Hans", "中文 (Simplified)")
         };
 
         /// <summary>

@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--Project was exported from assembly: I:\GITHUB\Projects\AsBuiltExplorer\AsBuiltExplorer.exe-->
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><!--Project was exported from assembly: I:\GITHUB\Projects\AsBuiltExplorer\AsBuiltExplorer.exe-->
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Configuration Condition=" &apos;$(Configuration)&apos; == &apos;&apos; ">Debug</Configuration>
+    <Platform Condition=" &apos;$(Platform)&apos; == &apos;&apos; ">AnyCPU</Platform>
     <ProjectGuid>{A6B8B16F-003D-4AF9-860A-B5DE99EF356F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AssemblyName>AsBuiltExplorer</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile/>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>AsBuiltExplorer</RootNamespace>
     <PublishUrl>publish\</PublishUrl>
@@ -22,14 +21,14 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationVersion>2.0.0.1</ApplicationVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <StartupObject>AsBuiltExplorer.Program</StartupObject>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" &apos;$(Configuration)|$(Platform)&apos; == &apos;Debug|AnyCPU&apos; ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -40,7 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" &apos;$(Configuration)|$(Platform)&apos; == &apos;Release|AnyCPU&apos; ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -60,8 +59,8 @@
     <ApplicationIcon>app_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="x64\" />
-    <Folder Include="x86\" />
+    <Folder Include="x64\"/>
+    <Folder Include="x86\"/>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.1.11.2622, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
@@ -73,28 +72,28 @@
     <Reference Include="SQLitePCLRaw.provider.dynamic_cdecl, Version=2.1.11.2622, Culture=neutral, PublicKeyToken=b68184102cba0b3b, processorArchitecture=MSIL">
       <HintPath>packages\SQLitePCLRaw.provider.dynamic_cdecl.2.1.11\lib\netstandard2.0\SQLitePCLRaw.provider.dynamic_cdecl.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System"/>
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data" />
+    <Reference Include="System.Data"/>
     <Reference Include="System.Data.SQLite, Version=2.0.2.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.SQLite.2.0.2\lib\net471\System.Data.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing"/>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
-    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics"/>
     <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Transactions"/>
+    <Reference Include="System.Windows.Forms"/>
+    <Reference Include="System.Xml"/>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources.Designer.cs">
@@ -102,9 +101,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\clsListviewSorter.cs" />
-    <Compile Include="Utilities\CommonDatabase.cs" />
-    <Compile Include="Utilities\DefinitionsDBHelper.cs" />
+    <Compile Include="Utilities\clsListviewSorter.cs"/>
+    <Compile Include="Utilities\CommonDatabase.cs"/>
+    <Compile Include="Utilities\DefinitionsDBHelper.cs"/>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,27 +135,27 @@
     <Compile Include="Forms\frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\ModuleDatabase.cs" />
-    <Compile Include="Utilities\SQLiteHelper.cs" />
-    <Compile Include="Utilities\VehicleDatabase.cs" />
-    <Compile Include="Utilities\modAsBuilt.cs" />
-    <Compile Include="Utilities\VBCompat.cs" />
-    <Compile Include="Utilities\CRC.cs" />
-    <Compile Include="Utilities\NHTSADecoder.cs" />
-    <Compile Include="Utilities\ModDatabase.cs" />
-    <Compile Include="Utilities\GitHubUpdateChecker.cs" />
+    <Compile Include="Utilities\ModuleDatabase.cs"/>
+    <Compile Include="Utilities\SQLiteHelper.cs"/>
+    <Compile Include="Utilities\VehicleDatabase.cs"/>
+    <Compile Include="Utilities\modAsBuilt.cs"/>
+    <Compile Include="Utilities\VBCompat.cs"/>
+    <Compile Include="Utilities\CRC.cs"/>
+    <Compile Include="Utilities\NHTSADecoder.cs"/>
+    <Compile Include="Utilities\ModDatabase.cs"/>
+    <Compile Include="Utilities\GitHubUpdateChecker.cs"/>
     <Compile Include="Forms\frmUpdateAvailable.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmUpdateAvailable.Designer.cs">
       <DependentUpon>frmUpdateAvailable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\VINDecoder.cs" />
-    <Compile Include="Utilities\VehicleStrategy.cs" />
-    <Compile Include="Properties\Settings.cs" />
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Localization\LocalizationManager.cs" />
+    <Compile Include="Utilities\VINDecoder.cs"/>
+    <Compile Include="Utilities\VehicleStrategy.cs"/>
+    <Compile Include="Properties\Settings.cs"/>
+    <Compile Include="AssemblyInfo.cs"/>
+    <Compile Include="Program.cs"/>
+    <Compile Include="Localization\LocalizationManager.cs"/>
     <Compile Include="Localization\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,12 +167,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Strings.it.resx" />
-    <EmbeddedResource Include="Localization\Strings.es.resx" />
-    <EmbeddedResource Include="Localization\Strings.de.resx" />
-    <EmbeddedResource Include="Localization\Strings.fr.resx" />
-    <EmbeddedResource Include="Localization\Strings.pt.resx" />
-    <EmbeddedResource Include="Localization\Strings.pl.resx" />
+    <EmbeddedResource Include="Localization\Strings.it.resx"/>
+    <EmbeddedResource Include="Localization\Strings.es.resx"/>
+    <EmbeddedResource Include="Localization\Strings.de.resx"/>
+    <EmbeddedResource Include="Localization\Strings.fr.resx"/>
+    <EmbeddedResource Include="Localization\Strings.pt.resx"/>
+    <EmbeddedResource Include="Localization\Strings.pl.resx"/>
+    <EmbeddedResource Include="Localization\Strings.zh-Hans.resx"/>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,10 +186,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
-    <None Include="app.config" />
-    <Content Include="Resources\definitions.db" />
-    <Content Include="app_icon.ico" />
+    <None Include="README.md"/>
+    <None Include="app.config"/>
+    <Content Include="Resources\definitions.db"/>
+    <Content Include="app_icon.ico"/>
     <Content Include="Help\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -208,7 +208,7 @@
     <Content Include="AsBuiltData\README.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="packages.config" />
+    <None Include="packages.config"/>
     <Content Include="Resources\settings_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -225,21 +225,21 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists('packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+  <Import Project="packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists(&apos;packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets&apos;)"/>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets'))" />
+    <Error Condition="!Exists(&apos;packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets&apos;)" Text="$([System.String]::Format(&apos;$(ErrorText)&apos;, &apos;packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\buildTransitive\net461\SQLitePCLRaw.lib.e_sqlite3.targets&apos;))"/>
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
-      copy /Y "$(ProjectDir)Resources\definitions.db" "$(TargetDir)definitions.db"
-      if not exist "$(TargetDir)x86" mkdir "$(TargetDir)x86"
-      if not exist "$(TargetDir)x64" mkdir "$(TargetDir)x64"
-      copy /Y "$(ProjectDir)packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x86\native\e_sqlite3.dll" "$(TargetDir)x86\e_sqlite3.dll"
-      copy /Y "$(ProjectDir)packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x64\native\e_sqlite3.dll" "$(TargetDir)x64\e_sqlite3.dll"
+      copy /Y &quot;$(ProjectDir)Resources\definitions.db&quot; &quot;$(TargetDir)definitions.db&quot;
+      if not exist &quot;$(TargetDir)x86&quot; mkdir &quot;$(TargetDir)x86&quot;
+      if not exist &quot;$(TargetDir)x64&quot; mkdir &quot;$(TargetDir)x64&quot;
+      copy /Y &quot;$(ProjectDir)packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x86\native\e_sqlite3.dll&quot; &quot;$(TargetDir)x86\e_sqlite3.dll&quot;
+      copy /Y &quot;$(ProjectDir)packages\SQLitePCLRaw.lib.e_sqlite3.2.1.11\runtimes\win-x64\native\e_sqlite3.dll&quot; &quot;$(TargetDir)x64\e_sqlite3.dll&quot;
     </PostBuildEvent>
   </PropertyGroup>
 </Project>

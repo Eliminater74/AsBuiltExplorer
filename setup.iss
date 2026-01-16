@@ -5,7 +5,7 @@
 
 ; This can be overridden by command line arg: /DMyAppVersion="1.2.3"
 #ifndef MyAppVersion
-  #define MyAppVersion "1.0.0"
+  #define MyAppVersion "2.0.0.1"
 #endif
 
 [Setup]
