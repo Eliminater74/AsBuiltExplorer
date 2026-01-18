@@ -5,7 +5,7 @@
 
 ; This can be overridden by command line arg: /DMyAppVersion="1.2.3"
 #ifndef MyAppVersion
-  #define MyAppVersion "2.0.0.2"
+  #define MyAppVersion "2.1.0.0"
 #endif
 
 [Setup]
@@ -55,4 +55,5 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#MyAppName}}"; Flags: nowait postinstall skipifsilent
+
 
