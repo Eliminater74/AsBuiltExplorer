@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -57,9 +57,7 @@
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-
-  <!-- ===== NOMBRES DE PESTAÑAS ===== -->
+  </resheader><!-- ===== NOMBRES DE PESTAÑAS ===== -->
   <data name="Tab_Compare" xml:space="preserve">
     <value>Comparar As-Built</value>
   </data>
@@ -89,9 +87,7 @@
   </data>
   <data name="Tab_About" xml:space="preserve">
     <value>Acerca de</value>
-  </data>
-
-  <!-- ===== BOTONES ===== -->
+  </data><!-- ===== BOTONES ===== -->
   <data name="Btn_Browse" xml:space="preserve">
     <value>Examinar...</value>
   </data>
@@ -145,9 +141,7 @@
   </data>
   <data name="Btn_RemindLater" xml:space="preserve">
     <value>Recordar Después</value>
-  </data>
-
-  <!-- ===== ETIQUETAS ===== -->
+  </data><!-- ===== ETIQUETAS ===== -->
   <data name="Lbl_File1" xml:space="preserve">
     <value>Archivo As-Built # 1:</value>
   </data>
@@ -171,9 +165,7 @@
   </data>
   <data name="Chk_ShowOnlyMismatches" xml:space="preserve">
     <value>Mostrar Solo Grupos No Coincidentes</value>
-  </data>
-
-  <!-- ===== ENCABEZADOS DE COLUMNAS ===== -->
+  </data><!-- ===== ENCABEZADOS DE COLUMNAS ===== -->
   <data name="Col_ModuleAddress" xml:space="preserve">
     <value>Dirección del Módulo</value>
   </data>
@@ -206,9 +198,7 @@
   </data>
   <data name="Col_Calibration" xml:space="preserve">
     <value>Calibración</value>
-  </data>
-
-  <!-- ===== MENÚ CONTEXTUAL ===== -->
+  </data><!-- ===== MENÚ CONTEXTUAL ===== -->
   <data name="Menu_Copy" xml:space="preserve">
     <value>Copiar</value>
   </data>
@@ -262,9 +252,7 @@
   </data>
   <data name="Menu_DeleteFile" xml:space="preserve">
     <value>Eliminar Archivo</value>
-  </data>
-
-  <!-- ===== CONFIGURACIÓN ===== -->
+  </data><!-- ===== CONFIGURACIÓN ===== -->
   <data name="Settings_Title" xml:space="preserve">
     <value>Configuración</value>
   </data>
@@ -300,9 +288,7 @@
   </data>
   <data name="Settings_RestartRequired" xml:space="preserve">
     <value>Idioma cambiado. Reinicie la aplicación para aplicar los cambios.</value>
-  </data>
-
-  <!-- ===== CALCULADORAS ===== -->
+  </data><!-- ===== CALCULADORAS ===== -->
   <data name="Calc_Checksum" xml:space="preserve">
     <value>Calculadora de Checksum</value>
   </data>
@@ -338,9 +324,7 @@
   </data>
   <data name="Calc_Audio" xml:space="preserve">
     <value>Configuración de Audio (Legacy)</value>
-  </data>
-
-  <!-- ===== DEDUCTOR ===== -->
+  </data><!-- ===== DEDUCTOR ===== -->
   <data name="Deduce_SelectVehicle" xml:space="preserve">
     <value>Seleccionar un vehículo guardado:</value>
   </data>
@@ -361,9 +345,7 @@
   </data>
   <data name="Deduce_LoadOptions" xml:space="preserve">
     <value>Cargar Opciones</value>
-  </data>
-
-  <!-- ===== MODIFICACIONES ===== -->
+  </data><!-- ===== MODIFICACIONES ===== -->
   <data name="Mods_SelectPlatform" xml:space="preserve">
     <value>Seleccionar Plataforma:</value>
   </data>
@@ -375,9 +357,7 @@
   </data>
   <data name="Mods_Category" xml:space="preserve">
     <value>Categoría</value>
-  </data>
-
-  <!-- ===== DECODIFICADOR VIN ===== -->
+  </data><!-- ===== DECODIFICADOR VIN ===== -->
   <data name="VIN_Input" xml:space="preserve">
     <value>Introducir VIN:</value>
   </data>
@@ -398,9 +378,7 @@
   </data>
   <data name="Col_Notes" xml:space="preserve">
     <value>Notas</value>
-  </data>
-
-  <!-- ===== MENSAJES ===== -->
+  </data><!-- ===== MENSAJES ===== -->
   <data name="Msg_LoadError" xml:space="preserve">
     <value>No se pudo cargar el archivo: {0}
 Archivo no encontrado o formato desconocido.
@@ -441,7 +419,7 @@ Esta acción no se puede deshacer.</value>
     <value>Ruta Faltante</value>
   </data>
   <data name="Msg_ConfirmDelete" xml:space="preserve">
-    <value>¿Está seguro de que desea eliminar '{0}'?</value>
+    <value>¿Está seguro de que desea eliminar &apos;{0}&apos;?</value>
   </data>
   <data name="Msg_Title_ConfirmDelete" xml:space="preserve">
     <value>Confirmar Eliminación</value>
@@ -496,9 +474,9 @@ Abriendo navegador en su lugar.</value>
     <value>No se encontraron características en la base de datos.
 
 Para descubrir características automáticamente:
-1. Vaya a la pestaña 'Base de Datos de Vehículos'.
+1. Vaya a la pestaña &apos;Base de Datos de Vehículos&apos;.
 2. Seleccione sus vehículos.
-3. Haga clic derecho y elija 'Decodificar con NHTSA (Online)'.
+3. Haga clic derecho y elija &apos;Decodificar con NHTSA (Online)&apos;.
 
 Esto recuperará automáticamente las especificaciones usando la API gubernamental.</value>
   </data>
@@ -530,13 +508,13 @@ Esto recuperará automáticamente las especificaciones usando la API gubernament
     <value>Error al copiar texto al portapapeles.</value>
   </data>
   <data name="Msg_ABTNewFormat" xml:space="preserve">
-    <value>Los datos del módulo contienen secciones/bloques con ID mayor a '99', por lo que se requiere escribir el archivo ABT en el formato 'nuevo' 2019-08.</value>
+    <value>Los datos del módulo contienen secciones/bloques con ID mayor a &apos;99&apos;, por lo que se requiere escribir el archivo ABT en el formato &apos;nuevo&apos; 2019-08.</value>
   </data>
   <data name="Msg_Title_Information" xml:space="preserve">
     <value>Información</value>
   </data>
   <data name="Msg_ABTFormatChoice" xml:space="preserve">
-    <value>¿Desea que el archivo ABT se escriba en el formato 'nuevo' 2019-08 (SÍ), o en el formato 'antiguo' (NO)?</value>
+    <value>¿Desea que el archivo ABT se escriba en el formato &apos;nuevo&apos; 2019-08 (SÍ), o en el formato &apos;antiguo&apos; (NO)?</value>
   </data>
   <data name="Msg_Title_ExportFormat" xml:space="preserve">
     <value>Formato de Exportación</value>
@@ -558,9 +536,7 @@ Esto recuperará automáticamente las especificaciones usando la API gubernament
   </data>
   <data name="Msg_MigrationError" xml:space="preserve">
     <value>Error al migrar CSVs a la Base de Datos: {0}</value>
-  </data>
-
-  <!-- ===== ACTUALIZACIÓN ===== -->
+  </data><!-- ===== ACTUALIZACIÓN ===== -->
   <data name="Update_Title" xml:space="preserve">
     <value>Actualización Disponible</value>
   </data>
@@ -572,9 +548,7 @@ Esto recuperará automáticamente las especificaciones usando la API gubernament
   </data>
   <data name="Update_Changelog" xml:space="preserve">
     <value>Novedades:</value>
-  </data>
-
-  <!-- ===== ACERCA DE ===== -->
+  </data><!-- ===== ACERCA DE ===== -->
   <data name="About_Title" xml:space="preserve">
     <value>AsBuilt Explorer</value>
   </data>
@@ -586,9 +560,7 @@ Esto recuperará automáticamente las especificaciones usando la API gubernament
   </data>
   <data name="About_GitHub" xml:space="preserve">
     <value>Ver en GitHub</value>
-  </data>
-
-  <!-- ===== BASE DE DATOS DE VEHÍCULOS ===== -->
+  </data><!-- ===== BASE DE DATOS DE VEHÍCULOS ===== -->
   <data name="VehicleDB_Title" xml:space="preserve">
     <value>Base de Datos de Vehículos</value>
   </data>
@@ -600,9 +572,7 @@ Esto recuperará automáticamente las especificaciones usando la API gubernament
   </data>
   <data name="VehicleDB_Features" xml:space="preserve">
     <value>Características:</value>
-  </data>
-
-  <!-- ===== BASE DE DATOS DE DEFINICIONES ===== -->
+  </data><!-- ===== BASE DE DATOS DE DEFINICIONES ===== -->
   <data name="DefsDB_Title" xml:space="preserve">
     <value>Base de Datos de Definiciones</value>
   </data>
@@ -614,6 +584,103 @@ Esto recuperará automáticamente las especificaciones usando la API gubernament
   </data>
   <data name="DefsDB_Edit" xml:space="preserve">
     <value>Editar</value>
+  </data><!-- ===== NEW KEYS FOR EXPANDED LOCALIZATION (SPANISH) ===== -->
+  <data name="Calc_ReCalc" xml:space="preserve">
+    <value>Recalcular Checksum (último byte)</value>
   </data>
+  <data name="Calc_TPMS_Desc" xml:space="preserve">
+    <value>Ingrese PSI. El resultado es valor Hex para 726-02-01.</value>
+  </data>
+  <data name="Calc_Audio_Sub" xml:space="preserve">
+    <value>Audiophile / Subwoofer</value>
+  </data>
+  <data name="Calc_Audio_DVD" xml:space="preserve">
+    <value>Entretenimiento DVD Trasero</value>
+  </data>
+  <data name="Calc_Audio_Sat" xml:space="preserve">
+    <value>Radio Satelital</value>
+  </data>
+  <data name="Calc_VIN_Convert" xml:space="preserve">
+    <value>Convertir a Bloques Hex</value>
+  </data>
+  <data name="Moto_OpenSite" xml:space="preserve">
+    <value>Abrir Sitio Motorcraft &gt;&gt;</value>
+  </data>
+  <data name="Moto_ExtBrowser" xml:space="preserve">
+    <value>Navegador Ext.</value>
+  </data>
+  <data name="Deduce_LoadDB" xml:space="preserve">
+    <value>Cargar Desde Base de Datos</value>
+  </data>
+  <data name="Deduce_SelectFeat" xml:space="preserve">
+    <value>Seleccionar característica a deducir:</value>
+  </data>
+  <data name="Deduce_SelectYM" xml:space="preserve">
+    <value>Seleccionar Años y Modelos:</value>
+  </data>
+  <data name="Deduce_Review" xml:space="preserve">
+    <value>Revisar resultados abajo</value>
+  </data>
+  <data name="Deduce_CompareCCC" xml:space="preserve">
+    <value>Comparar también bits CCC</value>
+  </data>
+  <data name="Deduce_FindPerfect" xml:space="preserve">
+    <value>Buscar Bits Perfectos</value>
+  </data>
+  <data name="Deduce_Note_Perfect" xml:space="preserve">
+    <value>&quot;Bits Perfectos&quot; listados abajo. Los bits se numeran de izquierda a derecha comenzando en cero.</value>
+  </data>
+  <data name="Bit_LoadStored" xml:space="preserve">
+    <value>Cargar Datos Guardados</value>
+  </data>
+  <data name="Bit_LoadModules" xml:space="preserve">
+    <value>Cargar Módulos</value>
+  </data>
+  <data name="Bit_SelectModule" xml:space="preserve">
+    <value>Seleccionar Módulo:</value>
+  </data>
+  <data name="Bit_SelectBit" xml:space="preserve">
+    <value>Seleccionar Índice Bit (0 a 39):</value>
+  </data>
+  <data name="Bit_FindFeature" xml:space="preserve">
+    <value>Buscar Característica</value>
+  </data>
+  <data name="Bit_AnalyzeAll" xml:space="preserve">
+    <value>Analizar Todos los bits</value>
+  </data>
+  <data name="Bit_Note_Desc" xml:space="preserve">
+    <value>Esta herramienta intenta deducir qué característica(s) corresponde(n) al bit del módulo elegido.
 
+Es un análisis estadístico y solo identifica consistencias -- no garantías.</value>
+  </data>
+  <data name="Mod_Add" xml:space="preserve">
+    <value>Añadir Mod Personalizado</value>
+  </data>
+  <data name="Mod_Import" xml:space="preserve">
+    <value>Importar CSV</value>
+  </data>
+  <data name="Mod_Export" xml:space="preserve">
+    <value>Exportar CSV</value>
+  </data>
+  <data name="Col_Date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="Col_Year" xml:space="preserve">
+    <value>Año</value>
+  </data>
+  <data name="Col_Model" xml:space="preserve">
+    <value>Modelo</value>
+  </data>
+  <data name="Col_Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Grp_BrowserAct" xml:space="preserve">
+    <value>Navegador y Acciones</value>
+  </data>
+  <data name="Grp_VehicleSelection" xml:space="preserve">
+    <value>Selección de Vehículo</value>
+  </data>
+  <data name="Tab_MotorCraft" xml:space="preserve">
+    <value>Datos AsBuilt MotorCraft</value>
+  </data>
 </root>

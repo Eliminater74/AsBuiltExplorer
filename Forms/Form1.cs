@@ -3832,7 +3832,7 @@ namespace AsBuiltExplorer
             // Tabs
             TabPage1.Text = Strings.Tab_Compare;
             TabPage2.Text = Strings.Tab_Calculators;
-            // TabPage3 is MotorCraft
+            TabPage3.Text = Strings.Tab_MotorCraft;
             TabPage4.Text = Strings.Tab_Deducer;
             TabPage5.Text = Strings.Tab_BitDeducer;
             tabMods.Text = Strings.Tab_Mods;
@@ -3874,11 +3874,84 @@ namespace AsBuiltExplorer
                 ListView1.Columns[10].Text = Strings.Col_Calibration;
             }
 
+            // Tab: Calculators
+            grpChecksum.Text = Strings.Calc_Checksum;
+            Label1.Text = Strings.Calc_ModuleID;
+            Label2.Text = Strings.Calc_Data1;
+            Label3.Text = Strings.Calc_Data2;
+            Label4.Text = Strings.Calc_Data3;
+            Button1.Text = Strings.Calc_ReCalc;
+            Label5.Text = Strings.Calc_Checksum_Result;
+
+            grpConverter.Text = Strings.Calc_Converter;
+            Label15.Text = Strings.Calc_Hex;
+            Label16.Text = Strings.Calc_Binary;
+
+            grpTPMS.Text = Strings.Calc_TPMS;
+            lblTPMS_Desc.Text = Strings.Calc_TPMS_Desc;
+
+            grpAudio.Text = Strings.Calc_Audio;
+            chkAudio_Sub.Text = Strings.Calc_Audio_Sub;
+            chkAudio_DVD.Text = Strings.Calc_Audio_DVD;
+            chkAudio_Sat.Text = Strings.Calc_Audio_Sat;
+
+            grpVIN.Text = Strings.Calc_VIN;
+            btnVIN_Convert.Text = Strings.Calc_VIN_Convert;
+
+            // Tab: MotorCraft
+            grpDeduceSelection.Text = Strings.Grp_VehicleSelection;
+            lblDeduceSelect.Text = Strings.Deduce_SelectVehicle;
+            lblDeduceOr.Text = Strings.Deduce_Or;
+            btnDeduceGo.Text = Strings.Moto_OpenSite;
+            btnDeduceExternal.Text = Strings.Moto_ExtBrowser;
+            grpDeduceBrowser.Text = Strings.Grp_BrowserAct;
+
+            // Tab: Deducer (Feature)
+            btnDeduceLoadOptions.Text = Strings.Deduce_LoadDB;
+            Label10.Text = Strings.Deduce_SelectFeat;
+            Label11.Text = Strings.Deduce_SelectYM;
+            Label13.Text = Strings.Deduce_Review;
+            chkDeduceDoCCC.Text = Strings.Deduce_CompareCCC;
+            btnDeduceFigureIt.Text = Strings.Deduce_FindPerfect;
+            Label14.Text = Strings.Deduce_Note_Perfect;
+
+            // Tab: Deducer (Bit)
+            Button5.Text = Strings.Bit_LoadStored;
+            Button6.Text = Strings.Bit_LoadModules;
+            Label19.Text = Strings.Deduce_SelectYM; // Reuse
+            Label20.Text = Strings.Bit_SelectModule;
+            Label21.Text = Strings.Bit_SelectBit;
+            Button4.Text = Strings.Bit_FindFeature;
+            Button10.Text = Strings.Bit_AnalyzeAll;
+            TextBox3.Text = Strings.Bit_Note_Desc;
+
+            // Tab: Mods
+            lblModPlatform.Text = Strings.Mods_SelectPlatform;
+            lblModsHelp.Text = Strings.Mods_Help;
+            btnAddMod.Text = Strings.Mod_Add;
+            btnImportMods.Text = Strings.Mod_Import;
+            btnExportMods.Text = Strings.Mod_Export;
+            lvwMods.Columns[0].Text = Strings.Mods_Title;
+            lvwMods.Columns[1].Text = Strings.Mods_Category;
+
             // Tab: VIN Decoder
             lblVinInput.Text = Strings.VIN_Input;
-            lblVinSelect.Text = Strings.VIN_SelectVehicle; // Correct key from ResX view
+            lblVinSelect.Text = Strings.VIN_SelectVehicle;
             btnDecode.Text = Strings.Btn_Decode;
             chkUseNHTSA.Text = Strings.VIN_UseNHTSA;
+            btnDB_Scan.Text = Strings.Btn_Scan;
+            btnBrowseRefresh.Text = Strings.Btn_Refresh;
+
+            // Logic for ListView columns in Browse tab
+            if (lvwBrowser.Columns.Count >= 6)
+            {
+                lvwBrowser.Columns[0].Text = Strings.Col_Name;
+                lvwBrowser.Columns[1].Text = Strings.Col_Date;
+                lvwBrowser.Columns[2].Text = Strings.Col_Year;
+                lvwBrowser.Columns[3].Text = Strings.Col_Model;
+                lvwBrowser.Columns[4].Text = Strings.VehicleDB_VIN;
+                lvwBrowser.Columns[5].Text = Strings.VehicleDB_Features;
+            }
 
             // Re-apply window title
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -3886,5 +3959,3 @@ namespace AsBuiltExplorer
         }
     }
 }
-
-
