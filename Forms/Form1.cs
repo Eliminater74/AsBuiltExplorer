@@ -3137,20 +3137,72 @@ namespace AsBuiltExplorer
 
         void tabMods_Enter(object sender, EventArgs e)
         {
-            // Populate Platform Combo if empty
-            if (cmbModPlatform.Items.Count == 0)
+            // Always refresh content to ensure new mods appear
+            // Save current selection if possible
+            var currentPlat = cmbModPlatform.SelectedItem?.ToString();
+
+            cmbModPlatform.Items.Clear();
+
+            // Get unique platforms
+            var platforms = new HashSet<string>();
+            foreach (var m in ModDatabase.Mods)
             {
-                // Get unique platforms
-                var platforms = new HashSet<string>();
-                foreach (var m in ModDatabase.Mods)
+                platforms.Add(m.Platform);
+            }
+            foreach (var p in platforms)
+            {
+                cmbModPlatform.Items.Add(p);
+            }
+
+            if (!string.IsNullOrEmpty(currentPlat) && cmbModPlatform.Items.Contains(currentPlat))
+            {
+                cmbModPlatform.SelectedItem = currentPlat;
+            }
+            else if (cmbModPlatform.Items.Count > 0)
+            {
+                cmbModPlatform.SelectedIndex = 0;
+            }
+        }
+
+        private void btnAddMod_Click(object sender, EventArgs e)
+        {
+            var frm = new Forms.frmAddMod(cmbModPlatform.SelectedItem?.ToString());
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                ModDatabase.Add(frm.NewMod);
+                // Refresh
+                tabMods_Enter(null, null);
+                // Select the new mod's platform
+                cmbModPlatform.SelectedItem = frm.NewMod.Platform;
+                // Trigger list refresh
+                cmbModPlatform_SelectedIndexChanged(null, null);
+            }
+        }
+
+        private void btnImportMods_Click(object sender, EventArgs e)
+        {
+            using (var ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "CSV Files|*.csv";
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    platforms.Add(m.Platform);
+                    int count = ModDatabase.ImportFromCSV(ofd.FileName);
+                    MessageBox.Show($"Imported {count} mods.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tabMods_Enter(null, null);
                 }
-                foreach (var p in platforms)
+            }
+        }
+
+        private void btnExportMods_Click(object sender, EventArgs e)
+        {
+            using (var sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "CSV Files|*.csv";
+                sfd.FileName = "MyMods.csv";
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    cmbModPlatform.Items.Add(p);
+                    ModDatabase.ExportToCSV(sfd.FileName);
                 }
-                if (cmbModPlatform.Items.Count > 0) cmbModPlatform.SelectedIndex = 0;
             }
         }
 

@@ -4,34 +4,34 @@ using System.Windows.Forms;
 using System.ComponentModel;
 namespace AsBuiltExplorer
 {
-  partial class Form1
-  {
-    /// <summary>
-    /// Required designer variable.
-    /// </summary>
-    private System.ComponentModel.IContainer components = null;
-
-    /// <summary>
-    /// Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing)
+    partial class Form1
     {
-      if (disposing && (components != null))
-      {
-        components.Dispose();
-      }
-      base.Dispose(disposing);
-    }
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-    #region Windows Form Designer generated code
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-    /// <summary>
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent()
-    {
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.TabControl1 = new System.Windows.Forms.TabControl();
@@ -151,6 +151,10 @@ namespace AsBuiltExplorer
             this.btnDeduceLoadOptions = new System.Windows.Forms.Button();
             this.lstDeduceFactoryOptions = new System.Windows.Forms.ListBox();
             this.tabMods = new System.Windows.Forms.TabPage();
+            this.btnAddMod = new System.Windows.Forms.Button();
+            this.btnImportMods = new System.Windows.Forms.Button();
+            this.btnExportMods = new System.Windows.Forms.Button();
+            this.btnAboutDev = new System.Windows.Forms.Button();
             this.splitMods = new System.Windows.Forms.SplitContainer();
             this.lvwMods = new System.Windows.Forms.ListView();
             this.colModTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -209,6 +213,7 @@ namespace AsBuiltExplorer
             this.lblVinInput = new System.Windows.Forms.Label();
             this.TabPage7 = new System.Windows.Forms.TabPage();
             this.TabPage8 = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lnkAboutGithub = new System.Windows.Forms.LinkLabel();
             this.lblAboutMoto = new System.Windows.Forms.Label();
             this.lblAboutCredits = new System.Windows.Forms.Label();
@@ -217,7 +222,6 @@ namespace AsBuiltExplorer
             this.lblAboutTitle = new System.Windows.Forms.Label();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbSettings = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.TabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.ContextMenuStrip1.SuspendLayout();
@@ -250,8 +254,8 @@ namespace AsBuiltExplorer
             // TabControl1
             // 
             this.TabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.TabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.TabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TabControl1.Controls.Add(this.TabPage1);
             this.TabControl1.Controls.Add(this.TabPage2);
@@ -549,8 +553,8 @@ namespace AsBuiltExplorer
             // 
             // ListView1
             // 
-            this.ListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnHeader1,
@@ -866,7 +870,6 @@ namespace AsBuiltExplorer
             this.txtVIN_Hex.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtVIN_Hex.Size = new System.Drawing.Size(220, 310);
             this.txtVIN_Hex.TabIndex = 2;
-            // 
             // 
             // txtVIN_Input
             // 
@@ -1233,8 +1236,8 @@ namespace AsBuiltExplorer
             // 
             // grpDeduceBrowser
             // 
-            this.grpDeduceBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.grpDeduceBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpDeduceBrowser.Controls.Add(this.wbDeducer);
             this.grpDeduceBrowser.Location = new System.Drawing.Point(20, 85);
@@ -1246,8 +1249,8 @@ namespace AsBuiltExplorer
             // 
             // wbDeducer
             // 
-            this.wbDeducer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.wbDeducer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.wbDeducer.Location = new System.Drawing.Point(15, 25);
             this.wbDeducer.MinimumSize = new System.Drawing.Size(20, 20);
@@ -1258,7 +1261,7 @@ namespace AsBuiltExplorer
             // 
             // grpDeduceSelection
             // 
-            this.grpDeduceSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.grpDeduceSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpDeduceSelection.Controls.Add(this.btnDeduceGo);
             this.grpDeduceSelection.Controls.Add(this.btnDeduceExternal);
@@ -1483,6 +1486,9 @@ namespace AsBuiltExplorer
             // 
             // tabMods
             // 
+            this.tabMods.Controls.Add(this.btnAddMod);
+            this.tabMods.Controls.Add(this.btnImportMods);
+            this.tabMods.Controls.Add(this.btnExportMods);
             this.tabMods.Controls.Add(this.splitMods);
             this.tabMods.Controls.Add(this.lblModsHelp);
             this.tabMods.Controls.Add(this.cmbModPlatform);
@@ -1496,10 +1502,43 @@ namespace AsBuiltExplorer
             this.tabMods.UseVisualStyleBackColor = true;
             this.tabMods.Enter += new System.EventHandler(this.tabMods_Enter);
             // 
+            // btnAddMod
+            // 
+            this.btnAddMod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddMod.Location = new System.Drawing.Point(650, 15);
+            this.btnAddMod.Name = "btnAddMod";
+            this.btnAddMod.Size = new System.Drawing.Size(120, 24);
+            this.btnAddMod.TabIndex = 4;
+            this.btnAddMod.Text = "Add Custom Mod";
+            this.btnAddMod.UseVisualStyleBackColor = true;
+            this.btnAddMod.Click += new System.EventHandler(this.btnAddMod_Click);
+            // 
+            // btnImportMods
+            // 
+            this.btnImportMods.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImportMods.Location = new System.Drawing.Point(780, 15);
+            this.btnImportMods.Name = "btnImportMods";
+            this.btnImportMods.Size = new System.Drawing.Size(80, 24);
+            this.btnImportMods.TabIndex = 5;
+            this.btnImportMods.Text = "Import CSV";
+            this.btnImportMods.UseVisualStyleBackColor = true;
+            this.btnImportMods.Click += new System.EventHandler(this.btnImportMods_Click);
+            // 
+            // btnExportMods
+            // 
+            this.btnExportMods.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportMods.Location = new System.Drawing.Point(870, 15);
+            this.btnExportMods.Name = "btnExportMods";
+            this.btnExportMods.Size = new System.Drawing.Size(80, 24);
+            this.btnExportMods.TabIndex = 6;
+            this.btnExportMods.Text = "Export CSV";
+            this.btnExportMods.UseVisualStyleBackColor = true;
+            this.btnExportMods.Click += new System.EventHandler(this.btnExportMods_Click);
+            // 
             // splitMods
             // 
-            this.splitMods.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.splitMods.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitMods.Location = new System.Drawing.Point(9, 48);
             this.splitMods.Name = "splitMods";
@@ -1738,7 +1777,6 @@ namespace AsBuiltExplorer
             // tbxDeduceReport2
             // 
             this.tbxDeduceReport2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbxDeduceReport2.Location = new System.Drawing.Point(20, 343);
             this.tbxDeduceReport2.MaxLength = 5000000;
             this.tbxDeduceReport2.Multiline = true;
             this.tbxDeduceReport2.Name = "tbxDeduceReport2";
@@ -1794,8 +1832,8 @@ namespace AsBuiltExplorer
             // 
             // lvwBrowser
             // 
-            this.lvwBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.lvwBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwBrowser.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnHeader10,
@@ -1945,8 +1983,8 @@ namespace AsBuiltExplorer
             // 
             // lvwDecodeResults
             // 
-            this.lvwDecodeResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.lvwDecodeResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwDecodeResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colPos,
@@ -2059,7 +2097,6 @@ namespace AsBuiltExplorer
             this.TabPage8.Controls.Add(this.lblAboutMoto);
             this.TabPage8.Controls.Add(this.lblAboutCredits);
             this.TabPage8.Controls.Add(this.lblAboutDev);
-            this.TabPage8.Controls.Add(this.lblAboutDev);
             this.TabPage8.Controls.Add(this.btnAboutDev);
             this.TabPage8.Controls.Add(this.lblAboutVersion);
             this.TabPage8.Controls.Add(this.lblAboutTitle);
@@ -2069,6 +2106,15 @@ namespace AsBuiltExplorer
             this.TabPage8.Size = new System.Drawing.Size(993, 597);
             this.TabPage8.TabIndex = 7;
             this.TabPage8.Text = "About";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.Location = new System.Drawing.Point(387, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(600, 582);
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
             // 
             // lnkAboutGithub
             // 
@@ -2170,15 +2216,6 @@ namespace AsBuiltExplorer
             this.pbSettings.TabStop = false;
             this.pbSettings.Click += new System.EventHandler(this.pbSettings_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.Location = new System.Drawing.Point(387, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(600, 582);
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2233,217 +2270,220 @@ namespace AsBuiltExplorer
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
-    }
+        }
 
-    #endregion
+        #endregion
 
-  private TabPage TabPage1;
-  private TabPage TabPage2;
-  private TextBox tbxData2hex;
-  private Label Label3;
-  private TextBox tbxData1hex;
-  private TextBox tbxChecksumHex;
-  private Button Button1;
-  private TextBox tbxData3hex;
-  private Button btnCompBrowse2;
-  private Button btnCompBrowse1;
-  private ListView ListView1;
-  private Button btnCompLoad;
-  private ContextMenuStrip ContextMenuStrip1;
-  private ToolStripMenuItem CopyToolStripMenuItem;
-  private ToolStripMenuItem EntireLineToolStripMenuItem;
-  private ToolStripMenuItem Data1hexToolStripMenuItem;
-  private ToolStripMenuItem Data2hexToolStripMenuItem;
-  private ToolStripMenuItem Data3hexToolStripMenuItem;
-  private ToolStripMenuItem BinaryToolStripMenuItem;
+        private TabPage TabPage1;
+        private TabPage TabPage2;
+        private TextBox tbxData2hex;
+        private Label Label3;
+        private TextBox tbxData1hex;
+        private TextBox tbxChecksumHex;
+        private Button Button1;
+        private TextBox tbxData3hex;
+        private Button btnCompBrowse2;
+        private Button btnCompBrowse1;
+        private ListView ListView1;
+        private Button btnCompLoad;
+        private ContextMenuStrip ContextMenuStrip1;
+        private ToolStripMenuItem CopyToolStripMenuItem;
+        private ToolStripMenuItem EntireLineToolStripMenuItem;
+        private ToolStripMenuItem Data1hexToolStripMenuItem;
+        private ToolStripMenuItem Data2hexToolStripMenuItem;
+        private ToolStripMenuItem Data3hexToolStripMenuItem;
+        private ToolStripMenuItem BinaryToolStripMenuItem;
 
-  private WebBrowser wbDeducer;
+        private WebBrowser wbDeducer;
 
 
 
-  private ListView lvwBrowser;
-  private System.Windows.Forms.TabPage TabPage5;
-  private System.Windows.Forms.Button Button4;
-  private System.Windows.Forms.Button Button8;
-  private System.Windows.Forms.Button Button6;
-  private System.Windows.Forms.Button Button5;
-  private System.Windows.Forms.Button Button9;
-  private System.Windows.Forms.Button Button7;
-  private Button btnBrowseRefresh;
-  private ContextMenuStrip ContextMenuStrip2;
-  private ToolStripMenuItem SetAsCompare1ToolStripMenuItem;
-  private ToolStripMenuItem SetAsCompare2ToolStripMenuItem;
-  private ToolStripMenuItem SetAsCompare3ToolStripMenuItem;
-  private ToolStripMenuItem SetAsCompare4ToolStripMenuItem;
-  private ToolStripMenuItem DeleteFileToolStripMenuItem;
-  private PictureBox PictureBox1;
-  private ToolStripMenuItem ExportModuleToolStripMenuItem;
-  private ToolStripMenuItem ToUCDSToolStripMenuItem;
-  private ToolStripMenuItem ToABTToolStripMenuItem;
-  private Button Button10;
-  private CheckBox chkShowOnlyMismatches;
-  
-  private TabControl TabControl1;
-  private Label Label2;
-  private TextBox tbxModIDhex;
-  private Label Label1;
-  private Label Label5;
-  private Label Label4;
-  private TextBox tbxData3bin2;
-  private TextBox tbxData2bin2;
-  private TextBox tbxData1bin2;
-  private TextBox tbxData3bin1;
-  private TextBox tbxData2bin1;
-  private TextBox tbxData1bin1;
-  private TextBox tbxCompFile2;
-  private TextBox tbxCompFile1;
-  private Label Label7;
-  private Label Label6;
-  private ColumnHeader ColumnHeader1;
-  private ColumnHeader ColumnHeader2;
-  private ColumnHeader ColumnHeader3;
-  private ColumnHeader ColumnHeader4;
-  private ColumnHeader ColumnHeader5;
-  private ColumnHeader ColumnHeader6;
-  private TabPage TabPage3;
+        private ListView lvwBrowser;
+        private System.Windows.Forms.TabPage TabPage5;
+        private System.Windows.Forms.Button Button4;
+        private System.Windows.Forms.Button Button8;
+        private System.Windows.Forms.Button Button6;
+        private System.Windows.Forms.Button Button5;
+        private System.Windows.Forms.Button Button9;
+        private System.Windows.Forms.Button Button7;
+        private Button btnBrowseRefresh;
+        private ContextMenuStrip ContextMenuStrip2;
+        private ToolStripMenuItem SetAsCompare1ToolStripMenuItem;
+        private ToolStripMenuItem SetAsCompare2ToolStripMenuItem;
+        private ToolStripMenuItem SetAsCompare3ToolStripMenuItem;
+        private ToolStripMenuItem SetAsCompare4ToolStripMenuItem;
+        private ToolStripMenuItem DeleteFileToolStripMenuItem;
+        private PictureBox PictureBox1;
+        private ToolStripMenuItem ExportModuleToolStripMenuItem;
+        private ToolStripMenuItem ToUCDSToolStripMenuItem;
+        private ToolStripMenuItem ToABTToolStripMenuItem;
+        private Button Button10;
+        private CheckBox chkShowOnlyMismatches;
 
-  private TextBox tbxDeduceReport;
-  private ListBox lstDeduceFactoryOptions;
+        private TabControl TabControl1;
+        private Label Label2;
+        private TextBox tbxModIDhex;
+        private Label Label1;
+        private Label Label5;
+        private Label Label4;
+        private TextBox tbxData3bin2;
+        private TextBox tbxData2bin2;
+        private TextBox tbxData1bin2;
+        private TextBox tbxData3bin1;
+        private TextBox tbxData2bin1;
+        private TextBox tbxData1bin1;
+        private TextBox tbxCompFile2;
+        private TextBox tbxCompFile1;
+        private Label Label7;
+        private Label Label6;
+        private ColumnHeader ColumnHeader1;
+        private ColumnHeader ColumnHeader2;
+        private ColumnHeader ColumnHeader3;
+        private ColumnHeader ColumnHeader4;
+        private ColumnHeader ColumnHeader5;
+        private ColumnHeader ColumnHeader6;
+        private TabPage TabPage3;
 
-  private CheckedListBox lstDeduceModels;
+        private TextBox tbxDeduceReport;
+        private ListBox lstDeduceFactoryOptions;
 
-  private Label Label14;
-  private TextBox tbxConvertBin;
-  private TextBox tbxConvertHex;
-  private TextBox tbxChecksumBin;
-  private Label Label15;
-  private Label Label16;
-  private Label Label17;
-  private TextBox TextBox3;
-  private Label Label18;
-  private TextBox tbxDeduceReport2;
-  private ColumnHeader ColumnHeader7;
-  private ColumnHeader ColumnHeader8;
-  private ColumnHeader ColumnHeader9;
-  private Label Label20;
-  private Label Label19;
-  private CheckedListBox lstBit_Years;
-  private CheckedListBox lstBit_Models;
-  private ListBox lstBit_Modules;
-  private TextBox TextBox4;
-  private Label Label21;
-  private CheckBox chkCompareShowChecksum;
-  private CheckBox chkDeduceDoCCC;
-  private TextBox tbxCompFile4;
-  private Label Label23;
-  private TextBox tbxCompFile3;
-  private Label Label22;
-  private TabPage TabPage6;
-  private ColumnHeader ColumnHeader10;
-  private ColumnHeader ColumnHeader11;
-  private ColumnHeader ColumnHeader12;
-  private ColumnHeader ColumnHeader13;
-  private ColumnHeader ColumnHeader14;
+        private CheckedListBox lstDeduceModels;
 
-  private ToolStripSeparator ToolStripMenuItem1;
-  private Label lblComp4VIN;
-  private Label lblComp3VIN;
-  private Label lblComp2VIN;
-  private Label lblComp1VIN;
-  private CheckBox chkCompareShowNames;
-  private System.Windows.Forms.ColumnHeader colModuleName;
-  private System.Windows.Forms.Button btnDB1;
-  private System.Windows.Forms.Button btnDB2;
-  private System.Windows.Forms.Button btnDB3;
-  private System.Windows.Forms.Button btnDB4;
-  private System.Windows.Forms.ToolStripMenuItem IdentifyToolStripMenuItem;
+        private Label Label14;
+        private TextBox tbxConvertBin;
+        private TextBox tbxConvertHex;
+        private TextBox tbxChecksumBin;
+        private Label Label15;
+        private Label Label16;
+        private Label Label17;
+        private TextBox TextBox3;
+        private Label Label18;
+        private TextBox tbxDeduceReport2;
+        private ColumnHeader ColumnHeader7;
+        private ColumnHeader ColumnHeader8;
+        private ColumnHeader ColumnHeader9;
+        private Label Label20;
+        private Label Label19;
+        private CheckedListBox lstBit_Years;
+        private CheckedListBox lstBit_Models;
+        private ListBox lstBit_Modules;
+        private TextBox TextBox4;
+        private Label Label21;
+        private CheckBox chkCompareShowChecksum;
+        private CheckBox chkDeduceDoCCC;
+        private TextBox tbxCompFile4;
+        private Label Label23;
+        private TextBox tbxCompFile3;
+        private Label Label22;
+        private TabPage TabPage6;
+        private ColumnHeader ColumnHeader10;
+        private ColumnHeader ColumnHeader11;
+        private ColumnHeader ColumnHeader12;
+        private ColumnHeader ColumnHeader13;
+        private ColumnHeader ColumnHeader14;
 
-    private System.Windows.Forms.Button btnViewDefs;
-   private System.Windows.Forms.TabPage TabPage7;
-   private System.Windows.Forms.TabPage TabPage8;
-   private System.Windows.Forms.Label lblAboutTitle;
-   private System.Windows.Forms.Label lblAboutVersion;
-   private System.Windows.Forms.Label lblAboutDev;
-   private System.Windows.Forms.Label lblAboutCredits;
-    private System.Windows.Forms.Label lblAboutMoto;
-    private System.Windows.Forms.Button btnAboutDev;
-    private System.Windows.Forms.LinkLabel lnkAboutGithub;
-   // VIN Decoder Controls
-   private System.Windows.Forms.TabPage TabPage9;
-   private System.Windows.Forms.Label lblVinInput;
-   private System.Windows.Forms.TextBox txtVinInput;
-   private System.Windows.Forms.Label lblVinSelect;
-   private System.Windows.Forms.ComboBox cmbSavedVehicles;
-   private System.Windows.Forms.Button btnDecode;
-   private System.Windows.Forms.CheckBox chkUseNHTSA;
-   private System.Windows.Forms.ListView lvwDecodeResults;
-   private System.Windows.Forms.ColumnHeader colPos;
-   private System.Windows.Forms.ColumnHeader colVal;
-   private System.Windows.Forms.ColumnHeader colMean;
-    private System.Windows.Forms.ColumnHeader colNotes;
-    
-    // Deducer Controls
-    private System.Windows.Forms.GroupBox grpDeduceSelection;
-    private System.Windows.Forms.Label lblDeduceSelect;
-    private System.Windows.Forms.ComboBox cmbDeduceSavedVehicles;
-    private System.Windows.Forms.Label lblDeduceOr;
-    private System.Windows.Forms.TextBox txtDeduceVIN;
-    private System.Windows.Forms.Button btnDeduceGo;
-    private System.Windows.Forms.GroupBox grpDeduceBrowser;
-    
+        private ToolStripSeparator ToolStripMenuItem1;
+        private Label lblComp4VIN;
+        private Label lblComp3VIN;
+        private Label lblComp2VIN;
+        private Label lblComp1VIN;
+        private CheckBox chkCompareShowNames;
+        private System.Windows.Forms.ColumnHeader colModuleName;
+        private System.Windows.Forms.Button btnDB1;
+        private System.Windows.Forms.Button btnDB2;
+        private System.Windows.Forms.Button btnDB3;
+        private System.Windows.Forms.Button btnDB4;
+        private System.Windows.Forms.ToolStripMenuItem IdentifyToolStripMenuItem;
 
-    
-    // TabPage4 Controls (Restored)
-    private System.Windows.Forms.TabPage TabPage4;
-    private System.Windows.Forms.Button btnDeduceLoadOptions;
-    private System.Windows.Forms.CheckedListBox lstDeduceYears;
-    private System.Windows.Forms.Button btnDeduceFigureIt;
-    private System.Windows.Forms.TextBox TextBox1;
-    private System.Windows.Forms.Label Label10;
-    private System.Windows.Forms.Label Label11;
-    private System.Windows.Forms.Label Label13;
+        private System.Windows.Forms.Button btnViewDefs;
+        private System.Windows.Forms.TabPage TabPage7;
+        private System.Windows.Forms.TabPage TabPage8;
+        private System.Windows.Forms.Label lblAboutTitle;
+        private System.Windows.Forms.Label lblAboutVersion;
+        private System.Windows.Forms.Label lblAboutDev;
+        private System.Windows.Forms.Label lblAboutCredits;
+        private System.Windows.Forms.Label lblAboutMoto;
+        private System.Windows.Forms.LinkLabel lnkAboutGithub;
+        // VIN Decoder Controls
+        private System.Windows.Forms.TabPage TabPage9;
+        private System.Windows.Forms.Label lblVinInput;
+        private System.Windows.Forms.TextBox txtVinInput;
+        private System.Windows.Forms.Label lblVinSelect;
+        private System.Windows.Forms.ComboBox cmbSavedVehicles;
+        private System.Windows.Forms.Button btnDecode;
+        private System.Windows.Forms.CheckBox chkUseNHTSA;
+        private System.Windows.Forms.ListView lvwDecodeResults;
+        private System.Windows.Forms.ColumnHeader colPos;
+        private System.Windows.Forms.ColumnHeader colVal;
+        private System.Windows.Forms.ColumnHeader colMean;
+        private System.Windows.Forms.ColumnHeader colNotes;
 
-    private System.Windows.Forms.GroupBox grpTPMS;
-    private System.Windows.Forms.NumericUpDown numTPMS_PSI;
-    private System.Windows.Forms.TextBox tbxTPMS_Hex;
-    private System.Windows.Forms.Label lblTPMS_Desc;
-    
-    private System.Windows.Forms.GroupBox grpVIN;
-    private System.Windows.Forms.ComboBox txtVIN_Input;
-    private System.Windows.Forms.TextBox txtVIN_Hex;
-    private System.Windows.Forms.Button btnVIN_Convert;
-    private System.Windows.Forms.Label lblVIN_Desc;
+        // Deducer Controls
+        private System.Windows.Forms.GroupBox grpDeduceSelection;
+        private System.Windows.Forms.Label lblDeduceSelect;
+        private System.Windows.Forms.ComboBox cmbDeduceSavedVehicles;
+        private System.Windows.Forms.Label lblDeduceOr;
+        private System.Windows.Forms.TextBox txtDeduceVIN;
+        private System.Windows.Forms.Button btnDeduceGo;
+        private System.Windows.Forms.GroupBox grpDeduceBrowser;
 
-    private System.Windows.Forms.GroupBox grpAudio;
-    private System.Windows.Forms.CheckBox chkAudio_Sub;
-    private System.Windows.Forms.CheckBox chkAudio_DVD;
-    private System.Windows.Forms.CheckBox chkAudio_Sat;
-    private System.Windows.Forms.TextBox tbxAudio_Hex;
-    private System.Windows.Forms.Label lblAudio_Desc;
 
-    private System.Windows.Forms.GroupBox grpChecksum;
-    private System.Windows.Forms.ComboBox cmbChecksumType;
-    private System.Windows.Forms.GroupBox grpConverter;
 
-    // Mods Tab Controls
-    private System.Windows.Forms.TabPage tabMods;
-    private System.Windows.Forms.SplitContainer splitMods;
-    private System.Windows.Forms.ListView lvwMods;
-    private System.Windows.Forms.RichTextBox rtbModDetails;
-    private System.Windows.Forms.ComboBox cmbModPlatform;
-    private System.Windows.Forms.Label lblModPlatform;
-    private System.Windows.Forms.Label lblModsHelp;
-    private System.Windows.Forms.ColumnHeader colModTitle;
+        // TabPage4 Controls (Restored)
+        private System.Windows.Forms.TabPage TabPage4;
+        private System.Windows.Forms.Button btnDeduceLoadOptions;
+        private System.Windows.Forms.CheckedListBox lstDeduceYears;
+        private System.Windows.Forms.Button btnDeduceFigureIt;
+        private System.Windows.Forms.TextBox TextBox1;
+        private System.Windows.Forms.Label Label10;
+        private System.Windows.Forms.Label Label11;
+        private System.Windows.Forms.Label Label13;
 
-    private System.Windows.Forms.ColumnHeader colModCat;
-    private System.Windows.Forms.ToolStripMenuItem EditFeaturesToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem DecodeNHTSAToolStripMenuItem; 
-    private System.Windows.Forms.ToolStripMenuItem ScanLibraryToolStripMenuItem; 
-    private System.Windows.Forms.ColumnHeader colKnownFeatures;
-    private System.Windows.Forms.PictureBox pbSettings;
-    private System.Windows.Forms.Button btnDeduceExternal;
-    private System.Windows.Forms.Button btnDB_Scan;
-    private System.Windows.Forms.ColumnHeader colFeatures; // Added
+        private System.Windows.Forms.GroupBox grpTPMS;
+        private System.Windows.Forms.NumericUpDown numTPMS_PSI;
+        private System.Windows.Forms.TextBox tbxTPMS_Hex;
+        private System.Windows.Forms.Label lblTPMS_Desc;
+
+        private System.Windows.Forms.GroupBox grpVIN;
+        private System.Windows.Forms.ComboBox txtVIN_Input;
+        private System.Windows.Forms.TextBox txtVIN_Hex;
+        private System.Windows.Forms.Button btnVIN_Convert;
+        private System.Windows.Forms.Button btnAddMod;
+        private System.Windows.Forms.Button btnImportMods;
+        private System.Windows.Forms.Button btnExportMods;
+        private System.Windows.Forms.Button btnAboutDev;
+        private System.Windows.Forms.Label lblVIN_Desc;
+
+        private System.Windows.Forms.GroupBox grpAudio;
+        private System.Windows.Forms.CheckBox chkAudio_Sub;
+        private System.Windows.Forms.CheckBox chkAudio_DVD;
+        private System.Windows.Forms.CheckBox chkAudio_Sat;
+        private System.Windows.Forms.TextBox tbxAudio_Hex;
+        private System.Windows.Forms.Label lblAudio_Desc;
+
+        private System.Windows.Forms.GroupBox grpChecksum;
+        private System.Windows.Forms.ComboBox cmbChecksumType;
+        private System.Windows.Forms.GroupBox grpConverter;
+
+        // Mods Tab Controls
+        private System.Windows.Forms.TabPage tabMods;
+        private System.Windows.Forms.SplitContainer splitMods;
+        private System.Windows.Forms.ListView lvwMods;
+        private System.Windows.Forms.RichTextBox rtbModDetails;
+        private System.Windows.Forms.ComboBox cmbModPlatform;
+        private System.Windows.Forms.Label lblModPlatform;
+        private System.Windows.Forms.Label lblModsHelp;
+        private System.Windows.Forms.ColumnHeader colModTitle;
+
+        private System.Windows.Forms.ColumnHeader colModCat;
+        private System.Windows.Forms.ToolStripMenuItem EditFeaturesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DecodeNHTSAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ScanLibraryToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader colKnownFeatures;
+        private System.Windows.Forms.PictureBox pbSettings;
+        private System.Windows.Forms.Button btnDeduceExternal;
+        private System.Windows.Forms.Button btnDB_Scan;
+        private System.Windows.Forms.ColumnHeader colFeatures; // Added
         private PictureBox pictureBox2;
     }
 }

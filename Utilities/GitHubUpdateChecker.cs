@@ -122,7 +122,7 @@ namespace AsBuiltExplorer.Utilities
                         // ASSET PARSING: Try to find a direct .exe download link
                         // "assets": [ { "browser_download_url": "..." } ]
                         // Only if we downloaded the tag JSON
-                        string assetUrl = "";
+                        // string assetUrl = "";
                         var assetMatches = Regex.Matches(body + url + (json ?? ""), "\"browser_download_url\"\\s*:\\s*\"([^\"]+)\"");
                         // Actually, we need to search the tagJson source if available, or original JSON if the block contains assets.
                         // The original /releases JSON contains assets for each release. 

@@ -144,6 +144,12 @@
     <Compile Include="Utilities\NHTSADecoder.cs"/>
     <Compile Include="Utilities\ModDatabase.cs"/>
     <Compile Include="Utilities\GitHubUpdateChecker.cs"/>
+    <Compile Include="Forms\frmAddMod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAddMod.Designer.cs">
+      <DependentUpon>frmAddMod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmUpdateAvailable.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -63,22 +63,48 @@ namespace AsBuiltExplorer
                         Features TEXT
                     )";
 
+                var sqlMods = @"
+                    CREATE TABLE IF NOT EXISTS Mods (
+                        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Title TEXT,
+                        Platform TEXT,
+                        Category TEXT,
+                        Description TEXT,
+                        Instructions TEXT,
+                        IsUserMod INTEGER DEFAULT 1
+                    )";
+
                 using (var cmd = new SQLiteCommand(sql, conn))
                     cmd.ExecuteNonQuery();
-                
+
+                using (var cmd = new SQLiteCommand(sqlMods, conn))
+                    cmd.ExecuteNonQuery();
+
 
                 // Migration: Add columns if they don't exist (for existing DBs)
-                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Year TEXT", conn)) cmd.ExecuteNonQuery();
- } catch { }
+                try
+                {
+                    using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Year TEXT", conn)) cmd.ExecuteNonQuery();
+                }
+                catch { }
 
-                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Make TEXT", conn)) cmd.ExecuteNonQuery();
- } catch { }
+                try
+                {
+                    using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Make TEXT", conn)) cmd.ExecuteNonQuery();
+                }
+                catch { }
 
-                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Model TEXT", conn)) cmd.ExecuteNonQuery();
- } catch { }
+                try
+                {
+                    using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Model TEXT", conn)) cmd.ExecuteNonQuery();
+                }
+                catch { }
 
-                try { using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Features TEXT", conn)) cmd.ExecuteNonQuery();
- } catch { }
+                try
+                {
+                    using (var cmd = new SQLiteCommand("ALTER TABLE Vehicles ADD COLUMN Features TEXT", conn)) cmd.ExecuteNonQuery();
+                }
+                catch { }
             }
         }
 
